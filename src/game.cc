@@ -1,24 +1,23 @@
 #include "game.h"
+#include "graphics.h"
 
 
 Game::Game() {
   SDL_Init(SDL_INIT_EVERYTHING);
-  _screen = SDL_CreateWindow("My Game Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_OPENGL);
   eventLoop();
 }
 
 Game::~Game() {
-  SDL_DestroyWindow(_screen);
   SDL_Quit();
 }
 
 void Game::eventLoop()
 {
+  Graphics graphics;
   SDL_Event event;
   bool running = true;
   while (running == true)
   {
-    //fprintf(stderr, "test");
     const int start_time_ms = SDL_GetTicks();
     while(SDL_PollEvent(&event))
     {
@@ -39,9 +38,12 @@ void Game::eventLoop()
     int timeToDelay = 1000 / 60 - elapsed_time_ms;
     timeToDelay = timeToDelay < 0 ? 0 : timeToDelay;
 
-    fprintf(stderr, "delaying for %d\n", timeToDelay);
+    //fprintf(stderr, "delaying for %d\n", timeToDelay);
     SDL_Delay(timeToDelay);
-    fprintf(stderr, "finished delay\n");
+    //fprintf(stderr, "finished delay\n");
+    //const float seconds_per_frame = (SDL_GetTicks() - start_time_ms )/ 1000.0;
+    //const float fps = 1 / seconds_per_frame;
+    //fprintf(stderr, "fps=%f\n", fps);
   }
 
 }
