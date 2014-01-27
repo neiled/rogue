@@ -15,6 +15,8 @@ void Game::eventLoop()
 {
   Graphics graphics;
   SDL_Event event;
+
+  _sprite.reset(new Sprite(&graphics, "content/MyChar.bmp", 0, 0, 32, 32));
   bool running = true;
   while (running == true)
   {
@@ -33,7 +35,7 @@ void Game::eventLoop()
 
     }
     update();
-    draw();
+    draw(&graphics);
     const int elapsed_time_ms = SDL_GetTicks() - start_time_ms;
     int timeToDelay = 1000 / 60 - elapsed_time_ms;
     timeToDelay = timeToDelay < 0 ? 0 : timeToDelay;
@@ -51,7 +53,10 @@ void Game::eventLoop()
 void Game::update()
 {
 }
-void Game::draw()
+void Game::draw(Graphics* graphics)
 {
+  graphics->clearScreen();
+  _sprite->draw(320, 240);
+  graphics->render();
 }
    

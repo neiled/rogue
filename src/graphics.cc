@@ -2,14 +2,25 @@
 
 Graphics::Graphics() {
   _window = SDL_CreateWindow("My Game Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_OPENGL);
-  _renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
-  SDL_SetRenderDrawColor( _renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+  Renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
+  SDL_SetRenderDrawColor( Renderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
 }
 
 Graphics::~Graphics()
 {
   SDL_DestroyWindow(_window);
+}
+
+
+void Graphics::render()
+{
+  SDL_RenderPresent(Renderer);
+}
+
+void Graphics::clearScreen()
+{
+  SDL_RenderClear(Renderer);
 }
 //void Graphics::blitSurface(SDL_Surface* source, SDL_Rect* source_rect, SDL_Rect* dest_rect)
 //{
@@ -45,7 +56,7 @@ SDL_Texture* Graphics::loadTexture( std::string path )
   else
   {
     //Create texture from surface pixels
-    newTexture = SDL_CreateTextureFromSurface(_renderer, loadedSurface );
+    newTexture = SDL_CreateTextureFromSurface(Renderer, loadedSurface );
     if( newTexture == NULL )
     {
       printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
