@@ -23,5 +23,5 @@ void Sprite::draw(int x, int y)
   destination.w = _source_rect.w;
   destination.h = _source_rect.h;
 
-  SDL_RenderCopy(_graphics->Renderer, _texture, NULL, &destination);
+  SDL_RenderCopy(_graphics->Renderer, _texture, &_source_rect, &destination);
 }
