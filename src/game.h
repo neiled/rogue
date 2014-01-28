@@ -15,7 +15,7 @@ struct Game {
     void update(World* world);
     void draw(Graphics* graphics, World* world);
 
-    boost::scoped_ptr<Sprite> _sprite;
+    void delay();
 
 };
 #endif
