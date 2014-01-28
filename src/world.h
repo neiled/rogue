@@ -6,6 +6,7 @@ class World
 public:
   World ();
   virtual ~World ();
+  void update();
 
 private:
   /* data */
