@@ -4,6 +4,7 @@
 #include <boost/scoped_ptr.hpp>
 #include "sprite.h"
 
+class World;
 
 struct Game {
   Game();
@@ -11,8 +12,8 @@ struct Game {
 
   private:
     void eventLoop();
-    void update();
-    void draw(Graphics* graphics);
+    void update(World* world);
+    void draw(Graphics* graphics, World* world);
 
     boost::scoped_ptr<Sprite> _sprite;
 

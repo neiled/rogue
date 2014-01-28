@@ -10,6 +10,7 @@ class Tile
     Tile();
     Tile (TileType tileType);
     virtual ~Tile ();
+    void SetTileType(TileType tileType);
 
 
   private:

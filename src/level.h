@@ -1,10 +1,11 @@
 #ifndef LEVEL_H_
 #define LEVEL_H_
 
-#include "levelbuilder.h"
 #include "tile.h"
 #include <iostream>
 #include <array>
+
+class LevelBuilder;
 
 using namespace std;
 
@@ -16,7 +17,8 @@ class Level
   public:
     Level ();
     virtual ~Level ();
-    void BuildLevel(LevelBuilder builder);
+    void BuildLevel(LevelBuilder* builder);
+    void SetType(int x, int y, Tile::TileType tileType);
 
   private:
     array<array<Tile*, LEVEL_WIDTH>, LEVEL_HEIGHT > _map;

@@ -2,8 +2,7 @@
 #define LEVELBUILDER_H_
 
 #include "levelbuilder.h"
-
-class Level;
+#include "level.h"
 
 class LevelBuilder
 {

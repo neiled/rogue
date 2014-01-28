@@ -4,7 +4,7 @@
 class World
 {
 public:
-  World (int levelSize);
+  World ();
   virtual ~World ();
 
 private:
