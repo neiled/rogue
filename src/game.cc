@@ -18,7 +18,6 @@ void Game::eventLoop()
   SDL_Event event;
   World world;
 
-  _sprite.reset(new Sprite(&graphics, "content/MyChar.bmp", 0, 0, 32, 32));
   bool running = true;
   while (running == true)
   {
@@ -42,12 +41,8 @@ void Game::eventLoop()
     int timeToDelay = 1000 / 60 - elapsed_time_ms;
     timeToDelay = timeToDelay < 0 ? 0 : timeToDelay;
 
-    //fprintf(stderr, "delaying for %d\n", timeToDelay);
     SDL_Delay(timeToDelay);
-    //fprintf(stderr, "finished delay\n");
-    //const float seconds_per_frame = (SDL_GetTicks() - start_time_ms )/ 1000.0;
-    //const float fps = 1 / seconds_per_frame;
-    //fprintf(stderr, "fps=%f\n", fps);
+
   }
 
 }
@@ -60,7 +55,6 @@ void Game::draw(Graphics* graphics, World* world)
 {
   graphics->clearScreen();
   
-  _sprite->draw(320, 240);
   graphics->render();
 }
    
