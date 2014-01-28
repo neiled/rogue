@@ -37,14 +37,19 @@ void Game::eventLoop()
     }
     update(&world);
     draw(&graphics, &world);
-    const int elapsed_time_ms = SDL_GetTicks() - start_time_ms;
-    int timeToDelay = 1000 / 60 - elapsed_time_ms;
-    timeToDelay = timeToDelay < 0 ? 0 : timeToDelay;
 
-    SDL_Delay(timeToDelay);
 
   }
 
+}
+
+void Game::delay(int start_time_ms)
+{
+  const int elapsed_time_ms = SDL_GetTicks() - start_time_ms;
+  int timeToDelay = 1000 / 60 - elapsed_time_ms;
+  timeToDelay = timeToDelay < 0 ? 0 : timeToDelay;
+
+  SDL_Delay(timeToDelay);  
 }
 
 void Game::update(World* world)
