@@ -1,0 +1,1 @@
+/usr/bin/gcc   -Wl,-search_paths_first -headerpad_max_install_names  CMakeFiles/rbox.dir/src/rbox/rbox.c.o  -o rbox  libqhullstatic.a -lm 

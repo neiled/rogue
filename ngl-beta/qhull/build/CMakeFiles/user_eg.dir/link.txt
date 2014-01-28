@@ -1,0 +1,1 @@
+/usr/bin/gcc   -Wl,-search_paths_first -headerpad_max_install_names  CMakeFiles/user_eg.dir/src/user_eg/user_eg.c.o  -o user_eg  libqhull_p.6.dylib -lm 

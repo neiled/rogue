@@ -1,0 +1,1 @@
+/usr/bin/gcc   -Wl,-search_paths_first -headerpad_max_install_names  CMakeFiles/testqset.dir/src/libqhull/qset.c.o CMakeFiles/testqset.dir/src/libqhull/mem.c.o CMakeFiles/testqset.dir/src/testqset/testqset.c.o  -o testqset  

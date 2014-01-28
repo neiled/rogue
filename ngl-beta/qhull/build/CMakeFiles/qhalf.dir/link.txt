@@ -1,0 +1,1 @@
+/usr/bin/gcc   -Wl,-search_paths_first -headerpad_max_install_names  CMakeFiles/qhalf.dir/src/qhalf/qhalf.c.o  -o qhalf  libqhullstatic.a -lm 

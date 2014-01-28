@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/neiled/dev/cpp/rogue/ngl-beta/binsrc/common.h
+fstream
+-
+map
+-
+vector
+-
+stdexcept
+-
+algorithm
+-
+
+/Users/neiled/dev/cpp/rogue/ngl-beta/binsrc/getDelaunay.cpp
+common.h
+/Users/neiled/dev/cpp/rogue/ngl-beta/binsrc/common.h
+timing.h
+/Users/neiled/dev/cpp/rogue/ngl-beta/binsrc/timing.h
+assert.h
+-
+stdlib.h
+-
+unistd.h
+-
+vector
+-
+timing.h
+/Users/neiled/dev/cpp/rogue/ngl-beta/binsrc/timing.h
+
+/Users/neiled/dev/cpp/rogue/ngl-beta/binsrc/timing.h
+limits.h
+-
+windows.h
+-
+sys/time.h
+-
+unistd.h
+-
+

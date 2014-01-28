@@ -1,0 +1,1 @@
+/usr/bin/gcc   -Wl,-search_paths_first -headerpad_max_install_names  CMakeFiles/qhull.dir/src/qhull/unix.c.o  -o qhull  libqhullstatic.a -lm 

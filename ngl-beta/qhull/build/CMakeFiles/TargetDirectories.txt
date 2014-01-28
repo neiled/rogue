@@ -1,0 +1,15 @@
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/libqhull.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/qconvex.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/qdelaunay.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/qhalf.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/qhull.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/qhull_p.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/qhullcpp.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/qhullstatic.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/qhullstatic_p.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/qvoronoi.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/rbox.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/testqset.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/user_eg.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/user_eg2.dir
+/Users/cdcorrea/Research/ngl/qhull/build/CMakeFiles/user_eg3.dir

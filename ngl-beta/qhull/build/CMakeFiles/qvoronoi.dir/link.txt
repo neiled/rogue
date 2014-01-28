@@ -1,0 +1,1 @@
+/usr/bin/gcc   -Wl,-search_paths_first -headerpad_max_install_names  CMakeFiles/qvoronoi.dir/src/qvoronoi/qvoronoi.c.o  -o qvoronoi  libqhullstatic.a -lm 

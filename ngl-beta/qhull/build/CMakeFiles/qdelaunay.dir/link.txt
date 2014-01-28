@@ -1,0 +1,1 @@
+/usr/bin/gcc   -Wl,-search_paths_first -headerpad_max_install_names  CMakeFiles/qdelaunay.dir/src/qdelaunay/qdelaun.c.o  -o qdelaunay  libqhullstatic.a -lm 

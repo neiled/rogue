@@ -1,0 +1,1 @@
+/usr/bin/c++   -stdlib=libstdc++ -O3 -DNDEBUG -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/interactiveGraph.dir/interactiveGraph.cpp.o  -o interactiveGraph  -framework AGL -framework OpenGL -framework GLUT -framework Cocoa ../../ann_1.1.2/lib/libANN.a 
