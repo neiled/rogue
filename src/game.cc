@@ -38,6 +38,7 @@ void Game::eventLoop()
     update(&world);
     draw(&graphics, &world);
 
+    delay(start_time_ms);
 
   }
 
