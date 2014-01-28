@@ -15,7 +15,7 @@ struct Game {
     void update(World* world);
     void draw(Graphics* graphics, World* world);
 
-    void delay();
+    void delay(int start_time_ms);
 
 };
 #endif
