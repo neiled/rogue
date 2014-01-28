@@ -6,9 +6,11 @@ Tile::Tile()
   _tileType = TileType::Rock;
 }
 
-Tile::Tile(TileType tileType)
+Tile::Tile(TileType tileType, int x, int y)
 {
   _tileType = tileType;
+  _x = x;
+  _y = y;
 }
 
 Tile::~Tile()
