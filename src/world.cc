@@ -11,7 +11,7 @@ World::~World()
 {
 }
 
-world::update()
+World::update()
 {
   
 }
