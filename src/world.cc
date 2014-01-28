@@ -10,3 +10,8 @@ World::World()
 World::~World()
 {
 }
+
+world::update()
+{
+  
+}
