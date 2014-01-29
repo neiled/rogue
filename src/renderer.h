@@ -9,7 +9,7 @@ class Renderer {
     Renderer();
     ~Renderer();
   
-    void render(Tile[][] map);
+    void render(Level* level);
     
   private:
 
