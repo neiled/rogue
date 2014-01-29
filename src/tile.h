@@ -11,6 +11,7 @@ class Tile
     Tile (TileType tileType, Level* level, int x, int y);
     virtual ~Tile ();
     void SetTileType(TileType tileType);
+    Level* getLevel();
 
 
   private:
