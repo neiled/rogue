@@ -21,3 +21,8 @@ Player* World::getPlayer()
 {
   return _player;
 }
+
+Level* World::getCurrentLevel()
+{
+  return _player->getCurrentLevel();
+}
