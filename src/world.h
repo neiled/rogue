@@ -7,6 +7,7 @@ public:
   World ();
   virtual ~World ();
   void update();
+  Player* getPlayer();
 
 private:
   /* data */
