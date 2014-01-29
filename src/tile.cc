@@ -23,7 +23,7 @@ void Tile::SetTileType(TileType tileType)
   _tileType = tileType;
 }
 
-Level* getLevel()
+Level* Tile::getLevel()
 {
   return _level;
 }
