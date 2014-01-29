@@ -6,7 +6,7 @@ Level::Level()
   {
     for (int x = 0; x < LEVEL_WIDTH; ++x)
     {
-      Tile* t = new Tile(Tile::TileType::Rock);
+      Tile* t = new Tile(Tile::TileType::Rock, x, y);
       _map[y][x] = t;
     }
   }

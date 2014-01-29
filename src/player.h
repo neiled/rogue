@@ -1,6 +1,8 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
+class Tile;
+
 
 class Player
 {
@@ -9,6 +11,6 @@ class Player
     virtual ~Player();
 
   private:
-    Tile _currentTile;
+    Tile* _currentTile;
 };
 #endif
