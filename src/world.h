@@ -9,7 +9,7 @@ public:
   World ();
   virtual ~World ();
   void update();
-  Player* getPlayer();
+  Level* getCurrentLevel();
 
 private:
   Player* _player;
