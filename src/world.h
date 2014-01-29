@@ -1,7 +1,8 @@
 #ifndef WORLD_H_
 #define WORLD_H_
 
-class Player;
+#include "player.h"
+#include "level.h"
 
 class World
 {
@@ -10,6 +11,7 @@ public:
   virtual ~World ();
   void update();
   Level* getCurrentLevel();
+  Player* getPlayer();
 
 private:
   Player* _player;

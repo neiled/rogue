@@ -1,7 +1,9 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
-class Tile;
+class Level;
+
+#include "tile.h"
 
 
 class Player

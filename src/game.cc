@@ -61,7 +61,7 @@ void Game::update(World* world)
 void Game::draw(Graphics* graphics, Renderer* renderer, World* world)
 {
   graphics->clearScreen();
-  renderer->render(world->getCurrentLevel())
+  renderer->render(world->getCurrentLevel());
   graphics->render();
 }
    

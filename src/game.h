@@ -3,6 +3,7 @@
 
 #include <boost/scoped_ptr.hpp>
 #include "sprite.h"
+#include "renderer.h"
 
 class World;
 
@@ -13,7 +14,7 @@ struct Game {
   private:
     void eventLoop();
     void update(World* world);
-    void draw(Graphics* graphics, World* world);
+    void draw(Graphics* graphics, Renderer* renderer, World* world);
 
     void delay(int start_time_ms);
 

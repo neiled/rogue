@@ -1,6 +1,7 @@
 #ifndef TILE_H_
 #define TILE_H_
 
+class Level;
 
 class Tile
 {
@@ -10,7 +11,7 @@ class Tile
     Tile();
     Tile (TileType tileType, Level* level, int x, int y);
     virtual ~Tile ();
-    void SetTileType(TileType tileType);
+    void setTileType(TileType tileType);
     Level* getLevel();
 
 

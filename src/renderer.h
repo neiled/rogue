@@ -1,8 +1,7 @@
 #ifndef RENDERER_H_
 #define RENDERER_H_
 
-#include <boost/scoped_ptr.hpp>
-#include "sprite.h"
+class Level;
 
 class Renderer {
   public:

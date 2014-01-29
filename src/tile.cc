@@ -18,7 +18,7 @@ Tile::~Tile()
 {
 }
 
-void Tile::SetTileType(TileType tileType)
+void Tile::setTileType(TileType tileType)
 {
   _tileType = tileType;
 }

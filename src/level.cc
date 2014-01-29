@@ -18,7 +18,7 @@ void Level::BuildLevel(LevelBuilder* builder)
 
 void Level::SetType(int x, int y, Tile::TileType tileType)
 {
-  _map[y][x]->SetTileType(tileType);
+  _map[y][x]->setTileType(tileType);
 }
 
 
