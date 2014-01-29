@@ -15,3 +15,8 @@ void World::update()
 {
   
 }
+
+Player* World::getPlayer()
+{
+  return _player;
+}
