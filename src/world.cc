@@ -9,6 +9,7 @@ World::World()
 
 World::~World()
 {
+  delete _player;
 }
 
 void World::update()
