@@ -17,6 +17,7 @@ void Game::eventLoop()
   Graphics graphics;
   SDL_Event event;
   World world;
+  Renderer renderer;
 
   bool running = true;
   while (running == true)
@@ -36,7 +37,7 @@ void Game::eventLoop()
 
     }
     update(&world);
-    draw(&graphics, &world);
+    draw(&graphics, &renderer, &world);
 
     delay(start_time_ms);
 
@@ -57,10 +58,10 @@ void Game::update(World* world)
 {
   
 }
-void Game::draw(Graphics* graphics, World* world)
+void Game::draw(Graphics* graphics, Renderer* renderer, World* world)
 {
   graphics->clearScreen();
-  
+  renderer->render(world->getCurrentLevel())
   graphics->render();
 }
    
