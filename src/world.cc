@@ -3,7 +3,7 @@
 
 World::World()
 {
-
+  _player = new Player();
 }
 
 
