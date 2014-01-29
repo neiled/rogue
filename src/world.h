@@ -1,6 +1,8 @@
 #ifndef WORLD_H_
 #define WORLD_H_
 
+class Player;
+
 class World
 {
 public:
@@ -10,6 +12,6 @@ public:
   Player* getPlayer();
 
 private:
-  /* data */
+  Player* _player;
 };
 #endif
