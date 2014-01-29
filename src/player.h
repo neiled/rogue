@@ -9,7 +9,8 @@ class Player
   public:
     Player();
     virtual ~Player();
-
+    Level* getCurrentLevel();
+    
   private:
     Tile* _currentTile;
 };
