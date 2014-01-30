@@ -12,13 +12,15 @@ Level::Level()
   }
 }
 
-void Level::BuildLevel(LevelBuilder* builder)
-{
-}
 
-void Level::SetType(int x, int y, Tile::TileType tileType)
+void Level::setType(int x, int y, Tile::TileType tileType)
 {
   _map[y][x]->setTileType(tileType);
+}
+
+Tile* Level::getTile(int x, int y)
+{
+  return _map[y][x];
 }
 
 

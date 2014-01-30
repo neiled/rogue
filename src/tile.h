@@ -12,6 +12,7 @@ class Tile
     Tile (TileType tileType, Level* level, int x, int y);
     virtual ~Tile ();
     void setTileType(TileType tileType);
+    TileType getTileType();
     Level* getLevel();
 
 

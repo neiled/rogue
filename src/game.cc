@@ -17,7 +17,7 @@ void Game::eventLoop()
   Graphics graphics;
   SDL_Event event;
   World world;
-  Renderer renderer;
+  Renderer renderer(&graphics);
 
   bool running = true;
   while (running == true)

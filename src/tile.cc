@@ -23,6 +23,11 @@ void Tile::setTileType(TileType tileType)
   _tileType = tileType;
 }
 
+Tile::TileType Tile::getTileType()
+{
+  return _tileType;
+}
+
 Level* Tile::getLevel()
 {
   return _level;

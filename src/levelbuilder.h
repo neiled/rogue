@@ -9,7 +9,7 @@ class LevelBuilder
   public:
     LevelBuilder ();
     virtual ~LevelBuilder ();
-    void BuildLevel(Level* level);
+    void buildLevel(Level* level);
 
   private:
     /* data */

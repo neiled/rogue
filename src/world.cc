@@ -1,9 +1,17 @@
 #include "world.h"
 
+#include "levelbuilder.h"
 
 World::World()
 {
+  LevelBuilder* builder = new LevelBuilder();
+  Level* firstLevel = new Level();
+
+  builder->buildLevel(firstLevel);
+
+
   _player = new Player();
+  _player->setCurrentTile(firstLevel->getTile(0,0));
 }
 
 
