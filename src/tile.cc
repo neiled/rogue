@@ -32,3 +32,13 @@ Level* Tile::getLevel()
 {
   return _level;
 }
+
+int Tile::getX()
+{
+  return _x;
+}
+
+int Tile::getY()
+{
+  return _y;
+}

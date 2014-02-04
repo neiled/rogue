@@ -14,6 +14,8 @@ class Tile
     void setTileType(TileType tileType);
     TileType getTileType();
     Level* getLevel();
+    int getX();
+    int getY();
 
 
   private:

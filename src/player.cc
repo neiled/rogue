@@ -12,6 +12,10 @@ void Player::setCurrentTile(Tile* currentTile)
 {
   _currentTile = currentTile;
 }
+Tile* Player::getCurrentTile()
+{
+  return _currentTile;
+}
 
 Level* Player::getCurrentLevel()
 {

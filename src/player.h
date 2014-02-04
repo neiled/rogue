@@ -13,6 +13,7 @@ class Player
     virtual ~Player();
     Level* getCurrentLevel();
     void setCurrentTile(Tile* currentTile);
+    Tile* getCurrentTile();
     
   private:
     Tile* _currentTile;
