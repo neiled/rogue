@@ -22,7 +22,7 @@ World::~World()
 
 void World::update()
 {
-  
+  _player->getCurrentLevel().update();
 }
 
 Player* World::getPlayer()
