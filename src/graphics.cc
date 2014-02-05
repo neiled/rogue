@@ -24,6 +24,16 @@ void Graphics::clearScreen()
   SDL_RenderClear(Renderer);
 }
 
+int Graphics::getScreenWidth()
+{
+  return 800;
+}
+
+int Graphocs::getScreenHeight()
+{
+  return 600;
+}
+
 SDL_Texture* Graphics::loadTexture( std::string path )
 {
   //The final texture
