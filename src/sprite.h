@@ -7,12 +7,15 @@ class Sprite
 {
   public:
   Sprite(Graphics* graphics, const std::string& file_path, int source_x, int source_y, int width, int height);
-  ~Sprite();
+  virtual ~Sprite();
   void draw(int x, int y);
+  virtual void update(int elapsed_time_in_ms) {}
+
+  protected:
+    SDL_Rect _source_rect;
 
   private:
     SDL_Texture* _texture;
-    SDL_Rect _source_rect;
     Graphics* _graphics;
 
 };

@@ -1,4 +1,5 @@
 #include "renderer.h"
+#include "tile.h"
 
 Renderer::Renderer(Graphics* graphics)
 {
@@ -13,14 +14,51 @@ Renderer::~Renderer()
 {
 }
 
+void Renderer::update(World* world, int elapsed_time_in_ms)
+{
+  updateLightMap(world->getPlayer());
+}
+
+void Renderer::updateLightMap(Player* player)
+{
+  int maxLightDistance = 5;
+  int startLocationX = player->getCurrentTile()->getX() - maxLightDistance;
+  int startLocationY = player->getCurrentTile()->getY() - maxLightDistance;
+  int endLocationX = player->getCurrentTile()->getX() + maxLightDistance;
+  int endLocationY = player->getCurrentTile()->getY() + maxLightDistance;
+
+  if(startLocationX < 0) startLocationX = 0;
+  if(startLocationY < 0) startLocationY = 0;
+  if(endLocationX >= Level::LEVEL_WIDTH) endLocationX = Level::LEVEL_WIDTH;
+  if(endLocationY >= Level::LEVEL_HEIGHT) endLocationY = Level::LEVEL_HEIGHT;
+
+   
+  for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
+  {
+    for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
+    {
+      _light_map[y][x] = false;
+    }
+  }
+
+  for (int y = startLocationY; y < endLocationY; ++y)
+  {
+    for (int x = startLocationX; x < endLocationX; ++x)
+    {
+     _light_map[y][x] = true; 
+    }
+  }
+}
+
 void Renderer::render(Level* level)
 {
   for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
   {
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
+      bool lit = _light_map[y][x];
       Tile* currentTile = level->getTile(x, y);
-      if(currentTile->getTileType() == Tile::TileType::Rock)
+      if(currentTile->getTileType() == Tile::TileType::Rock && lit)
         _mapTiles[0]->draw(x*TILE_WIDTH,y*TILE_HEIGHT);
     }
   }
@@ -29,6 +67,6 @@ void Renderer::render(Level* level)
 void Renderer::render(Player* player)
 {
   Tile* currentTile = player->getCurrentTile();
-  _player->draw(currentTile->getX(), currentTile->getY());
+  _player->draw(currentTile->getX()*TILE_WIDTH, currentTile->getY()*TILE_HEIGHT);
 }
 
