@@ -21,7 +21,19 @@ Renderer::~Renderer()
 
 void Renderer::update(World* world, int elapsed_time_in_ms)
 {
+  updateCamera(world->getPlayer());
   updateLightMap(world->getPlayer());
+}
+
+void Renderer::updateCamera(Player* player)
+{
+  _cameraRect.x = player->getCurrentTile()->getX() - (_cameraRect.width/2);
+  _cameraRect.y = player->getCurrentTile()->getY() - (_cameraRect.height/2);
+  
+  if(_cameraRect.x < 0) _cameraRect.x = 0;
+  if(_cameraRect.y < 0) _cameraRect.y = 0;
+  if(_cameraRect.x >= Level::LEVEL_WIDTH - _camera.width) _cameraRect.x = Level::LEVEL_WIDTH - _camera.width;
+  if(_cameraRect.y >= Level::LEVEL_HEIGHT - _camera.height) _cameraRect.y = Level::LEVEL_HEIGHT - _camera.height;
 }
 
 void Renderer::updateLightMap(Player* player)
