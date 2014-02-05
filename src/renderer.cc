@@ -36,36 +36,7 @@ void Renderer::updateCamera(Player* player)
   if(_cameraRect.y >= Level::LEVEL_HEIGHT - _camera.height) _cameraRect.y = Level::LEVEL_HEIGHT - _camera.height;
 }
 
-void Renderer::updateLightMap(Player* player)
-{
-  int maxLightDistance = 5;
-  int startLocationX = player->getCurrentTile()->getX() - maxLightDistance;
-  int startLocationY = player->getCurrentTile()->getY() - maxLightDistance;
-  int endLocationX = player->getCurrentTile()->getX() + maxLightDistance;
-  int endLocationY = player->getCurrentTile()->getY() + maxLightDistance;
 
-  if(startLocationX < 0) startLocationX = 0;
-  if(startLocationY < 0) startLocationY = 0;
-  if(endLocationX >= Level::LEVEL_WIDTH) endLocationX = Level::LEVEL_WIDTH;
-  if(endLocationY >= Level::LEVEL_HEIGHT) endLocationY = Level::LEVEL_HEIGHT;
-
-   
-  for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
-  {
-    for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
-    {
-      _light_map[y][x] = false;
-    }
-  }
-
-  for (int y = startLocationY; y < endLocationY; ++y)
-  {
-    for (int x = startLocationX; x < endLocationX; ++x)
-    {
-     _light_map[y][x] = true; 
-    }
-  }
-}
 
 void Renderer::render(Level* level)
 {
