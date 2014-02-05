@@ -18,6 +18,10 @@ void LevelBuilder::buildLevel(Level* level)
         level->setType(x, y, Tile::TileType::Floor);
     }
   }
+  
+  //generate X number of rooms in the level
+  //find all the rooms closest neighbours
+  //plot a path to each neighbour
 }
 
 LevelBuilder::~LevelBuilder()
