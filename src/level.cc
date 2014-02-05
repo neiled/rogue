@@ -8,6 +8,7 @@ Level::Level()
     {
       Tile* t = new Tile(Tile::TileType::Rock, this, x, y);
       _map[y][x] = t;
+      _light_map[y][x] = Level::LightType:Unseen;
     }
   }
 }
