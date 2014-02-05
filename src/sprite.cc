@@ -15,11 +15,11 @@ Sprite::~Sprite()
   SDL_DestroyTexture(_texture);
 }
 
-void Sprite::draw(int x, int y)
+void Sprite::draw(int x, int y, int offsetX, int offsetY)
 {
   SDL_Rect destination;
-  destination.x = x;
-  destination.y = y;
+  destination.x = x - offsetX;
+  destination.y = y - offsetY;
   destination.w = _source_rect.w;
   destination.h = _source_rect.h;
 
