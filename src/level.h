@@ -16,6 +16,7 @@ class Level
     Level ();
     virtual ~Level ();
     void update();
+    void updateLightMap(Player* player)
     void setType(int x, int y, Tile::TileType tileType);
     Tile* getTile(int x, int y);
 
