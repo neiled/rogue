@@ -35,7 +35,8 @@ void Level::updateLightMap(Player* player)
   {
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
-      _light_map[y][x] = false;
+      if(_light_map[y][x] == Level::LightType:Lit)
+        _light_map[y][x] = LeveL::LightType:Unlit;
     }
   }
 
@@ -43,7 +44,7 @@ void Level::updateLightMap(Player* player)
   {
     for (int x = startLocationX; x < endLocationX; ++x)
     {
-     _light_map[y][x] = true; 
+     _light_map[y][x] = Level::LightType:Lit; 
     }
   }
 }
