@@ -24,12 +24,13 @@ class Level
     const static int LEVEL_HEIGHT = 100;
 
   private:
+    enum class LightType {Unseen, Unlit, Lit};
+    
     void updateLightMap(Player* player)
     
     array<array<Tile*, LEVEL_WIDTH>, LEVEL_HEIGHT > _map;
-    array<array<bool, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_map;
-    
-    enum class LightType {Unseen, Unlit, Lit};
+    array<array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_map;
+  
 };
 
 #endif
