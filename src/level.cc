@@ -12,9 +12,9 @@ Level::Level()
   }
 }
 
-void Level::update()
+void Level::update(Player* player)
 {
-
+  updateLightMap(player);
 }
 
 void Level::updateLightMap(Player* player)
