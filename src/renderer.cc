@@ -9,8 +9,8 @@ Renderer::Renderer(Graphics* graphics)
 
   _player = new Sprite(_graphics, "../content/knt1_lf1.bmp", 0,0,32,32);
   
-  _cameraRect.width = screenWidth;
-  _cameraRect.height = screenHeight;
+  _cameraRect.width = graphics->getScreenWidth();
+  _cameraRect.height = screenHeight->getScreenHeight();
   _cameraRect.x = 0;
   _cameraRect.y = 0;
 }
