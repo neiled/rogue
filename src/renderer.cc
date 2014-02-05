@@ -9,8 +9,8 @@ Renderer::Renderer(Graphics* graphics)
 
   _player = new Sprite(_graphics, "../content/knt1_lf1.bmp", 0,0,32,32);
   
-  _cameraRect.width = graphics->getScreenWidth();
-  _cameraRect.height = screenHeight->getScreenHeight();
+  _cameraRect.w= graphics->getScreenWidth();
+  _cameraRect.h= graphics->getScreenHeight();
   _cameraRect.x = 0;
   _cameraRect.y = 0;
 }
@@ -26,13 +26,14 @@ void Renderer::update(World* world, int elapsed_time_in_ms)
 
 void Renderer::updateCamera(Player* player)
 {
-  _cameraRect.x = player->getCurrentTile()->getX() - (_cameraRect.width/2);
-  _cameraRect.y = player->getCurrentTile()->getY() - (_cameraRect.height/2);
+  _cameraRect.x = player->getCurrentTile()->getX() * TILE_WIDTH - (_cameraRect.w/2);
+  _cameraRect.y = player->getCurrentTile()->getY() * TILE_HEIGHT - (_cameraRect.h/2);
+
   
   if(_cameraRect.x < 0) _cameraRect.x = 0;
   if(_cameraRect.y < 0) _cameraRect.y = 0;
-  if(_cameraRect.x >= Level::LEVEL_WIDTH - _camera.width) _cameraRect.x = Level::LEVEL_WIDTH - _camera.width;
-  if(_cameraRect.y >= Level::LEVEL_HEIGHT - _camera.height) _cameraRect.y = Level::LEVEL_HEIGHT - _camera.height;
+  if(_cameraRect.x >= Level::LEVEL_WIDTH*TILE_WIDTH - _cameraRect.w) _cameraRect.x = Level::LEVEL_WIDTH*TILE_WIDTH - _cameraRect.w;
+  if(_cameraRect.y >= Level::LEVEL_HEIGHT*TILE_HEIGHT - _cameraRect.h) _cameraRect.y = Level::LEVEL_HEIGHT*TILE_HEIGHT - _cameraRect.h;
 }
 
 
@@ -44,9 +45,9 @@ void Renderer::render(Level* level)
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
       //bool lit = _light_map[y][x];
-      Level::LightType lit = level->getLightMap(x, y);
+      Level::LightType lit = level->getTileLightMap(x, y);
       Tile* currentTile = level->getTile(x, y);
-      if(currentTile->getTileType() == Tile::TileType::Rock && lit != Level::LightType:Unseen)
+      if(currentTile->getTileType() == Tile::TileType::Rock && lit != Level::LightType::Unseen)
         _mapTiles[0]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
     }
   }

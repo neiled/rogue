@@ -1,4 +1,5 @@
 #include "level.h"
+#include <SDL2/SDL.h>
 
 Level::Level()
 {
@@ -8,7 +9,7 @@ Level::Level()
     {
       Tile* t = new Tile(Tile::TileType::Rock, this, x, y);
       _map[y][x] = t;
-      _light_map[y][x] = Level::LightType:Unseen;
+      _light_map[y][x] = Level::LightType::Unseen;
     }
   }
 }
@@ -36,8 +37,8 @@ void Level::updateLightMap(Player* player)
   {
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
-      if(_light_map[y][x] == Level::LightType:Lit)
-        _light_map[y][x] = LeveL::LightType:Unlit;
+      if(_light_map[y][x] == Level::LightType::Lit)
+        _light_map[y][x] = Level::LightType::Unlit;
     }
   }
 
@@ -45,12 +46,13 @@ void Level::updateLightMap(Player* player)
   {
     for (int x = startLocationX; x < endLocationX; ++x)
     {
-     _light_map[y][x] = Level::LightType:Lit; 
+      SDL_Log("lighting %d,%d", x, y);
+      _light_map[y][x] = Level::LightType::Lit;
     }
   }
 }
 
-bool Level::getTileLightMap(int x, int y)
+Level::LightType Level::getTileLightMap(int x, int y)
 {
   return _light_map[y][x];
 }

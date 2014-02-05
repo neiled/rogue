@@ -67,6 +67,7 @@ void Game::delay(int start_time_ms)
 
 void Game::update(World* world, Renderer* renderer, int elapsed_time_ms)
 {
+  world->update();
   renderer->update(world, elapsed_time_ms);
   
 }

@@ -29,7 +29,7 @@ int Graphics::getScreenWidth()
   return 800;
 }
 
-int Graphocs::getScreenHeight()
+int Graphics::getScreenHeight()
 {
   return 600;
 }
