@@ -1,7 +1,7 @@
 #include "renderer.h"
 #include "tile.h"
 
-Renderer::Renderer(Graphics* graphics, int screenWidth, int screenHeight)
+Renderer::Renderer(Graphics* graphics)
 {
   _graphics = graphics;
   Sprite* sprite = new Sprite(_graphics, "../content/dungeon_tiles_0.bmp", 64, 64, TILE_WIDTH, TILE_HEIGHT);
