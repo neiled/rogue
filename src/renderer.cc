@@ -64,7 +64,7 @@ void Renderer::render(Level* level)
       bool lit = _light_map[y][x];
       Tile* currentTile = level->getTile(x, y);
       if(currentTile->getTileType() == Tile::TileType::Rock && lit)
-        _mapTiles[0]->draw(x*TILE_WIDTH,y*TILE_HEIGHT);
+        _mapTiles[0]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
     }
   }
 }
@@ -72,6 +72,6 @@ void Renderer::render(Level* level)
 void Renderer::render(Player* player)
 {
   Tile* currentTile = player->getCurrentTile();
-  _player->draw(currentTile->getX()*TILE_WIDTH, currentTile->getY()*TILE_HEIGHT);
+  _player->draw(currentTile->getX()*TILE_WIDTH, currentTile->getY()*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
 }
 
