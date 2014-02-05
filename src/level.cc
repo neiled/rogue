@@ -12,6 +12,11 @@ Level::Level()
   }
 }
 
+void Level::update()
+{
+
+}
+
 
 void Level::setType(int x, int y, Tile::TileType tileType)
 {
