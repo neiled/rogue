@@ -29,6 +29,7 @@ class Renderer {
     Graphics* _graphics;
 
     void updateLightMap(Player* player);
+    void updateCamera(Player* player);
     array<array<bool, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_map;
     SDL_Rect _cameraRect;
     
