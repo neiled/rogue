@@ -16,7 +16,7 @@ class Level
     Level ();
     virtual ~Level ();
     void update(Player* player);
-    void updateLightMap(Player* player)
+    bool getTileLightMap(int x, int y)
     void setType(int x, int y, Tile::TileType tileType);
     Tile* getTile(int x, int y);
 
@@ -24,6 +24,8 @@ class Level
     const static int LEVEL_HEIGHT = 100;
 
   private:
+    void updateLightMap(Player* player)
+    
     array<array<Tile*, LEVEL_WIDTH>, LEVEL_HEIGHT > _map;
     array<array<bool, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_map;
 };
