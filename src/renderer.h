@@ -13,7 +13,7 @@ using std::vector;
 
 class Renderer {
   public:
-    Renderer(Graphics* graphics, int screenWidth, int screenHeight);
+    Renderer(Graphics* graphics);
     ~Renderer();
   
     void render(Level* level);
