@@ -23,50 +23,33 @@ Level* Player::getCurrentLevel()
 {
   return _currentTile->getLevel();
 }
+
 void Player::moveLeft()
 {
-  int currentX = getCurrentTile()->getX();
-  int currentY = getCurrentTile()->getY();
-
-  int newX = currentX - 1;
-  int newY = currentY;
-
-  attemptMove(newX, newY);
+  attemptMove(-1,0);
 }
 
 void Player::moveRight()
 {
-  int currentX = getCurrentTile()->getX();
-  int currentY = getCurrentTile()->getY();
-
-  int newX = currentX + 1;
-  int newY = currentY;
-
-  attemptMove(newX, newY);
+  attemptMove(1,0);
 }
 void Player::moveUp()
 {
-  int currentX = getCurrentTile()->getX();
-  int currentY = getCurrentTile()->getY();
-
-  int newX = currentX;
-  int newY = currentY - 1;
-
-  attemptMove(newX, newY);
+  attemptMove(0,-1);
 }
 void Player::moveDown()
 {
-  int currentX = getCurrentTile()->getX();
-  int currentY = getCurrentTile()->getY();
-
-  int newX = currentX;
-  int newY = currentY + 1;
-
-  attemptMove(newX, newY);
+  attemptMove(0,1);
 }
 
-void Player::attemptMove(int newX, int newY)
+void Player::attemptMove(int xModifier, int yModifier)
 {
+  int currentX = _currentTile->getX();
+  int currentY = _currentTile->getY();
+
+  int newX = currentX + xModifier;
+  int newY = currentY + yModifier;
+  
   Tile* newTile = checkCanMove(newX, newY);
   if(newTile != NULL)
   {
