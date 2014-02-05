@@ -22,7 +22,6 @@ Renderer::~Renderer()
 void Renderer::update(World* world, int elapsed_time_in_ms)
 {
   updateCamera(world->getPlayer());
-  updateLightMap(world->getPlayer());
 }
 
 void Renderer::updateCamera(Player* player)
@@ -44,7 +43,8 @@ void Renderer::render(Level* level)
   {
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
-      bool lit = _light_map[y][x];
+      //bool lit = _light_map[y][x];
+      bool lit = level->getLightMap(x, y);
       Tile* currentTile = level->getTile(x, y);
       if(currentTile->getTileType() == Tile::TileType::Rock && lit)
         _mapTiles[0]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
