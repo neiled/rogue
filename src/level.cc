@@ -46,7 +46,6 @@ void Level::updateLightMap(Player* player)
   {
     for (int x = startLocationX; x < endLocationX; ++x)
     {
-      SDL_Log("lighting %d,%d", x, y);
       _light_map[y][x] = Level::LightType::Lit;
     }
   }
