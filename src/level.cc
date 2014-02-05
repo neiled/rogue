@@ -48,6 +48,11 @@ void Level::updateLightMap(Player* player)
   }
 }
 
+bool Level::getTileLightMap(int x, int y)
+{
+  return _light_map[y][x];
+}
+
 
 void Level::setType(int x, int y, Tile::TileType tileType)
 {
