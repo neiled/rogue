@@ -19,12 +19,14 @@ class Level
     bool getTileLightMap(int x, int y)
     void setType(int x, int y, Tile::TileType tileType);
     Tile* getTile(int x, int y);
+    
+    enum class LightType {Unseen, Unlit, Lit};
 
     const static int LEVEL_WIDTH = 100;
     const static int LEVEL_HEIGHT = 100;
 
   private:
-    enum class LightType {Unseen, Unlit, Lit};
+    
     
     void updateLightMap(Player* player)
     
