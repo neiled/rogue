@@ -15,6 +15,7 @@ class Level
   public:
     Level ();
     virtual ~Level ();
+    void update();
     void setType(int x, int y, Tile::TileType tileType);
     Tile* getTile(int x, int y);
 
