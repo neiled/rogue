@@ -1,13 +1,18 @@
 #include "renderer.h"
 #include "tile.h"
 
-Renderer::Renderer(Graphics* graphics)
+Renderer::Renderer(Graphics* graphics, int screenWidth, int screenHeight)
 {
   _graphics = graphics;
   Sprite* sprite = new Sprite(_graphics, "../content/dungeon_tiles_0.bmp", 64, 64, TILE_WIDTH, TILE_HEIGHT);
   _mapTiles.push_back(sprite);
 
   _player = new Sprite(_graphics, "../content/knt1_lf1.bmp", 0,0,32,32);
+  
+  _cameraRect.width = screenWidth;
+  _cameraRect.height = screenHeight;
+  _cameraRect.x = 0;
+  _cameraRect.y = 0;
 }
 
 Renderer::~Renderer()
