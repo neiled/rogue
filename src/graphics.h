@@ -21,6 +21,8 @@ class Graphics
     SDL_Texture* loadTexture( std::string path );
     void render();
     void clearScreen();
+    int getScreenWidth();
+    int getScreenHeight();
 
   private:
     SDL_Window* _window;
