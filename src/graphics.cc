@@ -37,11 +37,11 @@ int Graphics::getScreenHeight()
 SDL_Texture* Graphics::loadTexture( std::string path )
 {
   //The final texture
-  SDL_Texture* newTexture = NULL;
+  SDL_Texture* newTexture = nullptr;
 
   //SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
   SDL_Surface* loadedSurface = SDL_LoadBMP(path.c_str());
-  if( loadedSurface == NULL )
+  if( loadedSurface == nullptr )
   {
     printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), SDL_GetError() );
   }
@@ -49,7 +49,7 @@ SDL_Texture* Graphics::loadTexture( std::string path )
   {
     //Create texture from surface pixels
     newTexture = SDL_CreateTextureFromSurface(Renderer, loadedSurface );
-    if( newTexture == NULL )
+    if( newTexture == nullptr )
     {
       printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
     }
