@@ -60,15 +60,15 @@ void Player::attemptMove(int xModifier, int yModifier)
 Tile* Player::checkCanMove(int newX, int newY)
 {
   if(newX < 0)
-    return NULL;
+    return nullptr;
   if(newY < 0)
-    return NULL;
+    return nullptr;
   if(newX >= Level::LEVEL_WIDTH)
-    return NULL;
+    return nullptr;
   if(newY >= Level::LEVEL_HEIGHT)
-    return NULL;
+    return nullptr;
   Tile* newTile = getCurrentLevel()->getTile(newX, newY);
   if(newTile->getTileType() != Tile::TileType::Floor)
-    return NULL;
+    return nullptr;
   return newTile;
 }
