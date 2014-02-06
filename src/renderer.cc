@@ -26,13 +26,13 @@ void Renderer::update(World* world, int elapsed_time_in_ms)
 
 void Renderer::updateCamera(Player* player)
 {
-  _cameraRect.x = player->getCurrentTile()->getX() * TILE_WIDTH - (_cameraRect.w/2);
+  _cameraRect.x = player->getCurrentTile()->getX() * TILE_WIDTH  - (_cameraRect.w/2);
   _cameraRect.y = player->getCurrentTile()->getY() * TILE_HEIGHT - (_cameraRect.h/2);
 
   
   if(_cameraRect.x < 0) _cameraRect.x = 0;
   if(_cameraRect.y < 0) _cameraRect.y = 0;
-  if(_cameraRect.x >= Level::LEVEL_WIDTH*TILE_WIDTH - _cameraRect.w) _cameraRect.x = Level::LEVEL_WIDTH*TILE_WIDTH - _cameraRect.w;
+  if(_cameraRect.x >= Level::LEVEL_WIDTH*TILE_WIDTH   - _cameraRect.w) _cameraRect.x = Level::LEVEL_WIDTH* TILE_WIDTH  - _cameraRect.w;
   if(_cameraRect.y >= Level::LEVEL_HEIGHT*TILE_HEIGHT - _cameraRect.h) _cameraRect.y = Level::LEVEL_HEIGHT*TILE_HEIGHT - _cameraRect.h;
 }
 
