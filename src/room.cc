@@ -78,6 +78,14 @@ void Room::setSecondNeighbour(Room* room)
     _n2Dist = distanceTo(_neighbour2);
 }
 
+void Room::removeNeighbour(Room* room)
+{
+  if(_neighbour1 == room)
+    _neighbour1 = nullptr;
+  else if(_neighbour2 == room)
+    _neighbour2 = nullptr;
+}
+
 double Room::distanceTo(Room* otherRoom)
 {
   return sqrt((otherRoom->getX() - _x)*(otherRoom->getX() - _x) + (otherRoom->getY() - _y) * (otherRoom->getY() - _y));
