@@ -21,6 +21,8 @@ public:
 
   Room* getFirstNeighbour();
   Room* getSecondNeighbour();
+  
+  void removeNeighbour(Room* room)
 
   double distanceTo(Room* otherRoom);
 
