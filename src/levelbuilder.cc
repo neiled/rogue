@@ -116,12 +116,12 @@ SDL_Point LevelBuilder::pickPointOfRoom(Room* startRoom)
   int h = startRoom->getHeight();
   
   if(pointPicked <w)
-    return SDL_Point {pointPicked + startRoom->getX(), 0};
+    return SDL_Point {pointPicked + startRoom->getX(), startRoom->getY()};
   if(pointPicked < w + h)
-    return SDL_Point {w + startRoom->getX(), pointPicked - w + startRoom->getY()};
+    return SDL_Point {w-1 + startRoom->getX(), pointPicked - w + startRoom->getY()};
   if(pointPicked < 2*w + h)
-    return SDL_Point {2*w + h - pointPicked + startRoom->getX(), h + startRoom->getY()};
-  return SDL_Point{0 + startRoom->getX(), 2*w + 2*h - pointPicked + startRoom->getY()};
+    return SDL_Point {2*w-1 + h - pointPicked + startRoom->getX(), h-1 + startRoom->getY()};
+  return SDL_Point{0 + startRoom->getX(), 2*w-1 + 2*h - pointPicked + startRoom->getY()};
 }
 
 void LevelBuilder::digCorridor(SDL_Point startPoint, SDL_Point endPoint, Level* level)
