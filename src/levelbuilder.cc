@@ -50,18 +50,25 @@ void LevelBuilder::buildLevel(Level* level)
   for(Room* startRoom : rooms)
   {
     Room* endRoom = startRoom->getFirstNeighbour();
-
-    SDL_Point startPoint = pickPointOfRoom(startRoom);
-    SDL_Point endPoint = pickPointOfRoom(endRoom);
-
-    digCorridor(startPoint, endPoint, level);
+    
+    if(endRoom != nullptr)
+    {
+      SDL_Point startPoint = pickPointOfRoom(startRoom);
+      SDL_Point endPoint = pickPointOfRoom(endRoom);
+  
+      digCorridor(startPoint, endPoint, level);
+      endroom->removeNeighbour(startRoom);
+    }
 
     endRoom = startRoom->getSecondNeighbour();
-    
-    startPoint = pickPointOfRoom(startRoom);
-    endPoint = pickPointOfRoom(endRoom);
-
-    digCorridor(startPoint, endPoint, level);
+    if(endroom != nullptr)
+    {
+      SDL_Point startPoint = pickPointOfRoom(startRoom);
+      SDL_Point endPoint = pickPointOfRoom(endRoom);
+  
+      digCorridor(startPoint, endPoint, level);
+      endroom->removeNeighbour(startRoom);
+    }
   }
 }
 
