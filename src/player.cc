@@ -69,6 +69,6 @@ Tile* Player::checkCanMove(int newX, int newY)
     return nullptr;
   Tile* newTile = getCurrentLevel()->getTile(newX, newY);
   if(newTile->getTileType() != Tile::TileType::Floor)
-    return nullptr;
+    return newTile;//nullptr;
   return newTile;
 }

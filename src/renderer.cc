@@ -44,7 +44,6 @@ void Renderer::render(Level* level)
   {
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
-      //bool lit = _light_map[y][x];
       Level::LightType lit = level->getTileLightMap(x, y);
       Tile* currentTile = level->getTile(x, y);
       if(currentTile->getTileType() == Tile::TileType::Rock && lit != Level::LightType::Unseen)
