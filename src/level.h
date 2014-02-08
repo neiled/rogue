@@ -36,6 +36,7 @@ class Level
    int _depth; 
     
     void updateLightMap(Player* player);
+    void resetLightMap();
     
     array<array<Tile*, LEVEL_WIDTH>, LEVEL_HEIGHT > _map;
     array<array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_map;

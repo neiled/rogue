@@ -51,9 +51,9 @@ void Renderer::render(Level* level)
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
       Level::LightType lit = level->getTileLightMap(x, y);
-      Tile* currentTile = level->getTile(x, y);
-      if(lit != Level::LightType::Unseen || true)
+      if(lit != Level::LightType::Unlit)
       {
+        Tile* currentTile = level->getTile(x, y);
         if(currentTile->getTileType() == Tile::TileType::Rock)
           _mapTiles[0]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
         else if(currentTile->getTileType() == Tile::TileType::StairsUp)

@@ -42,6 +42,16 @@ void Player::moveDown()
   attemptMove(0,1);
 }
 
+int Player::getX()
+{
+  return _currentTile->getX();
+}
+
+int Player::getY()
+{
+  return _currentTile->getY();
+}
+
 void Player::attemptMove(int xModifier, int yModifier)
 {
   int currentX = _currentTile->getX();

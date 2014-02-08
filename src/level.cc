@@ -1,5 +1,6 @@
 #include "level.h"
 #include <SDL2/SDL.h>
+#include "shadowcasting.h"
 
 Level::Level(int depth)
 {
@@ -22,32 +23,34 @@ void Level::update(Player* player)
 
 void Level::updateLightMap(Player* player)
 {
-  int maxLightDistance = 5;
-  int startLocationX = player->getCurrentTile()->getX() - maxLightDistance;
-  int startLocationY = player->getCurrentTile()->getY() - maxLightDistance;
-  int endLocationX = player->getCurrentTile()->getX() + maxLightDistance;
-  int endLocationY = player->getCurrentTile()->getY() + maxLightDistance;
-
-  if(startLocationX < 0) startLocationX = 0;
-  if(startLocationY < 0) startLocationY = 0;
-  if(endLocationX >= Level::LEVEL_WIDTH) endLocationX = Level::LEVEL_WIDTH;
-  if(endLocationY >= Level::LEVEL_HEIGHT) endLocationY = Level::LEVEL_HEIGHT;
+  ShadowCasting caster;
+  vector<vector<float>> newLightMap = caster.calculateFOV(_map, player->getX(), player->getY(), 100.0f);
 
    
+  resetLightMap();
+
+  for (int y = 0; y < newLightMap.size(); ++y)
+  {
+    for (int x = 0; x < newLightMap[y].size(); ++x)
+    {
+      if(newLightMap[y][x] > 0)
+      {
+        _light_map[y][x] = Level::LightType::Lit;
+        SDL_Log("Lightmap: %d,%d = %f", x, y, newLightMap[y][x]);
+      }
+    }
+  }
+
+}
+
+void Level::resetLightMap()
+{
   for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
   {
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
-      if(_light_map[y][x] == Level::LightType::Lit)
+      //if(_light_map[y][x] == Level::LightType::Lit)
         _light_map[y][x] = Level::LightType::Unlit;
-    }
-  }
-
-  for (int y = startLocationY; y < endLocationY; ++y)
-  {
-    for (int x = startLocationX; x < endLocationX; ++x)
-    {
-      _light_map[y][x] = Level::LightType::Lit;
     }
   }
 }

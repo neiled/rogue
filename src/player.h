@@ -14,6 +14,8 @@ class Player
     Level* getCurrentLevel();
     void setCurrentTile(Tile* currentTile);
     Tile* getCurrentTile();
+    int getX();
+    int getY();
     void moveLeft();
     void moveRight();
     void moveUp();
