@@ -49,7 +49,7 @@ void Level::resetLightMap()
   {
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
-      //if(_light_map[y][x] == Level::LightType::Lit)
+      if(_light_map[y][x] == Level::LightType::Lit)
         _light_map[y][x] = Level::LightType::Unlit;
     }
   }

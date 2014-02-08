@@ -8,7 +8,7 @@ class Sprite
   public:
   Sprite(Graphics* graphics, const std::string& file_path, int source_x, int source_y, int width, int height);
   virtual ~Sprite();
-  void draw(int x, int y, int offsetX, int offsetY);
+  void draw(int x, int y, int offsetX, int offsetY, int alpha = 255);
   virtual void update(int elapsed_time_in_ms) {}
 
   protected:

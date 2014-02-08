@@ -53,10 +53,11 @@ void Renderer::render(Level* level)
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
       Level::LightType lit = level->getTileLightMap(x, y);
-      if(lit != Level::LightType::Unlit)
+      if(lit != Level::LightType::Unseen)
       {
+        int alpha = lit == Level::LightType::Unlit ? 128 : 255;
         Tile* currentTile = level->getTile(x, y);
-        _mapTiles[(int)currentTile->getTileType()]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
+        _mapTiles[(int)currentTile->getTileType()]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y, alpha);
 
         //if(currentTile->getTileType() == Tile::TileType::Rock)
           //_mapTiles[0]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);

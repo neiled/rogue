@@ -15,7 +15,7 @@ Sprite::~Sprite()
   SDL_DestroyTexture(_texture);
 }
 
-void Sprite::draw(int x, int y, int offsetX, int offsetY)
+void Sprite::draw(int x, int y, int offsetX, int offsetY, int alpha)
 {
   SDL_Rect destination;
   destination.x = x - offsetX;
@@ -23,5 +23,6 @@ void Sprite::draw(int x, int y, int offsetX, int offsetY)
   destination.w = _source_rect.w;
   destination.h = _source_rect.h;
 
+  SDL_SetTextureAlphaMod(_texture, alpha);
   SDL_RenderCopy(_graphics->Renderer, _texture, &_source_rect, &destination);
 }
