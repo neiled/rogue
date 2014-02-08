@@ -31,6 +31,10 @@ class LevelBuilder
     void digCorridors(vector<Room*> rooms, Level* level);
     Room* positionStairs(vector<Room*> rooms, Level* level);
     void positionPlayer(Room* room, Player* player);
+
+    const static int ROOMS = 150;
+    const static int ROOM_HEIGHT = 8;
+    const static int ROOM_WIDTH = 8;
 };
 
 #endif

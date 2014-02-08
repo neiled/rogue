@@ -79,12 +79,12 @@ Room* LevelBuilder::positionStairs(vector<Room*> rooms, Level* level)
     }
   }
 
-  Tile* tile = startRoom->getRandomTile();
+  Tile* tile = startRoom->getRandomTile(true);
   tile->setTileType(Tile::TileType::StairsUp);
 
   SDL_Log("Putting stairs at %d,%d", tile->getX(), tile->getY());
 
-  tile = endRoom->getRandomTile();
+  tile = endRoom->getRandomTile(true);
   tile->setTileType(Tile::TileType::StairsDown);
 
   SDL_Log("Putting stairs at %d,%d", tile->getX(), tile->getY());
@@ -100,6 +100,14 @@ void LevelBuilder::digCorridors(vector<Room*> rooms, Level* level)
     {
       SDL_Point startPoint = pickPointOfRoom(startRoom);
       SDL_Point endPoint = pickPointOfRoom(neighbour);
+      if(startPoint.x == startRoom->getX()-1 && endPoint.x > startPoint.x + startRoom->getWidth())
+        startPoint.x = startRoom->getX() + startRoom->getWidth();
+      else if(startPoint.x == startRoom->getX() + startRoom->getWidth() && endPoint.x < startPoint.x)
+        startPoint.x = startRoom->getX() -1 ;
+      else if(startPoint.y == startRoom->getY()-1 && endPoint.y > startPoint.y + startRoom->getHeight())
+        startPoint.y = startRoom->getY() + startRoom->getHeight();
+      else if(startPoint.y == startRoom->getY() + startRoom->getHeight() && endPoint.y < startPoint.y )
+        startPoint.y = startRoom->getY()-1;
   
       digCorridor(startPoint, endPoint, neighbour, level);
     }
@@ -148,9 +156,9 @@ vector<Room*> LevelBuilder::createRooms(int amount, Level* level)
 {
   vector<Room*> rooms;
 
-  for (int i = 0; i < 50;)
+  for (int i = 0; i < LevelBuilder::ROOMS;)
   {
-    Room* newRoom = generateRoom(level, 12, 12);
+    Room* newRoom = generateRoom(level, LevelBuilder::ROOM_WIDTH, LevelBuilder::ROOM_HEIGHT);
 
     if(roomFits(newRoom, level))
     {
@@ -165,69 +173,81 @@ vector<Room*> LevelBuilder::createRooms(int amount, Level* level)
 
 SDL_Point LevelBuilder::pickPointOfRoom(Room* startRoom)
 {
-  Tile* tile = startRoom->getRandomTile();
-  return SDL_Point {tile->getX(), tile->getY()};
-  //int maxPoint = startRoom->getWidth() * 2 + startRoom->getHeight() * 2;
-  //int pointPicked = Random::Between(0,maxPoint);
+  //Tile* tile = startRoom->getRandomTile();
+  //return SDL_Point {tile->getX(), tile->getY()};
+  int w = startRoom->getWidth();
+  int h = startRoom->getHeight();
+  int maxPoint = w* 2 + h* 2;
+  int pointPicked = 0;
+  do
+  {
+    pointPicked = Random::Between(0,maxPoint-2);
+  }while(pointPicked == 0 || pointPicked == w-1 || pointPicked == w || pointPicked == w+h-1 || pointPicked == w+h|| pointPicked == w+w+h-1 || pointPicked == w+w+h);
 
-  //int x, y;
-  //int w = startRoom->getWidth();
-  //int h = startRoom->getHeight();
+  int x, y;
   
-  //if(pointPicked <w)
-  //{
-    //x = pointPicked + startRoom->getX();
-    //y = startRoom->getY();
-  //}
-  //else if(pointPicked < w + h)
-  //{
-    //x = w-1 + startRoom->getX();
-    //y = pointPicked - w + startRoom->getY();
-  //}
-  //else if(pointPicked < 2*w + h)
-  //{
+  if(pointPicked <w)
+  {
+    x = pointPicked + startRoom->getX();
+    y = startRoom->getY()-1;
+  }
+  else if(pointPicked < w + h)
+  {
+    x = w + startRoom->getX();
+    y = pointPicked - w + startRoom->getY();
+  }
+  else if(pointPicked < 2*w + h)
+  {
     //x = 2*w-1 + h - pointPicked + startRoom->getX();
-    //y = h-1 + startRoom->getY();
-  //}
-  //else
-  //{
-    //x = 0 + startRoom->getX();
-    //y = 2*w-1 + 2*h - pointPicked + startRoom->getY();
-  //}
-  //return SDL_Point {x, y};
+    //x = w - (pointPicked-w*2) + startRoom->getX();
+    x = w + h + w -1 - pointPicked + startRoom->getX();
+    y = h + startRoom->getY();
+  }
+  else
+  {
+    x = startRoom->getX() -1;
+    y = 2*w-1 + 2*h - pointPicked + startRoom->getY();
+  }
+  SDL_Log("Picked %d,%d after random %d picked. w: %d, h: %d - sp: %d,%d", x, y, pointPicked, w, h, startRoom->getX(), startRoom->getY());
+  return SDL_Point {x, y};
 }
 
 void LevelBuilder::digCorridor(SDL_Point startPoint, SDL_Point endPoint, Room* roomTarget, Level* level)
 {
+
+  Tile* tileToCheck = level->getTile(startPoint.x, startPoint.y);
+  tileToCheck->setTileType(Tile::TileType::Floor);
+  int x = startPoint.x;
+  int y = startPoint.y;
+
   if(startPoint.x == endPoint.x && startPoint.y == endPoint.y)
     return;
+  if(roomTarget->containsTile(level->getTile(x+1, y)))
+    return;
+  else if(roomTarget->containsTile(level->getTile(x-1, y)))
+    return;
+  else if(roomTarget->containsTile(level->getTile(x, y+1)))
+    return;
+  else if(roomTarget->containsTile(level->getTile(x, y-1)))
+    return;
+
+
+  int xModifier = 0;
+  int yModifier = 0;
 
   bool moveY = Random::Between(0,1) == 1 && startPoint.y != endPoint.y;
 
-  int xModifier = endPoint.x > startPoint.x ? 1 : -1;
+  xModifier = endPoint.x > startPoint.x ? 1 : -1;
   if(moveY || endPoint.x == startPoint.x)
     xModifier = 0;
 
-  int yModifier = endPoint.y > startPoint.y ? 1 : -1;
+  yModifier = endPoint.y > startPoint.y ? 1 : -1;
   if(!moveY || endPoint.y == startPoint.y)
     yModifier = 0;
 
-  int newX = startPoint.x + xModifier;
-  int newY = startPoint.y + yModifier;
-
-  Tile* tileToCheck = level->getTile(newX, newY);
-  tileToCheck->setTileType(Tile::TileType::Floor);
-
-  if(roomTarget->containsTile(level->getTile(newX+1, newY)))
-    return;
-  else if(roomTarget->containsTile(level->getTile(newX-1, newY)))
-    return;
-  else if(roomTarget->containsTile(level->getTile(newX, newY+1)))
-    return;
-  else if(roomTarget->containsTile(level->getTile(newX, newY-1)))
-    return;
-  else
-    digCorridor(SDL_Point {newX, newY}, endPoint, roomTarget, level);
+  int newX = x + xModifier;
+  int newY = y + yModifier;
+  digCorridor(SDL_Point {newX, newY}, endPoint, roomTarget, level);
 }
 
 

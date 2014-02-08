@@ -25,7 +25,7 @@ public:
 
   double distanceTo(Room* otherRoom);
   bool containsTile(Tile* tile);
-  Tile* getRandomTile();
+  Tile* getRandomTile(bool avoidWalls = false);
 
 private:
   Level* _level;

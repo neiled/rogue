@@ -66,10 +66,15 @@ bool Room::containsTile(Tile* tile)
   
 }
 
-Tile* Room::getRandomTile()
+Tile* Room::getRandomTile(bool avoidWalls)
 {
-  int x = Random::Between(0,_width-1) + _x;
-  int y = Random::Between(0,_height-1) + _y;
+  int minX = avoidWalls ? 1 : 0;
+  int maxX = avoidWalls ? _width-2 : _width-1;
+  int minY = avoidWalls ? 1 : 0;
+  int maxY = avoidWalls ? _height - 2 : _height - 1;
+
+  int x = Random::Between(minX,maxX) + _x;
+  int y = Random::Between(minY,maxY) + _y;
 
   return _level->getTile(x, y);
 }
