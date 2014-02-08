@@ -56,31 +56,6 @@ void LevelBuilder::buildLevel(Level* level)
       digCorridor(startPoint, endPoint, neighbour, level);
     }
   }
-
-
-  //for(Room* startRoom : rooms)
-  //{
-    //Room* endRoom = startRoom->getFirstNeighbour();
-    
-    //if(endRoom != nullptr)
-    //{
-      //SDL_Point startPoint = pickPointOfRoom(startRoom);
-      //SDL_Point endPoint = pickPointOfRoom(endRoom);
-  
-      //digCorridor(startPoint, endPoint, level);
-      //endRoom->removeNeighbour(startRoom);
-    //}
-
-    //endRoom = startRoom->getSecondNeighbour();
-    //if(endRoom != nullptr)
-    //{
-      //SDL_Point startPoint = pickPointOfRoom(startRoom);
-      //SDL_Point endPoint = pickPointOfRoom(endRoom);
-  
-      //digCorridor(startPoint, endPoint, level);
-      //endRoom->removeNeighbour(startRoom);
-    //}
-  //}
 }
 
 void LevelBuilder::connectRooms(vector<Room*> rooms)
@@ -119,27 +94,11 @@ void LevelBuilder::connectRooms(vector<Room*> rooms)
     connectedRooms.push_back(closestRoom);
   }while(connectedRooms.size() < rooms.size());
 
-  //for(Room* room : rooms)
-  //{
-    //for(Room* neighbour : rooms)
-    //{
-      //if(room != neighbour)
-      //{
-        //if(room->distanceTo(neighbour) < room->getFirstNeighbourDistance())
-          //room->setFirstNeighbour(neighbour);
-        //else if(room->distanceTo(neighbour) < room->getSecondNeihbourDistance())
-          //room->setSecondNeighbour(neighbour);
-      //}
-    //}
-  //}
 }
 
 vector<Room*> LevelBuilder::createRooms(int amount, Level* level)
 {
   vector<Room*> rooms;
-  //generate X number of rooms in the level
-  //find all the rooms closest neighbours
-  //plot a path to each neighbour
 
   for (int i = 0; i < 50;)
   {
@@ -194,7 +153,9 @@ void LevelBuilder::digCorridor(SDL_Point startPoint, SDL_Point endPoint, Room* r
 {
   if(startPoint.x == endPoint.x && startPoint.y == endPoint.y)
     return;
-  SDL_Log("Digging from %d,%d to %d,%d", startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+
+  //SDL_Log("Digging from %d,%d to %d,%d", startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+  
   std::uniform_int_distribution<int> tossCoin(0,1);
   bool moveY = tossCoin(rd) == 1 && startPoint.y != endPoint.y;
 
@@ -214,21 +175,14 @@ void LevelBuilder::digCorridor(SDL_Point startPoint, SDL_Point endPoint, Room* r
 
   if(roomTarget->containsTile(level->getTile(newX+1, newY)))
     return;
-    //digCorridor(SDL_Point {newX, newY}, SDL_Point{newX+1, newY}, roomTarget, level);
   else if(roomTarget->containsTile(level->getTile(newX-1, newY)))
     return;
-    //digCorridor(SDL_Point {newX, newY}, SDL_Point{newX-1, newY}, roomTarget, level);
   else if(roomTarget->containsTile(level->getTile(newX, newY+1)))
     return;
-    //digCorridor(SDL_Point {newX, newY}, SDL_Point{newX, newY+1}, roomTarget, level);
   else if(roomTarget->containsTile(level->getTile(newX, newY-1)))
     return;
-    //digCorridor(SDL_Point {newX, newY}, SDL_Point{newX, newY-1}, roomTarget, level);
   else
     digCorridor(SDL_Point {newX, newY}, endPoint, roomTarget, level);
-
-
-  
 }
 
 
@@ -268,7 +222,6 @@ bool LevelBuilder::roomFits(Room* room, Level* level)
       if(level->getTile(x, y)->getTileType() == Tile::TileType::Floor)
         return false;
     }
-    
   }
   return true;
 }
