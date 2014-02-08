@@ -61,7 +61,7 @@ void Player::attemptMove(int xModifier, int yModifier)
   int newY = currentY + yModifier;
   
   Tile* newTile = checkCanMove(newX, newY);
-  if(newTile != NULL)
+  if(newTile != nullptr)
   {
     _currentTile = newTile;
   }
@@ -78,7 +78,7 @@ Tile* Player::checkCanMove(int newX, int newY)
   if(newY >= Level::LEVEL_HEIGHT)
     return nullptr;
   Tile* newTile = getCurrentLevel()->getTile(newX, newY);
-  if(newTile->getTileType() != Tile::TileType::Floor)
-    return newTile;//nullptr;
+  if(newTile->getTileType() == Tile::TileType::Rock)
+    return nullptr;
   return newTile;
 }
