@@ -46,8 +46,11 @@ void Renderer::render(Level* level)
     {
       Level::LightType lit = level->getTileLightMap(x, y);
       Tile* currentTile = level->getTile(x, y);
-      if(currentTile->getTileType() == Tile::TileType::Rock && lit != Level::LightType::Unseen)
-        _mapTiles[0]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
+      if(lit != Level::LightType::Unseen || true)
+      {
+        if(currentTile->getTileType() == Tile::TileType::Rock)
+          _mapTiles[0]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
+      }
     }
   }
 }

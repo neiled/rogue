@@ -2,6 +2,12 @@
 #define ROOM_H 
 
 
+#include <vector>
+
+using namespace std;
+
+class Tile;
+
 class Room
 {
 public:
@@ -13,18 +19,21 @@ public:
   int getHeight();
   int getWidth();
 
-  double getFirstNeighbourDistance();
-  double getSecondNeihbourDistance();
+  //double getFirstNeighbourDistance();
+  //double getSecondNeihbourDistance();
 
-  void setFirstNeighbour(Room* room);
-  void setSecondNeighbour(Room* room);
+  //void setFirstNeighbour(Room* room);
+  //void setSecondNeighbour(Room* room);
 
-  Room* getFirstNeighbour();
-  Room* getSecondNeighbour();
+  //Room* getFirstNeighbour();
+  //Room* getSecondNeighbour();
   
-  void removeNeighbour(Room* room)
+  //void removeNeighbour(Room* room);
+  void addNeighbour(Room* room);
+  vector<Room*> getNeighbours();
 
   double distanceTo(Room* otherRoom);
+  bool containsTile(Tile* tile);
 
 private:
   /* data */
@@ -32,9 +41,10 @@ private:
   int _y;
   int _width;
   int _height;
-  Room* _neighbour1;
-  Room* _neighbour2;
-  double _n1Dist;
-  double _n2Dist;
+  vector<Room*> _neighbours;
+  //Room* _neighbour1;
+  //Room* _neighbour2;
+  //double _n1Dist;
+  //double _n2Dist;
 };
 #endif

@@ -28,7 +28,7 @@ class LevelBuilder
     void digRoom(Room* room, Level* level);
     bool roomFits(Room* room, Level* level);
     SDL_Point pickPointOfRoom(Room* room);
-    void digCorridor(SDL_Point startPoint, SDL_Point endPoint, Level* level);
+    void digCorridor(SDL_Point startPoint, SDL_Point endPoint, Room* roomTarget, Level* level);
 
 
 };

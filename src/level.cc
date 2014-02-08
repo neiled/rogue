@@ -64,6 +64,14 @@ void Level::setType(int x, int y, Tile::TileType tileType)
 
 Tile* Level::getTile(int x, int y)
 {
+  if(x >= Level::LEVEL_WIDTH)
+    return nullptr;
+  if(x < 0)
+    return nullptr;
+  if(y >= Level::LEVEL_HEIGHT)
+    return nullptr;
+  if(y < 0)
+    return nullptr;
   return _map[y][x];
 }
 

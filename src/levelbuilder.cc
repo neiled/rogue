@@ -46,47 +46,92 @@ void LevelBuilder::buildLevel(Level* level)
 
   connectRooms(rooms);
 
-
   for(Room* startRoom : rooms)
   {
-    Room* endRoom = startRoom->getFirstNeighbour();
-    
-    if(endRoom != nullptr)
+    for(Room* neighbour : startRoom->getNeighbours())
     {
       SDL_Point startPoint = pickPointOfRoom(startRoom);
-      SDL_Point endPoint = pickPointOfRoom(endRoom);
+      SDL_Point endPoint = pickPointOfRoom(neighbour);
   
-      digCorridor(startPoint, endPoint, level);
-      endroom->removeNeighbour(startRoom);
-    }
-
-    endRoom = startRoom->getSecondNeighbour();
-    if(endroom != nullptr)
-    {
-      SDL_Point startPoint = pickPointOfRoom(startRoom);
-      SDL_Point endPoint = pickPointOfRoom(endRoom);
-  
-      digCorridor(startPoint, endPoint, level);
-      endroom->removeNeighbour(startRoom);
+      digCorridor(startPoint, endPoint, neighbour, level);
     }
   }
+
+
+  //for(Room* startRoom : rooms)
+  //{
+    //Room* endRoom = startRoom->getFirstNeighbour();
+    
+    //if(endRoom != nullptr)
+    //{
+      //SDL_Point startPoint = pickPointOfRoom(startRoom);
+      //SDL_Point endPoint = pickPointOfRoom(endRoom);
+  
+      //digCorridor(startPoint, endPoint, level);
+      //endRoom->removeNeighbour(startRoom);
+    //}
+
+    //endRoom = startRoom->getSecondNeighbour();
+    //if(endRoom != nullptr)
+    //{
+      //SDL_Point startPoint = pickPointOfRoom(startRoom);
+      //SDL_Point endPoint = pickPointOfRoom(endRoom);
+  
+      //digCorridor(startPoint, endPoint, level);
+      //endRoom->removeNeighbour(startRoom);
+    //}
+  //}
 }
 
 void LevelBuilder::connectRooms(vector<Room*> rooms)
 {
-  for(Room* room : rooms)
+  vector<Room*> connectedRooms;
+  connectedRooms.push_back(rooms.front());
+
+  do
   {
-    for(Room* neighbour : rooms)
+    double minDistance = 1000000;
+    Room* startRoom = nullptr;
+    Room* closestRoom = nullptr;
+    for(Room* connectedRoom : connectedRooms)
     {
-      if(room != neighbour)
+      for(Room* roomToTest : rooms)
       {
-        if(room->distanceTo(neighbour) < room->getFirstNeighbourDistance())
-          room->setFirstNeighbour(neighbour);
-        else if(room->distanceTo(neighbour) < room->getSecondNeihbourDistance())
-          room->setSecondNeighbour(neighbour);
+        if(std::find(connectedRooms.begin(), connectedRooms.end(), roomToTest) == connectedRooms.end())
+        {
+          if(closestRoom == nullptr)
+          {
+            closestRoom = roomToTest;
+            minDistance = connectedRoom->distanceTo(roomToTest);
+            startRoom = connectedRoom;
+          }
+          else if(roomToTest->distanceTo(connectedRoom) < minDistance)
+          {
+            closestRoom = roomToTest;
+            minDistance = roomToTest->distanceTo(connectedRoom);
+            startRoom = connectedRoom;
+          }
+          
+        }
       }
     }
-  }
+    startRoom->addNeighbour(closestRoom);
+    connectedRooms.push_back(closestRoom);
+  }while(connectedRooms.size() < rooms.size());
+
+  //for(Room* room : rooms)
+  //{
+    //for(Room* neighbour : rooms)
+    //{
+      //if(room != neighbour)
+      //{
+        //if(room->distanceTo(neighbour) < room->getFirstNeighbourDistance())
+          //room->setFirstNeighbour(neighbour);
+        //else if(room->distanceTo(neighbour) < room->getSecondNeihbourDistance())
+          //room->setSecondNeighbour(neighbour);
+      //}
+    //}
+  //}
 }
 
 vector<Room*> LevelBuilder::createRooms(int amount, Level* level)
@@ -98,7 +143,7 @@ vector<Room*> LevelBuilder::createRooms(int amount, Level* level)
 
   for (int i = 0; i < 50;)
   {
-    Room* newRoom = generateRoom(10, 10);
+    Room* newRoom = generateRoom(20, 20);
 
     if(roomFits(newRoom, level))
     {
@@ -123,18 +168,33 @@ SDL_Point LevelBuilder::pickPointOfRoom(Room* startRoom)
   int h = startRoom->getHeight();
   
   if(pointPicked <w)
-    return SDL_Point {pointPicked + startRoom->getX(), startRoom->getY()};
-  if(pointPicked < w + h)
-    return SDL_Point {w-1 + startRoom->getX(), pointPicked - w + startRoom->getY()};
-  if(pointPicked < 2*w + h)
-    return SDL_Point {2*w-1 + h - pointPicked + startRoom->getX(), h-1 + startRoom->getY()};
-  return SDL_Point{0 + startRoom->getX(), 2*w-1 + 2*h - pointPicked + startRoom->getY()};
+  {
+    x = pointPicked + startRoom->getX();
+    y = startRoom->getY();
+  }
+  else if(pointPicked < w + h)
+  {
+    x = w-1 + startRoom->getX();
+    y = pointPicked - w + startRoom->getY();
+  }
+  else if(pointPicked < 2*w + h)
+  {
+    x = 2*w-1 + h - pointPicked + startRoom->getX();
+    y = h-1 + startRoom->getY();
+  }
+  else
+  {
+    x = 0 + startRoom->getX();
+    y = 2*w-1 + 2*h - pointPicked + startRoom->getY();
+  }
+  return SDL_Point {x, y};
 }
 
-void LevelBuilder::digCorridor(SDL_Point startPoint, SDL_Point endPoint, Level* level)
+void LevelBuilder::digCorridor(SDL_Point startPoint, SDL_Point endPoint, Room* roomTarget, Level* level)
 {
   if(startPoint.x == endPoint.x && startPoint.y == endPoint.y)
     return;
+  SDL_Log("Digging from %d,%d to %d,%d", startPoint.x, startPoint.y, endPoint.x, endPoint.y);
   std::uniform_int_distribution<int> tossCoin(0,1);
   bool moveY = tossCoin(rd) == 1 && startPoint.y != endPoint.y;
 
@@ -149,16 +209,25 @@ void LevelBuilder::digCorridor(SDL_Point startPoint, SDL_Point endPoint, Level* 
   int newX = startPoint.x + xModifier;
   int newY = startPoint.y + yModifier;
 
-  //SDL_Log("New Pos %d,%d", newX, newY);
-
   Tile* tileToCheck = level->getTile(newX, newY);
-  //if(tileToCheck->getTileType() != Tile::TileType::Floor)
-  //{
-    tileToCheck->setTileType(Tile::TileType::Floor);
-    digCorridor(SDL_Point {newX, newY}, endPoint, level);
-  //}
-  //else
-    //digCorridor(startPoint, endPoint, level);
+  tileToCheck->setTileType(Tile::TileType::Floor);
+
+  if(roomTarget->containsTile(level->getTile(newX+1, newY)))
+    return;
+    //digCorridor(SDL_Point {newX, newY}, SDL_Point{newX+1, newY}, roomTarget, level);
+  else if(roomTarget->containsTile(level->getTile(newX-1, newY)))
+    return;
+    //digCorridor(SDL_Point {newX, newY}, SDL_Point{newX-1, newY}, roomTarget, level);
+  else if(roomTarget->containsTile(level->getTile(newX, newY+1)))
+    return;
+    //digCorridor(SDL_Point {newX, newY}, SDL_Point{newX, newY+1}, roomTarget, level);
+  else if(roomTarget->containsTile(level->getTile(newX, newY-1)))
+    return;
+    //digCorridor(SDL_Point {newX, newY}, SDL_Point{newX, newY-1}, roomTarget, level);
+  else
+    digCorridor(SDL_Point {newX, newY}, endPoint, roomTarget, level);
+
+
   
 }
 
@@ -170,10 +239,10 @@ LevelBuilder::~LevelBuilder()
 
 Room* LevelBuilder::generateRoom(int maxWidth, int maxHeight)
 {
-  std::uniform_int_distribution<int> dW(2,maxWidth);
-  std::uniform_int_distribution<int> dH(2,maxHeight);
-  std::uniform_int_distribution<int> dX(2,Level::LEVEL_WIDTH);
-  std::uniform_int_distribution<int> dY(2,Level::LEVEL_HEIGHT);
+  std::uniform_int_distribution<int> dW(3,maxWidth);
+  std::uniform_int_distribution<int> dH(3,maxHeight);
+  std::uniform_int_distribution<int> dX(1,Level::LEVEL_WIDTH);
+  std::uniform_int_distribution<int> dY(1,Level::LEVEL_HEIGHT);
 
   int width = dW(rd);
   int height = dH(rd);
@@ -187,13 +256,13 @@ Room* LevelBuilder::generateRoom(int maxWidth, int maxHeight)
 
 bool LevelBuilder::roomFits(Room* room, Level* level)
 {
-  for (int y = room->getY(); y < room->getY()+room->getHeight(); ++y)
+  for (int y = room->getY()-1; y <= room->getY()+room->getHeight(); ++y)
   {
-    for (int x = room->getX(); x < room->getX()+room->getWidth(); ++x)
+    for (int x = room->getX()-1; x <= room->getX()+room->getWidth(); ++x)
     {
-      if(x >= Level::LEVEL_WIDTH)
+      if(x >= Level::LEVEL_WIDTH-1)
         return false;
-      if(y >= Level::LEVEL_HEIGHT)
+      if(y >= Level::LEVEL_HEIGHT-1)
         return false;
 
       if(level->getTile(x, y)->getTileType() == Tile::TileType::Floor)
