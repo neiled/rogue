@@ -24,7 +24,9 @@ class Renderer {
     const static int TILE_HEIGHT = 32;
     
   private:
-    vector<Sprite*> _mapTiles;
+    //vector<Sprite*> _mapTiles;
+    //array<Sprite*, 5> _mapTiles;
+    Sprite* _mapTiles[5];
     Sprite* _player;
     Graphics* _graphics;
 

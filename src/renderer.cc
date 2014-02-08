@@ -4,14 +4,16 @@
 Renderer::Renderer(Graphics* graphics)
 {
   _graphics = graphics;
-  Sprite* sprite = new Sprite(_graphics, "../content/dungeon_tiles_0.bmp", 64, 64, TILE_WIDTH, TILE_HEIGHT);
-  _mapTiles.push_back(sprite);
+  _mapTiles[(int)Tile::TileType::Floor] =  new Sprite(_graphics, "../content/dungeon_tiles_0.bmp", 64, 64, TILE_WIDTH, TILE_HEIGHT);
+  //_mapTiles.push_back(sprite);
 
-  sprite = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 12*TILE_WIDTH, 2*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
-  _mapTiles.push_back(sprite);
+  _mapTiles[(int)Tile::TileType::StairsUp] = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 12*TILE_WIDTH, 2*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+  //_mapTiles.push_back(sprite);
 
-  sprite = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 11*TILE_WIDTH, 5*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
-  _mapTiles.push_back(sprite);
+  _mapTiles[(int)Tile::TileType::StairsDown] = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 11*TILE_WIDTH, 5*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+  //_mapTiles.push_back(sprite);
+
+  _mapTiles[(int)Tile::TileType::Rock] = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 12*TILE_WIDTH, 5*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 
   _player = new Sprite(_graphics, "../content/knt1_lf1.bmp", 0,0,32,32);
   
@@ -54,12 +56,14 @@ void Renderer::render(Level* level)
       if(lit != Level::LightType::Unlit)
       {
         Tile* currentTile = level->getTile(x, y);
-        if(currentTile->getTileType() == Tile::TileType::Rock)
-          _mapTiles[0]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
-        else if(currentTile->getTileType() == Tile::TileType::StairsUp)
-          _mapTiles[1]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
-        else if(currentTile->getTileType() == Tile::TileType::StairsDown)
-          _mapTiles[2]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
+        _mapTiles[(int)currentTile->getTileType()]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
+
+        //if(currentTile->getTileType() == Tile::TileType::Rock)
+          //_mapTiles[0]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
+        //else if(currentTile->getTileType() == Tile::TileType::StairsUp)
+          //_mapTiles[1]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
+        //else if(currentTile->getTileType() == Tile::TileType::StairsDown)
+          //_mapTiles[2]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
 
       }
     }
