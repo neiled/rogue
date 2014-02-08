@@ -6,7 +6,7 @@ class Level;
 class Tile
 {
   public:
-    enum class TileType {Wall, Floor, Rock};
+    enum class TileType {Wall, Floor, Rock, StairsDown, StairsUp};
 
     Tile();
     Tile (TileType tileType, Level* level, int x, int y);

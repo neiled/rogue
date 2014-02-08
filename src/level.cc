@@ -1,8 +1,9 @@
 #include "level.h"
 #include <SDL2/SDL.h>
 
-Level::Level()
+Level::Level(int depth)
 {
+  _depth = depth;
   for (int y = 0; y < LEVEL_HEIGHT; ++y)
   {
     for (int x = 0; x < LEVEL_WIDTH; ++x)
@@ -54,6 +55,25 @@ void Level::updateLightMap(Player* player)
 Level::LightType Level::getTileLightMap(int x, int y)
 {
   return _light_map[y][x];
+}
+
+int Level::getDepth()
+{
+  return _depth;
+}
+
+Tile* Level::getTileOfType(Tile::TileType typeToLookFor)
+{
+  for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
+  {
+    for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
+    {
+      if(_map[y][x]->getTileType() == typeToLookFor)
+        return _map[y][x];
+    }
+  }
+  SDL_Log("Uh oh...");
+  return nullptr;
 }
 
 

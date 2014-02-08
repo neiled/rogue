@@ -32,13 +32,25 @@ void Game::eventLoop()
           if(event.key.keysym.sym == SDLK_ESCAPE)
             running = false;
           else if(event.key.keysym.sym == SDLK_UP)
+          {
             world.getPlayer()->moveUp();
+            update(&world);
+          }
           else if(event.key.keysym.sym == SDLK_DOWN)
+          {
             world.getPlayer()->moveDown();
+            update(&world);
+          }
           else if(event.key.keysym.sym == SDLK_LEFT)
+          {
             world.getPlayer()->moveLeft();
+            update(&world);
+          }
           else if(event.key.keysym.sym == SDLK_RIGHT)
+          {
             world.getPlayer()->moveRight();
+            update(&world);
+          }
           break;
         default:
           break;
@@ -46,7 +58,7 @@ void Game::eventLoop()
 
     }
     int current_time = SDL_GetTicks();
-    update(&world, &renderer, current_time - last_update_time);
+    updateGraphics(&world, &renderer, current_time - last_update_time);
     last_update_time = current_time;
     draw(&graphics, &renderer, &world);
 
@@ -65,9 +77,14 @@ void Game::delay(int start_time_ms)
   SDL_Delay(timeToDelay);  
 }
 
-void Game::update(World* world, Renderer* renderer, int elapsed_time_ms)
+void Game::update(World* world)
 {
   world->update();
+  
+}
+void Game::updateGraphics(World* world, Renderer* renderer, int elapsed_time_ms)
+{
+  world->updateGraphics();
   renderer->update(world, elapsed_time_ms);
   
 }

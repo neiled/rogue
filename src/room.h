@@ -7,11 +7,12 @@
 using namespace std;
 
 class Tile;
+class Level;
 
 class Room
 {
 public:
-  Room (int x, int y, int width, int height);
+  Room (Level* level, int x, int y, int width, int height);
   virtual ~Room ();
 
   int getX();
@@ -19,32 +20,19 @@ public:
   int getHeight();
   int getWidth();
 
-  //double getFirstNeighbourDistance();
-  //double getSecondNeihbourDistance();
-
-  //void setFirstNeighbour(Room* room);
-  //void setSecondNeighbour(Room* room);
-
-  //Room* getFirstNeighbour();
-  //Room* getSecondNeighbour();
-  
-  //void removeNeighbour(Room* room);
   void addNeighbour(Room* room);
   vector<Room*> getNeighbours();
 
   double distanceTo(Room* otherRoom);
   bool containsTile(Tile* tile);
+  Tile* getRandomTile();
 
 private:
-  /* data */
+  Level* _level;
   int _x;
   int _y;
   int _width;
   int _height;
   vector<Room*> _neighbours;
-  //Room* _neighbour1;
-  //Room* _neighbour2;
-  //double _n1Dist;
-  //double _n2Dist;
 };
 #endif

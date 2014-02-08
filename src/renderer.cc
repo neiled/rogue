@@ -7,6 +7,12 @@ Renderer::Renderer(Graphics* graphics)
   Sprite* sprite = new Sprite(_graphics, "../content/dungeon_tiles_0.bmp", 64, 64, TILE_WIDTH, TILE_HEIGHT);
   _mapTiles.push_back(sprite);
 
+  sprite = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 12*TILE_WIDTH, 2*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+  _mapTiles.push_back(sprite);
+
+  sprite = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 11*TILE_WIDTH, 5*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+  _mapTiles.push_back(sprite);
+
   _player = new Sprite(_graphics, "../content/knt1_lf1.bmp", 0,0,32,32);
   
   _cameraRect.w= graphics->getScreenWidth();
@@ -50,6 +56,11 @@ void Renderer::render(Level* level)
       {
         if(currentTile->getTileType() == Tile::TileType::Rock)
           _mapTiles[0]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
+        else if(currentTile->getTileType() == Tile::TileType::StairsUp)
+          _mapTiles[1]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
+        else if(currentTile->getTileType() == Tile::TileType::StairsDown)
+          _mapTiles[2]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
+
       }
     }
   }

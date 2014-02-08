@@ -3,17 +3,16 @@
 #include <limits>
 #include <cstddef>
 #include "tile.h"
+#include "level.h"
+#include "random.h"
 
-Room::Room(int x, int y, int width, int height)
+Room::Room(Level* level, int x, int y, int width, int height)
 {
+  _level = level;
   _x = x;
   _y = y;
   _width = width;
   _height = height;
-  //_n1Dist = std::numeric_limits<double>::max();
-  //_n2Dist = std::numeric_limits<double>::max();
-  //_neighbour1 = nullptr;
-  //_neighbour2 = nullptr;
 }
 
 Room::~Room()
@@ -67,52 +66,14 @@ bool Room::containsTile(Tile* tile)
   
 }
 
-//double Room::getFirstNeighbourDistance()
-//{
-  //return _n1Dist;
-//}
+Tile* Room::getRandomTile()
+{
+  int x = Random::Between(0,_width-1) + _x;
+  int y = Random::Between(0,_height-1) + _y;
 
-//double Room::getSecondNeihbourDistance()
-//{
-  //return _n2Dist;
-//}
+  return _level->getTile(x, y);
+}
 
-//Room* Room::getFirstNeighbour()
-//{
-  //return _neighbour1;
-//}
-
-
-//Room* Room::getSecondNeighbour()
-//{
-  //return _neighbour2;
-//}
-
-//void Room::setFirstNeighbour(Room* room)
-//{
-  //_neighbour2 = _neighbour1;
-  //_neighbour1 = room;
-
-  //if(_neighbour1 != nullptr)
-    //_n1Dist = distanceTo(_neighbour1);
-  //if(_neighbour2 != nullptr)
-    //_n2Dist = distanceTo(_neighbour2);
-//}
-
-//void Room::setSecondNeighbour(Room* room)
-//{
-  //_neighbour2 = room;
-  //if(_neighbour2 != nullptr)
-    //_n2Dist = distanceTo(_neighbour2);
-//}
-
-//void Room::removeNeighbour(Room* room)
-//{
-  //if(_neighbour1 == room)
-    //_neighbour1 = nullptr;
-  //else if(_neighbour2 == room)
-    //_neighbour2 = nullptr;
-//}
 
 double Room::distanceTo(Room* otherRoom)
 {
