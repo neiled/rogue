@@ -2,6 +2,7 @@
 
 #include "levelbuilder.h"
 #include "level.h"
+#include "player.h"
 
 World::World()
 {

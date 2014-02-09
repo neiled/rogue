@@ -1,6 +1,8 @@
 #include "game.h"
 #include "graphics.h"
 #include "world.h"
+#include "player.h"
+#include "renderer.h"
 
 
 Game::Game() {
@@ -19,6 +21,8 @@ void Game::eventLoop()
   World world;
   Renderer renderer(&graphics);
   int last_update_time = SDL_GetTicks();
+
+  update(&world);
 
   bool running = true;
   while (running == true)

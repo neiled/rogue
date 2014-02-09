@@ -1,5 +1,10 @@
 #include "renderer.h"
 #include "tile.h"
+#include "sprite.h"
+#include "directional_sprite.h"
+#include "graphics.h"
+#include "player.h"
+#include "level.h"
 
 Renderer::Renderer(Graphics* graphics)
 {
@@ -17,7 +22,9 @@ Renderer::Renderer(Graphics* graphics)
 
   _mapTiles[(int)Tile::TileType::Door] = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 13*TILE_WIDTH, 5*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 
-  _player = new Sprite(_graphics, "../content/knt1_lf1.bmp", 0,0,32,32);
+  //_player = new Sprite(_graphics, "../content/knt1_lf1.bmp", 0,0,32,32);
+  //_player = new Sprite(_graphics, "../content/player_right.png", 0,0,32,32);
+  _player = new DirectionalSprite(_graphics, "../content/player.png", 0, 0, TILE_WIDTH, TILE_HEIGHT);
   
   _cameraRect.w= graphics->getScreenWidth();
   _cameraRect.h= graphics->getScreenHeight();
@@ -76,6 +83,7 @@ void Renderer::render(Level* level)
 void Renderer::render(Player* player)
 {
   Tile* currentTile = player->getCurrentTile();
+  _player->update(player->direction);
   _player->draw(currentTile->getX()*TILE_WIDTH, currentTile->getY()*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
 }
 

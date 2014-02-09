@@ -1,10 +1,10 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "sprite.h"
-#include "renderer.h"
 
 class World;
+class Renderer;
+class Graphics;
 
 struct Game {
   Game();

@@ -3,6 +3,7 @@
 
 Player::Player()
 {
+  direction = World::Direction::EAST;
 }
 
 Player::~Player()
@@ -26,20 +27,24 @@ Level* Player::getCurrentLevel()
 
 void Player::moveLeft()
 {
-  attemptMove(-1,0);
+  if(attemptMove(-1,0))
+    direction = World::Direction::WEST;
 }
 
 void Player::moveRight()
 {
-  attemptMove(1,0);
+  if(attemptMove(1,0))
+    direction = World::Direction::EAST;
 }
 void Player::moveUp()
 {
-  attemptMove(0,-1);
+  if(attemptMove(0,-1))
+    direction = World::Direction::NORTH;
 }
 void Player::moveDown()
 {
-  attemptMove(0,1);
+  if(attemptMove(0,1))
+    direction = World::Direction::SOUTH;
 }
 
 int Player::getX()
@@ -52,7 +57,7 @@ int Player::getY()
   return _currentTile->getY();
 }
 
-void Player::attemptMove(int xModifier, int yModifier)
+bool Player::attemptMove(int xModifier, int yModifier)
 {
   int currentX = _currentTile->getX();
   int currentY = _currentTile->getY();
@@ -64,7 +69,9 @@ void Player::attemptMove(int xModifier, int yModifier)
   if(newTile != nullptr)
   {
     _currentTile = newTile;
+    return true;
   }
+  return false;
 }
 
 Tile* Player::checkCanMove(int newX, int newY)

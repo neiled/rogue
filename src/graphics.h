@@ -1,14 +1,11 @@
 #ifndef GRAPHICS_H_
 #define GRAPHICS_H_ 
 
-#include <SDL2/SDL.h>
-#include <SDL2_Image/SDL_Image.h>
 #include "stdio.h"
 #include <string>
+#include <SDL2/SDL.h>
+#include <SDL2_Image/SDL_Image.h>
 
-struct SDL_Surface;
-struct SDL_Window;
-struct SDL_Renderer;
 
 class Graphics
 {

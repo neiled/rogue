@@ -4,6 +4,7 @@
 class Level;
 
 #include "tile.h"
+#include "world.h"
 
 
 class Player
@@ -20,10 +21,11 @@ class Player
     void moveRight();
     void moveUp();
     void moveDown();
+    World::Direction direction;
     
   private:
     Tile* _currentTile;
-    void attemptMove(int newX, int newY);
+    bool attemptMove(int newX, int newY);
     Tile* checkCanMove(int newX, int newY);
 };
 #endif

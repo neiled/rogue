@@ -4,12 +4,17 @@
 
 #include <vector>
 #include <array>
-#include "sprite.h"
-#include "world.h"
-#include "level.h"
-#include "player.h"
+#include <SDL2/SDL.h>
+#include <SDL2_Image/SDL_Image.h>
 
 using std::vector;
+
+class Player;
+class Sprite;
+class DirectionalSprite;
+class World;
+class Graphics;
+class Level;
 
 class Renderer {
   public:
@@ -27,7 +32,7 @@ class Renderer {
     //vector<Sprite*> _mapTiles;
     //array<Sprite*, 5> _mapTiles;
     Sprite* _mapTiles[5];
-    Sprite* _player;
+    DirectionalSprite* _player;
     Graphics* _graphics;
 
     void updateCamera(Player* player);

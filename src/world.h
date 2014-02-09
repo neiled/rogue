@@ -1,13 +1,13 @@
 #ifndef WORLD_H_
 #define WORLD_H_
 
-#include "player.h"
 #include <vector>
 
 using namespace std;
 
 class Level;
 class LevelBuilder;
+class Player;
 
 class World
 {
@@ -18,6 +18,8 @@ public:
   void updateGraphics();
   Level* getCurrentLevel();
   Player* getPlayer();
+
+  enum struct Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
 
 private:
   Player* _player;
