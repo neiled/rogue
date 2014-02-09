@@ -2,6 +2,7 @@
 #define GRAPHICS_H_ 
 
 #include <SDL2/SDL.h>
+#include <SDL2_Image/SDL_Image.h>
 #include "stdio.h"
 #include <string>
 

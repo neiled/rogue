@@ -39,8 +39,8 @@ SDL_Texture* Graphics::loadTexture( std::string path )
   //The final texture
   SDL_Texture* newTexture = nullptr;
 
-  //SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
-  SDL_Surface* loadedSurface = SDL_LoadBMP(path.c_str());
+  //SDL_Surface* loadedSurface = SDL_LoadBMP(path.c_str());
+  SDL_Surface* loadedSurface = IMG_Load(path.c_str() );
   if( loadedSurface == nullptr )
   {
     printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), SDL_GetError() );
