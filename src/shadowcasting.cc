@@ -84,7 +84,7 @@ void ShadowCasting::castLight(int row, float start, float end, int xx, int xy, i
             }
  
             if (blocked) { //previous cell was a blocking one
-                if (_resistanceMap[currentY][currentX]->getTileType() == Tile::TileType::Rock) {//hit a wall
+                if (blockingCell(_resistanceMap[currentY][currentX])) {//hit a wall
                     newStart = rightSlope;
                     continue;
                 } else {
@@ -92,7 +92,7 @@ void ShadowCasting::castLight(int row, float start, float end, int xx, int xy, i
                     start = newStart;
                 }
             } else {
-                if (_resistanceMap[currentY][currentX]->getTileType() == Tile::TileType::Rock && distance < _radius) {//hit a wall within sight line
+                if (blockingCell(_resistanceMap[currentY][currentX]) && distance < _radius) {//hit a wall within sight line
                     blocked = true;
                     castLight(distance + 1, start, leftSlope, xx, xy, yx, yy);
                     newStart = rightSlope;
@@ -100,4 +100,12 @@ void ShadowCasting::castLight(int row, float start, float end, int xx, int xy, i
             }
         }
     }
+}
+bool ShadowCasting::blockingCell(Tile* tile)
+{
+  if(tile->getTileType() == Tile::TileType::Rock)
+    return true;
+  if(tile->getTileType() == Tile::TileType::Door)
+    return true;
+  return false;
 }

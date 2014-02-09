@@ -6,7 +6,7 @@ class Level;
 class Tile
 {
   public:
-    enum struct TileType {Floor = 0, Rock=1, StairsDown=2, StairsUp=3};
+    enum struct TileType {Floor = 0, Rock=1, StairsDown=2, StairsUp=3, Door=4};
 
     Tile();
     Tile (TileType tileType, Level* level, int x, int y);

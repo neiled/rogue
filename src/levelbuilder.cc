@@ -52,6 +52,58 @@ void LevelBuilder::buildLevel(Level* level, Player* player)
   Room* startRoom = positionStairs(rooms, level);
 
   positionPlayer(startRoom, player);
+
+  addDoors(rooms, level);
+}
+
+void LevelBuilder::addDoors(vector<Room*> rooms, Level* level)
+{
+  for(int y = 0; y < Level::LEVEL_HEIGHT-1; y++)
+  {
+    for (int x = 0; x < Level::LEVEL_WIDTH-1; ++x)
+    {
+      if(doorFits(x, y, rooms, level))
+          level->getTile(x, y)->setTileType(Tile::TileType::Door);
+    }
+
+  }
+}
+
+bool LevelBuilder::doorFits(int x, int y, vector<Room*> rooms, Level* level)
+{
+  if(x <= 0 || y <= 0)
+    return false;
+  Tile* currentTile = level->getTile(x, y);
+  if(currentTile->getTileType() != Tile::TileType::Floor)
+    return false;
+  if(level->getTile(x,y-1)->getTileType() == Tile::TileType::Floor)
+  {
+    if(level->getTile(x-1,y)->getTileType() != Tile::TileType::Rock)
+      return false;
+    if(level->getTile(x+1,y)->getTileType() != Tile::TileType::Rock)
+      return false;
+    if(level->getTile(x-1,y-1)->getTileType() != level->getTile(x+1,y-1)->getTileType())
+      return false;
+    if(level->getTile(x,y+1)->getTileType() != Tile::TileType::Floor)
+      return false;
+    if(level->getTile(x-1,y+1)->getTileType() != level->getTile(x+1,y+1)->getTileType())
+      return false;
+    return true;
+  }
+  else if(level->getTile(x-1, y)->getTileType() == Tile::TileType::Floor &&
+      level->getTile(x+1, y)->getTileType() == Tile::TileType::Floor)
+  {
+    if(level->getTile(x, y-1)->getTileType() != Tile::TileType::Rock)
+      return false;
+    if(level->getTile(x, y+1)->getTileType() != Tile::TileType::Rock)
+      return false;
+    if(level->getTile(x-1,y-1)->getTileType() != level->getTile(x-1,y+1)->getTileType())
+      return false;
+    if(level->getTile(x+1,y-1)->getTileType() != level->getTile(x+1,y+1)->getTileType())
+      return false;
+    return true;
+  }
+  return false;
 }
 
 void LevelBuilder::positionPlayer(Room* room, Player* player)

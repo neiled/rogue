@@ -15,6 +15,8 @@ Renderer::Renderer(Graphics* graphics)
 
   _mapTiles[(int)Tile::TileType::Rock] = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 12*TILE_WIDTH, 5*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 
+  _mapTiles[(int)Tile::TileType::Door] = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 13*TILE_WIDTH, 5*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+
   _player = new Sprite(_graphics, "../content/knt1_lf1.bmp", 0,0,32,32);
   
   _cameraRect.w= graphics->getScreenWidth();

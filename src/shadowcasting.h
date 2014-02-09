@@ -18,6 +18,7 @@ public:
   vector<vector<float>> calculateFOV(array<array<Tile*, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > resistanceMap, int startx, int starty, float radius);
   void castLight(int row, float start, float end, int xx, int xy, int yx, int yy);
   float radius(float dx, float dy);
+  bool blockingCell(Tile* tile);
 
 private:
   int _startx;
