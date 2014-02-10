@@ -1,4 +1,5 @@
 #include "tile.h"
+#include <cmath>
 
 
 Tile::Tile()
@@ -41,4 +42,9 @@ int Tile::getX()
 int Tile::getY()
 {
   return _y;
+}
+
+double Tile::distanceTo(Tile* otherRoom)
+{
+  return sqrt((otherRoom->getX() - _x)*(otherRoom->getX() - _x) + (otherRoom->getY() - _y) * (otherRoom->getY() - _y));
 }

@@ -16,6 +16,7 @@ class Tile
     Level* getLevel();
     int getX();
     int getY();
+    double distanceTo(Tile* otherRoom);
 
 
   private:
