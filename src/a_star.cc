@@ -2,17 +2,66 @@
 #include "tile.h"
 #include "level.h"
 
+/*
+struct StarNode
+{
+  public:
+  StarNode(Tile* tile, StarNode parentNode)
+  {
+    parent = parentNode;
+    _tile = tile;
+  }
+  
+  double getH(Tile* destination)
+  {
+    return tile->distanceTo(destination);
+  }
+  
+  int getG()
+  {
+    return 1;
+  }
+  
+  double getF(Tile* destination)
+  {
+    return getG()+getH();
+  }
+  
+  
+  StarNode* parent;
+  
+  private:
+  Tile* _tile;
+};
+*/
 vector<Tile*> AStar::plotPath(Tile* startingPoint, Tile* end)
 {
-  open_list.push_back(startingPoint);
+  map<Tile*, Tile*> parentList;
+  
+  Tile* nextTile = getNextSquare(startingPoint)
 
-  vector<Tile*> otherTiles = surroundingValidTiles(startingPoint, closed_list);
+  while(nextTile != end)
+  {
+    nextTile = getNextSquare(nextTile);
+  }
+  
+  //now go through the parent list for each node building up the path
+
+}
+
+Tile* AStar::getNextSquare(Tile* currentSquare)
+{
+  open_list.push_back(currentSquare);
+
+  vector<Tile*> otherTiles = surroundingValidTiles(currentSquare, closed_list);
   for(Tile* t : otherTiles)
+  {
     open_list.push_back(t);
-  Tile* nextTile = bestPath(startingPoint, end, otherTiles);
+    parentList[t] = currentSquare;
+  }
+  Tile* nextTile = bestPath(currentSquare, end, otherTiles);
   open_list.erase(remove(open_list.begin(), open_list.end(), nextTile), open_list.end());
-  closed_list.push_back(nextTile);
-
+  closed_list.push_back(nextTile);  
 }
 
 Tile* AStar::bestPath(Tile* start, Tile* end, vector<Tile*> choices)
