@@ -1,4 +1,5 @@
 #include "level.h"
+#include "player.h"
 #include <SDL2/SDL.h>
 #include "shadowcasting.h"
 
@@ -36,7 +37,7 @@ void Level::updateLightMap(Player* player)
       if(newLightMap[y][x] > 0)
       {
         _light_map[y][x] = Level::LightType::Lit;
-        SDL_Log("Lightmap: %d,%d = %f", x, y, newLightMap[y][x]);
+        //SDL_Log("Lightmap: %d,%d = %f", x, y, newLightMap[y][x]);
       }
     }
   }

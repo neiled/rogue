@@ -25,7 +25,7 @@ vector<vector<float>>  ShadowCasting::calculateFOV(array<array<Tile*, Level::LEV
     _radius = force/decay;
     _force = force;
     _decay = decay;
-    SDL_Log("Radius: %f, force: %f", _radius, _force);
+    //SDL_Log("Radius: %f, force: %f", _radius, _force);
 
     _lightMap.resize(_height);
     for (int i = 0; i < _height; ++i)

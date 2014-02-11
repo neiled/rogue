@@ -2,7 +2,6 @@
 #define LEVELBUILDER_H_
 
 
-#include "levelbuilder.h"
 #include <vector>
 
 using namespace std;

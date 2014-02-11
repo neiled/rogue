@@ -3,11 +3,12 @@
 
 #include <iostream>
 #include <array>
-
 #include "tile.h"
-#include "player.h"
+
 
 class LevelBuilder;
+class Player;
+class Level;
 
 using namespace std;
 

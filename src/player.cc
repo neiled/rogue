@@ -1,5 +1,7 @@
 #include "player.h"
 #include "level.h"
+#include "a_star.h"
+#include <deque>
 
 Player::Player()
 {
@@ -88,4 +90,57 @@ Tile* Player::checkCanMove(int newX, int newY)
   if(newTile->getTileType() == Tile::TileType::Rock)
     return nullptr;
   return newTile;
+}
+
+void Player::explore()
+{
+  if(_travelPath.empty())
+  {
+    _targetTile = _currentTile->getLevel()->getTile(_currentTile->getX(), _currentTile->getY()-2);
+    AStar searcher;
+    _travelPath = searcher.plotPath(_currentTile, _targetTile);
+    if(_travelPath.empty())
+    {
+      _targetTile = nullptr;
+      return; //no way to get to this square
+    }
+  }
+  Commands::CMD dirCommand = getCommandFromTiles(_currentTile, _travelPath.front());
+  _travelPath.pop_front();
+  if(_travelPath.empty() == false)
+    _commandQueue.push_front(Commands::CMD::CMD_EXPLORE);
+  _commandQueue.push_front(dirCommand);
+}
+
+Commands::CMD Player::getCommandFromTiles(Tile* start, Tile* end)
+{
+  int xDiff = end->getX() - start->getX();
+  int yDiff = end->getY() - start->getY();
+
+  if(xDiff == -1)
+    return Commands::CMD::CMD_MOVE_LEFT;
+  if(xDiff == 1)
+    return Commands::CMD::CMD_MOVE_RIGHT;
+  if(yDiff == -1)
+    return Commands::CMD::CMD_MOVE_UP;
+  if(yDiff == 1)
+    return Commands::CMD::CMD_MOVE_DOWN;
+  return Commands::CMD::NOP;
+}
+
+void Player::pushCommand(Commands::CMD command)
+{
+  _commandQueue.push_back(command);
+}
+
+Commands::CMD Player::popCommand()
+{
+  Commands::CMD currentCommand = _commandQueue.front();
+  _commandQueue.pop_front();
+  return currentCommand;
+}
+
+bool Player::hasCommands()
+{
+  return _commandQueue.empty() == false;
 }

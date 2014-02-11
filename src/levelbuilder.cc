@@ -2,6 +2,7 @@
 #include "tile.h"
 #include "room.h"
 #include "level.h"
+#include "player.h"
 #include <SDL2/SDL.h>
 #include "random.h"
 

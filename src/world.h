@@ -19,7 +19,7 @@ public:
   Level* getCurrentLevel();
   Player* getPlayer();
 
-  enum struct Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
+  enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
 
 private:
   Player* _player;

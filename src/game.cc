@@ -19,7 +19,9 @@ void Game::eventLoop()
   Graphics graphics;
   SDL_Event event;
   World world;
+  Player* player = world.getPlayer();
   Renderer renderer(&graphics);
+  CommandProcessor cProc;
   int last_update_time = SDL_GetTicks();
 
   update(&world);
@@ -36,37 +38,36 @@ void Game::eventLoop()
           if(event.key.keysym.sym == SDLK_ESCAPE)
             running = false;
           else if(event.key.keysym.sym == SDLK_UP)
-          {
-            world.getPlayer()->moveUp();
-            update(&world);
-          }
+            player->pushCommand(Commands::CMD::CMD_MOVE_UP);
           else if(event.key.keysym.sym == SDLK_DOWN)
-          {
-            world.getPlayer()->moveDown();
-            update(&world);
-          }
+            player->pushCommand(Commands::CMD::CMD_MOVE_DOWN);
           else if(event.key.keysym.sym == SDLK_LEFT)
-          {
-            world.getPlayer()->moveLeft();
-            update(&world);
-          }
+            player->pushCommand(Commands::CMD::CMD_MOVE_LEFT);
           else if(event.key.keysym.sym == SDLK_RIGHT)
-          {
-            world.getPlayer()->moveRight();
-            update(&world);
-          }
+            player->pushCommand(Commands::CMD::CMD_MOVE_RIGHT);
+          else if(event.key.keysym.sym == SDLK_o)
+            player->pushCommand(Commands::CMD::CMD_EXPLORE);
           break;
         default:
           break;
       }
 
     }
+
+    if(world.getPlayer()->hasCommands())
+    {
+      cProc.Process(world.getPlayer()->popCommand(), &world);
+      update(&world);
+
+    }
+
     int current_time = SDL_GetTicks();
     updateGraphics(&world, &renderer, current_time - last_update_time);
     last_update_time = current_time;
     draw(&graphics, &renderer, &world);
 
     delay(start_time_ms);
+
 
   }
 
