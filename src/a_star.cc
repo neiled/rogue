@@ -15,12 +15,12 @@ AStar::~AStar()
 deque<Tile*> AStar::plotPath(Tile* startingPoint, Tile* end)
 {
   deque<Tile*> results;
-  //SDL_Log("Starting at: %d,%d", startingPoint->getX(), startingPoint->getY());
-  //SDL_Log("Ending at: %d,%d", end->getX(), end->getY());
-  
-  Tile* nextTile = getNextSquare(startingPoint, end);
-  //SDL_Log("First next Tile at: %d,%d", nextTile->getX(), nextTile->getY());
 
+  open_list.push_back(startingPoint);
+  gCost[startingPoint] = 0;
+  
+  Tile* nextTile = getNextSquare(end);
+  
   while(nextTile != end)
   {
     nextTile = getNextSquare(nextTile, end);
@@ -47,38 +47,50 @@ deque<Tile*> AStar::plotPath(Tile* startingPoint, Tile* end)
 
 Tile* AStar::getNextSquare(Tile* currentSquare, Tile* end)
 {
-  open_list.push_back(currentSquare);
-  //SDL_Log("Added %d,%d to open_list", currentSquare->getX(), currentSquare->getY());
+  Tile* nextTile = bestPath(currentSquare, end);
+  open_list.erase(remove(open_list.begin(), open_list.end(), nextTile), open_list.end());
+  closed_list.push_back(nextTile);  
 
-  vector<Tile*> otherTiles = surroundingValidTiles(currentSquare, closed_list);
+  vector<Tile*> otherTiles = surroundingValidTiles(nextTile);
   for(Tile* t : otherTiles)
   {
-    //SDL_Log("Added %d,%d to open_list", t->getX(), t->getY());
-    open_list.push_back(t);
-    parentList[t] = currentSquare;
-    //SDL_Log("Parent of  %d,%d set to %d,%d", t->getX(), t->getY(), currentSquare->getX(), currentSquare->getY());
+    //if not on the open list
+      if(find(open_list.begin(), open_list.end(), neighbour) == open_list.end())
+      {
+        gCost[t] = gCost[currentSquare] + 10;
+        open_list.push_back(t);
+        parentList[t] = currentSquare;        
+      }
+      else
+      {
+        if(gCost[t] > gCost[currentSquare] + 10)
+        {
+          gCost[t] = gCost[currentSquare] + 10;
+          parentList[t] = currentSquare;
+        }
+      }
   }
-  Tile* nextTile = bestPath(currentSquare, end, otherTiles);
+  
   if(nextTile == nullptr)
     return nullptr;
 
-  //SDL_Log("Best tile =  %d,%d", nextTile->getX(), nextTile->getY());
-  
-  open_list.erase(remove(open_list.begin(), open_list.end(), nextTile), open_list.end());
-  closed_list.push_back(nextTile);  
+
   return nextTile;
 }
 
-Tile* AStar::bestPath(Tile* start, Tile* end, vector<Tile*> choices)
+Tile* AStar::bestPath(Tile* currentSquare, Tile* end)
 {
-  float bestDistance = 10000000;
+  //float bestDistance = 10000000;
   Tile* bestTile = nullptr;
-  for(Tile* currentTile : choices)
+  float bestFScore = 0;
+  for(Tile* currentTile : open_list)
   {
     float distance = currentTile->distanceTo(end);
-    if(distance < bestDistance)
+    int gScore = gScore[currentSquare] + 10;
+    float fScore = distance + gScore;
+    if(fScore < bestFScore || bestFScore == 0)
     {
-      bestDistance = distance;
+      bestFScore = fScore;
       bestTile = currentTile;
     }
   }
@@ -86,7 +98,7 @@ Tile* AStar::bestPath(Tile* start, Tile* end, vector<Tile*> choices)
   return bestTile;
 }
 
-vector<Tile*> AStar::surroundingValidTiles(Tile* start, vector<Tile*> closedList)
+vector<Tile*> AStar::surroundingValidTiles(Tile* start)
 {
   vector<Tile*> result;
   int startX = start->getX();
@@ -98,7 +110,7 @@ vector<Tile*> AStar::surroundingValidTiles(Tile* start, vector<Tile*> closedList
       if(x == y)
         continue;
       Tile* neighbour = start->getLevel()->getTile(x,y);
-      if(find(closedList.begin(), closedList.end(), neighbour) != closedList.end())
+      if(find(closed_list.begin(), closed_list.end(), neighbour) != closed_list.end())
         continue;
       if(neighbour == nullptr)
         continue;
