@@ -5,7 +5,7 @@ Blog detailing development can be found at:
 
 http://yetanotherroguelike.tumblr.com
 
-twitter: @neiled
+twitter:  [@neiled](twitter.com/neiled)
 
 To Do
 =====
