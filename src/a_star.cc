@@ -107,7 +107,7 @@ vector<Tile*> AStar::surroundingValidTiles(Tile* start)
   {
     for (int x = startX-1; x <= startX+1; ++x)
     {
-      if(x == y)
+      if(x != 0 && y != 0)
         continue;
       Tile* neighbour = start->getLevel()->getTile(x,y);
       if(find(closed_list.begin(), closed_list.end(), neighbour) != closed_list.end())
