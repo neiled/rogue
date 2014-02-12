@@ -6,8 +6,10 @@
 #include <deque>
 
 class Tile;
+class Level;
 
 using namespace std;
+
 
 class AStar
 {
@@ -16,6 +18,7 @@ public:
   virtual ~AStar ();
 
   deque<Tile*> plotPath(Tile* startingPoint, Tile* end);
+  deque<Tile*> explore(Tile* startingPoint, Level* level);
 
 private:
   vector<Tile*> open_list;

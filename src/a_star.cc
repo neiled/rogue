@@ -3,6 +3,7 @@
 #include "level.h"
 #include <SDL2/SDL.h>
 
+
 AStar::AStar()
 {
 }
@@ -11,6 +12,48 @@ AStar::~AStar()
 {
 
 }
+
+deque<Tile*> AStar::explore(Tile* startingPoint, Level* level)
+{
+  deque<Tile*> results;
+
+  SDL_Log("Starting at: %d,%d", startingPoint->getX(), startingPoint->getY());
+  open_list.push_back(startingPoint);
+
+  Tile* unexploredTile = nullptr;
+
+  Tile* result = startingPoint;
+  while(unexploredTile == nullptr)
+  {
+    result = search(result, nullptr);
+    if(result == nullptr)
+    {
+      SDL_Log("Nowhere left to explore...");
+      return deque<Tile*>();
+    }
+
+    for(Tile* t : closed_list)
+    {
+      if(level->getTileLightMap(t->getX(),t->getY()) == Level::LightType::Unseen)
+      {
+        unexploredTile = t;
+        break;
+      }
+    }
+  }
+
+  SDL_Log("Found a target of %d,%d", unexploredTile->getX(), unexploredTile->getY());
+  SDL_Log("Path of %d", closed_list.size());
+
+  //compile reuslts
+  while(unexploredTile != startingPoint)
+  {
+    results.push_front(unexploredTile);
+    unexploredTile = parentList[unexploredTile];
+  }
+  return results;
+}
+
 
 deque<Tile*> AStar::plotPath(Tile* startingPoint, Tile* end)
 {
@@ -80,7 +123,9 @@ Tile* AStar::findLowestScore(Tile* currentSquare, Tile* end)
   float bestFScore = 0;
   for(Tile* currentTile : open_list)
   {
-    float distance = currentTile->distanceTo(end);
+    float distance = 0;
+    if(end != nullptr)
+      distance = currentTile->distanceTo(end);
     int gScore = gCost[currentSquare] + 10;
     float fScore = distance + gScore;
     if(fScore < bestFScore || bestFScore == 0)

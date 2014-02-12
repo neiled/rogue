@@ -96,9 +96,10 @@ void Player::explore()
 {
   if(_travelPath.empty())
   {
-    _targetTile = _currentTile->getLevel()->getTile(_currentTile->getX(), _currentTile->getY()-2);
+    //_targetTile = _currentTile->getLevel()->getTile(_currentTile->getX(), _currentTile->getY()-2);
     AStar searcher;
-    _travelPath = searcher.plotPath(_currentTile, _targetTile);
+    //_travelPath = searcher.plotPath(_currentTile, _targetTile);
+    _travelPath = searcher.explore(_currentTile, _currentTile->getLevel());
     if(_travelPath.empty())
     {
       _targetTile = nullptr;
@@ -107,8 +108,8 @@ void Player::explore()
   }
   Commands::CMD dirCommand = getCommandFromTiles(_currentTile, _travelPath.front());
   _travelPath.pop_front();
-  if(_travelPath.empty() == false)
-    _commandQueue.push_front(Commands::CMD::CMD_EXPLORE);
+  //if(_travelPath.empty() == false)
+  _commandQueue.push_front(Commands::CMD::CMD_EXPLORE);
   _commandQueue.push_front(dirCommand);
 }
 

@@ -8,7 +8,6 @@
 
 class LevelBuilder;
 class Player;
-class Level;
 
 using namespace std;
 
@@ -43,5 +42,7 @@ class Level
     array<array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_map;
   
 };
+
+typedef array<array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT> lightMap_t;
 
 #endif
