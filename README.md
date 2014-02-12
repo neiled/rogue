@@ -33,3 +33,6 @@ Scoring should be done for particularly difficult things:
 * Diablo style +3 agility weapons.
 * Varying on rarity
 * Respawned monsters (if we have them) should not spawn anything other than normal weapons - no farming allowed.
+
+### Other
+* Some form of seeing your past deaths? Corpses of previous plays or something...
