@@ -36,3 +36,4 @@ Scoring should be done for particularly difficult things:
 
 ### Other
 * Some form of seeing your past deaths? Corpses of previous plays or something...
+* Keep a diary of events, player can read through previous plays.
