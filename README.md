@@ -25,7 +25,7 @@ twitter:  [@neiled](http://twitter.com/neiled)
 
 Scoring should be done for particularly difficult things:
 * New Dungeon level
-* ???
+* Beating your own score is classed as a win, not a loss.
 
 ### Combat
 
