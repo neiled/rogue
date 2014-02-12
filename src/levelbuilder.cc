@@ -135,12 +135,12 @@ Room* LevelBuilder::positionStairs(vector<Room*> rooms, Level* level)
   Tile* tile = startRoom->getRandomTile(true);
   tile->setTileType(Tile::TileType::StairsUp);
 
-  SDL_Log("Putting stairs at %d,%d", tile->getX(), tile->getY());
+  //SDL_Log("Putting stairs at %d,%d", tile->getX(), tile->getY());
 
   tile = endRoom->getRandomTile(true);
   tile->setTileType(Tile::TileType::StairsDown);
 
-  SDL_Log("Putting stairs at %d,%d", tile->getX(), tile->getY());
+  //SDL_Log("Putting stairs at %d,%d", tile->getX(), tile->getY());
 
   return startRoom;
 }
@@ -261,7 +261,7 @@ SDL_Point LevelBuilder::pickPointOfRoom(Room* startRoom)
     x = startRoom->getX() -1;
     y = 2*w-1 + 2*h - pointPicked + startRoom->getY();
   }
-  SDL_Log("Picked %d,%d after random %d picked. w: %d, h: %d - sp: %d,%d", x, y, pointPicked, w, h, startRoom->getX(), startRoom->getY());
+  //SDL_Log("Picked %d,%d after random %d picked. w: %d, h: %d - sp: %d,%d", x, y, pointPicked, w, h, startRoom->getX(), startRoom->getY());
   return SDL_Point {x, y};
 }
 

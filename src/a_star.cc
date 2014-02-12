@@ -19,74 +19,69 @@ deque<Tile*> AStar::plotPath(Tile* startingPoint, Tile* end)
   open_list.push_back(startingPoint);
   gCost[startingPoint] = 0;
   
-  Tile* nextTile = getNextSquare(end);
-  
-  while(nextTile != end)
+  Tile* result = startingPoint;
+  while(find(closed_list.begin(), closed_list.end(), end) == closed_list.end())
   {
-    nextTile = getNextSquare(nextTile, end);
-    if(nextTile == nullptr)
+    result = search(result, end);
+    if(result == nullptr)
     {
       SDL_Log("No way to get to square!");
       return deque<Tile*>();
     }
-    //SDL_Log("Next Tile at: %d,%d", nextTile->getX(), nextTile->getY());
   }
 
-  //SDL_Log("Last Tile at: %d,%d", nextTile->getX(), nextTile->getY());
   
+  Tile* nextTile = end;
   //now go through the parent list for each node building up the path
   while(nextTile != startingPoint)
   {
     results.push_front(nextTile);
-    //SDL_Log("Current Tile: %d,%d", nextTile->getX(), nextTile->getY());
     nextTile = parentList[nextTile];
-
   }
   return results;
 }
 
-Tile* AStar::getNextSquare(Tile* currentSquare, Tile* end)
+Tile* AStar::search(Tile* currentTile, Tile* end)
 {
-  Tile* nextTile = bestPath(currentSquare, end);
-  open_list.erase(remove(open_list.begin(), open_list.end(), nextTile), open_list.end());
-  closed_list.push_back(nextTile);  
+  currentTile = findLowestScore(currentTile, end);
+  if(currentTile == nullptr)
+    return nullptr;
+  open_list.erase(remove(open_list.begin(), open_list.end(), currentTile), open_list.end());
+  closed_list.push_back(currentTile);  
 
-  vector<Tile*> otherTiles = surroundingValidTiles(nextTile);
+  vector<Tile*> otherTiles = surroundingValidTiles(currentTile);
   for(Tile* t : otherTiles)
   {
     //if not on the open list
-      if(find(open_list.begin(), open_list.end(), neighbour) == open_list.end())
+      if(find(open_list.begin(), open_list.end(), t) == open_list.end())
       {
-        gCost[t] = gCost[currentSquare] + 10;
+        gCost[t] = gCost[currentTile] + 10;
         open_list.push_back(t);
-        parentList[t] = currentSquare;        
+        parentList[t] = currentTile;
       }
       else
       {
-        if(gCost[t] > gCost[currentSquare] + 10)
+        if(gCost[t] > gCost[currentTile] + 10)
         {
-          gCost[t] = gCost[currentSquare] + 10;
-          parentList[t] = currentSquare;
+          gCost[t] = gCost[currentTile] + 10;
+          parentList[t] = currentTile;
         }
       }
   }
   
-  if(nextTile == nullptr)
-    return nullptr;
 
 
-  return nextTile;
+  return currentTile;
 }
 
-Tile* AStar::bestPath(Tile* currentSquare, Tile* end)
+Tile* AStar::findLowestScore(Tile* currentSquare, Tile* end)
 {
-  //float bestDistance = 10000000;
   Tile* bestTile = nullptr;
   float bestFScore = 0;
   for(Tile* currentTile : open_list)
   {
     float distance = currentTile->distanceTo(end);
-    int gScore = gScore[currentSquare] + 10;
+    int gScore = gCost[currentSquare] + 10;
     float fScore = distance + gScore;
     if(fScore < bestFScore || bestFScore == 0)
     {
@@ -94,6 +89,8 @@ Tile* AStar::bestPath(Tile* currentSquare, Tile* end)
       bestTile = currentTile;
     }
   }
+  if(bestTile != nullptr)
+    SDL_Log("Found: %d,%d", bestTile->getX(), bestTile->getY());
 
   return bestTile;
 }
@@ -103,16 +100,18 @@ vector<Tile*> AStar::surroundingValidTiles(Tile* start)
   vector<Tile*> result;
   int startX = start->getX();
   int startY = start->getY();
-  for (int y = startY-1; y <= startY+1; ++y)
+  for (int offsety = -1; offsety <= 1; ++offsety)
   {
-    for (int x = startX-1; x <= startX+1; ++x)
+    for (int offsetx = -1; offsetx <= +1; ++offsetx)
     {
-      if(x != 0 && y != 0)
+      if(offsetx != 0 && offsety != 0)
         continue;
+      int x = startX + offsetx;
+      int y = startY + offsety;
       Tile* neighbour = start->getLevel()->getTile(x,y);
-      if(find(closed_list.begin(), closed_list.end(), neighbour) != closed_list.end())
-        continue;
       if(neighbour == nullptr)
+        continue;
+      if(find(closed_list.begin(), closed_list.end(), neighbour) != closed_list.end())
         continue;
       if(neighbour->getTileType() == Tile::TileType::Rock)
         continue;

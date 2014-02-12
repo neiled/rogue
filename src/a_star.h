@@ -20,9 +20,10 @@ public:
 private:
   vector<Tile*> open_list;
   vector<Tile*> closed_list;
-  vector<Tile*> surroundingValidTiles(Tile* startingPoint, vector<Tile*> closedList);
-  Tile* bestPath(Tile* start, Tile* end, vector<Tile*> choices);
-  Tile* getNextSquare(Tile* currentSquare, Tile* end);
+  vector<Tile*> surroundingValidTiles(Tile* startingPoint);
+  Tile* findLowestScore(Tile* start, Tile* end);
+  Tile* search(Tile* currentSquare, Tile* end);
   map<Tile*, Tile*> parentList;
+  map<Tile*, int> gCost;
 };
 #endif
