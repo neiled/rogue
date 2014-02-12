@@ -10,7 +10,7 @@ class Tile;
 #include "actor.h"
 
 
-class Player : Actor
+class Player : public Actor
 {
   public:
     Player();
