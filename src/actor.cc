@@ -2,6 +2,8 @@
 #include "level.h"
 #include "a_star.h"
 #include <deque>
+#include "random.h"
+#include <SDL2/SDL.h>
 
 Actor::Actor()
 {
@@ -73,21 +75,52 @@ bool Actor::attemptMove(int xModifier, int yModifier)
   if(!newTile)
     return false;
 
-  if(attack(newTile->getActor()))
+  if(meleeAttack(newTile->getActor()))
   {
     this->setCurrentTile(newTile);
     return true;
+  }
+  else
+    newTile->getActor()->meleeAttack(this);
+
+  return false;
+}
+
+bool Actor::meleeAttack(Actor* other)
+{
+  if(!other)
+    return true;
+
+  float toHit = getToHitChance();
+
+  if(Random::CheckChance(toHit))
+  {
+    int damage = Random::Between(0,10);
+    other->takeDamage(damage);
   }
 
   return false;
 }
 
-bool Actor::attack(Actor* other)
+float Actor::getToHitChance()
 {
-  if(!other)
-    return true;
+  //TODO: This would be based on the weapon used probably?
+  //For now we'll just call it 100%...
+  //
+  return 100.0f;
+}
 
-  return false;
+void Actor::takeDamage(int amount)
+{
+  _health -= amount;
+  if(_health <= 0)
+    die();
+  SDL_Log("I now have %d remaining health", _health);
+}
+
+bool Actor::dead() const
+{
+  return _health <= 0;
 }
 
 Tile* Actor::checkCanMove(int newX, int newY)
@@ -134,7 +167,7 @@ Commands::CMD Actor::popCommand()
   return currentCommand;
 }
 
-bool Actor::hasCommands()
+bool Actor::hasCommands() const
 {
   return _commandQueue.empty() == false;
 }

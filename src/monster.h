@@ -26,5 +26,7 @@ class Monster : public Actor
   private:
     Monster::MonsterType _monsterType;
     Monster::MonsterState _monsterState;
+
+    void die() override;
 };
 #endif

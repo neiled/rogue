@@ -18,5 +18,6 @@ class Player : public Actor
     void explore();
     
   private:
+    void die() override;
 };
 #endif

@@ -27,7 +27,6 @@ void World::update()
 {
   _player->getCurrentLevel()->update(_player);
   checkMoveLevel();
-
 }
 
 Player* World::getPlayer()

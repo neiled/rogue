@@ -6,6 +6,7 @@
 Player::Player()
 {
   direction = World::Direction::EAST;
+  _health = 100;
 }
 
 Player::~Player()
@@ -28,4 +29,9 @@ void Player::explore()
   _travelPath.pop_front();
   _commandQueue.push_front(Commands::CMD::CMD_EXPLORE);
   _commandQueue.push_front(dirCommand);
+}
+
+void Player::die()
+{
+  //TODO: End the game...
 }

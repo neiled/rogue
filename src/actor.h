@@ -26,18 +26,27 @@ class Actor
 
     void pushCommand(Commands::CMD command);
     Commands::CMD popCommand();
-    bool hasCommands();
+    bool hasCommands() const;
+
+    void takeDamage(int amount);
+
+    bool dead() const;
     
   protected:
     Tile* _currentTile = nullptr;
     Tile* _targetTile = nullptr;
+    int _health;
 
     std::deque<Commands::CMD> _commandQueue;
     std::deque<Tile*> _travelPath;
+    Commands::CMD getCommandFromTiles(Tile* start, Tile* end);
     
     bool attemptMove(int newX, int newY);
     Tile* checkCanMove(int newX, int newY);
-    Commands::CMD getCommandFromTiles(Tile* start, Tile* end);
-    bool attack(Actor* other);
+    bool meleeAttack(Actor* other);
+    float getToHitChance(/*Item* item*/);
+    virtual void die() = 0;
+
+
 };
 #endif

@@ -21,6 +21,15 @@ Level::Level(int depth)
 void Level::update(Player* player)
 {
   updateLightMap(player);
+  _monsters.erase( std::remove_if(_monsters.begin(), _monsters.end(), [](const Monster* m) {return m->dead();}), _monsters.end() );
+
+  //for(Monster* m : _monsters)
+  //{
+    //if(m->dead())
+    //{
+      //delete m;
+    //}
+  //}
 }
 
 void Level::updateLightMap(Player* player)
