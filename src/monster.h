@@ -19,6 +19,8 @@ class Monster : public Actor
     Monster(std::shared_ptr<Tile> startTile, Monster::MonsterType type, Monster::MonsterState state);
     virtual ~Monster();
     void explore();
+    
+    void update() overide;
 
     Monster::MonsterType getMonsterType();
     
