@@ -26,7 +26,7 @@ std::shared_ptr<Tile> Actor::getCurrentTile()
   return _currentTile;
 }
 
-Level* Actor::getCurrentLevel()
+Level* Actor::level()
 {
   return _currentTile->getLevel();
 }
