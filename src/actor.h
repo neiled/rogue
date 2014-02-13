@@ -18,7 +18,7 @@ class Actor
     
     virtual void update() = 0;
     
-    Level* getCurrentLevel();
+    Level* level();
     void setCurrentTile(std::shared_ptr<Tile> currentTile);
     std::shared_ptr<Tile> getCurrentTile();
     
