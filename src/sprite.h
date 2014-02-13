@@ -15,8 +15,8 @@ class Sprite
     SDL_Rect _source_rect;
 
   private:
-    SDL_Texture* _texture;
-    Graphics* _graphics;
+    SDL_Texture* _texture = nullptr;
+    Graphics* _graphics = nullptr;
 
 };
 
