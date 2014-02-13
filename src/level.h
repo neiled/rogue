@@ -38,8 +38,8 @@ class Level
     const static int LEVEL_MONSTER_COUNT = 100;
 
   private:
-   int _depth; 
-    
+    int _depth; 
+
     void updateLightMap(Player* player);
     void resetLightMap();
     std::shared_ptr<Tile> getRandomTile();
@@ -48,6 +48,7 @@ class Level
     std::array<std::array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_map;
 
     std::vector<Monster*> _monsters;
+    Player* _player = nullptr;
   
 };
 
