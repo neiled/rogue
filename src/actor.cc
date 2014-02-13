@@ -14,8 +14,8 @@ Actor::~Actor()
 void Actor::setCurrentTile(Tile* newTile)
 {
   if(_currentTile)
-    _currentTile->removeActor(this);
-  newTile->addActor(this);
+    _currentTile->removeActor();
+  newTile->setActor(this);
   _currentTile = newTile;
 }
 
@@ -70,8 +70,11 @@ bool Actor::attemptMove(int xModifier, int yModifier)
   int newY = currentY + yModifier;
   
   Tile* newTile = checkCanMove(newX, newY);
-  if(newTile == nullptr)
+  if(!newTile)
     return false;
+
+  if(newTile->getActor())
+    return false;//TODO: Combat would go here?
 
   this->setCurrentTile(newTile);
   return true;

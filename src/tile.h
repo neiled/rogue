@@ -21,8 +21,9 @@ class Tile
     int getX();
     int getY();
     double distanceTo(Tile* otherRoom);
-    void removeActor(Actor* actor);
-    void addActor(Actor* actor);
+    void removeActor();
+    void setActor(Actor* actor);
+    Actor* getActor();
 
 
   private:
@@ -30,6 +31,6 @@ class Tile
     int _x;
     int _y;
     Level* _level;
-    std::vector<Actor*> _actors;
+    Actor* _actor;
 };
 #endif

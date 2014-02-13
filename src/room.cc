@@ -51,7 +51,7 @@ std::vector<Room*> Room::getNeighbours()
 
 bool Room::containsTile(Tile* tile)
 {
-  if(tile == nullptr)
+  if(!tile)
     return false;
   if(tile->getX() < _x)
     return false;

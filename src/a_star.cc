@@ -23,10 +23,10 @@ std::deque<Tile*> AStar::explore(Tile* startingPoint, Level* level)
   Tile* unexploredTile = nullptr;
 
   Tile* result = startingPoint;
-  while(unexploredTile == nullptr)
+  while(!unexploredTile)
   {
     result = search(result, nullptr);
-    if(result == nullptr)
+    if(!result)
     {
       SDL_Log("Nowhere left to explore...");
       return std::deque<Tile*>();
@@ -66,7 +66,7 @@ std::deque<Tile*> AStar::plotPath(Tile* startingPoint, Tile* end)
   while(find(closed_list.begin(), closed_list.end(), end) == closed_list.end())
   {
     result = search(result, end);
-    if(result == nullptr)
+    if(!result)
     {
       SDL_Log("No way to get to square!");
       return std::deque<Tile*>();
@@ -87,7 +87,7 @@ std::deque<Tile*> AStar::plotPath(Tile* startingPoint, Tile* end)
 Tile* AStar::search(Tile* currentTile, Tile* end)
 {
   currentTile = findLowestScore(currentTile, end);
-  if(currentTile == nullptr)
+  if(!currentTile)
     return nullptr;
   open_list.erase(remove(open_list.begin(), open_list.end(), currentTile), open_list.end());
   closed_list.push_back(currentTile);  
@@ -124,7 +124,7 @@ Tile* AStar::findLowestScore(Tile* currentSquare, Tile* end)
   for(Tile* currentTile : open_list)
   {
     float distance = 0;
-    if(end != nullptr)
+    if(end)
       distance = currentTile->distanceTo(end);
     int gScore = gCost[currentSquare] + 10;
     float fScore = distance + gScore;
@@ -134,8 +134,6 @@ Tile* AStar::findLowestScore(Tile* currentSquare, Tile* end)
       bestTile = currentTile;
     }
   }
-  //if(bestTile != nullptr)
-    //SDL_Log("Found: %d,%d", bestTile->getX(), bestTile->getY());
 
   return bestTile;
 }
@@ -154,7 +152,7 @@ std::vector<Tile*> AStar::surroundingValidTiles(Tile* start)
       int x = startX + offsetx;
       int y = startY + offsety;
       Tile* neighbour = start->getLevel()->getTile(x,y);
-      if(neighbour == nullptr)
+      if(!neighbour)
         continue;
       if(find(closed_list.begin(), closed_list.end(), neighbour) != closed_list.end())
         continue;

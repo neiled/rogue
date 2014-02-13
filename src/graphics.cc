@@ -41,7 +41,7 @@ SDL_Texture* Graphics::loadTexture( std::string path )
 
   //SDL_Surface* loadedSurface = SDL_LoadBMP(path.c_str());
   SDL_Surface* loadedSurface = IMG_Load(path.c_str() );
-  if( loadedSurface == nullptr )
+  if(!loadedSurface)
   {
     printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), SDL_GetError() );
   }
@@ -49,7 +49,7 @@ SDL_Texture* Graphics::loadTexture( std::string path )
   {
     //Create texture from surface pixels
     newTexture = SDL_CreateTextureFromSurface(Renderer, loadedSurface );
-    if( newTexture == nullptr )
+    if(!newTexture)
     {
       printf( "Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError() );
     }

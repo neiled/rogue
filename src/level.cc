@@ -89,7 +89,7 @@ Tile* Level::getRandomTileOfType(Tile::TileType typeToLookFor)
     Tile* testTile = getRandomTile();
     if(testTile->getTileType() == typeToLookFor)
       chosenTile = testTile;
-  }while(chosenTile == nullptr);
+  }while(!chosenTile);
   return chosenTile;
 }
 

@@ -37,7 +37,7 @@ void LevelBuilder::generateMonsters(Level* level)
     Tile* randomTile = level->getRandomTileOfType(Tile::TileType::Floor);
     Monster* monster = new Monster(randomTile, Monster::MonsterType::Orc, Monster::MonsterState::Awake);
     level->addMonster(monster);
-    SDL_Log("Added monster to %d,%d", randomTile->getX(), randomTile->getY());
+    //SDL_Log("Added monster to %d,%d", randomTile->getX(), randomTile->getY());
   }
 
 }
@@ -168,7 +168,7 @@ void LevelBuilder::connectRooms(std::vector<Room*> rooms)
       {
         if(std::find(connectedRooms.begin(), connectedRooms.end(), roomToTest) == connectedRooms.end())
         {
-          if(closestRoom == nullptr)
+          if(!closestRoom)
           {
             closestRoom = roomToTest;
             minDistance = connectedRoom->distanceTo(roomToTest);

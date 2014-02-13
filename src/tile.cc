@@ -20,16 +20,19 @@ Tile::~Tile()
 {
 }
 
-void Tile::addActor(Actor* actor)
+void Tile::setActor(Actor* actor)
 {
-  if(find(_actors.begin(), _actors.end(), actor) == _actors.end())
-    _actors.push_back(actor);
+  _actor = actor;
 }
 
-void Tile::removeActor(Actor* actor)
+void Tile::removeActor()
 {
-  if(find(_actors.begin(), _actors.end(), actor) != _actors.end())
-    _actors.erase(remove(_actors.begin(), _actors.end(), actor), _actors.end());
+  _actor= nullptr;
+}
+
+Actor* Tile::getActor()
+{
+  return _actor;
 }
 
 void Tile::setTileType(TileType tileType)
