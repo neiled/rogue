@@ -12,10 +12,10 @@ ShadowCasting::~ShadowCasting()
 {
 }
 
-std::vector<std::vector<float>>  ShadowCasting::calculateFOV(std::array<std::array<Tile*, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > resistanceMap, int startx, int starty, float radius) {
+std::vector<std::vector<float>>  ShadowCasting::calculateFOV(std::array<std::array<std::shared_ptr<Tile>, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > resistanceMap, int startx, int starty, float radius) {
   return calculateFOV(resistanceMap, startx, starty, 1.0, 1.0 /radius);
 }
-std::vector<std::vector<float>>  ShadowCasting::calculateFOV(std::array<std::array<Tile*, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > resistanceMap, int startx, int starty, float force, float decay) {
+std::vector<std::vector<float>>  ShadowCasting::calculateFOV(std::array<std::array<std::shared_ptr<Tile>, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > resistanceMap, int startx, int starty, float force, float decay) {
     _startx = startx;
     _starty = starty;
     _resistanceMap = resistanceMap;
@@ -102,7 +102,7 @@ void ShadowCasting::castLight(int row, float start, float end, int xx, int xy, i
         }
     }
 }
-bool ShadowCasting::blockingCell(Tile* tile)
+bool ShadowCasting::blockingCell(std::shared_ptr<Tile> tile)
 {
   if(tile->getTileType() == Tile::TileType::Rock)
     return true;

@@ -16,7 +16,7 @@ class Monster : public Actor
     enum class MonsterType {Orc};
     enum class MonsterState {Asleep, Awake, Hunting};
 
-    Monster(Tile* startTile, Monster::MonsterType type, Monster::MonsterState state);
+    Monster(std::shared_ptr<Tile> startTile, Monster::MonsterType type, Monster::MonsterState state);
     virtual ~Monster();
     void explore();
 

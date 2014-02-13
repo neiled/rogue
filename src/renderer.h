@@ -44,7 +44,7 @@ class Renderer {
     void renderLevel(Level* level);
     void renderMonsters(Level* level);
 
-    void drawSprite(Sprite* sprite, Tile* tile);
+    void drawSprite(Sprite* sprite, std::shared_ptr<Tile> tile);
     
     SDL_Rect _cameraRect;
     

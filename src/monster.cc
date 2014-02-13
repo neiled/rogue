@@ -1,12 +1,14 @@
 #include "monster.h"
 #include "tile.h"
+#include <SDL2/SDL.h>
 
-Monster::Monster(Tile* startTile, Monster::MonsterType type, Monster::MonsterState state)
+Monster::Monster(std::shared_ptr<Tile> startTile, Monster::MonsterType type, Monster::MonsterState state)
 {
   setCurrentTile(startTile);
   _monsterType = type;
   _monsterState = state;
   _health = 100;
+  SDL_Log("Monster created at %d,%d", _currentTile->getX(), _currentTile->getY());
 }
 
 Monster::~Monster()
@@ -19,6 +21,8 @@ Monster::MonsterType Monster::getMonsterType()
 
 void Monster::die()
 {
+  SDL_Log("Killing monster");
   _currentTile->removeActor();
+  SDL_Log("Killed monster");
   //TODO: Free up memory this monster used....
 }

@@ -47,6 +47,8 @@ void Game::eventLoop()
             player->pushCommand(Commands::CMD::CMD_MOVE_RIGHT);
           else if(event.key.keysym.sym == SDLK_o)
             player->pushCommand(Commands::CMD::CMD_EXPLORE);
+          else if(event.key.keysym.sym == SDLK_p)
+            player->clearCommands();
           break;
         default:
           break;

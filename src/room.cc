@@ -49,7 +49,7 @@ std::vector<Room*> Room::getNeighbours()
   return _neighbours;
 }
 
-bool Room::containsTile(Tile* tile)
+bool Room::containsTile(std::shared_ptr<Tile> tile)
 {
   if(!tile)
     return false;
@@ -66,7 +66,7 @@ bool Room::containsTile(Tile* tile)
   
 }
 
-Tile* Room::getRandomTile(bool avoidWalls)
+std::shared_ptr<Tile> Room::getRandomTile(bool avoidWalls)
 {
   int minX = avoidWalls ? 1 : 0;
   int maxX = avoidWalls ? _width-2 : _width-1;

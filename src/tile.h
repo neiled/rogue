@@ -20,7 +20,7 @@ class Tile
     Level* getLevel();
     int getX();
     int getY();
-    double distanceTo(Tile* otherRoom);
+    double distanceTo(std::shared_ptr<Tile> otherRoom);
     void removeActor();
     void setActor(Actor* actor);
     Actor* getActor();
@@ -30,7 +30,7 @@ class Tile
     TileType _tileType;
     int _x;
     int _y;
-    Level* _level;
-    Actor* _actor;
+    Level* _level = nullptr;
+    Actor* _actor = nullptr;
 };
 #endif

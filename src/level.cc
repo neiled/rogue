@@ -11,7 +11,7 @@ Level::Level(int depth)
   {
     for (int x = 0; x < LEVEL_WIDTH; ++x)
     {
-      Tile* t = new Tile(Tile::TileType::Rock, this, x, y);
+      auto t = std::make_shared<Tile>(Tile::TileType::Rock, this, x, y);
       _map[y][x] = t;
       _light_map[y][x] = Level::LightType::Unseen;
     }
@@ -76,7 +76,7 @@ int Level::getDepth()
   return _depth;
 }
 
-Tile* Level::getTileOfType(Tile::TileType typeToLookFor)
+std::shared_ptr<Tile> Level::getTileOfType(Tile::TileType typeToLookFor)
 {
   for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
   {
@@ -90,15 +90,16 @@ Tile* Level::getTileOfType(Tile::TileType typeToLookFor)
   return nullptr;
 }
 
-Tile* Level::getRandomTileOfType(Tile::TileType typeToLookFor)
+std::shared_ptr<Tile> Level::getRandomTileOfType(Tile::TileType typeToLookFor)
 {
-  Tile* chosenTile = nullptr;
+  std::shared_ptr<Tile> chosenTile = nullptr;
   do
   {
-    Tile* testTile = getRandomTile();
+    auto testTile = getRandomTile();
     if(testTile->getTileType() == typeToLookFor)
       chosenTile = testTile;
   }while(!chosenTile);
+  SDL_Log("Found the tile at %d,%d", chosenTile->getX(), chosenTile->getY());
   return chosenTile;
 }
 
@@ -107,7 +108,7 @@ void Level::setType(int x, int y, Tile::TileType tileType)
   _map[y][x]->setTileType(tileType);
 }
 
-Tile* Level::getTile(int x, int y)
+std::shared_ptr<Tile> Level::getTile(int x, int y)
 {
   if(x >= Level::LEVEL_WIDTH)
     return nullptr;
@@ -130,7 +131,7 @@ void Level::addMonster(Monster* monster)
   _monsters.push_back(monster);
 }
 
-Tile* Level::getRandomTile()
+std::shared_ptr<Tile> Level::getRandomTile()
 {
   int x = Random::Between(0, Level::LEVEL_WIDTH-1);
   int y = Random::Between(0, Level::LEVEL_HEIGHT-1);

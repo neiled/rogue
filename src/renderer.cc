@@ -73,7 +73,7 @@ void Renderer::renderMonsters(Level* level)
   vector<Monster*> monsters = level->getMonsters();
   for(Monster* m : monsters)
   {
-    Tile* currentTile = m->getCurrentTile();
+    auto currentTile = m->getCurrentTile();
     Level::LightType lit = level->getTileLightMap(currentTile->getX(), currentTile->getY());
     if(lit != Level::LightType::Lit)
       continue;
@@ -93,7 +93,7 @@ void Renderer::renderLevel(Level* level)
       if(lit != Level::LightType::Unseen)
       {
         int alpha = lit == Level::LightType::Unlit ? 128 : 255;
-        Tile* currentTile = level->getTile(x, y);
+        auto currentTile = level->getTile(x, y);
         _mapTiles[(int)currentTile->getTileType()]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y, alpha);
       }
     }
@@ -103,13 +103,13 @@ void Renderer::renderLevel(Level* level)
 
 void Renderer::render(Player* player)
 {
-  Tile* currentTile = player->getCurrentTile();
+  auto currentTile = player->getCurrentTile();
   _player->update(player->direction);
   //_player->draw(currentTile->getX()*TILE_WIDTH, currentTile->getY()*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
   drawSprite(_player, currentTile);
 }
 
-void Renderer::drawSprite(Sprite* sprite, Tile* tile)
+void Renderer::drawSprite(Sprite* sprite, std::shared_ptr<Tile> tile)
 {
   sprite->draw(tile->getX()*TILE_WIDTH, tile->getY()*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
 
