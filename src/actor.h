@@ -16,7 +16,7 @@ class Actor
     
     World::Direction direction;
     
-    void update();
+    virtual void update() = 0;
     
     Level* getCurrentLevel();
     void setCurrentTile(std::shared_ptr<Tile> currentTile);
