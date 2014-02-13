@@ -20,10 +20,11 @@ public:
   enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
 
 private:
-  Player* _player;
-  std::vector<Level*> _levels;
-  LevelBuilder* _builder;
   void checkMoveLevel();
   Level* getLevel(int depth);
+  
+  Player* _player = nullptr;  
+  std::vector<Level*> _levels;
+  LevelBuilder _builder;  
 };
 #endif
