@@ -22,8 +22,8 @@ class Actor
     void setCurrentTile(std::shared_ptr<Tile> currentTile);
     std::shared_ptr<Tile> getCurrentTile();
     
-    int getX();
-    int getY();
+    int x();
+    int y();
     void moveLeft();
     void moveRight();
     void moveUp();
