@@ -25,9 +25,9 @@ void LevelBuilder::buildLevel(Level* level, Player* player)
 
   positionPlayer(startRoom, player);
 
-  generateMonsters(level);
-
   addDoors(level);
+
+  generateMonsters(level);
 }
 
 void LevelBuilder::generateMonsters(Level* level)

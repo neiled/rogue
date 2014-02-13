@@ -38,5 +38,6 @@ class Actor
     bool attemptMove(int newX, int newY);
     Tile* checkCanMove(int newX, int newY);
     Commands::CMD getCommandFromTiles(Tile* start, Tile* end);
+    bool attack(Actor* other);
 };
 #endif

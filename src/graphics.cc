@@ -1,7 +1,7 @@
 #include "graphics.h"
 
 Graphics::Graphics() {
-  _window = SDL_CreateWindow("My Game Window", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 800, 600, SDL_WINDOW_OPENGL);
+  _window = SDL_CreateWindow("YARL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 1024, 768, SDL_WINDOW_OPENGL);
   Renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
   //SDL_SetRenderDrawColor( Renderer, 0xFF, 0xFF, 0xFF, 0xFF );
   SDL_SetRenderDrawColor( Renderer, 0x00, 0x00, 0x00, 0x00 );

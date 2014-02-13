@@ -73,11 +73,21 @@ bool Actor::attemptMove(int xModifier, int yModifier)
   if(!newTile)
     return false;
 
-  if(newTile->getActor())
-    return false;//TODO: Combat would go here?
+  if(attack(newTile->getActor()))
+  {
+    this->setCurrentTile(newTile);
+    return true;
+  }
 
-  this->setCurrentTile(newTile);
-  return true;
+  return false;
+}
+
+bool Actor::attack(Actor* other)
+{
+  if(!other)
+    return true;
+
+  return false;
 }
 
 Tile* Actor::checkCanMove(int newX, int newY)
