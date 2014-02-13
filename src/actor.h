@@ -33,6 +33,9 @@ class Actor
 
     bool dead() const;
     
+    int attack_score();
+    int defense_score();
+    
   protected:
     std::shared_ptr<Tile> _currentTile = nullptr;
     std::shared_ptr<Tile> _targetTile = nullptr;
