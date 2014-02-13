@@ -26,8 +26,7 @@ public:
   std::shared_ptr<Tile> getRandomTile(bool avoidWalls = false);
 
 private:
-  Level* _level;
-  int _x;
+  Level* _level = nullptr
   int _y;
   int _width;
   int _height;
