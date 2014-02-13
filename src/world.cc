@@ -43,8 +43,11 @@ void World::checkMoveLevel()
 {
   if(_player->getCurrentTile()->getTileType() == Tile::TileType::StairsDown)
   {
-    int currentDepth = _player->getCurrentLevel()->getDepth();
+    int currentDepth = _player->level()->getDepth();
+    Level* currentLevel = _player->level();
+    currentLevel->set_player(nullptr);
     Level* nextLevel = getLevel(currentDepth+1);
+    nextLevel->set_player(_player);
     _player->setCurrentTile(nextLevel->getTileOfType(Tile::TileType::StairsUp));
   }
   else if(_player->getCurrentTile()->getTileType() == Tile::TileType::StairsUp)
@@ -52,7 +55,11 @@ void World::checkMoveLevel()
     int currentDepth = _player->getCurrentLevel()->getDepth();
     if(currentDepth > 0)
     {
+      Level* currentLevel = _player->level();
+      currentLevel->set_player(nullptr);      
+      
       Level* nextLevel = getLevel(currentDepth-1);
+      nextLevel->set_player(_player);      
       _player->setCurrentTile(nextLevel->getTileOfType(Tile::TileType::StairsDown));
     }
   }
