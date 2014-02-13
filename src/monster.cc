@@ -8,6 +8,7 @@ Monster::Monster(std::shared_ptr<Tile> startTile, Monster::MonsterType type, Mon
   _monsterType = type;
   _monsterState = state;
   _health = 100;
+  SDL_Log("Monster created at %d,%d", _currentTile->getX(), _currentTile->getY());
 }
 
 Monster::~Monster()

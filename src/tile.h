@@ -30,7 +30,7 @@ class Tile
     TileType _tileType;
     int _x;
     int _y;
-    Level* _level;
-    Actor* _actor;
+    Level* _level = nullptr;
+    Actor* _actor = nullptr;
 };
 #endif

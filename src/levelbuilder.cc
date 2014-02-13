@@ -38,6 +38,7 @@ void LevelBuilder::generateMonsters(Level* level)
     if(!randomTile->getActor())
     {
       Monster* monster = new Monster(randomTile, Monster::MonsterType::Orc, Monster::MonsterState::Awake);
+      SDL_Log("Added monster to %d,%d", randomTile->getX(), randomTile->getY());
       level->addMonster(monster);
       ++i;
     }
@@ -49,6 +50,7 @@ void LevelBuilder::generateMonsters(Level* level)
   {
     for (int x = 0; x < Level::LEVEL_WIDTH-1; ++x)
     {
+      SDL_Log("Checking %d,%d", x, y);
       auto tile = level->getTile(x,y);
       auto actor = tile->getActor();
       if(actor)

@@ -92,13 +92,14 @@ std::shared_ptr<Tile> Level::getTileOfType(Tile::TileType typeToLookFor)
 
 std::shared_ptr<Tile> Level::getRandomTileOfType(Tile::TileType typeToLookFor)
 {
-  std::shared_ptr<Tile> chosenTile;
+  std::shared_ptr<Tile> chosenTile = nullptr;
   do
   {
     auto testTile = getRandomTile();
     if(testTile->getTileType() == typeToLookFor)
       chosenTile = testTile;
   }while(!chosenTile);
+  SDL_Log("Found the tile at %d,%d", chosenTile->getX(), chosenTile->getY());
   return chosenTile;
 }
 
