@@ -34,7 +34,7 @@ class Actor
     bool dead() const;
     
   protected:
-    std::shared_ptr<Tile> _currentTile;
+    std::shared_ptr<Tile> _currentTile = nullptr;
     std::shared_ptr<Tile> _targetTile = nullptr;
     int _health;
 

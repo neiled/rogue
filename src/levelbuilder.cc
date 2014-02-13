@@ -32,13 +32,43 @@ void LevelBuilder::buildLevel(Level* level, Player* player)
 
 void LevelBuilder::generateMonsters(Level* level)
 {
-  for (int i = 0; i < Level::LEVEL_MONSTER_COUNT; ++i)
+  for (int i = 0; i < Level::LEVEL_MONSTER_COUNT;)
   {
     auto randomTile = level->getRandomTileOfType(Tile::TileType::Floor);
-    Monster* monster = new Monster(randomTile, Monster::MonsterType::Orc, Monster::MonsterState::Awake);
-    level->addMonster(monster);
+    if(!randomTile->getActor())
+    {
+      Monster* monster = new Monster(randomTile, Monster::MonsterType::Orc, Monster::MonsterState::Awake);
+      level->addMonster(monster);
+      ++i;
+    }
     //SDL_Log("Added monster to %d,%d", randomTile->getX(), randomTile->getY());
   }
+
+
+  for(int y = 0; y < Level::LEVEL_HEIGHT-1; y++)
+  {
+    for (int x = 0; x < Level::LEVEL_WIDTH-1; ++x)
+    {
+      auto tile = level->getTile(x,y);
+      auto actor = tile->getActor();
+      if(actor)
+      {
+        if(actor->getX() != x)
+          SDL_Log("We have a problem...");
+        if(actor->getY() != y)
+          SDL_Log("We have a problem...");
+        if(actor->getCurrentTile() != tile)
+          SDL_Log("We have a problem...");
+        if(actor->getCurrentTile()->getX() != x)
+          SDL_Log("We have a problem...");
+        if(actor->getCurrentTile()->getY() != y)
+          SDL_Log("We have a problem...");
+
+      }
+    }
+
+  }
+
 
 }
 

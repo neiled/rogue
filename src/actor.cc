@@ -15,18 +15,16 @@ Actor::~Actor()
 
 void Actor::setCurrentTile(std::shared_ptr<Tile> newTile)
 {
+  SDL_Log("setting new tile to %d,%d", newTile->getX(), newTile->getY());
   if(_currentTile)
     _currentTile->removeActor();
   newTile->setActor(this);
   _currentTile = newTile;
+  SDL_Log("new tile set to %d,%d", getCurrentTile()->getX(), getCurrentTile()->getY());
 }
 
 std::shared_ptr<Tile> Actor::getCurrentTile()
 {
-  SDL_Log("Getting current tile");
-  if(!_currentTile)
-    SDL_Log("Current tile is null!");
-
   return _currentTile;
 }
 
@@ -59,6 +57,8 @@ void Actor::moveDown()
 
 int Actor::getX()
 {
+  if(!_currentTile)
+    SDL_Log("Nothing in x");
   return _currentTile->getX();
 }
 
