@@ -8,8 +8,8 @@ World::World()
 {
   _player = new Player();
   Level* firstLevel = new Level(0);
-  _builder = new LevelBuilder();
-  _builder->buildLevel(firstLevel, _player);
+  //_builder = new LevelBuilder();
+  _builder.buildLevel(firstLevel, _player);
   _levels.push_back(firstLevel);
 }
 
