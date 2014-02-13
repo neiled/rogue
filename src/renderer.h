@@ -34,8 +34,8 @@ class Renderer {
   private:
     array<Sprite*,5> _mapTiles;
     array<DirectionalSprite*, 1> _monsters;
-    DirectionalSprite* _player;
-    Graphics* _graphics;
+    DirectionalSprite* _player = nullptr;
+    Graphics* _graphics = nullptr;
 
     void updateCamera(Player* player);
     void loadMapTiles();
