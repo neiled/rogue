@@ -8,25 +8,22 @@
 class Tile;
 class Level;
 
-using namespace std;
-
-
 class AStar
 {
 public:
   AStar ();
   virtual ~AStar ();
 
-  deque<Tile*> plotPath(Tile* startingPoint, Tile* end);
-  deque<Tile*> explore(Tile* startingPoint, Level* level);
+  std::deque<Tile*> plotPath(Tile* startingPoint, Tile* end);
+  std::deque<Tile*> explore(Tile* startingPoint, Level* level);
 
 private:
-  vector<Tile*> open_list;
-  vector<Tile*> closed_list;
-  vector<Tile*> surroundingValidTiles(Tile* startingPoint);
+  std::vector<Tile*> open_list;
+  std::vector<Tile*> closed_list;
+  std::vector<Tile*> surroundingValidTiles(Tile* startingPoint);
   Tile* findLowestScore(Tile* start, Tile* end);
   Tile* search(Tile* currentSquare, Tile* end);
-  map<Tile*, Tile*> parentList;
-  map<Tile*, int> gCost;
+  std::map<Tile*, Tile*> parentList;
+  std::map<Tile*, int> gCost;
 };
 #endif

@@ -44,7 +44,7 @@ void Room::addNeighbour(Room* neighbour)
   _neighbours.push_back(neighbour);
 }
 
-vector<Room*> Room::getNeighbours()
+std::vector<Room*> Room::getNeighbours()
 {
   return _neighbours;
 }

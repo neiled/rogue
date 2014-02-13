@@ -2,6 +2,7 @@
 #include "tile.h"
 #include <math.h>
 #include <SDL2/SDL.h>
+#include <array>
 
 ShadowCasting::ShadowCasting()
 {
@@ -11,10 +12,10 @@ ShadowCasting::~ShadowCasting()
 {
 }
 
-vector<vector<float>>  ShadowCasting::calculateFOV(array<array<Tile*, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > resistanceMap, int startx, int starty, float radius) {
+std::vector<std::vector<float>>  ShadowCasting::calculateFOV(std::array<std::array<Tile*, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > resistanceMap, int startx, int starty, float radius) {
   return calculateFOV(resistanceMap, startx, starty, 1.0, 1.0 /radius);
 }
-vector<vector<float>>  ShadowCasting::calculateFOV(array<array<Tile*, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > resistanceMap, int startx, int starty, float force, float decay) {
+std::vector<std::vector<float>>  ShadowCasting::calculateFOV(std::array<std::array<Tile*, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > resistanceMap, int startx, int starty, float force, float decay) {
     _startx = startx;
     _starty = starty;
     _resistanceMap = resistanceMap;

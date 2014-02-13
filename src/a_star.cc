@@ -13,9 +13,9 @@ AStar::~AStar()
 
 }
 
-deque<Tile*> AStar::explore(Tile* startingPoint, Level* level)
+std::deque<Tile*> AStar::explore(Tile* startingPoint, Level* level)
 {
-  deque<Tile*> results;
+  std::deque<Tile*> results;
 
   //SDL_Log("Starting at: %d,%d", startingPoint->getX(), startingPoint->getY());
   open_list.push_back(startingPoint);
@@ -29,7 +29,7 @@ deque<Tile*> AStar::explore(Tile* startingPoint, Level* level)
     if(result == nullptr)
     {
       SDL_Log("Nowhere left to explore...");
-      return deque<Tile*>();
+      return std::deque<Tile*>();
     }
 
     for(Tile* t : closed_list)
@@ -55,9 +55,9 @@ deque<Tile*> AStar::explore(Tile* startingPoint, Level* level)
 }
 
 
-deque<Tile*> AStar::plotPath(Tile* startingPoint, Tile* end)
+std::deque<Tile*> AStar::plotPath(Tile* startingPoint, Tile* end)
 {
-  deque<Tile*> results;
+  std::deque<Tile*> results;
 
   open_list.push_back(startingPoint);
   gCost[startingPoint] = 0;
@@ -69,7 +69,7 @@ deque<Tile*> AStar::plotPath(Tile* startingPoint, Tile* end)
     if(result == nullptr)
     {
       SDL_Log("No way to get to square!");
-      return deque<Tile*>();
+      return std::deque<Tile*>();
     }
   }
 
@@ -92,7 +92,7 @@ Tile* AStar::search(Tile* currentTile, Tile* end)
   open_list.erase(remove(open_list.begin(), open_list.end(), currentTile), open_list.end());
   closed_list.push_back(currentTile);  
 
-  vector<Tile*> otherTiles = surroundingValidTiles(currentTile);
+  std::vector<Tile*> otherTiles = surroundingValidTiles(currentTile);
   for(Tile* t : otherTiles)
   {
     //if not on the open list
@@ -128,7 +128,7 @@ Tile* AStar::findLowestScore(Tile* currentSquare, Tile* end)
       distance = currentTile->distanceTo(end);
     int gScore = gCost[currentSquare] + 10;
     float fScore = distance + gScore;
-    if(fScore < bestFScore || bestFScore == 0)
+    if(fScore < bestFScore || bestFScore <= 0)
     {
       bestFScore = fScore;
       bestTile = currentTile;
@@ -140,9 +140,9 @@ Tile* AStar::findLowestScore(Tile* currentSquare, Tile* end)
   return bestTile;
 }
 
-vector<Tile*> AStar::surroundingValidTiles(Tile* start)
+std::vector<Tile*> AStar::surroundingValidTiles(Tile* start)
 {
-  vector<Tile*> result;
+  std::vector<Tile*> result;
   int startX = start->getX();
   int startY = start->getY();
   for (int offsety = -1; offsety <= 1; ++offsety)

@@ -14,8 +14,6 @@ class Graphics
     virtual ~Graphics ();
     SDL_Renderer* Renderer;
 
-    //void blitSurface(SDL_Surface* source, SDL_Rect* source_rect, SDL_Rect* dest_rect);
-    //SDL_Surface* loadSurface(std::string path);
     SDL_Texture* loadTexture( std::string path );
     void render();
     void clearScreen();
@@ -24,7 +22,6 @@ class Graphics
 
   private:
     SDL_Window* _window;
-    SDL_Surface* _surfaceWindow;
 };
 
 #endif

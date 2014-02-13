@@ -4,11 +4,9 @@
 
 #include <vector>
 
-using namespace std;
-
 class Room;
 class Level;
-class SDL_Point;
+struct SDL_Point;
 class Player;
 
 class LevelBuilder
@@ -20,18 +18,18 @@ class LevelBuilder
 
   private:
 
-    vector<Room*> createRooms(int amount, Level* level);
-    void connectRooms(vector<Room*> rooms);
+    std::vector<Room*> createRooms(int amount, Level* level);
+    void connectRooms(std::vector<Room*> rooms);
     Room* generateRoom(Level* level, int maxWidth, int maxHeight);
     void digRoom(Room* room, Level* level);
     bool roomFits(Room* room, Level* level);
     SDL_Point pickPointOfRoom(Room* room);
     void digCorridor(SDL_Point startPoint, SDL_Point endPoint, Room* roomTarget, Level* level);
-    void digCorridors(vector<Room*> rooms, Level* level);
-    Room* positionStairs(vector<Room*> rooms, Level* level);
+    void digCorridors(std::vector<Room*> rooms, Level* level);
+    Room* positionStairs(std::vector<Room*> rooms, Level* level);
     void positionPlayer(Room* room, Player* player);
-    void addDoors(vector<Room*> rooms, Level* level);
-    bool doorFits(int x, int y, vector<Room*> rooms, Level* level);
+    void addDoors(Level* level);
+    bool doorFits(int x, int y, Level* level);
     void generateMonsters(Level* level);
 
     const static int ROOMS = 150;

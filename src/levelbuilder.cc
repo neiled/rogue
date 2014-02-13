@@ -15,7 +15,7 @@ LevelBuilder::LevelBuilder()
 void LevelBuilder::buildLevel(Level* level, Player* player)
 {
 
-  vector<Room*> rooms = createRooms(75, level);
+  std::vector<Room*> rooms = createRooms(75, level);
 
   connectRooms(rooms);
 
@@ -27,7 +27,7 @@ void LevelBuilder::buildLevel(Level* level, Player* player)
 
   generateMonsters(level);
 
-  addDoors(rooms, level);
+  addDoors(level);
 }
 
 void LevelBuilder::generateMonsters(Level* level)
@@ -42,20 +42,20 @@ void LevelBuilder::generateMonsters(Level* level)
 
 }
 
-void LevelBuilder::addDoors(vector<Room*> rooms, Level* level)
+void LevelBuilder::addDoors(Level* level)
 {
   for(int y = 0; y < Level::LEVEL_HEIGHT-1; y++)
   {
     for (int x = 0; x < Level::LEVEL_WIDTH-1; ++x)
     {
-      if(doorFits(x, y, rooms, level))
+      if(doorFits(x, y, level))
           level->getTile(x, y)->setTileType(Tile::TileType::Door);
     }
 
   }
 }
 
-bool LevelBuilder::doorFits(int x, int y, vector<Room*> rooms, Level* level)
+bool LevelBuilder::doorFits(int x, int y, Level* level)
 {
   if(x <= 0 || y <= 0)
     return false;
@@ -97,7 +97,7 @@ void LevelBuilder::positionPlayer(Room* room, Player* player)
   player->setCurrentTile(room->getRandomTile());
 }
 
-Room* LevelBuilder::positionStairs(vector<Room*> rooms, Level* level)
+Room* LevelBuilder::positionStairs(std::vector<Room*> rooms, Level* level)
 {
   int maxDistance = 0;
   Room* startRoom = nullptr;
@@ -130,7 +130,7 @@ Room* LevelBuilder::positionStairs(vector<Room*> rooms, Level* level)
   return startRoom;
 }
 
-void LevelBuilder::digCorridors(vector<Room*> rooms, Level* level)
+void LevelBuilder::digCorridors(std::vector<Room*> rooms, Level* level)
 {
   for(Room* startRoom : rooms)
   {
@@ -152,9 +152,9 @@ void LevelBuilder::digCorridors(vector<Room*> rooms, Level* level)
   }
 }
 
-void LevelBuilder::connectRooms(vector<Room*> rooms)
+void LevelBuilder::connectRooms(std::vector<Room*> rooms)
 {
-  vector<Room*> connectedRooms;
+  std::vector<Room*> connectedRooms;
   connectedRooms.push_back(rooms.front());
 
   do
@@ -190,9 +190,9 @@ void LevelBuilder::connectRooms(vector<Room*> rooms)
 
 }
 
-vector<Room*> LevelBuilder::createRooms(int amount, Level* level)
+std::vector<Room*> LevelBuilder::createRooms(int amount, Level* level)
 {
-  vector<Room*> rooms;
+  std::vector<Room*> rooms;
 
   for (int i = 0; i < LevelBuilder::ROOMS;)
   {

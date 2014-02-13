@@ -26,7 +26,7 @@ void Level::update(Player* player)
 void Level::updateLightMap(Player* player)
 {
   ShadowCasting caster;
-  vector<vector<float>> newLightMap = caster.calculateFOV(_map, player->getX(), player->getY(), 100.0f);
+  std::vector<std::vector<float>> newLightMap = caster.calculateFOV(_map, player->getX(), player->getY(), 100.0f);
 
    
   resetLightMap();
@@ -111,7 +111,7 @@ Tile* Level::getTile(int x, int y)
   return _map[y][x];
 }
 
-vector<Monster*> Level::getMonsters()
+std::vector<Monster*> Level::getMonsters()
 {
   return _monsters;
 }

@@ -3,8 +3,6 @@
 
 #include <vector>
 
-using namespace std;
-
 class Level;
 class LevelBuilder;
 class Player;
@@ -23,7 +21,7 @@ public:
 
 private:
   Player* _player;
-  vector<Level*> _levels;
+  std::vector<Level*> _levels;
   LevelBuilder* _builder;
   void checkMoveLevel();
   Level* getLevel(int depth);

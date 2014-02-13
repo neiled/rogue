@@ -1,6 +1,7 @@
 #include "tile.h"
 #include <cmath>
-
+#include "actor.h"
+#include <SDL2/SDL.h>
 
 Tile::Tile()
 {
@@ -17,6 +18,18 @@ Tile::Tile(TileType tileType, Level* level, int x, int y)
 
 Tile::~Tile()
 {
+}
+
+void Tile::addActor(Actor* actor)
+{
+  if(find(_actors.begin(), _actors.end(), actor) == _actors.end())
+    _actors.push_back(actor);
+}
+
+void Tile::removeActor(Actor* actor)
+{
+  if(find(_actors.begin(), _actors.end(), actor) != _actors.end())
+    _actors.erase(remove(_actors.begin(), _actors.end(), actor), _actors.end());
 }
 
 void Tile::setTileType(TileType tileType)

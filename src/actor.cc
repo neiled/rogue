@@ -11,9 +11,12 @@ Actor::~Actor()
 {
 }
 
-void Actor::setCurrentTile(Tile* currentTile)
+void Actor::setCurrentTile(Tile* newTile)
 {
-  _currentTile = currentTile;
+  if(_currentTile)
+    _currentTile->removeActor(this);
+  newTile->addActor(this);
+  _currentTile = newTile;
 }
 
 Tile* Actor::getCurrentTile()
@@ -67,12 +70,11 @@ bool Actor::attemptMove(int xModifier, int yModifier)
   int newY = currentY + yModifier;
   
   Tile* newTile = checkCanMove(newX, newY);
-  if(newTile != nullptr)
-  {
-    _currentTile = newTile;
-    return true;
-  }
-  return false;
+  if(newTile == nullptr)
+    return false;
+
+  this->setCurrentTile(newTile);
+  return true;
 }
 
 Tile* Actor::checkCanMove(int newX, int newY)

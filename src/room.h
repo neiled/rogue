@@ -4,8 +4,6 @@
 
 #include <vector>
 
-using namespace std;
-
 class Tile;
 class Level;
 
@@ -21,7 +19,7 @@ public:
   int getWidth();
 
   void addNeighbour(Room* room);
-  vector<Room*> getNeighbours();
+  std::vector<Room*> getNeighbours();
 
   double distanceTo(Room* otherRoom);
   bool containsTile(Tile* tile);
@@ -33,6 +31,6 @@ private:
   int _y;
   int _width;
   int _height;
-  vector<Room*> _neighbours;
+  std::vector<Room*> _neighbours;
 };
 #endif

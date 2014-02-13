@@ -29,11 +29,11 @@ class Actor
     bool hasCommands();
     
   protected:
-    Tile* _currentTile;
-    Tile* _targetTile;
+    Tile* _currentTile = nullptr;
+    Tile* _targetTile = nullptr;
 
-    deque<Commands::CMD> _commandQueue;
-    deque<Tile*> _travelPath;
+    std::deque<Commands::CMD> _commandQueue;
+    std::deque<Tile*> _travelPath;
     
     bool attemptMove(int newX, int newY);
     Tile* checkCanMove(int newX, int newY);

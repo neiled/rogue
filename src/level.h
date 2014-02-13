@@ -12,9 +12,6 @@ class LevelBuilder;
 class Player;
 class Monster;
 
-using namespace std;
-
-
 class Level
 {
   public:
@@ -31,7 +28,7 @@ class Level
     int getDepth();
     Tile* getTileOfType(Tile::TileType typeToLookFor);
     Tile* getRandomTileOfType(Tile::TileType typeToLookFor);
-    vector<Monster*> getMonsters();
+    std::vector<Monster*> getMonsters();
     void addMonster(Monster* monster);
     
 
@@ -47,14 +44,14 @@ class Level
     void resetLightMap();
     Tile* getRandomTile();
     
-    array<array<Tile*, LEVEL_WIDTH>, LEVEL_HEIGHT > _map;
-    array<array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_map;
+    std::array<std::array<Tile*, LEVEL_WIDTH>, LEVEL_HEIGHT > _map;
+    std::array<std::array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_map;
 
-    vector<Monster*> _monsters;
+    std::vector<Monster*> _monsters;
   
 };
 
-typedef array<array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT> lightMap_t;
+typedef std::array<std::array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT> lightMap_t;
 
 template <typename RandomGenerator = std::default_random_engine>
 struct random_selector
