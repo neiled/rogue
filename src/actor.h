@@ -13,16 +13,22 @@ class Actor
   public:
     Actor();
     virtual ~Actor();
+    
+    World::Direction direction;
+    
+    void update();
+    
     Level* getCurrentLevel();
     void setCurrentTile(std::shared_ptr<Tile> currentTile);
     std::shared_ptr<Tile> getCurrentTile();
+    
     int getX();
     int getY();
     void moveLeft();
     void moveRight();
     void moveUp();
     void moveDown();
-    World::Direction direction;
+    
 
     void pushCommand(Commands::CMD command);
     Commands::CMD popCommand();
