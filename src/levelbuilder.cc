@@ -38,40 +38,10 @@ void LevelBuilder::generateMonsters(Level* level)
     if(!randomTile->getActor())
     {
       Monster* monster = new Monster(randomTile, Monster::MonsterType::Orc, Monster::MonsterState::Awake);
-      SDL_Log("Added monster to %d,%d", randomTile->getX(), randomTile->getY());
       level->addMonster(monster);
       ++i;
     }
-    //SDL_Log("Added monster to %d,%d", randomTile->getX(), randomTile->getY());
   }
-
-
-  for(int y = 0; y < Level::LEVEL_HEIGHT-1; y++)
-  {
-    for (int x = 0; x < Level::LEVEL_WIDTH-1; ++x)
-    {
-      SDL_Log("Checking %d,%d", x, y);
-      auto tile = level->getTile(x,y);
-      auto actor = tile->getActor();
-      if(actor)
-      {
-        if(actor->getX() != x)
-          SDL_Log("We have a problem...");
-        if(actor->getY() != y)
-          SDL_Log("We have a problem...");
-        if(actor->getCurrentTile() != tile)
-          SDL_Log("We have a problem...");
-        if(actor->getCurrentTile()->getX() != x)
-          SDL_Log("We have a problem...");
-        if(actor->getCurrentTile()->getY() != y)
-          SDL_Log("We have a problem...");
-
-      }
-    }
-
-  }
-
-
 }
 
 void LevelBuilder::addDoors(Level* level)
@@ -152,12 +122,8 @@ Room* LevelBuilder::positionStairs(std::vector<Room*> rooms, Level* level)
   auto tile = startRoom->getRandomTile(true);
   tile->setTileType(Tile::TileType::StairsUp);
 
-  //SDL_Log("Putting stairs at %d,%d", tile->getX(), tile->getY());
-
   tile = endRoom->getRandomTile(true);
   tile->setTileType(Tile::TileType::StairsDown);
-
-  //SDL_Log("Putting stairs at %d,%d", tile->getX(), tile->getY());
 
   return startRoom;
 }
@@ -243,8 +209,6 @@ std::vector<Room*> LevelBuilder::createRooms(int amount, Level* level)
 
 SDL_Point LevelBuilder::pickPointOfRoom(Room* startRoom)
 {
-  //auto tile = startRoom->getRandomTile();
-  //return SDL_Point {tile->getX(), tile->getY()};
   int w = startRoom->getWidth();
   int h = startRoom->getHeight();
   int maxPoint = w* 2 + h* 2;
@@ -268,8 +232,6 @@ SDL_Point LevelBuilder::pickPointOfRoom(Room* startRoom)
   }
   else if(pointPicked < 2*w + h)
   {
-    //x = 2*w-1 + h - pointPicked + startRoom->getX();
-    //x = w - (pointPicked-w*2) + startRoom->getX();
     x = w + h + w -1 - pointPicked + startRoom->getX();
     y = h + startRoom->getY();
   }
@@ -278,7 +240,6 @@ SDL_Point LevelBuilder::pickPointOfRoom(Room* startRoom)
     x = startRoom->getX() -1;
     y = 2*w-1 + 2*h - pointPicked + startRoom->getY();
   }
-  //SDL_Log("Picked %d,%d after random %d picked. w: %d, h: %d - sp: %d,%d", x, y, pointPicked, w, h, startRoom->getX(), startRoom->getY());
   return SDL_Point {x, y};
 }
 
