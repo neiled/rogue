@@ -104,12 +104,20 @@ bool Actor::meleeAttack(Actor* other)
   return false;
 }
 
-float Actor::getToHitChance()
+int Actor::attack_score()
 {
-  //TODO: This would be based on the weapon used probably?
-  //For now we'll just call it 100%...
-  //
-  return 100.0f;
+  //TODO make this a calc
+  return 100;
+}
+int defense_score()
+{
+  //TODO make this a calc  
+  return 100;
+}
+
+float Actor::getToHitChance(Actor& other)
+{
+  return static_cast<float>(attack_score()) / (attack_score() + other.defense_score());
 }
 
 void Actor::takeDamage(int amount)
