@@ -13,6 +13,18 @@ Monster::Monster(std::shared_ptr<Tile> startTile, Monster::MonsterType type, Mon
 Monster::~Monster()
 {
 }
+
+virtual void Monster::update() override
+{
+  if(_monsterState != Monster::MonsterState::Hunting)
+  {
+    if(can_see_player(level()->player()))
+    {
+    }
+  }
+}
+
+
 Monster::MonsterType Monster::getMonsterType()
 {
   return _monsterType;
@@ -23,3 +35,4 @@ void Monster::die()
   _currentTile->removeActor();
   //TODO: Free up memory this monster used....
 }
+
