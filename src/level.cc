@@ -32,9 +32,14 @@ void Level::update(Player* player)
   //}
 }
 
-Player& Level::player()
+Player* Level::player()
 {
   return _player;
+}
+
+void set_player(Player* player)
+{
+  _player = player;
 }
 
 void Level::updateLightMap(Player* player)
