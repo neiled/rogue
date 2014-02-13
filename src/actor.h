@@ -29,6 +29,8 @@ class Actor
     void moveUp();
     void moveDown();
     
+    bool can_see_actor(Actor& actor);
+    
 
     void pushCommand(Commands::CMD command);
     Commands::CMD popCommand();
