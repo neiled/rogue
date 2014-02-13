@@ -32,6 +32,11 @@ void Level::update(Player* player)
   //}
 }
 
+Player& Level::player()
+{
+  return _player;
+}
+
 void Level::updateLightMap(Player* player)
 {
   ShadowCasting caster;
