@@ -13,26 +13,26 @@ AStar::~AStar()
 
 }
 
-std::deque<Tile*> AStar::explore(Tile* startingPoint, Level* level)
+std::deque<std::shared_ptr<Tile>> AStar::explore(std::shared_ptr<Tile> startingPoint, Level* level)
 {
-  std::deque<Tile*> results;
+  std::deque<std::shared_ptr<Tile>> results;
 
   //SDL_Log("Starting at: %d,%d", startingPoint->getX(), startingPoint->getY());
   open_list.push_back(startingPoint);
 
-  Tile* unexploredTile = nullptr;
+  std::shared_ptr<Tile> unexploredTile = nullptr;
 
-  Tile* result = startingPoint;
+  auto result = startingPoint;
   while(!unexploredTile)
   {
     result = search(result, nullptr);
     if(!result)
     {
       SDL_Log("Nowhere left to explore...");
-      return std::deque<Tile*>();
+      return std::deque<std::shared_ptr<Tile>>();
     }
 
-    for(Tile* t : closed_list)
+    for(auto t : closed_list)
     {
       if(level->getTileLightMap(t->getX(),t->getY()) == Level::LightType::Unseen)
       {
@@ -55,26 +55,26 @@ std::deque<Tile*> AStar::explore(Tile* startingPoint, Level* level)
 }
 
 
-std::deque<Tile*> AStar::plotPath(Tile* startingPoint, Tile* end)
+std::deque<std::shared_ptr<Tile>> AStar::plotPath(std::shared_ptr<Tile> startingPoint, std::shared_ptr<Tile> end)
 {
-  std::deque<Tile*> results;
+  std::deque<std::shared_ptr<Tile>> results;
 
   open_list.push_back(startingPoint);
   gCost[startingPoint] = 0;
   
-  Tile* result = startingPoint;
+  auto result = startingPoint;
   while(find(closed_list.begin(), closed_list.end(), end) == closed_list.end())
   {
     result = search(result, end);
     if(!result)
     {
       SDL_Log("No way to get to square!");
-      return std::deque<Tile*>();
+      return std::deque<std::shared_ptr<Tile>>();
     }
   }
 
   
-  Tile* nextTile = end;
+  auto nextTile = end;
   //now go through the parent list for each node building up the path
   while(nextTile != startingPoint)
   {
@@ -84,7 +84,7 @@ std::deque<Tile*> AStar::plotPath(Tile* startingPoint, Tile* end)
   return results;
 }
 
-Tile* AStar::search(Tile* currentTile, Tile* end)
+std::shared_ptr<Tile> AStar::search(std::shared_ptr<Tile> currentTile, std::shared_ptr<Tile> end)
 {
   currentTile = findLowestScore(currentTile, end);
   if(!currentTile)
@@ -92,8 +92,8 @@ Tile* AStar::search(Tile* currentTile, Tile* end)
   open_list.erase(remove(open_list.begin(), open_list.end(), currentTile), open_list.end());
   closed_list.push_back(currentTile);  
 
-  std::vector<Tile*> otherTiles = surroundingValidTiles(currentTile);
-  for(Tile* t : otherTiles)
+  std::vector<std::shared_ptr<Tile>> otherTiles = surroundingValidTiles(currentTile);
+  for(auto t : otherTiles)
   {
     //if not on the open list
       if(find(open_list.begin(), open_list.end(), t) == open_list.end())
@@ -117,11 +117,11 @@ Tile* AStar::search(Tile* currentTile, Tile* end)
   return currentTile;
 }
 
-Tile* AStar::findLowestScore(Tile* currentSquare, Tile* end)
+std::shared_ptr<Tile> AStar::findLowestScore(std::shared_ptr<Tile> currentSquare, std::shared_ptr<Tile> end)
 {
-  Tile* bestTile = nullptr;
+  std::shared_ptr<Tile> bestTile = nullptr;
   float bestFScore = 0;
-  for(Tile* currentTile : open_list)
+  for(auto currentTile : open_list)
   {
     float distance = 0;
     if(end)
@@ -138,9 +138,9 @@ Tile* AStar::findLowestScore(Tile* currentSquare, Tile* end)
   return bestTile;
 }
 
-std::vector<Tile*> AStar::surroundingValidTiles(Tile* start)
+std::vector<std::shared_ptr<Tile>> AStar::surroundingValidTiles(std::shared_ptr<Tile> start)
 {
-  std::vector<Tile*> result;
+  std::vector<std::shared_ptr<Tile>> result;
   int startX = start->getX();
   int startY = start->getY();
   for (int offsety = -1; offsety <= 1; ++offsety)
@@ -151,7 +151,7 @@ std::vector<Tile*> AStar::surroundingValidTiles(Tile* start)
         continue;
       int x = startX + offsetx;
       int y = startY + offsety;
-      Tile* neighbour = start->getLevel()->getTile(x,y);
+      auto neighbour = start->getLevel()->getTile(x,y);
       if(!neighbour)
         continue;
       if(find(closed_list.begin(), closed_list.end(), neighbour) != closed_list.end())

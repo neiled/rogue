@@ -13,7 +13,7 @@ Actor::~Actor()
 {
 }
 
-void Actor::setCurrentTile(Tile* newTile)
+void Actor::setCurrentTile(std::shared_ptr<Tile> newTile)
 {
   if(_currentTile)
     _currentTile->removeActor();
@@ -21,8 +21,12 @@ void Actor::setCurrentTile(Tile* newTile)
   _currentTile = newTile;
 }
 
-Tile* Actor::getCurrentTile()
+std::shared_ptr<Tile> Actor::getCurrentTile()
 {
+  SDL_Log("Getting current tile");
+  if(!_currentTile)
+    SDL_Log("Current tile is null!");
+
   return _currentTile;
 }
 
@@ -71,7 +75,7 @@ bool Actor::attemptMove(int xModifier, int yModifier)
   int newX = currentX + xModifier;
   int newY = currentY + yModifier;
   
-  Tile* newTile = checkCanMove(newX, newY);
+  auto newTile = checkCanMove(newX, newY);
   if(!newTile)
     return false;
 
@@ -93,6 +97,15 @@ bool Actor::meleeAttack(Actor* other)
 
   float toHit = getToHitChance();
 
+  SDL_Log("Getting other tile...");
+  if(!other)
+    SDL_Log("Other has gone...");
+  auto otherTile = other->getCurrentTile();
+  SDL_Log("Done getting other tile...");
+  SDL_Log("Attacking monster at %d,%d", otherTile->getX(), otherTile->getY());
+  if(otherTile->getActor() != other)
+    SDL_Log("Tile doesn't think the monster is on it...");
+
   if(Random::CheckChance(toHit))
   {
     int damage = Random::Between(0,10);
@@ -112,10 +125,11 @@ float Actor::getToHitChance()
 
 void Actor::takeDamage(int amount)
 {
+  SDL_Log("Taking damage");
   _health -= amount;
+  SDL_Log("I now have %d remaining health", _health);
   if(_health <= 0)
     die();
-  SDL_Log("I now have %d remaining health", _health);
 }
 
 bool Actor::dead() const
@@ -123,7 +137,7 @@ bool Actor::dead() const
   return _health <= 0;
 }
 
-Tile* Actor::checkCanMove(int newX, int newY)
+std::shared_ptr<Tile> Actor::checkCanMove(int newX, int newY)
 {
   if(newX < 0)
     return nullptr;
@@ -133,13 +147,18 @@ Tile* Actor::checkCanMove(int newX, int newY)
     return nullptr;
   if(newY >= Level::LEVEL_HEIGHT)
     return nullptr;
-  Tile* newTile = getCurrentLevel()->getTile(newX, newY);
+  auto newTile = getCurrentLevel()->getTile(newX, newY);
   if(newTile->getTileType() == Tile::TileType::Rock)
     return nullptr;
   return newTile;
 }
 
-Commands::CMD Actor::getCommandFromTiles(Tile* start, Tile* end)
+void Actor::clearCommands()
+{
+  _commandQueue.clear();
+}
+
+Commands::CMD Actor::getCommandFromTiles(std::shared_ptr<Tile> start, std::shared_ptr<Tile> end)
 {
   int xDiff = end->getX() - start->getX();
   int yDiff = end->getY() - start->getY();

@@ -18,6 +18,7 @@ Tile::Tile(TileType tileType, Level* level, int x, int y)
 
 Tile::~Tile()
 {
+  SDL_Log("I'm being deleted! %d,%d", _x, _y);
 }
 
 void Tile::setActor(Actor* actor)
@@ -60,7 +61,7 @@ int Tile::getY()
   return _y;
 }
 
-double Tile::distanceTo(Tile* otherRoom)
+double Tile::distanceTo(std::shared_ptr<Tile> otherRoom)
 {
   return sqrt((otherRoom->getX() - _x)*(otherRoom->getX() - _x) + (otherRoom->getY() - _y) * (otherRoom->getY() - _y));
 }

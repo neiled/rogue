@@ -14,8 +14,8 @@ class Actor
     Actor();
     virtual ~Actor();
     Level* getCurrentLevel();
-    void setCurrentTile(Tile* currentTile);
-    Tile* getCurrentTile();
+    void setCurrentTile(std::shared_ptr<Tile> currentTile);
+    std::shared_ptr<Tile> getCurrentTile();
     int getX();
     int getY();
     void moveLeft();
@@ -27,22 +27,23 @@ class Actor
     void pushCommand(Commands::CMD command);
     Commands::CMD popCommand();
     bool hasCommands() const;
+    void clearCommands();
 
     void takeDamage(int amount);
 
     bool dead() const;
     
   protected:
-    Tile* _currentTile = nullptr;
-    Tile* _targetTile = nullptr;
+    std::shared_ptr<Tile> _currentTile;
+    std::shared_ptr<Tile> _targetTile = nullptr;
     int _health;
 
     std::deque<Commands::CMD> _commandQueue;
-    std::deque<Tile*> _travelPath;
-    Commands::CMD getCommandFromTiles(Tile* start, Tile* end);
+    std::deque<std::shared_ptr<Tile>> _travelPath;
+    Commands::CMD getCommandFromTiles(std::shared_ptr<Tile> start, std::shared_ptr<Tile> end);
     
     bool attemptMove(int newX, int newY);
-    Tile* checkCanMove(int newX, int newY);
+    std::shared_ptr<Tile> checkCanMove(int newX, int newY);
     bool meleeAttack(Actor* other);
     float getToHitChance(/*Item* item*/);
     virtual void die() = 0;

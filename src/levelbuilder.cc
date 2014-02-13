@@ -34,7 +34,7 @@ void LevelBuilder::generateMonsters(Level* level)
 {
   for (int i = 0; i < Level::LEVEL_MONSTER_COUNT; ++i)
   {
-    Tile* randomTile = level->getRandomTileOfType(Tile::TileType::Floor);
+    auto randomTile = level->getRandomTileOfType(Tile::TileType::Floor);
     Monster* monster = new Monster(randomTile, Monster::MonsterType::Orc, Monster::MonsterState::Awake);
     level->addMonster(monster);
     //SDL_Log("Added monster to %d,%d", randomTile->getX(), randomTile->getY());
@@ -59,7 +59,7 @@ bool LevelBuilder::doorFits(int x, int y, Level* level)
 {
   if(x <= 0 || y <= 0)
     return false;
-  Tile* currentTile = level->getTile(x, y);
+  auto currentTile = level->getTile(x, y);
   if(currentTile->getTileType() != Tile::TileType::Floor)
     return false;
   if(level->getTile(x,y-1)->getTileType() == Tile::TileType::Floor)
@@ -117,7 +117,7 @@ Room* LevelBuilder::positionStairs(std::vector<Room*> rooms, Level* level)
     }
   }
 
-  Tile* tile = startRoom->getRandomTile(true);
+  auto tile = startRoom->getRandomTile(true);
   tile->setTileType(Tile::TileType::StairsUp);
 
   //SDL_Log("Putting stairs at %d,%d", tile->getX(), tile->getY());
@@ -211,7 +211,7 @@ std::vector<Room*> LevelBuilder::createRooms(int amount, Level* level)
 
 SDL_Point LevelBuilder::pickPointOfRoom(Room* startRoom)
 {
-  //Tile* tile = startRoom->getRandomTile();
+  //auto tile = startRoom->getRandomTile();
   //return SDL_Point {tile->getX(), tile->getY()};
   int w = startRoom->getWidth();
   int h = startRoom->getHeight();
@@ -253,7 +253,7 @@ SDL_Point LevelBuilder::pickPointOfRoom(Room* startRoom)
 void LevelBuilder::digCorridor(SDL_Point startPoint, SDL_Point endPoint, Room* roomTarget, Level* level)
 {
 
-  Tile* tileToCheck = level->getTile(startPoint.x, startPoint.y);
+  auto tileToCheck = level->getTile(startPoint.x, startPoint.y);
   tileToCheck->setTileType(Tile::TileType::Floor);
   int x = startPoint.x;
   int y = startPoint.y;

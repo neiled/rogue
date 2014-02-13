@@ -22,8 +22,8 @@ public:
   std::vector<Room*> getNeighbours();
 
   double distanceTo(Room* otherRoom);
-  bool containsTile(Tile* tile);
-  Tile* getRandomTile(bool avoidWalls = false);
+  bool containsTile(std::shared_ptr<Tile> tile);
+  std::shared_ptr<Tile> getRandomTile(bool avoidWalls = false);
 
 private:
   Level* _level;
