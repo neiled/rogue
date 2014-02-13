@@ -53,14 +53,29 @@ void Actor::moveDown()
     direction = World::Direction::SOUTH;
 }
 
-int Actor::getX()
+int Actor::x()
 {
   return _currentTile->getX();
 }
 
-int Actor::getY()
+int Actor::y()
 {
   return _currentTile->getY();
+}
+
+bool Actor::can_see_actor(Actor& actor)
+{
+  int visibility = 5;//TODO get this number from somewhere...
+  
+  for(int y = y()-visibility; y < y() + visibility; ++y)
+  {
+    for(int x = x() - visibility; x < x() + visibility; ++x)
+    {
+      if(actor.x() == x && actor.y == y)
+        return true;
+    }
+  }
+  return false;
 }
 
 bool Actor::attemptMove(int xModifier, int yModifier)
