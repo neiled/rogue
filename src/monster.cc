@@ -20,8 +20,15 @@ virtual void Monster::update() override
   {
     if(can_see_player(level()->player()))
     {
+      _monsterState = Monster::MonsterState::Hunting;
     }
   }
+  
+  if(_monsterState == Monster::MonsterState::Hunting)
+  {
+    //TODO: Move towards player
+  }
+  
 }
 
 
