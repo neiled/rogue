@@ -1,40 +1,12 @@
+#include <SDL2/SDL.h>
 #include "levelbuilder.h"
 #include "tile.h"
 #include "room.h"
 #include "level.h"
 #include "player.h"
-#include <SDL2/SDL.h>
-#include "random.h"
+#include "monster.h"
 
 
-template <typename RandomGenerator = std::default_random_engine>
-struct random_selector
-{
-  //On most platforms, you probably want to use std::random_device("/dev/urandom")()
-  random_selector(RandomGenerator g = RandomGenerator(std::random_device()()))
-    : gen(g) {}
- 
-  template <typename Iter>
-  Iter select(Iter start, Iter end) {
-    std::uniform_int_distribution<> dis(0, std::distance(start, end) - 1);
-    std::advance(start, dis(gen));
-    return start;
-  }
- 
-  //convenience function
-  template <typename Iter>
-  Iter operator()(Iter start, Iter end) {
-    return select(start, end);
-  }
- 
-  template <typename Container>
-  auto operator()(const Container& c) -> decltype(*begin(c))& {
-    return *select(begin(c), end(c));
-  }
- 
-private:
-  RandomGenerator gen;
-};
 
 LevelBuilder::LevelBuilder()
 {
@@ -42,7 +14,6 @@ LevelBuilder::LevelBuilder()
 
 void LevelBuilder::buildLevel(Level* level, Player* player)
 {
-  random_selector<> selector{};
 
   vector<Room*> rooms = createRooms(75, level);
 
@@ -54,7 +25,21 @@ void LevelBuilder::buildLevel(Level* level, Player* player)
 
   positionPlayer(startRoom, player);
 
+  generateMonsters(level);
+
   addDoors(rooms, level);
+}
+
+void LevelBuilder::generateMonsters(Level* level)
+{
+  for (int i = 0; i < Level::LEVEL_MONSTER_COUNT; ++i)
+  {
+    Tile* randomTile = level->getRandomTileOfType(Tile::TileType::Floor);
+    Monster* monster = new Monster(randomTile, Monster::MonsterType::Orc, Monster::MonsterState::Awake);
+    level->addMonster(monster);
+    SDL_Log("Added monster to %d,%d", randomTile->getX(), randomTile->getY());
+  }
+
 }
 
 void LevelBuilder::addDoors(vector<Room*> rooms, Level* level)
@@ -311,21 +296,10 @@ LevelBuilder::~LevelBuilder()
 
 Room* LevelBuilder::generateRoom(Level* level, int maxWidth, int maxHeight)
 {
-  //std::uniform_int_distribution<int> dW(3,maxWidth);
-  //std::uniform_int_distribution<int> dH(3,maxHeight);
-  //std::uniform_int_distribution<int> dX(1,Level::LEVEL_WIDTH);
-  //std::uniform_int_distribution<int> dY(1,Level::LEVEL_HEIGHT);
-  //
   int width = Random::Between(3,maxWidth);
   int height = Random::Between(3, maxHeight);
   int x = Random::Between(1, Level::LEVEL_WIDTH);
   int y = Random::Between(1, Level::LEVEL_HEIGHT);
-
-  //int width = dW(rd);
-  //int height = dH(rd);
-
-  //int x = dX(rd);
-  //int y = dY(rd);
 
   return new Room(level, x, y, width, height);
 

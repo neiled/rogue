@@ -32,6 +32,7 @@ class LevelBuilder
     void positionPlayer(Room* room, Player* player);
     void addDoors(vector<Room*> rooms, Level* level);
     bool doorFits(int x, int y, vector<Room*> rooms, Level* level);
+    void generateMonsters(Level* level);
 
     const static int ROOMS = 150;
     const static int ROOM_HEIGHT = 8;

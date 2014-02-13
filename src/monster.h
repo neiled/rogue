@@ -10,16 +10,21 @@ class Tile;
 #include "actor.h"
 
 
-class Monster : Actor
+class Monster : public Actor
 {
   public:
-    Monster();
+    enum class MonsterType {Orc};
+    enum class MonsterState {Asleep, Awake, Hunting};
+
+    Monster(Tile* startTile, Monster::MonsterType type, Monster::MonsterState state);
     virtual ~Monster();
     void explore();
+
+    Monster::MonsterType getMonsterType();
     
-    enum class MonsterType {Orc};
     
   private:
-  Monster::MonsterType _monsterType;
+    Monster::MonsterType _monsterType;
+    Monster::MonsterState _monsterState;
 };
 #endif

@@ -8,6 +8,7 @@
 #include <SDL2_Image/SDL_Image.h>
 
 using std::vector;
+using std::array;
 
 class Player;
 class Sprite;
@@ -15,6 +16,8 @@ class DirectionalSprite;
 class World;
 class Graphics;
 class Level;
+class Monster;
+class Tile;
 
 class Renderer {
   public:
@@ -29,13 +32,19 @@ class Renderer {
     const static int TILE_HEIGHT = 32;
     
   private:
-    //vector<Sprite*> _mapTiles;
-    //array<Sprite*, 5> _mapTiles;
-    Sprite* _mapTiles[5];
+    array<Sprite*,5> _mapTiles;
+    array<DirectionalSprite*, 1> _monsters;
     DirectionalSprite* _player;
     Graphics* _graphics;
 
     void updateCamera(Player* player);
+    void loadMapTiles();
+    void loadMonsterTiles();
+
+    void renderLevel(Level* level);
+    void renderMonsters(Level* level);
+
+    void drawSprite(Sprite* sprite, Tile* tile);
     
     SDL_Rect _cameraRect;
     

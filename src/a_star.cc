@@ -17,7 +17,7 @@ deque<Tile*> AStar::explore(Tile* startingPoint, Level* level)
 {
   deque<Tile*> results;
 
-  SDL_Log("Starting at: %d,%d", startingPoint->getX(), startingPoint->getY());
+  //SDL_Log("Starting at: %d,%d", startingPoint->getX(), startingPoint->getY());
   open_list.push_back(startingPoint);
 
   Tile* unexploredTile = nullptr;
@@ -42,8 +42,8 @@ deque<Tile*> AStar::explore(Tile* startingPoint, Level* level)
     }
   }
 
-  SDL_Log("Found a target of %d,%d", unexploredTile->getX(), unexploredTile->getY());
-  SDL_Log("Path of %d", closed_list.size());
+  //SDL_Log("Found a target of %d,%d", unexploredTile->getX(), unexploredTile->getY());
+  //SDL_Log("Path of %d", closed_list.size());
 
   //compile reuslts
   while(unexploredTile != startingPoint)
@@ -134,8 +134,8 @@ Tile* AStar::findLowestScore(Tile* currentSquare, Tile* end)
       bestTile = currentTile;
     }
   }
-  if(bestTile != nullptr)
-    SDL_Log("Found: %d,%d", bestTile->getX(), bestTile->getY());
+  //if(bestTile != nullptr)
+    //SDL_Log("Found: %d,%d", bestTile->getX(), bestTile->getY());
 
   return bestTile;
 }

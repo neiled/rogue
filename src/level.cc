@@ -1,5 +1,6 @@
 #include "level.h"
 #include "player.h"
+#include "monster.h"
 #include <SDL2/SDL.h>
 #include "shadowcasting.h"
 
@@ -80,6 +81,17 @@ Tile* Level::getTileOfType(Tile::TileType typeToLookFor)
   return nullptr;
 }
 
+Tile* Level::getRandomTileOfType(Tile::TileType typeToLookFor)
+{
+  Tile* chosenTile = nullptr;
+  do
+  {
+    Tile* testTile = getRandomTile();
+    if(testTile->getTileType() == typeToLookFor)
+      chosenTile = testTile;
+  }while(chosenTile == nullptr);
+  return chosenTile;
+}
 
 void Level::setType(int x, int y, Tile::TileType tileType)
 {
@@ -99,7 +111,23 @@ Tile* Level::getTile(int x, int y)
   return _map[y][x];
 }
 
+vector<Monster*> Level::getMonsters()
+{
+  return _monsters;
+}
 
+void Level::addMonster(Monster* monster)
+{
+  _monsters.push_back(monster);
+}
+
+Tile* Level::getRandomTile()
+{
+  int x = Random::Between(0, Level::LEVEL_WIDTH-1);
+  int y = Random::Between(0, Level::LEVEL_HEIGHT-1);
+
+  return getTile(x,y);
+}
 
 Level::~Level()
 {
