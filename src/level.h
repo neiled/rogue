@@ -31,6 +31,8 @@ class Level
     std::vector<Monster*> getMonsters();
     void addMonster(Monster* monster);
     
+    Player& player();
+    
 
     const static int LEVEL_WIDTH = 100;
     const static int LEVEL_HEIGHT = 100;
