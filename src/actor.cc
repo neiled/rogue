@@ -15,12 +15,10 @@ Actor::~Actor()
 
 void Actor::setCurrentTile(std::shared_ptr<Tile> newTile)
 {
-  SDL_Log("setting new tile to %d,%d", newTile->getX(), newTile->getY());
   if(_currentTile)
     _currentTile->removeActor();
   newTile->setActor(this);
   _currentTile = newTile;
-  SDL_Log("new tile set to %d,%d", getCurrentTile()->getX(), getCurrentTile()->getY());
 }
 
 std::shared_ptr<Tile> Actor::getCurrentTile()
@@ -57,8 +55,6 @@ void Actor::moveDown()
 
 int Actor::getX()
 {
-  if(!_currentTile)
-    SDL_Log("Nothing in x");
   return _currentTile->getX();
 }
 
@@ -97,14 +93,7 @@ bool Actor::meleeAttack(Actor* other)
 
   float toHit = getToHitChance();
 
-  SDL_Log("Getting other tile...");
-  if(!other)
-    SDL_Log("Other has gone...");
   auto otherTile = other->getCurrentTile();
-  SDL_Log("Done getting other tile...");
-  SDL_Log("Attacking monster at %d,%d", otherTile->getX(), otherTile->getY());
-  if(otherTile->getActor() != other)
-    SDL_Log("Tile doesn't think the monster is on it...");
 
   if(Random::CheckChance(toHit))
   {
@@ -125,9 +114,7 @@ float Actor::getToHitChance()
 
 void Actor::takeDamage(int amount)
 {
-  SDL_Log("Taking damage");
   _health -= amount;
-  SDL_Log("I now have %d remaining health", _health);
   if(_health <= 0)
     die();
 }
