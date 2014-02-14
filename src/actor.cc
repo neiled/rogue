@@ -107,12 +107,8 @@ bool Actor::meleeAttack(Actor* other)
     return true;
 
   float toHit = getToHitChance(*other);
-  SDL_Log("Hit chance %f", toHit);
 
   auto otherTile = other->getCurrentTile();
-
-  SDL_Log("I'm attacking at %d,%d", otherTile->x(), otherTile->y());
-  SDL_Log("The monster there thinks they're at %d,%d", other->x(), other->y());
 
   if(Random::CheckChance(toHit))
   {
@@ -136,8 +132,10 @@ int Actor::defense_score()
 
 float Actor::getToHitChance(Actor& other)
 {
-  int floatChance = static_cast<float>(attack_score()) / (attack_score() + other.defense_score());
-  return floatChance * 100;
+  float attackFloat = attack_score();
+  float defenseFloat = other.defense_score();
+  float floatChance = attackFloat / (attackFloat + defenseFloat);
+  return static_cast<int>(floatChance * 100.0);
 }
 
 void Actor::takeDamage(int amount)

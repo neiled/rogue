@@ -5,6 +5,7 @@
 
 Monster::Monster(Tile& startTile, Monster::MonsterType type, Monster::MonsterState state)
 {
+  this->direction = static_cast<Actor::Direction>(Random::Between(0,3));
   setCurrentTile(startTile);
   _monsterType = type;
   _monsterState = state;
