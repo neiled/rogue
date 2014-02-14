@@ -13,28 +13,27 @@ AStar::~AStar()
 
 }
 
-std::deque<std::shared_ptr<Tile>> AStar::explore(std::shared_ptr<Tile> startingPoint, Level* level)
+std::deque<Tile*> AStar::explore(Tile& startingPoint, Level& level)
 {
-  std::deque<std::shared_ptr<Tile>> results;
+  std::deque<Tile*> results;
 
-  //SDL_Log("Starting at: %d,%d", startingPoint->getX(), startingPoint->getY());
-  open_list.push_back(startingPoint);
+  open_list.push_back(&startingPoint);
 
-  std::shared_ptr<Tile> unexploredTile = nullptr;
+  Tile* unexploredTile = nullptr;
 
-  auto result = startingPoint;
+  Tile* result = &startingPoint;
   while(!unexploredTile)
   {
-    result = search(result, nullptr);
+    result = search(*result, nullptr);
     if(!result)
     {
       SDL_Log("Nowhere left to explore...");
-      return std::deque<std::shared_ptr<Tile>>();
+      return std::deque<Tile*>();
     }
 
     for(auto t : closed_list)
     {
-      if(level->getTileLightMap(t->getX(),t->getY()) == Level::LightType::Unseen)
+      if(level.getTileLightMap(t->x(),t->y()) == Level::LightType::Unseen)
       {
         unexploredTile = t;
         break;
@@ -42,11 +41,10 @@ std::deque<std::shared_ptr<Tile>> AStar::explore(std::shared_ptr<Tile> startingP
     }
   }
 
-  //SDL_Log("Found a target of %d,%d", unexploredTile->getX(), unexploredTile->getY());
   //SDL_Log("Path of %d", closed_list.size());
 
   //compile reuslts
-  while(unexploredTile != startingPoint)
+  while(unexploredTile != &startingPoint)
   {
     results.push_front(unexploredTile);
     unexploredTile = parentList[unexploredTile];
@@ -55,28 +53,28 @@ std::deque<std::shared_ptr<Tile>> AStar::explore(std::shared_ptr<Tile> startingP
 }
 
 
-std::deque<std::shared_ptr<Tile>> AStar::plotPath(std::shared_ptr<Tile> startingPoint, std::shared_ptr<Tile> end)
+std::deque<Tile*> AStar::plotPath(Tile& startingPoint, Tile& end)
 {
-  std::deque<std::shared_ptr<Tile>> results;
+  std::deque<Tile*> results;
 
-  open_list.push_back(startingPoint);
-  gCost[startingPoint] = 0;
+  open_list.push_back(&startingPoint);
+  gCost[&startingPoint] = 0;
   
-  auto result = startingPoint;
-  while(find(closed_list.begin(), closed_list.end(), end) == closed_list.end())
+  Tile* result = &startingPoint;
+  while(find(closed_list.begin(), closed_list.end(), &end) == closed_list.end())
   {
-    result = search(result, end);
+    result = search(*result, &end);
     if(!result)
     {
       SDL_Log("No way to get to square!");
-      return std::deque<std::shared_ptr<Tile>>();
+      return std::deque<Tile*>();
     }
   }
 
   
-  auto nextTile = end;
+  auto nextTile = &end;
   //now go through the parent list for each node building up the path
-  while(nextTile != startingPoint)
+  while(nextTile != &startingPoint)
   {
     results.push_front(nextTile);
     nextTile = parentList[nextTile];
@@ -84,15 +82,15 @@ std::deque<std::shared_ptr<Tile>> AStar::plotPath(std::shared_ptr<Tile> starting
   return results;
 }
 
-std::shared_ptr<Tile> AStar::search(std::shared_ptr<Tile> currentTile, std::shared_ptr<Tile> end)
+Tile* AStar::search(Tile& start, Tile* end)
 {
-  currentTile = findLowestScore(currentTile, end);
+  Tile* currentTile = findLowestScore(start, end);
   if(!currentTile)
     return nullptr;
   open_list.erase(remove(open_list.begin(), open_list.end(), currentTile), open_list.end());
   closed_list.push_back(currentTile);  
 
-  std::vector<std::shared_ptr<Tile>> otherTiles = surroundingValidTiles(currentTile);
+  std::vector<Tile*> otherTiles = surroundingValidTiles(*currentTile);
   for(auto t : otherTiles)
   {
     //if not on the open list
@@ -117,16 +115,16 @@ std::shared_ptr<Tile> AStar::search(std::shared_ptr<Tile> currentTile, std::shar
   return currentTile;
 }
 
-std::shared_ptr<Tile> AStar::findLowestScore(std::shared_ptr<Tile> currentSquare, std::shared_ptr<Tile> end)
+Tile* AStar::findLowestScore(Tile& currentSquare, Tile* end)
 {
-  std::shared_ptr<Tile> bestTile = nullptr;
+  Tile* bestTile = nullptr;
   float bestFScore = 0;
   for(auto currentTile : open_list)
   {
     float distance = 0;
     if(end)
-      distance = currentTile->distanceTo(end);
-    int gScore = gCost[currentSquare] + 10;
+      distance = currentTile->distanceTo(*end);
+    int gScore = gCost[&currentSquare] + 10;
     float fScore = distance + gScore;
     if(fScore < bestFScore || bestFScore <= 0)
     {
@@ -138,11 +136,11 @@ std::shared_ptr<Tile> AStar::findLowestScore(std::shared_ptr<Tile> currentSquare
   return bestTile;
 }
 
-std::vector<std::shared_ptr<Tile>> AStar::surroundingValidTiles(std::shared_ptr<Tile> start)
+std::vector<Tile*> AStar::surroundingValidTiles(Tile& start)
 {
-  std::vector<std::shared_ptr<Tile>> result;
-  int startX = start->getX();
-  int startY = start->getY();
+  std::vector<Tile*> result;
+  int startX = start.x();
+  int startY = start.y();
   for (int offsety = -1; offsety <= 1; ++offsety)
   {
     for (int offsetx = -1; offsetx <= +1; ++offsetx)
@@ -151,7 +149,7 @@ std::vector<std::shared_ptr<Tile>> AStar::surroundingValidTiles(std::shared_ptr<
         continue;
       int x = startX + offsetx;
       int y = startY + offsety;
-      auto neighbour = start->getLevel()->getTile(x,y);
+      auto neighbour = start.getLevel().getTile(x,y);
       if(!neighbour)
         continue;
       if(find(closed_list.begin(), closed_list.end(), neighbour) != closed_list.end())

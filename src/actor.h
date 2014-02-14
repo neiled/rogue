@@ -1,26 +1,28 @@
 #ifndef ACTOR_H_
 #define ACTOR_H_
 
-class Level;
-class Tile;
 
 #include <deque>
 #include "commands.h"
-#include "world.h"
+
+class Tile;
+class Level;
 
 class Actor
 {
   public:
     Actor();
     virtual ~Actor();
+
+    enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
     
-    World::Direction direction;
+    Direction direction;
     
     virtual void update() = 0;
     
-    Level* level();
-    void setCurrentTile(std::shared_ptr<Tile> currentTile);
-    std::shared_ptr<Tile> getCurrentTile();
+    Level& level();
+    void setCurrentTile(Tile& currentTile);
+    Tile* getCurrentTile();
     
     int x();
     int y();
@@ -45,18 +47,18 @@ class Actor
     int defense_score();
     
   protected:
-    std::shared_ptr<Tile> _currentTile = nullptr;
-    std::shared_ptr<Tile> _targetTile = nullptr;
+    Tile* _currentTile = nullptr;
+    Tile* _targetTile = nullptr;
     int _health;
 
     std::deque<Commands::CMD> _commandQueue;
-    std::deque<std::shared_ptr<Tile>> _travelPath;
-    Commands::CMD getCommandFromTiles(std::shared_ptr<Tile> start, std::shared_ptr<Tile> end);
+    std::deque<Tile*> _travelPath;
+    Commands::CMD getCommandFromTiles(Tile& start, Tile& end);
     
     bool attemptMove(int newX, int newY);
-    std::shared_ptr<Tile> checkCanMove(int newX, int newY);
+    Tile* checkCanMove(int newX, int newY);
     bool meleeAttack(Actor* other);
-    float getToHitChance(/*Item* item*/);
+    float getToHitChance(Actor& other);
     virtual void die() = 0;
 
 

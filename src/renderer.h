@@ -24,8 +24,8 @@ class Renderer {
     Renderer(Graphics* graphics);
     ~Renderer();
   
-    void render(Level* level);
-    void render(Player* player);
+    void render(Level& level);
+    void render(Player& player);
     void update(World* world, int elapsed_time_in_ms);
 
     const static int TILE_WIDTH = 32;
@@ -37,14 +37,14 @@ class Renderer {
     DirectionalSprite* _player = nullptr;
     Graphics* _graphics = nullptr;
 
-    void updateCamera(Player* player);
+    void updateCamera(Player& player);
     void loadMapTiles();
     void loadMonsterTiles();
 
-    void renderLevel(Level* level);
-    void renderMonsters(Level* level);
+    void renderLevel(Level& level);
+    void renderMonsters(Level& level);
 
-    void drawSprite(Sprite* sprite, std::shared_ptr<Tile> tile);
+    void drawSprite(Sprite* sprite, Tile& tile);
     
     SDL_Rect _cameraRect;
     

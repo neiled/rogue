@@ -12,25 +12,25 @@ class Tile
     enum struct TileType {Floor = 0, Rock=1, StairsDown=2, StairsUp=3, Door=4};
 
 
-    Tile();
-    Tile (TileType tileType, Level* level, int x, int y);
+    Tile (TileType tileType, Level& level, int x, int y);
     virtual ~Tile ();
     void setTileType(TileType tileType);
-    TileType getTileType();
-    Level* getLevel();
-    int getX();
-    int getY();
-    double distanceTo(std::shared_ptr<Tile> otherRoom);
+    double distanceTo(const Tile otherTile);
     void removeActor();
-    void setActor(Actor* actor);
+    void setActor(Actor& actor);
+    
     Actor* getActor();
+    Level& getLevel();
+    TileType getTileType();
+    int x() const;
+    int y() const;
 
 
   private:
     TileType _tileType;
     int _x;
     int _y;
-    Level* _level = nullptr;
+    Level& _level;
     Actor* _actor = nullptr;
 };
 #endif

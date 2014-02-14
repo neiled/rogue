@@ -1,8 +1,9 @@
+#include "level.h"
 #include "monster.h"
 #include "tile.h"
 #include <SDL2/SDL.h>
 
-Monster::Monster(std::shared_ptr<Tile> startTile, Monster::MonsterType type, Monster::MonsterState state)
+Monster::Monster(Tile& startTile, Monster::MonsterType type, Monster::MonsterState state)
 {
   setCurrentTile(startTile);
   _monsterType = type;
@@ -14,11 +15,14 @@ Monster::~Monster()
 {
 }
 
-virtual void Monster::update() override
+void Monster::update()
 {
   if(_monsterState != Monster::MonsterState::Hunting)
   {
-    if(can_see_player(level()->player()))
+    Player* player = level().player();
+    if(!player)
+      return;
+    if(can_see_player(*player))
     {
       _monsterState = Monster::MonsterState::Hunting;
     }
@@ -31,6 +35,10 @@ virtual void Monster::update() override
   
 }
 
+bool Monster::can_see_player(const Player& player)
+{
+  return false; //TODO: fixme
+}
 
 Monster::MonsterType Monster::getMonsterType()
 {

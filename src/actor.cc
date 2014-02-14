@@ -13,20 +13,20 @@ Actor::~Actor()
 {
 }
 
-void Actor::setCurrentTile(std::shared_ptr<Tile> newTile)
+void Actor::setCurrentTile(Tile& newTile)
 {
   if(_currentTile)
     _currentTile->removeActor();
-  newTile->setActor(this);
-  _currentTile = newTile;
+  newTile.setActor(*this);
+  _currentTile = &newTile;
 }
 
-std::shared_ptr<Tile> Actor::getCurrentTile()
+Tile* Actor::getCurrentTile()
 {
   return _currentTile;
 }
 
-Level* Actor::level()
+Level& Actor::level()
 {
   return _currentTile->getLevel();
 }
@@ -34,44 +34,44 @@ Level* Actor::level()
 void Actor::moveLeft()
 {
   if(attemptMove(-1,0))
-    direction = World::Direction::WEST;
+    direction = Actor::Direction::WEST;
 }
 
 void Actor::moveRight()
 {
   if(attemptMove(1,0))
-    direction = World::Direction::EAST;
+    direction = Actor::Direction::EAST;
 }
 void Actor::moveUp()
 {
   if(attemptMove(0,-1))
-    direction = World::Direction::NORTH;
+    direction = Actor::Direction::NORTH;
 }
 void Actor::moveDown()
 {
   if(attemptMove(0,1))
-    direction = World::Direction::SOUTH;
+    direction = Actor::Direction::SOUTH;
 }
 
 int Actor::x()
 {
-  return _currentTile->getX();
+  return _currentTile->x();
 }
 
 int Actor::y()
 {
-  return _currentTile->getY();
+  return _currentTile->y();
 }
 
 bool Actor::can_see_actor(Actor& actor)
 {
   int visibility = 5;//TODO get this number from somewhere...
   
-  for(int y = y()-visibility; y < y() + visibility; ++y)
+  for(int y = this->y()-visibility; y < this->y() + visibility; ++y)
   {
-    for(int x = x() - visibility; x < x() + visibility; ++x)
+    for(int x = this->x() - visibility; x < this->x() + visibility; ++x)
     {
-      if(actor.x() == x && actor.y == y)
+      if(actor.x() == x && actor.y() == y)
         return true;
     }
   }
@@ -80,8 +80,8 @@ bool Actor::can_see_actor(Actor& actor)
 
 bool Actor::attemptMove(int xModifier, int yModifier)
 {
-  int currentX = _currentTile->getX();
-  int currentY = _currentTile->getY();
+  int currentX = _currentTile->x();
+  int currentY = _currentTile->y();
 
   int newX = currentX + xModifier;
   int newY = currentY + yModifier;
@@ -92,7 +92,7 @@ bool Actor::attemptMove(int xModifier, int yModifier)
 
   if(meleeAttack(newTile->getActor()))
   {
-    this->setCurrentTile(newTile);
+    this->setCurrentTile(*newTile);
     return true;
   }
   else
@@ -106,7 +106,8 @@ bool Actor::meleeAttack(Actor* other)
   if(!other)
     return true;
 
-  float toHit = getToHitChance();
+  float toHit = getToHitChance(*other);
+  SDL_Log("Hit chance %f", toHit);
 
   auto otherTile = other->getCurrentTile();
 
@@ -124,7 +125,7 @@ int Actor::attack_score()
   //TODO make this a calc
   return 100;
 }
-int defense_score()
+int Actor::defense_score()
 {
   //TODO make this a calc  
   return 100;
@@ -132,7 +133,8 @@ int defense_score()
 
 float Actor::getToHitChance(Actor& other)
 {
-  return static_cast<float>(attack_score()) / (attack_score() + other.defense_score());
+  int floatChance = static_cast<float>(attack_score()) / (attack_score() + other.defense_score());
+  return floatChance * 100;
 }
 
 void Actor::takeDamage(int amount)
@@ -147,7 +149,7 @@ bool Actor::dead() const
   return _health <= 0;
 }
 
-std::shared_ptr<Tile> Actor::checkCanMove(int newX, int newY)
+Tile* Actor::checkCanMove(int newX, int newY)
 {
   if(newX < 0)
     return nullptr;
@@ -157,7 +159,7 @@ std::shared_ptr<Tile> Actor::checkCanMove(int newX, int newY)
     return nullptr;
   if(newY >= Level::LEVEL_HEIGHT)
     return nullptr;
-  auto newTile = getCurrentLevel()->getTile(newX, newY);
+  auto newTile = level().getTile(newX, newY);
   if(newTile->getTileType() == Tile::TileType::Rock)
     return nullptr;
   return newTile;
@@ -168,10 +170,10 @@ void Actor::clearCommands()
   _commandQueue.clear();
 }
 
-Commands::CMD Actor::getCommandFromTiles(std::shared_ptr<Tile> start, std::shared_ptr<Tile> end)
+Commands::CMD Actor::getCommandFromTiles(Tile& start, Tile& end)
 {
-  int xDiff = end->getX() - start->getX();
-  int yDiff = end->getY() - start->getY();
+  int xDiff = end.x() - start.x();
+  int yDiff = end.y() - start.y();
 
   if(xDiff == -1)
     return Commands::CMD::CMD_MOVE_LEFT;

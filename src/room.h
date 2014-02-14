@@ -10,11 +10,11 @@ class Level;
 class Room
 {
 public:
-  Room (Level* level, int x, int y, int width, int height);
+  Room (Level& level, int x, int y, int width, int height);
   virtual ~Room ();
 
-  int getX();
-  int getY();
+  int x();
+  int y();
   int getHeight();
   int getWidth();
 
@@ -22,11 +22,12 @@ public:
   std::vector<Room*> getNeighbours();
 
   double distanceTo(Room* otherRoom);
-  bool containsTile(std::shared_ptr<Tile> tile);
-  std::shared_ptr<Tile> getRandomTile(bool avoidWalls = false);
+  bool containsTile(Tile* tile);
+  Tile* getRandomTile(bool avoidWalls = false);
 
 private:
-  Level* _level = nullptr
+  Level& _level;
+  int _x;
   int _y;
   int _width;
   int _height;

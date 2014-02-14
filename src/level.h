@@ -4,11 +4,9 @@
 #include <iostream>
 #include <array>
 #include <vector>
-#include "tile.h"
 #include "random.h"
+#include "tile.h"
 
-
-class LevelBuilder;
 class Player;
 class Monster;
 
@@ -20,34 +18,34 @@ class Level
 
     enum class LightType {Unseen, Unlit, Lit};
 
-    void update(Player* player);
+    void setType(int x, int y, Tile::TileType tileType);
+    void update(Player& player);
     void updateGraphics();
     Level::LightType getTileLightMap(int x, int y);
-    void setType(int x, int y, Tile::TileType tileType);
-    std::shared_ptr<Tile> getTile(int x, int y);
-    int getDepth();
-    std::shared_ptr<Tile> getTileOfType(Tile::TileType typeToLookFor);
-    std::shared_ptr<Tile> getRandomTileOfType(Tile::TileType typeToLookFor);
+    Tile* getTile(int x, int y);
+    Tile* getTileOfType(Tile::TileType typeToLookFor);
+    Tile* getRandomTileOfType(Tile::TileType typeToLookFor);
     std::vector<Monster*> getMonsters();
     void addMonster(Monster* monster);
     
     Player* player();
     void set_player(Player* player);
     
+    int getDepth();
 
     const static int LEVEL_WIDTH = 100;
     const static int LEVEL_HEIGHT = 100;
-    const static int LEVEL_ROOM_COUNT = 75;
-    const static int LEVEL_MONSTER_COUNT = 100;
+    const static int LEVEL_ROOM_COUNT = 150;
+    const static int LEVEL_MONSTER_COUNT = 75;
 
   private:
     int _depth; 
 
-    void updateLightMap(Player* player);
+    void updateLightMap(Player& player);
     void resetLightMap();
-    std::shared_ptr<Tile> getRandomTile();
+    Tile* getRandomTile();
     
-    std::array<std::array<std::shared_ptr<Tile>, LEVEL_WIDTH>, LEVEL_HEIGHT > _map;
+    std::array<std::array<Tile*, LEVEL_WIDTH>, LEVEL_HEIGHT > _map;
     std::array<std::array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_map;
 
     std::vector<Monster*> _monsters;

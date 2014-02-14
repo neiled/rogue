@@ -1,14 +1,13 @@
-#include "room.h"
 #include <cmath>
 #include <limits>
 #include <cstddef>
+#include "room.h"
 #include "tile.h"
 #include "level.h"
 #include "random.h"
 
-Room::Room(Level* level, int x, int y, int width, int height)
+Room::Room(Level& level, int x, int y, int width, int height) : _level(level)
 {
-  _level = level;
   _x = x;
   _y = y;
   _width = width;
@@ -19,12 +18,12 @@ Room::~Room()
 {
 }
 
-int Room::getX()
+int Room::x()
 {
   return _x;
 }
 
-int Room::getY()
+int Room::y()
 {
   return _y;
 }
@@ -49,24 +48,24 @@ std::vector<Room*> Room::getNeighbours()
   return _neighbours;
 }
 
-bool Room::containsTile(std::shared_ptr<Tile> tile)
+bool Room::containsTile(Tile* tile)
 {
   if(!tile)
     return false;
-  if(tile->getX() < _x)
+  if(tile->x() < _x)
     return false;
-  if(tile->getX() >= _x + _width)
+  if(tile->x() >= _x + _width)
     return false;
-  if(tile->getY() < _y)
+  if(tile->y() < _y)
     return false;
-  if(tile->getY() >= _y + _height)
+  if(tile->y() >= _y + _height)
     return false;
 
   return true;
   
 }
 
-std::shared_ptr<Tile> Room::getRandomTile(bool avoidWalls)
+Tile* Room::getRandomTile(bool avoidWalls)
 {
   int minX = avoidWalls ? 1 : 0;
   int maxX = avoidWalls ? _width-2 : _width-1;
@@ -76,11 +75,11 @@ std::shared_ptr<Tile> Room::getRandomTile(bool avoidWalls)
   int x = Random::Between(minX,maxX) + _x;
   int y = Random::Between(minY,maxY) + _y;
 
-  return _level->getTile(x, y);
+  return (_level.getTile(x, y));
 }
 
 
 double Room::distanceTo(Room* otherRoom)
 {
-  return sqrt((otherRoom->getX() - _x)*(otherRoom->getX() - _x) + (otherRoom->getY() - _y) * (otherRoom->getY() - _y));
+  return sqrt((otherRoom->x() - _x)*(otherRoom->x() - _x) + (otherRoom->y() - _y) * (otherRoom->y() - _y));
 }

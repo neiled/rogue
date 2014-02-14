@@ -1,13 +1,11 @@
 #ifndef MONSTER_H_
 #define MONSTER_H_
 
-class Level;
-class Tile;
 
 #include <deque>
-#include "commands.h"
-#include "world.h"
 #include "actor.h"
+
+class Tile;
 
 
 class Monster : public Actor
@@ -16,11 +14,11 @@ class Monster : public Actor
     enum class MonsterType {Orc};
     enum class MonsterState {Asleep, Awake, Hunting};
 
-    Monster(std::shared_ptr<Tile> startTile, Monster::MonsterType type, Monster::MonsterState state);
+    Monster(Tile& startTile, Monster::MonsterType type, Monster::MonsterState state);
     virtual ~Monster();
     void explore();
     
-    void update() overide;
+    virtual void update() override;
 
     Monster::MonsterType getMonsterType();
     
@@ -29,6 +27,8 @@ class Monster : public Actor
     Monster::MonsterType _monsterType;
     Monster::MonsterState _monsterState;
 
-    void die() override;
+    bool can_see_player(const Player& player);
+
+    virtual void die() override;
 };
 #endif

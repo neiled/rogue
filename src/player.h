@@ -1,14 +1,9 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
-class Level;
-class Tile;
 
 #include <deque>
-#include "commands.h"
-#include "world.h"
 #include "actor.h"
-
 
 class Player : public Actor
 {
@@ -16,8 +11,9 @@ class Player : public Actor
     Player();
     virtual ~Player();
     void explore();
+    virtual void update() override;
     
   private:
-    void die() override;
+    virtual void die() override;
 };
 #endif

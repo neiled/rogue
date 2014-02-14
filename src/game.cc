@@ -16,11 +16,15 @@ Game::~Game() {
 
 void Game::eventLoop()
 {
+  SDL_Log("Creating Graphics");
   Graphics graphics;
   SDL_Event event;
+  SDL_Log("Creating world");
   World world;
-  Player* player = world.getPlayer();
+  Player& player = world.getPlayer();
+  SDL_Log("Creating renderer");
   Renderer renderer(&graphics);
+  SDL_Log("Done renderer");
   CommandProcessor cProc;
   int last_update_time = SDL_GetTicks();
 
@@ -38,17 +42,17 @@ void Game::eventLoop()
           if(event.key.keysym.sym == SDLK_ESCAPE)
             running = false;
           else if(event.key.keysym.sym == SDLK_UP)
-            player->pushCommand(Commands::CMD::CMD_MOVE_UP);
+            player.pushCommand(Commands::CMD::CMD_MOVE_UP);
           else if(event.key.keysym.sym == SDLK_DOWN)
-            player->pushCommand(Commands::CMD::CMD_MOVE_DOWN);
+            player.pushCommand(Commands::CMD::CMD_MOVE_DOWN);
           else if(event.key.keysym.sym == SDLK_LEFT)
-            player->pushCommand(Commands::CMD::CMD_MOVE_LEFT);
+            player.pushCommand(Commands::CMD::CMD_MOVE_LEFT);
           else if(event.key.keysym.sym == SDLK_RIGHT)
-            player->pushCommand(Commands::CMD::CMD_MOVE_RIGHT);
+            player.pushCommand(Commands::CMD::CMD_MOVE_RIGHT);
           else if(event.key.keysym.sym == SDLK_o)
-            player->pushCommand(Commands::CMD::CMD_EXPLORE);
+            player.pushCommand(Commands::CMD::CMD_EXPLORE);
           else if(event.key.keysym.sym == SDLK_p)
-            player->clearCommands();
+            player.clearCommands();
           break;
         default:
           break;
@@ -56,9 +60,9 @@ void Game::eventLoop()
 
     }
 
-    if(world.getPlayer()->hasCommands())
+    if(player.hasCommands())
     {
-      cProc.Process(world.getPlayer()->popCommand(), &world);
+      cProc.Process(player.popCommand(), &world);
       update(&world);
 
     }

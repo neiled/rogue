@@ -11,14 +11,14 @@ Level::Level(int depth)
   {
     for (int x = 0; x < LEVEL_WIDTH; ++x)
     {
-      auto t = std::make_shared<Tile>(Tile::TileType::Rock, this, x, y);
+      auto t = new Tile(Tile::TileType::Rock, *this, x, y);
       _map[y][x] = t;
       _light_map[y][x] = Level::LightType::Unseen;
     }
   }
 }
 
-void Level::update(Player* player)
+void Level::update(Player& player)
 {
   updateLightMap(player);
   _monsters.erase( std::remove_if(_monsters.begin(), _monsters.end(), [](const Monster* m) {return m->dead();}), _monsters.end() );
@@ -37,15 +37,15 @@ Player* Level::player()
   return _player;
 }
 
-void set_player(Player* player)
+void Level::set_player(Player* player)
 {
   _player = player;
 }
 
-void Level::updateLightMap(Player* player)
+void Level::updateLightMap(Player& player)
 {
   ShadowCasting caster;
-  std::vector<std::vector<float>> newLightMap = caster.calculateFOV(_map, player->getX(), player->getY(), 100.0f);
+  std::vector<std::vector<float>> newLightMap = caster.calculateFOV(_map, player.x(), player.y(), 100.0f);
 
    
   resetLightMap();
@@ -86,7 +86,7 @@ int Level::getDepth()
   return _depth;
 }
 
-std::shared_ptr<Tile> Level::getTileOfType(Tile::TileType typeToLookFor)
+Tile* Level::getTileOfType(Tile::TileType typeToLookFor)
 {
   for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
   {
@@ -96,21 +96,17 @@ std::shared_ptr<Tile> Level::getTileOfType(Tile::TileType typeToLookFor)
         return _map[y][x];
     }
   }
-  SDL_Log("Uh oh...");
   return nullptr;
 }
 
-std::shared_ptr<Tile> Level::getRandomTileOfType(Tile::TileType typeToLookFor)
+Tile* Level::getRandomTileOfType(Tile::TileType typeToLookFor)
 {
-  std::shared_ptr<Tile> chosenTile = nullptr;
   do
   {
     auto testTile = getRandomTile();
     if(testTile->getTileType() == typeToLookFor)
-      chosenTile = testTile;
-  }while(!chosenTile);
-  //SDL_Log("Found the tile at %d,%d", chosenTile->getX(), chosenTile->getY());
-  return chosenTile;
+      return testTile;
+  }while(true);
 }
 
 void Level::setType(int x, int y, Tile::TileType tileType)
@@ -118,7 +114,7 @@ void Level::setType(int x, int y, Tile::TileType tileType)
   _map[y][x]->setTileType(tileType);
 }
 
-std::shared_ptr<Tile> Level::getTile(int x, int y)
+Tile* Level::getTile(int x, int y)
 {
   if(x >= Level::LEVEL_WIDTH)
     return nullptr;
@@ -141,12 +137,14 @@ void Level::addMonster(Monster* monster)
   _monsters.push_back(monster);
 }
 
-std::shared_ptr<Tile> Level::getRandomTile()
+Tile* Level::getRandomTile()
 {
   int x = Random::Between(0, Level::LEVEL_WIDTH-1);
   int y = Random::Between(0, Level::LEVEL_HEIGHT-1);
 
-  return getTile(x,y);
+  Tile* foundTile = getTile(x,y);
+
+  return foundTile;
 }
 
 Level::~Level()

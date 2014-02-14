@@ -12,13 +12,12 @@ ShadowCasting::~ShadowCasting()
 {
 }
 
-std::vector<std::vector<float>>  ShadowCasting::calculateFOV(std::array<std::array<std::shared_ptr<Tile>, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > resistanceMap, int startx, int starty, float radius) {
+std::vector<std::vector<float>>  ShadowCasting::calculateFOV(resistance_map_t resistanceMap, int startx, int starty, float radius) {
   return calculateFOV(resistanceMap, startx, starty, 1.0, 1.0 /radius);
 }
-std::vector<std::vector<float>>  ShadowCasting::calculateFOV(std::array<std::array<std::shared_ptr<Tile>, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > resistanceMap, int startx, int starty, float force, float decay) {
+std::vector<std::vector<float>>  ShadowCasting::calculateFOV(resistance_map_t resistanceMap, int startx, int starty, float force, float decay) {
     _startx = startx;
     _starty = starty;
-    _resistanceMap = resistanceMap;
  
     _width = resistanceMap.size();
     _height = resistanceMap[0].size();
@@ -41,8 +40,8 @@ std::vector<std::vector<float>>  ShadowCasting::calculateFOV(std::array<std::arr
       for (int j = -1; j < 2; j+=2)
       {
         
-        castLight(1, 1.0f, 0.0f, 0, i, j, 0);
-        castLight(1, 1.0f, 0.0f, i, 0, 0, j);
+        castLight(1, 1.0f, 0.0f, 0, i, j, 0, resistanceMap);
+        castLight(1, 1.0f, 0.0f, i, 0, 0, j, resistanceMap);
       }
       
     }
@@ -56,7 +55,7 @@ float ShadowCasting::radius(float dx, float dy)
   return sqrt(dx*dx+dy*dy);
 }
  
-void ShadowCasting::castLight(int row, float start, float end, int xx, int xy, int yx, int yy) {
+void ShadowCasting::castLight(int row, float start, float end, int xx, int xy, int yx, int yy, resistance_map_t resistance_map) {
     float newStart = 0.0f;
     if (start < end) {
         return;
@@ -85,7 +84,7 @@ void ShadowCasting::castLight(int row, float start, float end, int xx, int xy, i
             }
  
             if (blocked) { //previous cell was a blocking one
-                if (blockingCell(_resistanceMap[currentY][currentX])) {//hit a wall
+                if (blockingCell(resistance_map[currentY][currentX])) {//hit a wall
                     newStart = rightSlope;
                     continue;
                 } else {
@@ -93,16 +92,16 @@ void ShadowCasting::castLight(int row, float start, float end, int xx, int xy, i
                     start = newStart;
                 }
             } else {
-                if (blockingCell(_resistanceMap[currentY][currentX]) && distance < _radius) {//hit a wall within sight line
+                if (blockingCell(resistance_map[currentY][currentX]) && distance < _radius) {//hit a wall within sight line
                     blocked = true;
-                    castLight(distance + 1, start, leftSlope, xx, xy, yx, yy);
+                    castLight(distance + 1, start, leftSlope, xx, xy, yx, yy, resistance_map);
                     newStart = rightSlope;
                 }
             }
         }
     }
 }
-bool ShadowCasting::blockingCell(std::shared_ptr<Tile> tile)
+bool ShadowCasting::blockingCell(Tile* tile)
 {
   if(tile->getTileType() == Tile::TileType::Rock)
     return true;

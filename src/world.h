@@ -2,10 +2,10 @@
 #define WORLD_H_
 
 #include <vector>
+#include "player.h"
+#include "levelbuilder.h"
 
 class Level;
-class LevelBuilder;
-class Player;
 
 class World
 {
@@ -14,16 +14,15 @@ public:
   virtual ~World ();
   void update();
   void updateGraphics();
-  Level* getCurrentLevel();
-  Player* getPlayer();
+  Level& getCurrentLevel();
+  Player& getPlayer();
 
-  enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
 
 private:
   void checkMoveLevel();
   Level* getLevel(int depth);
   
-  Player* _player = nullptr;  
+  Player _player;
   std::vector<Level*> _levels;
   LevelBuilder _builder;  
 };

@@ -3,20 +3,21 @@
 #include "level.h"
 #include "player.h"
 #include "tile.h"
+#include <SDL2/SDL.h>
 
 World::World()
 {
-  _player = new Player();
+  SDL_Log("Creating first level");
   Level* firstLevel = new Level(0);
-  //_builder = new LevelBuilder();
-  _builder.buildLevel(firstLevel, _player);
+  SDL_Log("Building first level");
+  _builder.buildLevel(*firstLevel, _player);
+  SDL_Log("Done.");
   _levels.push_back(firstLevel);
 }
 
 
 World::~World()
 {
-  delete _player;
 }
 
 void World::updateGraphics()
@@ -25,42 +26,46 @@ void World::updateGraphics()
 
 void World::update()
 {
-  _player->getCurrentLevel()->update(_player);
+  _player.level().update(_player);
   checkMoveLevel();
 }
 
-Player* World::getPlayer()
+Player& World::getPlayer()
 {
   return _player;
 }
 
-Level* World::getCurrentLevel()
+Level& World::getCurrentLevel()
 {
-  return _player->getCurrentLevel();
+  return _player.level();
 }
 
 void World::checkMoveLevel()
 {
-  if(_player->getCurrentTile()->getTileType() == Tile::TileType::StairsDown)
+  if(_player.getCurrentTile()->getTileType() == Tile::TileType::StairsDown)
   {
-    int currentDepth = _player->level()->getDepth();
-    Level* currentLevel = _player->level();
-    currentLevel->set_player(nullptr);
-    Level* nextLevel = getLevel(currentDepth+1);
-    nextLevel->set_player(_player);
-    _player->setCurrentTile(nextLevel->getTileOfType(Tile::TileType::StairsUp));
+    int currentDepth = _player.level().getDepth();
+    Level& currentLevel = _player.level();
+    currentLevel.set_player(nullptr);
+    auto nextLevel = getLevel(currentDepth+1);
+    nextLevel->set_player(&_player);
+    auto tileUp = nextLevel->getTileOfType(Tile::TileType::StairsUp);
+    if(tileUp)
+      _player.setCurrentTile(*tileUp);
   }
-  else if(_player->getCurrentTile()->getTileType() == Tile::TileType::StairsUp)
+  else if(_player.getCurrentTile()->getTileType() == Tile::TileType::StairsUp)
   {
-    int currentDepth = _player->getCurrentLevel()->getDepth();
+    int currentDepth = _player.level().getDepth();
     if(currentDepth > 0)
     {
-      Level* currentLevel = _player->level();
-      currentLevel->set_player(nullptr);      
+      Level& currentLevel = _player.level();
+      currentLevel.set_player(nullptr);      
       
-      Level* nextLevel = getLevel(currentDepth-1);
-      nextLevel->set_player(_player);      
-      _player->setCurrentTile(nextLevel->getTileOfType(Tile::TileType::StairsDown));
+      auto nextLevel = getLevel(currentDepth-1);
+      nextLevel->set_player(&_player);      
+      auto tileDown = nextLevel->getTileOfType(Tile::TileType::StairsDown);
+      if(tileDown)
+        _player.setCurrentTile(*tileDown);
     }
   }
 }
@@ -69,8 +74,8 @@ Level* World::getLevel(int depth)
 {
     if(_levels.size() < depth + 1)
     {
-      Level* newLevel = new Level(depth);
-      _builder->buildLevel(newLevel, _player);
+      auto newLevel = new Level(depth);
+      _builder.buildLevel(*newLevel, _player);
       _levels.push_back(newLevel);
     }
 

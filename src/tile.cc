@@ -3,15 +3,9 @@
 #include "actor.h"
 #include <SDL2/SDL.h>
 
-Tile::Tile()
-{
-  _tileType = TileType::Rock;
-}
-
-Tile::Tile(TileType tileType, Level* level, int x, int y)
+Tile::Tile(TileType tileType, Level& level, int x, int y) :_level(level)
 {
   _tileType = tileType;
-  _level = level;
   _x = x;
   _y = y;
 }
@@ -21,9 +15,9 @@ Tile::~Tile()
   SDL_Log("I'm being deleted! %d,%d", _x, _y);
 }
 
-void Tile::setActor(Actor* actor)
+void Tile::setActor(Actor& actor)
 {
-  _actor = actor;
+  _actor = &actor;
 }
 
 void Tile::removeActor()
@@ -46,22 +40,23 @@ Tile::TileType Tile::getTileType()
   return _tileType;
 }
 
-Level* Tile::getLevel()
+Level& Tile::getLevel()
 {
   return _level;
 }
 
-int Tile::getX()
+int Tile::x() const
 {
   return _x;
 }
 
-int Tile::getY()
+
+int Tile::y() const
 {
   return _y;
 }
 
-double Tile::distanceTo(std::shared_ptr<Tile> otherRoom)
+double Tile::distanceTo(const Tile otherTile)
 {
-  return sqrt((otherRoom->getX() - _x)*(otherRoom->getX() - _x) + (otherRoom->getY() - _y) * (otherRoom->getY() - _y));
+  return sqrt((otherTile.x() - _x)*(otherTile.x() - _x) + (otherTile.y() - _y) * (otherTile.y() - _y));
 }
