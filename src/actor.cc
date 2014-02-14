@@ -112,7 +112,7 @@ bool Actor::meleeAttack(Actor* other)
   auto otherTile = other->getCurrentTile();
 
   SDL_Log("I'm attacking at %d,%d", otherTile->x(), otherTile->y());
-  SDL_Log("The monster there thinks they're at %d,%d", other->x(), other-y());
+  SDL_Log("The monster there thinks they're at %d,%d", other->x(), other->y());
 
   if(Random::CheckChance(toHit))
   {
