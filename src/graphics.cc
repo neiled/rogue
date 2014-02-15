@@ -26,12 +26,17 @@ void Graphics::clearScreen()
 
 int Graphics::getScreenWidth()
 {
-  return 800;
+  return 1024;
 }
 
 int Graphics::getScreenHeight()
 {
-  return 600;
+  return 768;
+}
+
+SDL_Window* Graphics::window()
+{
+  return _window;
 }
 
 SDL_Texture* Graphics::loadTexture( std::string path )

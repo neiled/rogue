@@ -15,9 +15,29 @@ Renderer::Renderer(Graphics* graphics)
   loadMonsterTiles();
 
   _player = new DirectionalSprite(_graphics, "../content/player.png", 0, 0, TILE_WIDTH, TILE_HEIGHT);
-  
-  _cameraRect.w= graphics->getScreenWidth();
-  _cameraRect.h= graphics->getScreenHeight();
+
+  int screen_h = graphics->getScreenHeight();
+  int screen_w = graphics->getScreenWidth();
+  SDL_Log("Screen h:%d, w:%d", screen_h, screen_w);
+
+
+  _vp_main.w = 800;
+  _vp_main.h = 668;
+  _vp_main.x = 0;
+  _vp_main.y = 100;
+
+  _vp_info.w = screen_w - _vp_main.w;
+  _vp_info.h = screen_h;
+  _vp_info.x = screen_w - _vp_info.w;//_vp_main.x + _vp_main.w;
+  _vp_info.y = 0;//screen_h;
+
+  _vp_msg.h = 100;
+  _vp_msg.w = screen_w - _vp_info.w;
+  _vp_msg.x = 0;
+  _vp_msg.y = 0;//screen_h - _vp_main.h;
+
+  _cameraRect.w= _vp_main.w;
+  _cameraRect.h= _vp_main.h;
   _cameraRect.x = 0;
   _cameraRect.y = 0;
 }
@@ -65,8 +85,10 @@ void Renderer::updateCamera(Player& player)
 
 void Renderer::render(Level& level)
 {
+  SDL_RenderSetViewport(_graphics->Renderer, &_vp_main);
   renderLevel(level);
   renderMonsters(level);
+  SDL_RenderSetViewport(_graphics->Renderer, NULL);
 }
 
 void Renderer::renderMonsters(Level& level)
@@ -108,6 +130,21 @@ void Renderer::render(Player& player)
   auto currentTile = player.getCurrentTile();
   _player->update(player.direction);
   drawSprite(_player, *currentTile);
+}
+
+void Renderer::render_info()
+{
+  SDL_RenderSetViewport(_graphics->Renderer, &_vp_info);
+  auto vp_t = _graphics->loadTexture("../content/vp_info.png");
+  SDL_RenderCopy(_graphics->Renderer, vp_t, NULL, NULL);
+
+}
+
+void Renderer::render_messages()
+{
+  SDL_RenderSetViewport(_graphics->Renderer, &_vp_msg);
+  auto vp_t = _graphics->loadTexture("../content/vp_msg.png");
+  SDL_RenderCopy(_graphics->Renderer, vp_t, NULL, NULL);
 }
 
 void Renderer::drawSprite(Sprite* sprite, Tile& tile)

@@ -11,7 +11,7 @@ Monster::Monster(Tile& startTile, Monster::MonsterType type, Monster::MonsterSta
   setCurrentTile(startTile);
   _monsterType = type;
   _monsterState = state;
-  _health = 100;
+  _health = 10;
 }
 
 Monster::~Monster()

@@ -26,6 +26,8 @@ class Renderer {
   
     void render(Level& level);
     void render(Player& player);
+    void render_info();
+    void render_messages();
     void update(World* world, int elapsed_time_in_ms);
 
     const static int TILE_WIDTH = 32;
@@ -36,6 +38,10 @@ class Renderer {
     array<DirectionalSprite*, 1> _monsters;
     DirectionalSprite* _player = nullptr;
     Graphics* _graphics = nullptr;
+
+    SDL_Rect _vp_main;
+    SDL_Rect _vp_msg;
+    SDL_Rect _vp_info;
 
     void updateCamera(Player& player);
     void loadMapTiles();

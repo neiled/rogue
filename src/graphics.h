@@ -19,6 +19,7 @@ class Graphics
     void clearScreen();
     int getScreenWidth();
     int getScreenHeight();
+    SDL_Window* window();
 
   private:
     SDL_Window* _window;
