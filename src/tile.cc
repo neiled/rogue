@@ -12,7 +12,6 @@ Tile::Tile(TileType tileType, Level& level, int x, int y) :_level(level)
 
 Tile::~Tile()
 {
-  SDL_Log("I'm being deleted! %d,%d", _x, _y);
 }
 
 void Tile::setActor(Actor& actor)

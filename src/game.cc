@@ -1,6 +1,7 @@
 #include "game.h"
 #include "graphics.h"
 #include "world.h"
+#include "actor.h"
 #include "player.h"
 #include "renderer.h"
 
@@ -62,9 +63,8 @@ void Game::eventLoop()
 
     if(player.hasCommands())
     {
-      cProc.Process(player.popCommand(), &world);
+      cProc.Process(player.popCommand(), player);
       update(&world);
-
     }
 
     int current_time = SDL_GetTicks();

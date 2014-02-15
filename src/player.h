@@ -10,7 +10,6 @@ class Player : public Actor
   public:
     Player();
     virtual ~Player();
-    void explore();
     virtual void update() override;
     
   private:

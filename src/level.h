@@ -43,6 +43,7 @@ class Level
 
     void updateLightMap(Player& player);
     void resetLightMap();
+    void update_monsters(Player& player);
     Tile* getRandomTile();
     
     std::array<std::array<Tile*, LEVEL_WIDTH>, LEVEL_HEIGHT > _map;

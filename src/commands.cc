@@ -1,6 +1,6 @@
 #include "commands.h"
 #include "world.h"
-#include "player.h"
+#include "actor.h"
 
 CommandProcessor::CommandProcessor()
 {
@@ -10,25 +10,24 @@ CommandProcessor::~CommandProcessor()
 {
 }
 
-void CommandProcessor::Process(Commands::CMD command, World* world)
+void CommandProcessor::Process(Commands::CMD command, Actor& actor)
 {
-  Player& player = world->getPlayer();
   switch(command)
   {
     case Commands::CMD::CMD_MOVE_UP:
-      player.moveUp();
+      actor.moveUp();
       break;
     case Commands::CMD::CMD_MOVE_DOWN:
-      player.moveDown();
+      actor.moveDown();
       break;
     case Commands::CMD::CMD_MOVE_LEFT:
-      player.moveLeft();
+      actor.moveLeft();
       break;
     case Commands::CMD::CMD_MOVE_RIGHT:
-      player.moveRight();
+      actor.moveRight();
       break;
     case Commands::CMD::CMD_EXPLORE:
-      player.explore();
+      actor.explore();
       break;
     default:
       break;

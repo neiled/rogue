@@ -22,14 +22,18 @@ void Level::update(Player& player)
 {
   updateLightMap(player);
   _monsters.erase( std::remove_if(_monsters.begin(), _monsters.end(), [](const Monster* m) {return m->dead();}), _monsters.end() );
+  update_monsters(player);
+}
 
-  //for(Monster* m : _monsters)
-  //{
-    //if(m->dead())
-    //{
-      //delete m;
-    //}
-  //}
+void Level::update_monsters(Player& player)
+{
+  CommandProcessor cProc;
+  for(auto m : _monsters)
+  {
+    m->update();
+    if(m->hasCommands())
+      cProc.Process(m->popCommand(), *m);
+  }
 }
 
 Player* Level::player()

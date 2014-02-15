@@ -21,7 +21,7 @@ void Actor::setCurrentTile(Tile& newTile)
   _currentTile = &newTile;
 }
 
-Tile* Actor::getCurrentTile()
+Tile* Actor::getCurrentTile() const
 {
   return _currentTile;
 }
@@ -33,24 +33,24 @@ Level& Actor::level()
 
 void Actor::moveLeft()
 {
-  if(attemptMove(-1,0))
-    direction = Actor::Direction::WEST;
+  direction = Actor::Direction::WEST;
+  attemptMove(-1,0);
 }
 
 void Actor::moveRight()
 {
-  if(attemptMove(1,0))
-    direction = Actor::Direction::EAST;
+  direction = Actor::Direction::EAST;
+  attemptMove(1,0);
 }
 void Actor::moveUp()
 {
-  if(attemptMove(0,-1))
-    direction = Actor::Direction::NORTH;
+  direction = Actor::Direction::NORTH;
+  attemptMove(0,-1);
 }
 void Actor::moveDown()
 {
-  if(attemptMove(0,1))
-    direction = Actor::Direction::SOUTH;
+  direction = Actor::Direction::SOUTH;
+  attemptMove(0,1);
 }
 
 int Actor::x()
@@ -90,25 +90,46 @@ bool Actor::attemptMove(int xModifier, int yModifier)
   if(!newTile)
     return false;
 
-  if(meleeAttack(newTile->getActor()))
+  auto otherActor = newTile->getActor();
+
+  if(otherActor)
+  {
+    meleeAttack(otherActor);
+    if(otherActor->dead() == false)
+      otherActor->meleeAttack(this);
+    return false;
+  }
+  else
   {
     this->setCurrentTile(*newTile);
     return true;
   }
-  else
-    newTile->getActor()->meleeAttack(this);
-
-  return false;
 }
 
-bool Actor::meleeAttack(Actor* other)
+void Actor::explore()
+{
+  if(_travelPath.empty())
+  {
+    AStar searcher;
+    _travelPath = searcher.explore(*_currentTile, _currentTile->getLevel());
+    if(_travelPath.empty())
+    {
+      _targetTile = nullptr;
+      return; //no way to get to this square
+    }
+  }
+  Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
+  _travelPath.pop_front();
+  _commandQueue.push_front(Commands::CMD::CMD_EXPLORE);
+  _commandQueue.push_front(dirCommand);
+}
+
+void Actor::meleeAttack(Actor* other)
 {
   if(!other)
-    return true;
+    return;
 
   float toHit = getToHitChance(*other);
-
-  auto otherTile = other->getCurrentTile();
 
   if(Random::CheckChance(toHit))
   {
@@ -116,7 +137,10 @@ bool Actor::meleeAttack(Actor* other)
     other->takeDamage(damage);
   }
 
-  return false;
+  SDL_Log("My health: %d", _health);
+  SDL_Log("Their health: %d", other->_health);
+
+  return;
 }
 
 int Actor::attack_score()
@@ -201,5 +225,6 @@ Commands::CMD Actor::popCommand()
 
 bool Actor::hasCommands() const
 {
+
   return _commandQueue.empty() == false;
 }

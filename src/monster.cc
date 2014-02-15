@@ -1,6 +1,8 @@
 #include "level.h"
 #include "monster.h"
 #include "tile.h"
+#include "player.h"
+#include "a_star.h"
 #include <SDL2/SDL.h>
 
 Monster::Monster(Tile& startTile, Monster::MonsterType type, Monster::MonsterState state)
@@ -18,12 +20,20 @@ Monster::~Monster()
 
 void Monster::update()
 {
+  //SDL_Log("Monster::update");
+  if(dead())
+    return;
+  //SDL_Log("not dead");
+  Player* player = level().player();
+  //SDL_Log("got player");
   if(_monsterState != Monster::MonsterState::Hunting)
   {
-    Player* player = level().player();
+    //SDL_Log("not hunting");
     if(!player)
+    {
       return;
-    if(can_see_player(*player))
+    }
+    if(can_see_actor(*player))
     {
       _monsterState = Monster::MonsterState::Hunting;
     }
@@ -31,15 +41,18 @@ void Monster::update()
   
   if(_monsterState == Monster::MonsterState::Hunting)
   {
-    //TODO: Move towards player
+    _travelPath.clear();
+    AStar searcher;
+    _travelPath = searcher.plotPath(*_currentTile, *player->getCurrentTile());
+    if(_travelPath.empty() == false)
+    {
+      Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
+      _commandQueue.push_front(dirCommand);
+    }
   }
   
 }
 
-bool Monster::can_see_player(const Player& player)
-{
-  return false; //TODO: fixme
-}
 
 Monster::MonsterType Monster::getMonsterType()
 {
@@ -48,7 +61,7 @@ Monster::MonsterType Monster::getMonsterType()
 
 void Monster::die()
 {
+  _commandQueue.clear();
   _currentTile->removeActor();
-  //TODO: Free up memory this monster used....
 }
 

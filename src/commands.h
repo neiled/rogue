@@ -1,6 +1,7 @@
 #ifndef COMMANDS_H
 #define COMMANDS_H 
 
+class Actor;
 class World;
 
 struct Commands
@@ -23,7 +24,7 @@ class CommandProcessor
 public:
   CommandProcessor ();
   virtual ~CommandProcessor ();
-  void Process(Commands::CMD command, World* world);
+  void Process(Commands::CMD command, Actor& actor);
 
 private:
   

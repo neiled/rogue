@@ -9,6 +9,7 @@ World::World()
 {
   SDL_Log("Creating first level");
   Level* firstLevel = new Level(0);
+  firstLevel->set_player(&_player);
   SDL_Log("Building first level");
   _builder.buildLevel(*firstLevel, _player);
   SDL_Log("Done.");

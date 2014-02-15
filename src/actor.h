@@ -22,7 +22,7 @@ class Actor
     
     Level& level();
     void setCurrentTile(Tile& currentTile);
-    Tile* getCurrentTile();
+    Tile* getCurrentTile() const;
     
     int x();
     int y();
@@ -30,6 +30,7 @@ class Actor
     void moveRight();
     void moveUp();
     void moveDown();
+    void explore();
     
     bool can_see_actor(Actor& actor);
     
@@ -57,7 +58,7 @@ class Actor
     
     bool attemptMove(int newX, int newY);
     Tile* checkCanMove(int newX, int newY);
-    bool meleeAttack(Actor* other);
+    void meleeAttack(Actor* other);
     float getToHitChance(Actor& other);
     virtual void die() = 0;
 
