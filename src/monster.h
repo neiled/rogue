@@ -24,11 +24,13 @@ class Monster : public Actor
     
     
   private:
-    Monster::MonsterType _monsterType;
+    Monster::MonsterType _monster_type;
     Monster::MonsterState _monsterState;
 
     bool can_see_player(const Player& player);
 
+    void hunt(Player& player);
+    Item* generate_corpse();
     virtual void die() override;
 };
 #endif

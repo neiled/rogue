@@ -22,7 +22,7 @@ class Actor
     
     Level& level();
     void setCurrentTile(Tile& currentTile);
-    Tile* getCurrentTile() const;
+    Tile* tile() const;
     
     int x();
     int y();

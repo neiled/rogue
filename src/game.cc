@@ -22,7 +22,7 @@ void Game::eventLoop()
   SDL_Event event;
   SDL_Log("Creating world");
   World world;
-  Player& player = world.getPlayer();
+  Player& player = world.player();
   SDL_Log("Creating renderer");
   Renderer renderer(&graphics);
   SDL_Log("Done renderer");
@@ -103,7 +103,7 @@ void Game::draw(Graphics* graphics, Renderer* renderer, World* world)
 {
   graphics->clearScreen();
   renderer->render(world->getCurrentLevel());
-  renderer->render(world->getPlayer());
+  renderer->render(world->player());
   renderer->render_info();
   renderer->render_messages();
   graphics->render();

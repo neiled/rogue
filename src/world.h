@@ -15,7 +15,7 @@ public:
   void update();
   void updateGraphics();
   Level& getCurrentLevel();
-  Player& getPlayer();
+  Player& player();
 
 
 private:

@@ -49,7 +49,7 @@ void LevelBuilder::generateMonsters(Level& level)
   for (int i = 0; i < Level::LEVEL_MONSTER_COUNT;)
   {
     auto randomTile = level.getRandomTileOfType(Tile::TileType::Floor);
-    if(!randomTile->getActor())
+    if(!randomTile->actor())
     {
       Monster* monster = new Monster(*randomTile, Monster::MonsterType::Orc, Monster::MonsterState::Awake);
       level.addMonster(monster);
@@ -76,32 +76,32 @@ bool LevelBuilder::doorFits(int x, int y, Level& level)
   if(x <= 0 || y <= 0)
     return false;
   auto currentTile = level.getTile(x, y);
-  if(currentTile->getTileType() != Tile::TileType::Floor)
+  if(currentTile->tile_type() != Tile::TileType::Floor)
     return false;
-  if(level.getTile(x,y-1)->getTileType() == Tile::TileType::Floor)
+  if(level.getTile(x,y-1)->tile_type() == Tile::TileType::Floor)
   {
-    if(level.getTile(x-1,y)->getTileType() != Tile::TileType::Rock)
+    if(level.getTile(x-1,y)->tile_type() != Tile::TileType::Rock)
       return false;
-    if(level.getTile(x+1,y)->getTileType() != Tile::TileType::Rock)
+    if(level.getTile(x+1,y)->tile_type() != Tile::TileType::Rock)
       return false;
-    if(level.getTile(x-1,y-1)->getTileType() != level.getTile(x+1,y-1)->getTileType())
+    if(level.getTile(x-1,y-1)->tile_type() != level.getTile(x+1,y-1)->tile_type())
       return false;
-    if(level.getTile(x,y+1)->getTileType() != Tile::TileType::Floor)
+    if(level.getTile(x,y+1)->tile_type() != Tile::TileType::Floor)
       return false;
-    if(level.getTile(x-1,y+1)->getTileType() != level.getTile(x+1,y+1)->getTileType())
+    if(level.getTile(x-1,y+1)->tile_type() != level.getTile(x+1,y+1)->tile_type())
       return false;
     return true;
   }
-  else if(level.getTile(x-1, y)->getTileType() == Tile::TileType::Floor &&
-      level.getTile(x+1, y)->getTileType() == Tile::TileType::Floor)
+  else if(level.getTile(x-1, y)->tile_type() == Tile::TileType::Floor &&
+      level.getTile(x+1, y)->tile_type() == Tile::TileType::Floor)
   {
-    if(level.getTile(x, y-1)->getTileType() != Tile::TileType::Rock)
+    if(level.getTile(x, y-1)->tile_type() != Tile::TileType::Rock)
       return false;
-    if(level.getTile(x, y+1)->getTileType() != Tile::TileType::Rock)
+    if(level.getTile(x, y+1)->tile_type() != Tile::TileType::Rock)
       return false;
-    if(level.getTile(x-1,y-1)->getTileType() != level.getTile(x-1,y+1)->getTileType())
+    if(level.getTile(x-1,y-1)->tile_type() != level.getTile(x-1,y+1)->tile_type())
       return false;
-    if(level.getTile(x+1,y-1)->getTileType() != level.getTile(x+1,y+1)->getTileType())
+    if(level.getTile(x+1,y-1)->tile_type() != level.getTile(x+1,y+1)->tile_type())
       return false;
     return true;
   }
@@ -323,7 +323,7 @@ bool LevelBuilder::roomFits(Room* room, Level& level)
       if(y >= Level::LEVEL_HEIGHT-1)
         return false;
 
-      if(level.getTile(x, y)->getTileType() == Tile::TileType::Floor)
+      if(level.getTile(x, y)->tile_type() == Tile::TileType::Floor)
         return false;
     }
   }

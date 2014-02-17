@@ -96,7 +96,7 @@ Tile* Level::getTileOfType(Tile::TileType typeToLookFor)
   {
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
-      if(_map[y][x]->getTileType() == typeToLookFor)
+      if(_map[y][x]->tile_type() == typeToLookFor)
         return _map[y][x];
     }
   }
@@ -108,7 +108,7 @@ Tile* Level::getRandomTileOfType(Tile::TileType typeToLookFor)
   do
   {
     auto testTile = getRandomTile();
-    if(testTile->getTileType() == typeToLookFor)
+    if(testTile->tile_type() == typeToLookFor)
       return testTile;
   }while(true);
 }

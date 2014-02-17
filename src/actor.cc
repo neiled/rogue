@@ -21,14 +21,14 @@ void Actor::setCurrentTile(Tile& newTile)
   _currentTile = &newTile;
 }
 
-Tile* Actor::getCurrentTile() const
+Tile* Actor::tile() const
 {
   return _currentTile;
 }
 
 Level& Actor::level()
 {
-  return _currentTile->getLevel();
+  return _currentTile->level();
 }
 
 void Actor::moveLeft()
@@ -90,7 +90,7 @@ bool Actor::attemptMove(int xModifier, int yModifier)
   if(!newTile)
     return false;
 
-  auto otherActor = newTile->getActor();
+  auto otherActor = newTile->actor();
 
   if(otherActor)
   {
@@ -111,7 +111,7 @@ void Actor::explore()
   if(_travelPath.empty())
   {
     AStar searcher;
-    _travelPath = searcher.explore(*_currentTile, _currentTile->getLevel());
+    _travelPath = searcher.explore(*_currentTile, _currentTile->level());
     if(_travelPath.empty())
     {
       _targetTile = nullptr;
@@ -185,7 +185,7 @@ Tile* Actor::checkCanMove(int newX, int newY)
   if(newY >= Level::LEVEL_HEIGHT)
     return nullptr;
   auto newTile = level().getTile(newX, newY);
-  if(newTile->getTileType() == Tile::TileType::Rock)
+  if(newTile->tile_type() == Tile::TileType::Rock)
     return nullptr;
   return newTile;
 }

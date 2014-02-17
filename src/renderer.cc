@@ -7,19 +7,32 @@
 #include "level.h"
 #include "monster.h"
 #include "world.h"
+#include "item.h"
 
 Renderer::Renderer(Graphics* graphics)
 {
   _graphics = graphics;
   loadMapTiles();
   loadMonsterTiles();
+  load_items();
 
   _player = new DirectionalSprite(_graphics, "../content/player.png", 0, 0, TILE_WIDTH, TILE_HEIGHT);
 
-  int screen_h = graphics->getScreenHeight();
-  int screen_w = graphics->getScreenWidth();
-  SDL_Log("Screen h:%d, w:%d", screen_h, screen_w);
 
+  init_viewports();
+
+}
+
+Renderer::~Renderer()
+{
+}
+
+
+void Renderer::init_viewports()
+{
+  int screen_h = _graphics->getScreenHeight();
+  int screen_w = _graphics->getScreenWidth();
+  SDL_Log("Screen h:%d, w:%d", screen_h, screen_w);
 
   _vp_main.w = 800;
   _vp_main.h = 668;
@@ -42,10 +55,6 @@ Renderer::Renderer(Graphics* graphics)
   _cameraRect.y = 0;
 }
 
-Renderer::~Renderer()
-{
-}
-
 void Renderer::loadMonsterTiles()
 {
   _monsters[(int)Monster::MonsterType::Orc] = new DirectionalSprite(_graphics, "../content/monsters/monster_orc.png", 0, 0, TILE_WIDTH, TILE_HEIGHT);
@@ -64,15 +73,20 @@ void Renderer::loadMapTiles()
   _mapTiles[(int)Tile::TileType::Door] = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 13*TILE_WIDTH, 5*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 }
 
+void Renderer::load_items()
+{
+  _items[(int)Item::ItemType::ORC_CORPSE] = new Sprite(_graphics, "../content/items.png", 0, 0, TILE_WIDTH, TILE_HEIGHT);
+}
+
 void Renderer::update(World* world, int elapsed_time_in_ms)
 {
-  updateCamera(world->getPlayer());
+  updateCamera(world->player());
 }
 
 void Renderer::updateCamera(Player& player)
 {
-  _cameraRect.x = player.getCurrentTile()->x() * TILE_WIDTH  - (_cameraRect.w/2);
-  _cameraRect.y = player.getCurrentTile()->y() * TILE_HEIGHT - (_cameraRect.h/2);
+  _cameraRect.x = player.tile()->x() * TILE_WIDTH  - (_cameraRect.w/2);
+  _cameraRect.y = player.tile()->y() * TILE_HEIGHT - (_cameraRect.h/2);
 
   
   if(_cameraRect.x < 0) _cameraRect.x = 0;
@@ -96,7 +110,7 @@ void Renderer::renderMonsters(Level& level)
   vector<Monster*> monsters = level.getMonsters();
   for(Monster* m : monsters)
   {
-    auto currentTile = m->getCurrentTile();
+    auto currentTile = m->tile();
     auto lit = level.getTileLightMap(currentTile->x(), currentTile->y());
     if(lit != Level::LightType::Lit)
       continue;
@@ -104,6 +118,15 @@ void Renderer::renderMonsters(Level& level)
     sprite->update(m->direction);
     drawSprite(sprite, *currentTile);
   }
+}
+
+void Renderer::render_items(Tile& tile, int alpha)
+{
+  for(Item* item : tile.items())
+  {
+    _items[(int)item->item_type()]->draw(tile.x()*TILE_WIDTH, tile.y()*TILE_HEIGHT, _cameraRect.x, _cameraRect.y, alpha);
+  }
+
 }
 
 void Renderer::renderLevel(Level& level)
@@ -117,8 +140,9 @@ void Renderer::renderLevel(Level& level)
       {
         int alpha = lit == Level::LightType::Unlit ? 128 : 255;
         auto currentTile = level.getTile(x, y);
-        auto tileType = (int)currentTile->getTileType();
+        auto tileType = (int)currentTile->tile_type();
         _mapTiles[tileType]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y, alpha);
+        render_items(*currentTile, alpha);
       }
     }
   }
@@ -127,7 +151,7 @@ void Renderer::renderLevel(Level& level)
 
 void Renderer::render(Player& player)
 {
-  auto currentTile = player.getCurrentTile();
+  auto currentTile = player.tile();
   _player->update(player.direction);
   drawSprite(_player, *currentTile);
 }
@@ -135,16 +159,16 @@ void Renderer::render(Player& player)
 void Renderer::render_info()
 {
   SDL_RenderSetViewport(_graphics->Renderer, &_vp_info);
-  auto vp_t = _graphics->loadTexture("../content/vp_info.png");
-  SDL_RenderCopy(_graphics->Renderer, vp_t, NULL, NULL);
+  //auto vp_t = _graphics->loadTexture("../content/vp_info.png");
+  //SDL_RenderCopy(_graphics->Renderer, vp_t, NULL, NULL);
 
 }
 
 void Renderer::render_messages()
 {
   SDL_RenderSetViewport(_graphics->Renderer, &_vp_msg);
-  auto vp_t = _graphics->loadTexture("../content/vp_msg.png");
-  SDL_RenderCopy(_graphics->Renderer, vp_t, NULL, NULL);
+  //auto vp_t = _graphics->loadTexture("../content/vp_msg.png");
+  //SDL_RenderCopy(_graphics->Renderer, vp_t, NULL, NULL);
 }
 
 void Renderer::drawSprite(Sprite* sprite, Tile& tile)

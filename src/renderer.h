@@ -36,6 +36,7 @@ class Renderer {
   private:
     array<Sprite*,5> _mapTiles;
     array<DirectionalSprite*, 1> _monsters;
+    array<Sprite*, 1> _items;
     DirectionalSprite* _player = nullptr;
     Graphics* _graphics = nullptr;
 
@@ -46,9 +47,12 @@ class Renderer {
     void updateCamera(Player& player);
     void loadMapTiles();
     void loadMonsterTiles();
+    void load_items();
+    void init_viewports();
 
     void renderLevel(Level& level);
     void renderMonsters(Level& level);
+    void render_items(Tile& tile, int alpha);
 
     void drawSprite(Sprite* sprite, Tile& tile);
     

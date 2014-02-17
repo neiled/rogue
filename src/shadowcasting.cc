@@ -103,9 +103,9 @@ void ShadowCasting::castLight(int row, float start, float end, int xx, int xy, i
 }
 bool ShadowCasting::blockingCell(Tile* tile)
 {
-  if(tile->getTileType() == Tile::TileType::Rock)
+  if(tile->tile_type() == Tile::TileType::Rock)
     return true;
-  if(tile->getTileType() == Tile::TileType::Door)
+  if(tile->tile_type() == Tile::TileType::Door)
     return true;
   return false;
 }
