@@ -11,7 +11,7 @@ class Level;
 class Actor
 {
   public:
-    Actor();
+    Actor(int max_health);
     virtual ~Actor();
 
     enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
@@ -46,6 +46,8 @@ class Actor
     
     int attack_score();
     int defense_score();
+    virtual int max_health() = 0;
+    int health();
     
   protected:
     Tile* _currentTile = nullptr;
@@ -61,6 +63,7 @@ class Actor
     void meleeAttack(Actor* other);
     float getToHitChance(Actor& other);
     virtual void die() = 0;
+    virtual bool is_player() = 0;
 
 
 };

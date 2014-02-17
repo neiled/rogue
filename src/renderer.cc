@@ -110,13 +110,16 @@ void Renderer::renderMonsters(Level& level)
   vector<Monster*> monsters = level.getMonsters();
   for(Monster* m : monsters)
   {
+    if(m->dead())
+      continue;
     auto currentTile = m->tile();
-    auto lit = level.getTileLightMap(currentTile->x(), currentTile->y());
+    auto lit = level.light_map(currentTile->x(), currentTile->y());
     if(lit != Level::LightType::Lit)
       continue;
     auto sprite = _monsters[(int)m->getMonsterType()];
     sprite->update(m->direction);
-    drawSprite(sprite, *currentTile);
+    draw_sprite(sprite, *currentTile);
+    draw_health(*m);
   }
 }
 
@@ -135,10 +138,21 @@ void Renderer::renderLevel(Level& level)
   {
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
-      Level::LightType lit = level.getTileLightMap(x, y);
+      Level::LightType lit = level.light_map(x, y);
       if(lit != Level::LightType::Unseen)
       {
-        int alpha = lit == Level::LightType::Unlit ? 128 : 255;
+        int alpha = 255;
+        if(lit == Level::LightType::Unlit)
+          alpha = 64;
+        else
+        {
+          auto intensity = level.light_intensity(x,y);
+          alpha = static_cast<int>(255.0f * intensity);
+          if(alpha < 64)
+            alpha = 64;
+        }
+
+        //int alpha = lit == Level::LightType::Unlit ? 128 : 255;
         auto currentTile = level.getTile(x, y);
         auto tileType = (int)currentTile->tile_type();
         _mapTiles[tileType]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y, alpha);
@@ -153,7 +167,32 @@ void Renderer::render(Player& player)
 {
   auto currentTile = player.tile();
   _player->update(player.direction);
-  drawSprite(_player, *currentTile);
+  draw_sprite(_player, *currentTile);
+  draw_health(player);
+}
+
+void Renderer::draw_health(Actor& actor)
+{
+  if(actor.health() == actor.max_health())
+    return;
+  SDL_Rect health;
+  health.x = actor.x()*TILE_WIDTH - _cameraRect.x;
+  health.y = actor.y()*TILE_HEIGHT - _cameraRect.y + (TILE_HEIGHT-10);
+  health.w = TILE_WIDTH;
+  health.h = 5;
+
+  SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, 128);
+  SDL_SetRenderDrawBlendMode(_graphics->Renderer, SDL_BLENDMODE_BLEND);
+  SDL_RenderDrawRect(_graphics->Renderer, &health);
+
+  health.x++;
+  health.y++;
+  health.h-=2;
+  health.w = 32.0f * (static_cast<float>(actor.health()) / actor.max_health()) - 2;
+  SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, 128);
+  SDL_RenderFillRect(_graphics->Renderer, &health);
+  SDL_SetRenderDrawBlendMode(_graphics->Renderer, SDL_BLENDMODE_NONE);
+  SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 
 void Renderer::render_info()
@@ -171,7 +210,7 @@ void Renderer::render_messages()
   //SDL_RenderCopy(_graphics->Renderer, vp_t, NULL, NULL);
 }
 
-void Renderer::drawSprite(Sprite* sprite, Tile& tile)
+void Renderer::draw_sprite(Sprite* sprite, Tile& tile)
 {
   sprite->draw(tile.x()*TILE_WIDTH, tile.y()*TILE_HEIGHT, _cameraRect.x, _cameraRect.y);
 

@@ -7,12 +7,12 @@
 #include "item.h"
 
 Monster::Monster(Tile& startTile, Monster::MonsterType type, Monster::MonsterState state)
+  : Actor(max_health())
 {
   this->direction = static_cast<Actor::Direction>(Random::Between(0,3));
   setCurrentTile(startTile);
   _monster_type = type;
   _monsterState = state;
-  _health = 10;
 }
 
 Monster::~Monster()
@@ -78,4 +78,9 @@ Item* Monster::generate_corpse()
     default:
       return nullptr;
   }
+}
+
+int Monster::max_health()
+{
+  return 10;
 }

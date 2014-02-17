@@ -27,6 +27,7 @@ class Tile
     TileType tile_type();
     int x() const;
     int y() const;
+    bool is_lit() const;
 
 
   private:

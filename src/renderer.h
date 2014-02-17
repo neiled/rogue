@@ -18,6 +18,7 @@ class Graphics;
 class Level;
 class Monster;
 class Tile;
+class Actor;
 
 class Renderer {
   public:
@@ -54,7 +55,8 @@ class Renderer {
     void renderMonsters(Level& level);
     void render_items(Tile& tile, int alpha);
 
-    void drawSprite(Sprite* sprite, Tile& tile);
+    void draw_sprite(Sprite* sprite, Tile& tile);
+    void draw_health(Actor& actor);
     
     SDL_Rect _cameraRect;
     

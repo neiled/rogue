@@ -11,8 +11,10 @@ class Player : public Actor
     Player();
     virtual ~Player();
     virtual void update() override;
+    virtual int max_health() override;
     
   private:
     virtual void die() override;
+    virtual bool is_player() override { return true;}
 };
 #endif

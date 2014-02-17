@@ -33,7 +33,7 @@ std::deque<Tile*> AStar::explore(Tile& startingPoint, Level& level)
 
     for(auto t : closed_list)
     {
-      if(level.getTileLightMap(t->x(),t->y()) == Level::LightType::Unseen)
+      if(level.light_map(t->x(),t->y()) == Level::LightType::Unseen)
       {
         unexploredTile = t;
         break;

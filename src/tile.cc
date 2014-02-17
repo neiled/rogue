@@ -3,6 +3,7 @@
 #include "tile.h"
 #include "actor.h"
 #include "item.h"
+#include "level.h"
 
 Tile::Tile(TileType tileType, Level& level, int x, int y) :_level(level)
 {
@@ -64,6 +65,11 @@ int Tile::x() const
 int Tile::y() const
 {
   return _y;
+}
+
+bool Tile::is_lit() const
+{
+  return _level.light_map(_x, _y) == Level::LightType::Lit;
 }
 
 double Tile::distanceTo(const Tile otherTile)

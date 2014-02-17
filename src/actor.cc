@@ -5,8 +5,9 @@
 #include "random.h"
 #include <SDL2/SDL.h>
 
-Actor::Actor()
+Actor::Actor(int max_health)
 {
+  _health = max_health;
 }
 
 Actor::~Actor()
@@ -65,16 +66,19 @@ int Actor::y()
 
 bool Actor::can_see_actor(Actor& actor)
 {
-  int visibility = 5;//TODO get this number from somewhere...
+  if(actor.tile()->is_lit() && this->tile()->is_lit())
+    return true;
+
+  //int visibility = 5;//TODO get this number from somewhere...
   
-  for(int y = this->y()-visibility; y < this->y() + visibility; ++y)
-  {
-    for(int x = this->x() - visibility; x < this->x() + visibility; ++x)
-    {
-      if(actor.x() == x && actor.y() == y)
-        return true;
-    }
-  }
+  //for(int y = this->y()-visibility; y < this->y() + visibility; ++y)
+  //{
+    //for(int x = this->x() - visibility; x < this->x() + visibility; ++x)
+    //{
+      //if(actor.x() == x && actor.y() == y)
+        //return true;
+    //}
+  //}
   return false;
 }
 
@@ -94,9 +98,12 @@ bool Actor::attemptMove(int xModifier, int yModifier)
 
   if(otherActor)
   {
-    meleeAttack(otherActor);
-    if(otherActor->dead() == false)
-      otherActor->meleeAttack(this);
+    if((this->is_player() || otherActor->is_player()))
+    {
+      meleeAttack(otherActor);
+      if(otherActor->dead() == false)
+        otherActor->meleeAttack(this);
+    }
     return false;
   }
   else
@@ -137,8 +144,6 @@ void Actor::meleeAttack(Actor* other)
     other->takeDamage(damage);
   }
 
-  SDL_Log("My health: %d", _health);
-  SDL_Log("Their health: %d", other->_health);
 
   return;
 }
@@ -166,7 +171,10 @@ void Actor::takeDamage(int amount)
 {
   _health -= amount;
   if(_health <= 0)
+  {
+    _health = 0;
     die();
+  }
 }
 
 bool Actor::dead() const
@@ -227,4 +235,10 @@ bool Actor::hasCommands() const
 {
 
   return _commandQueue.empty() == false;
+}
+
+
+int Actor::health()
+{
+  return _health;
 }

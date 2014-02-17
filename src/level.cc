@@ -49,7 +49,7 @@ void Level::set_player(Player* player)
 void Level::updateLightMap(Player& player)
 {
   ShadowCasting caster;
-  std::vector<std::vector<float>> newLightMap = caster.calculateFOV(_map, player.x(), player.y(), 100.0f);
+  std::vector<std::vector<float>> newLightMap = caster.calculateFOV(_map, player.x(), player.y(), 10.0f);
 
    
   resetLightMap();
@@ -58,6 +58,7 @@ void Level::updateLightMap(Player& player)
   {
     for (int x = 0; x < newLightMap[y].size(); ++x)
     {
+      _light_intensity[y][x] = newLightMap[y][x];
       if(newLightMap[y][x] > 0)
       {
         _light_map[y][x] = Level::LightType::Lit;
@@ -80,9 +81,14 @@ void Level::resetLightMap()
   }
 }
 
-Level::LightType Level::getTileLightMap(int x, int y)
+Level::LightType Level::light_map(int x, int y)
 {
   return _light_map[y][x];
+}
+
+float Level::light_intensity(int x, int y)
+{
+  return _light_intensity[y][x];
 }
 
 int Level::getDepth()

@@ -32,5 +32,7 @@ class Monster : public Actor
     void hunt(Player& player);
     Item* generate_corpse();
     virtual void die() override;
+    virtual int max_health() override;
+    virtual bool is_player() override { return false;}
 };
 #endif
