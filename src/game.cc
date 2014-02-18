@@ -104,7 +104,7 @@ void Game::draw(Graphics* graphics, Renderer* renderer, World* world)
   graphics->clearScreen();
   renderer->render(world->getCurrentLevel());
   renderer->render(world->player());
-  renderer->render_info();
+  renderer->render_info(world->player());
   renderer->render_messages();
   graphics->render();
 }

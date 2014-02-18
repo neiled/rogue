@@ -15,6 +15,7 @@ Renderer::Renderer(Graphics* graphics)
   loadMapTiles();
   loadMonsterTiles();
   load_items();
+  load_info();
 
   _player = new DirectionalSprite(_graphics, "../content/player.png", 0, 0, TILE_WIDTH, TILE_HEIGHT);
 
@@ -25,6 +26,7 @@ Renderer::Renderer(Graphics* graphics)
 
 Renderer::~Renderer()
 {
+
 }
 
 
@@ -76,6 +78,11 @@ void Renderer::loadMapTiles()
 void Renderer::load_items()
 {
   _items[(int)Item::ItemType::ORC_CORPSE] = new Sprite(_graphics, "../content/items.png", 0, 0, TILE_WIDTH, TILE_HEIGHT);
+}
+
+void Renderer::load_info()
+{
+  _info_char = new Sprite(_graphics, "../content/outline.png", 0, 0, 150, 271);
 }
 
 void Renderer::update(World* world, int elapsed_time_in_ms)
@@ -139,25 +146,25 @@ void Renderer::renderLevel(Level& level)
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
       Level::LightType lit = level.light_map(x, y);
-      if(lit != Level::LightType::Unseen)
-      {
-        int alpha = 255;
-        if(lit == Level::LightType::Unlit)
-          alpha = 64;
-        else
-        {
-          auto intensity = level.light_intensity(x,y);
-          alpha = static_cast<int>(255.0f * intensity);
-          if(alpha < 64)
-            alpha = 64;
-        }
+      if(lit == Level::LightType::Unseen)
+        continue;
 
-        //int alpha = lit == Level::LightType::Unlit ? 128 : 255;
-        auto currentTile = level.getTile(x, y);
-        auto tileType = (int)currentTile->tile_type();
-        _mapTiles[tileType]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y, alpha);
-        render_items(*currentTile, alpha);
+      auto currentTile = level.getTile(x, y);
+      auto tileType = (int)currentTile->tile_type();
+      int alpha = 255;
+
+      if(lit == Level::LightType::Unlit)
+        alpha = 100;
+      else
+      {
+        auto intensity = level.light_intensity(x,y);
+        alpha = static_cast<int>(255.0f * intensity);
+        if(alpha < 128) alpha = 128;
       }
+
+      _mapTiles[tileType]->draw(x*TILE_WIDTH,y*TILE_HEIGHT, _cameraRect.x, _cameraRect.y, alpha);
+      if(lit == Level::LightType::Lit)
+        render_items(*currentTile, alpha);
     }
   }
 }
@@ -168,39 +175,79 @@ void Renderer::render(Player& player)
   auto currentTile = player.tile();
   _player->update(player.direction);
   draw_sprite(_player, *currentTile);
-  draw_health(player);
+  //draw_health(player);
 }
 
 void Renderer::draw_health(Actor& actor)
 {
   if(actor.health() == actor.max_health())
     return;
-  SDL_Rect health;
-  health.x = actor.x()*TILE_WIDTH - _cameraRect.x;
-  health.y = actor.y()*TILE_HEIGHT - _cameraRect.y + (TILE_HEIGHT-10);
-  health.w = TILE_WIDTH;
-  health.h = 5;
 
-  SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, 128);
-  SDL_SetRenderDrawBlendMode(_graphics->Renderer, SDL_BLENDMODE_BLEND);
+  int x = actor.x()*TILE_WIDTH - _cameraRect.x;
+  int y = actor.y()*TILE_HEIGHT - _cameraRect.y + (TILE_HEIGHT-10);
+  int w = TILE_WIDTH;
+  int h = 5;
+
+  draw_health_bar(x, y, w, h, actor.health(), actor.max_health());
+  //SDL_Rect health;
+  //health.x = actor.x()*TILE_WIDTH - _cameraRect.x;
+  //health.y = actor.y()*TILE_HEIGHT - _cameraRect.y + (TILE_HEIGHT-10);
+  //health.w = TILE_WIDTH;
+  //health.h = 5;
+
+  //SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, 128);
+  //SDL_SetRenderDrawBlendMode(_graphics->Renderer, SDL_BLENDMODE_BLEND);
+  //SDL_RenderDrawRect(_graphics->Renderer, &health);
+
+  //health.x++;
+  //health.y++;
+  //health.h-=2;
+  //health.w = 30.0f * (static_cast<float>(actor.health()) / actor.max_health());
+  //SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, 128);
+  //SDL_RenderFillRect(_graphics->Renderer, &health);
+  //SDL_SetRenderDrawBlendMode(_graphics->Renderer, SDL_BLENDMODE_NONE);
+  //SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+}
+
+void Renderer::render_info(Player& player)
+{
+  SDL_RenderSetViewport(_graphics->Renderer, &_vp_info);
+  _info_char->draw(0, 0, 0, 0);
+  draw_health_bar(0, 300, 150, 20, player.health(), player.max_health());
+  //SDL_Rect health;
+  //health.x = 0;
+  //health.y = 300;
+  //health.w = 150;
+  //health.h = 20;
+  //SDL_SetRenderDrawColor(_graphics->Renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+  //SDL_RenderDrawRect(_graphics->Renderer, &health);
+
+  //health.x++;
+  //health.y++;
+  //health.h-=2;
+  //health.w = 148.0f * (static_cast<float>(player.health()) / player.max_health());
+  //SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+  //SDL_RenderFillRect(_graphics->Renderer, &health);
+  //SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+}
+
+void Renderer::draw_health_bar(int x, int y, int width, int height, int current_health, int max_health)
+{
+  SDL_Rect health;
+  health.x = x;
+  health.y = y;
+  health.w = width;
+  health.h = height;
+  SDL_SetRenderDrawColor(_graphics->Renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
   SDL_RenderDrawRect(_graphics->Renderer, &health);
 
   health.x++;
   health.y++;
   health.h-=2;
-  health.w = 32.0f * (static_cast<float>(actor.health()) / actor.max_health()) - 2;
-  SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, 128);
+  health.w = (width-2) * (static_cast<float>(current_health) / max_health);
+  SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
   SDL_RenderFillRect(_graphics->Renderer, &health);
-  SDL_SetRenderDrawBlendMode(_graphics->Renderer, SDL_BLENDMODE_NONE);
   SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-}
-
-void Renderer::render_info()
-{
-  SDL_RenderSetViewport(_graphics->Renderer, &_vp_info);
-  //auto vp_t = _graphics->loadTexture("../content/vp_info.png");
-  //SDL_RenderCopy(_graphics->Renderer, vp_t, NULL, NULL);
-
 }
 
 void Renderer::render_messages()

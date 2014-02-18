@@ -27,7 +27,7 @@ class Renderer {
   
     void render(Level& level);
     void render(Player& player);
-    void render_info();
+    void render_info(Player& player);
     void render_messages();
     void update(World* world, int elapsed_time_in_ms);
 
@@ -40,6 +40,7 @@ class Renderer {
     array<Sprite*, 1> _items;
     DirectionalSprite* _player = nullptr;
     Graphics* _graphics = nullptr;
+    Sprite* _info_char = nullptr;
 
     SDL_Rect _vp_main;
     SDL_Rect _vp_msg;
@@ -49,7 +50,9 @@ class Renderer {
     void loadMapTiles();
     void loadMonsterTiles();
     void load_items();
+    void load_info();
     void init_viewports();
+    void draw_health_bar(int x, int y, int width, int height, int health, int max_health);
 
     void renderLevel(Level& level);
     void renderMonsters(Level& level);
