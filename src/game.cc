@@ -63,8 +63,8 @@ void Game::eventLoop()
 
     if(player.hasCommands())
     {
-      cProc.Process(player.popCommand(), player);
-      update(&world);
+      if(cProc.Process(player.popCommand(), player))
+        update(&world);
     }
 
     int current_time = SDL_GetTicks();

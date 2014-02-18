@@ -149,7 +149,7 @@ std::vector<Tile*> AStar::surroundingValidTiles(Tile& start)
         continue;
       int x = startX + offsetx;
       int y = startY + offsety;
-      auto neighbour = start.level().getTile(x,y);
+      auto neighbour = start.level().tile(x,y);
       if(!neighbour)
         continue;
       if(find(closed_list.begin(), closed_list.end(), neighbour) != closed_list.end())

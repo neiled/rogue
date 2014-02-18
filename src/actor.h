@@ -48,6 +48,7 @@ class Actor
     int defense_score();
     virtual int max_health() = 0;
     int health();
+    bool can_see_something_interesting();
     
   protected:
     Tile* _currentTile = nullptr;

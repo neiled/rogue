@@ -96,7 +96,7 @@ int Level::getDepth()
   return _depth;
 }
 
-Tile* Level::getTileOfType(Tile::TileType typeToLookFor)
+Tile* Level::tile_of_type(Tile::TileType typeToLookFor)
 {
   for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
   {
@@ -124,7 +124,7 @@ void Level::setType(int x, int y, Tile::TileType tileType)
   _map[y][x]->setTileType(tileType);
 }
 
-Tile* Level::getTile(int x, int y)
+Tile* Level::tile(int x, int y)
 {
   if(x >= Level::LEVEL_WIDTH)
     return nullptr;
@@ -152,9 +152,25 @@ Tile* Level::getRandomTile()
   int x = Random::Between(0, Level::LEVEL_WIDTH-1);
   int y = Random::Between(0, Level::LEVEL_HEIGHT-1);
 
-  Tile* foundTile = getTile(x,y);
+  Tile* foundTile = tile(x,y);
 
   return foundTile;
+}
+
+std::vector<Tile*> Level::visible_tiles()
+{
+  std::vector<Tile*> results;
+
+  for (int y = 0; y < LEVEL_HEIGHT; ++y)
+  {
+    for (int x = 0; x < LEVEL_WIDTH; ++x)
+    {
+      if(_light_map[y][x] == Level::LightType::Lit)
+        results.push_back(tile(x,y));
+    }
+  }
+
+  return results;
 }
 
 Level::~Level()

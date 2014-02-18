@@ -149,7 +149,7 @@ void Renderer::renderLevel(Level& level)
       if(lit == Level::LightType::Unseen)
         continue;
 
-      auto currentTile = level.getTile(x, y);
+      auto currentTile = level.tile(x, y);
       auto tileType = (int)currentTile->tile_type();
       int alpha = 255;
 
@@ -189,24 +189,6 @@ void Renderer::draw_health(Actor& actor)
   int h = 5;
 
   draw_health_bar(x, y, w, h, actor.health(), actor.max_health());
-  //SDL_Rect health;
-  //health.x = actor.x()*TILE_WIDTH - _cameraRect.x;
-  //health.y = actor.y()*TILE_HEIGHT - _cameraRect.y + (TILE_HEIGHT-10);
-  //health.w = TILE_WIDTH;
-  //health.h = 5;
-
-  //SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, 128);
-  //SDL_SetRenderDrawBlendMode(_graphics->Renderer, SDL_BLENDMODE_BLEND);
-  //SDL_RenderDrawRect(_graphics->Renderer, &health);
-
-  //health.x++;
-  //health.y++;
-  //health.h-=2;
-  //health.w = 30.0f * (static_cast<float>(actor.health()) / actor.max_health());
-  //SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, 128);
-  //SDL_RenderFillRect(_graphics->Renderer, &health);
-  //SDL_SetRenderDrawBlendMode(_graphics->Renderer, SDL_BLENDMODE_NONE);
-  //SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 
 void Renderer::render_info(Player& player)
@@ -214,21 +196,6 @@ void Renderer::render_info(Player& player)
   SDL_RenderSetViewport(_graphics->Renderer, &_vp_info);
   _info_char->draw(0, 0, 0, 0);
   draw_health_bar(0, 300, 150, 20, player.health(), player.max_health());
-  //SDL_Rect health;
-  //health.x = 0;
-  //health.y = 300;
-  //health.w = 150;
-  //health.h = 20;
-  //SDL_SetRenderDrawColor(_graphics->Renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
-  //SDL_RenderDrawRect(_graphics->Renderer, &health);
-
-  //health.x++;
-  //health.y++;
-  //health.h-=2;
-  //health.w = 148.0f * (static_cast<float>(player.health()) / player.max_health());
-  //SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-  //SDL_RenderFillRect(_graphics->Renderer, &health);
-  //SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 
 void Renderer::draw_health_bar(int x, int y, int width, int height, int current_health, int max_health)

@@ -50,7 +50,7 @@ void World::checkMoveLevel()
     currentLevel.set_player(nullptr);
     auto nextLevel = getLevel(currentDepth+1);
     nextLevel->set_player(&_player);
-    auto tileUp = nextLevel->getTileOfType(Tile::TileType::StairsUp);
+    auto tileUp = nextLevel->tile_of_type(Tile::TileType::StairsUp);
     if(tileUp)
       _player.setCurrentTile(*tileUp);
   }
@@ -64,7 +64,7 @@ void World::checkMoveLevel()
       
       auto nextLevel = getLevel(currentDepth-1);
       nextLevel->set_player(&_player);      
-      auto tileDown = nextLevel->getTileOfType(Tile::TileType::StairsDown);
+      auto tileDown = nextLevel->tile_of_type(Tile::TileType::StairsDown);
       if(tileDown)
         _player.setCurrentTile(*tileDown);
     }

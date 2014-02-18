@@ -10,7 +10,7 @@ CommandProcessor::~CommandProcessor()
 {
 }
 
-void CommandProcessor::Process(Commands::CMD command, Actor& actor)
+bool CommandProcessor::Process(Commands::CMD command, Actor& actor)
 {
   switch(command)
   {
@@ -27,10 +27,14 @@ void CommandProcessor::Process(Commands::CMD command, Actor& actor)
       actor.moveRight();
       break;
     case Commands::CMD::CMD_EXPLORE:
+      if(actor.can_see_something_interesting())
+        return false;
       actor.explore();
       break;
     default:
       break;
   }
+
+  return true;
 
 }

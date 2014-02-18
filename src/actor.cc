@@ -115,6 +115,8 @@ bool Actor::attemptMove(int xModifier, int yModifier)
 
 void Actor::explore()
 {
+  if(can_see_something_interesting())
+    return;
   if(_travelPath.empty())
   {
     AStar searcher;
@@ -125,10 +127,22 @@ void Actor::explore()
       return; //no way to get to this square
     }
   }
-  Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
+  auto dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
   _travelPath.pop_front();
   _commandQueue.push_front(Commands::CMD::CMD_EXPLORE);
   _commandQueue.push_front(dirCommand);
+}
+
+bool Actor::can_see_something_interesting()
+{
+  auto visible_tiles = level().visible_tiles();
+  for(auto tile : visible_tiles)
+  {
+    if(tile->actor() && tile->actor()->is_player() == false)
+      return true;
+  }
+
+  return false;
 }
 
 void Actor::meleeAttack(Actor* other)
@@ -192,7 +206,7 @@ Tile* Actor::checkCanMove(int newX, int newY)
     return nullptr;
   if(newY >= Level::LEVEL_HEIGHT)
     return nullptr;
-  auto newTile = level().getTile(newX, newY);
+  auto newTile = level().tile(newX, newY);
   if(newTile->tile_type() == Tile::TileType::Rock)
     return nullptr;
   return newTile;

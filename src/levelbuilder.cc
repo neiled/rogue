@@ -65,7 +65,7 @@ void LevelBuilder::addDoors(Level& level)
     for (int x = 0; x < Level::LEVEL_WIDTH-1; ++x)
     {
       if(doorFits(x, y, level))
-          level.getTile(x, y)->setTileType(Tile::TileType::Door);
+          level.tile(x, y)->setTileType(Tile::TileType::Door);
     }
 
   }
@@ -75,33 +75,33 @@ bool LevelBuilder::doorFits(int x, int y, Level& level)
 {
   if(x <= 0 || y <= 0)
     return false;
-  auto currentTile = level.getTile(x, y);
+  auto currentTile = level.tile(x, y);
   if(currentTile->tile_type() != Tile::TileType::Floor)
     return false;
-  if(level.getTile(x,y-1)->tile_type() == Tile::TileType::Floor)
+  if(level.tile(x,y-1)->tile_type() == Tile::TileType::Floor)
   {
-    if(level.getTile(x-1,y)->tile_type() != Tile::TileType::Rock)
+    if(level.tile(x-1,y)->tile_type() != Tile::TileType::Rock)
       return false;
-    if(level.getTile(x+1,y)->tile_type() != Tile::TileType::Rock)
+    if(level.tile(x+1,y)->tile_type() != Tile::TileType::Rock)
       return false;
-    if(level.getTile(x-1,y-1)->tile_type() != level.getTile(x+1,y-1)->tile_type())
+    if(level.tile(x-1,y-1)->tile_type() != level.tile(x+1,y-1)->tile_type())
       return false;
-    if(level.getTile(x,y+1)->tile_type() != Tile::TileType::Floor)
+    if(level.tile(x,y+1)->tile_type() != Tile::TileType::Floor)
       return false;
-    if(level.getTile(x-1,y+1)->tile_type() != level.getTile(x+1,y+1)->tile_type())
+    if(level.tile(x-1,y+1)->tile_type() != level.tile(x+1,y+1)->tile_type())
       return false;
     return true;
   }
-  else if(level.getTile(x-1, y)->tile_type() == Tile::TileType::Floor &&
-      level.getTile(x+1, y)->tile_type() == Tile::TileType::Floor)
+  else if(level.tile(x-1, y)->tile_type() == Tile::TileType::Floor &&
+      level.tile(x+1, y)->tile_type() == Tile::TileType::Floor)
   {
-    if(level.getTile(x, y-1)->tile_type() != Tile::TileType::Rock)
+    if(level.tile(x, y-1)->tile_type() != Tile::TileType::Rock)
       return false;
-    if(level.getTile(x, y+1)->tile_type() != Tile::TileType::Rock)
+    if(level.tile(x, y+1)->tile_type() != Tile::TileType::Rock)
       return false;
-    if(level.getTile(x-1,y-1)->tile_type() != level.getTile(x-1,y+1)->tile_type())
+    if(level.tile(x-1,y-1)->tile_type() != level.tile(x-1,y+1)->tile_type())
       return false;
-    if(level.getTile(x+1,y-1)->tile_type() != level.getTile(x+1,y+1)->tile_type())
+    if(level.tile(x+1,y-1)->tile_type() != level.tile(x+1,y+1)->tile_type())
       return false;
     return true;
   }
@@ -260,20 +260,20 @@ SDL_Point LevelBuilder::pickPointOfRoom(Room* startRoom)
 void LevelBuilder::digCorridor(SDL_Point startPoint, SDL_Point endPoint, Room* roomTarget, Level& level)
 {
 
-  auto tileToCheck = level.getTile(startPoint.x, startPoint.y);
+  auto tileToCheck = level.tile(startPoint.x, startPoint.y);
   tileToCheck->setTileType(Tile::TileType::Floor);
   int x = startPoint.x;
   int y = startPoint.y;
 
   if(startPoint.x == endPoint.x && startPoint.y == endPoint.y)
     return;
-  if(roomTarget->containsTile(level.getTile(x+1, y)))
+  if(roomTarget->containsTile(level.tile(x+1, y)))
     return;
-  else if(roomTarget->containsTile(level.getTile(x-1, y)))
+  else if(roomTarget->containsTile(level.tile(x-1, y)))
     return;
-  else if(roomTarget->containsTile(level.getTile(x, y+1)))
+  else if(roomTarget->containsTile(level.tile(x, y+1)))
     return;
-  else if(roomTarget->containsTile(level.getTile(x, y-1)))
+  else if(roomTarget->containsTile(level.tile(x, y-1)))
     return;
 
 
@@ -323,7 +323,7 @@ bool LevelBuilder::roomFits(Room* room, Level& level)
       if(y >= Level::LEVEL_HEIGHT-1)
         return false;
 
-      if(level.getTile(x, y)->tile_type() == Tile::TileType::Floor)
+      if(level.tile(x, y)->tile_type() == Tile::TileType::Floor)
         return false;
     }
   }
@@ -336,7 +336,7 @@ void LevelBuilder::digRoom(Room* room, Level& level)
   {
     for (int x = room->x(); x < room->x()+room->getWidth(); ++x)
     {
-      level.getTile(x, y)->setTileType(Tile::TileType::Floor);
+      level.tile(x, y)->setTileType(Tile::TileType::Floor);
     }
   }
 }
