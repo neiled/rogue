@@ -1,20 +1,4 @@
-Notes
-
-certain monsters can be used to generate certain things
-	for example orc eyes can be used to make XXXX
-
-Food deteriorates over time?
-Food ripens and gets better for it rotts and becomes useless?
-
-Eating takes multiple turns
-Changing armour takes multiple turns
-
-stats for everything
-
-graveyard shows previous characters and their diary.
-
-
-effects
+Effects
 =======
 
 Effects can be:
