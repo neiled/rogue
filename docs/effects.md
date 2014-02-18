@@ -29,7 +29,7 @@ Properties of an effect
 * Attribute modifiers
 * State modifiers
 * Length of time
-
+```
     class Effect
     {
 	    Effect(std::string name, Item* item, vector<AttributeModifier> attr, vector<StateModifier> states);
@@ -47,3 +47,4 @@ Properties of an effect
 	    int turns;
 	    Actor::State state;
     }
+```
