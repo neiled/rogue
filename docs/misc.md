@@ -1,0 +1,3 @@
+Triggering a trap means you 'hear' a click noise.
+If you drop an item on it then it won't fire. Player decides if they want to be hurt by the trap or lose their items...
+
