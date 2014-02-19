@@ -8,3 +8,7 @@ Potion::~Potion()
 {
 }
 
+void Potion::drink(Actor& actor)
+{
+  //TODO: drink the potion
+}
