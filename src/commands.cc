@@ -27,9 +27,7 @@ bool CommandProcessor::Process(Commands::CMD command, Actor& actor)
       actor.moveRight();
       break;
     case Commands::CMD::CMD_EXPLORE:
-      if(actor.can_see_something_interesting())
-        return false;
-      actor.explore();
+      return actor.explore();
       break;
     default:
       break;

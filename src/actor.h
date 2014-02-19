@@ -30,7 +30,7 @@ class Actor
     void moveRight();
     void moveUp();
     void moveDown();
-    void explore();
+    bool explore();
     
     bool can_see_actor(Actor& actor);
     

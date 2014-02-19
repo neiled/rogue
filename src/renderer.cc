@@ -36,17 +36,20 @@ void Renderer::init_viewports()
   int screen_w = _graphics->getScreenWidth();
   SDL_Log("Screen h:%d, w:%d", screen_h, screen_w);
 
-  _vp_main.w = 800;
-  _vp_main.h = 668;
+  int msg_h = 200;
+  int info_w = 224;
+
+  _vp_main.w = screen_w-info_w;
+  _vp_main.h = screen_h-msg_h;
   _vp_main.x = 0;
-  _vp_main.y = 100;
+  _vp_main.y = msg_h;
 
   _vp_info.w = screen_w - _vp_main.w;
   _vp_info.h = screen_h;
   _vp_info.x = screen_w - _vp_info.w;//_vp_main.x + _vp_main.w;
   _vp_info.y = 0;//screen_h;
 
-  _vp_msg.h = 100;
+  _vp_msg.h = msg_h;
   _vp_msg.w = screen_w - _vp_info.w;
   _vp_msg.x = 0;
   _vp_msg.y = 0;//screen_h - _vp_main.h;
@@ -217,11 +220,32 @@ void Renderer::draw_health_bar(int x, int y, int width, int height, int current_
   SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 
-void Renderer::render_messages()
+void Renderer::render_messages(std::deque<std::string> messages)
 {
+  if(messages.empty())
+    return;
   SDL_RenderSetViewport(_graphics->Renderer, &_vp_msg);
-  //auto vp_t = _graphics->loadTexture("../content/vp_msg.png");
-  //SDL_RenderCopy(_graphics->Renderer, vp_t, NULL, NULL);
+
+  int message_h = 16;
+  int total_messages = _vp_msg.h / message_h;
+
+  for (int i = 1; i <= messages.size() && i <= total_messages; ++i)
+  {
+    std::string message = messages.at(messages.size() - i);
+    auto messageT = render_message(message, message_h);
+    SDL_Rect dst;
+    dst.x = 25;
+    dst.y = (i-1)*message_h;
+    SDL_QueryTexture(messageT, NULL, NULL, &dst.w, &dst.h);
+    SDL_RenderCopy(_graphics->Renderer, messageT, NULL, &dst);
+    SDL_DestroyTexture(messageT);
+    
+  }
+}
+
+SDL_Texture* Renderer::render_message(std::string message, int height)
+{
+  return _graphics->renderText(message, "../content/secrcode.ttf", SDL_Color {255,255,255}, height);
 }
 
 void Renderer::draw_sprite(Sprite* sprite, Tile& tile)

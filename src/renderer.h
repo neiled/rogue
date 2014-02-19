@@ -4,8 +4,11 @@
 
 #include <vector>
 #include <array>
+#include <deque>
+#include <string>
 #include <SDL2/SDL.h>
 #include <SDL2_Image/SDL_Image.h>
+#include <SDL2_ttf/SDL_ttf.h>
 
 using std::vector;
 using std::array;
@@ -28,7 +31,7 @@ class Renderer {
     void render(Level& level);
     void render(Player& player);
     void render_info(Player& player);
-    void render_messages();
+    void render_messages(std::deque<std::string> messages);
     void update(World* world, int elapsed_time_in_ms);
 
     const static int TILE_WIDTH = 32;
@@ -57,6 +60,7 @@ class Renderer {
     void renderLevel(Level& level);
     void renderMonsters(Level& level);
     void render_items(Tile& tile, int alpha);
+    SDL_Texture* render_message(std::string message, int height);
 
     void draw_sprite(Sprite* sprite, Tile& tile);
     void draw_health(Actor& actor);

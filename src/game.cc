@@ -4,6 +4,7 @@
 #include "actor.h"
 #include "player.h"
 #include "renderer.h"
+#include "messages.h"
 
 
 Game::Game() {
@@ -67,6 +68,7 @@ void Game::eventLoop()
         update(&world);
     }
 
+
     int current_time = SDL_GetTicks();
     updateGraphics(&world, &renderer, current_time - last_update_time);
     last_update_time = current_time;
@@ -90,8 +92,8 @@ void Game::delay(int start_time_ms)
 
 void Game::update(World* world)
 {
+  ++_turn;
   world->update();
-  
 }
 void Game::updateGraphics(World* world, Renderer* renderer, int elapsed_time_ms)
 {
@@ -105,7 +107,7 @@ void Game::draw(Graphics* graphics, Renderer* renderer, World* world)
   renderer->render(world->getCurrentLevel());
   renderer->render(world->player());
   renderer->render_info(world->player());
-  renderer->render_messages();
+  renderer->render_messages(Messages::AllMessages());
   graphics->render();
 }
    

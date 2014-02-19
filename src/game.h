@@ -18,5 +18,7 @@ struct Game {
 
     void delay(int start_time_ms);
 
+    int _turn;
+
 };
 #endif

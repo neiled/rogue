@@ -15,14 +15,20 @@ class Graphics
     SDL_Renderer* Renderer;
 
     SDL_Texture* loadTexture( std::string path );
+    SDL_Texture* renderText(std::string message, std::string fontFile, SDL_Color color, int fontSize);
     void render();
     void clearScreen();
     int getScreenWidth();
     int getScreenHeight();
     SDL_Window* window();
 
+    static const int RES_W = 1600;
+    static const int RES_H = 900;
+
   private:
     SDL_Window* _window;
+
+    void initTTF();
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "actor.h"
 #include "level.h"
 #include "a_star.h"
+#include "messages.h"
 #include <deque>
 #include "random.h"
 #include <SDL2/SDL.h>
@@ -113,10 +114,13 @@ bool Actor::attemptMove(int xModifier, int yModifier)
   }
 }
 
-void Actor::explore()
+bool Actor::explore()
 {
   if(can_see_something_interesting())
-    return;
+  {
+    Messages::Add("You see something and stop.");
+    return false;
+  }
   if(_travelPath.empty())
   {
     AStar searcher;
@@ -124,13 +128,14 @@ void Actor::explore()
     if(_travelPath.empty())
     {
       _targetTile = nullptr;
-      return; //no way to get to this square
+      return false; //no way to get to this square
     }
   }
   auto dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
   _travelPath.pop_front();
   _commandQueue.push_front(Commands::CMD::CMD_EXPLORE);
   _commandQueue.push_front(dirCommand);
+  return true;
 }
 
 bool Actor::can_see_something_interesting()
@@ -155,6 +160,8 @@ void Actor::meleeAttack(Actor* other)
   if(Random::CheckChance(toHit))
   {
     int damage = Random::Between(0,10);
+    if(is_player())
+      Messages::Add("You deal " + std::to_string(damage) + " damage");
     other->takeDamage(damage);
   }
 
@@ -183,6 +190,8 @@ float Actor::getToHitChance(Actor& other)
 
 void Actor::takeDamage(int amount)
 {
+  if(is_player())
+    Messages::Add("You take " + std::to_string(amount) + " damage");
   _health -= amount;
   if(_health <= 0)
   {
