@@ -265,3 +265,8 @@ int Actor::health()
 {
   return _health;
 }
+
+Inventory* Actor::inventory()
+{
+  return &_inventory;
+}

@@ -80,7 +80,15 @@ void Renderer::loadMapTiles()
 
 void Renderer::load_items()
 {
-  _items[(int)Item::ItemType::ORC_CORPSE] = new Sprite(_graphics, "../content/items.png", 0, 0, TILE_WIDTH, TILE_HEIGHT);
+  load_corpses();
+}
+
+void Renderer::load_corpses()
+{
+  _items[Item::ItemType::CORPSE] = std::map<Item::ItemSubtype, Sprite*>();
+  _items[Item::ItemType::CORPSE][Item::ItemSubtype::CORPSE_ORC] = new Sprite(_graphics, "../content/corpse.png", 0, 0, TILE_WIDTH, TILE_HEIGHT);
+
+
 }
 
 void Renderer::load_info()
@@ -137,7 +145,7 @@ void Renderer::render_items(Tile& tile, int alpha)
 {
   for(Item* item : tile.items())
   {
-    _items[(int)item->item_type()]->draw(tile.x()*TILE_WIDTH, tile.y()*TILE_HEIGHT, _cameraRect.x, _cameraRect.y, alpha);
+    _items[item->item_type()][item->item_subtype()]->draw(tile.x()*TILE_WIDTH, tile.y()*TILE_HEIGHT, _cameraRect.x, _cameraRect.y, alpha);
   }
 
 }

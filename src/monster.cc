@@ -5,6 +5,7 @@
 #include "player.h"
 #include "a_star.h"
 #include "item.h"
+#include "item_factory.h"
 
 Monster::Monster(Tile& startTile, Monster::MonsterType type, Monster::MonsterState state)
   : Actor(max_health())
@@ -13,6 +14,7 @@ Monster::Monster(Tile& startTile, Monster::MonsterType type, Monster::MonsterSta
   setCurrentTile(startTile);
   _monster_type = type;
   _monsterState = state;
+  populate_inventory();
 }
 
 Monster::~Monster()
@@ -73,7 +75,7 @@ Item* Monster::generate_corpse()
   switch(_monster_type)
   {
     case MonsterType::Orc:
-      return new Item(Item::ItemType::ORC_CORPSE);
+      return new Item(Item::ItemType::CORPSE, Item::ItemSubtype::CORPSE_ORC);
       break;
     default:
       return nullptr;
@@ -83,4 +85,9 @@ Item* Monster::generate_corpse()
 int Monster::max_health()
 {
   return 10;
+}
+
+void Monster::populate_inventory()
+{
+  _inventory.add(ItemFactory::Build());
 }

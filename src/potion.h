@@ -6,9 +6,9 @@
 class Potion : public Item
 {
 public:
-  Potion ();
+  Potion (Item::ItemSubtype subtype);
   virtual ~Potion ();
-  void drink(Actor& actor)
+  void drink(Actor& actor);
 
 private:
   /* data */

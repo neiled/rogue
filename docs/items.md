@@ -60,3 +60,7 @@ SWORD_BROADSWORD
 {{DEF, 5, 0}}
 {}
 ```
+
+####Where are they found####
+
+Items are only found either on enemies or in chests. The items found in enemies will be the ones that were used against the player. Items found in chests will be special items generally.

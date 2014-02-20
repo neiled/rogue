@@ -2,10 +2,12 @@
 #define RENDERER_H_
 
 
+#include "item.h"
 #include <vector>
 #include <array>
 #include <deque>
 #include <string>
+#include <map>
 #include <SDL2/SDL.h>
 #include <SDL2_Image/SDL_Image.h>
 #include <SDL2_ttf/SDL_ttf.h>
@@ -40,7 +42,7 @@ class Renderer {
   private:
     array<Sprite*,5> _mapTiles;
     array<DirectionalSprite*, 1> _monsters;
-    array<Sprite*, 1> _items;
+    std::map<Item::ItemType, std::map<Item::ItemSubtype, Sprite*>> _items;
     DirectionalSprite* _player = nullptr;
     Graphics* _graphics = nullptr;
     Sprite* _info_char = nullptr;
@@ -52,7 +54,6 @@ class Renderer {
     void updateCamera(Player& player);
     void loadMapTiles();
     void loadMonsterTiles();
-    void load_items();
     void load_info();
     void init_viewports();
     void draw_health_bar(int x, int y, int width, int height, int health, int max_health);
@@ -67,6 +68,8 @@ class Renderer {
     
     SDL_Rect _cameraRect;
     
+    void load_items();
+    void load_corpses();
 
 
 };

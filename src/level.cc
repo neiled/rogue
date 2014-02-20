@@ -91,7 +91,7 @@ float Level::light_intensity(int x, int y)
   return _light_intensity[y][x];
 }
 
-int Level::getDepth()
+int Level::depth()
 {
   return _depth;
 }

@@ -4,6 +4,7 @@
 
 #include <deque>
 #include "commands.h"
+#include "inventory.h"
 
 class Tile;
 class Level;
@@ -23,6 +24,8 @@ class Actor
     Level& level();
     void setCurrentTile(Tile& currentTile);
     Tile* tile() const;
+
+    Inventory* inventory();
     
     int x();
     int y();
@@ -58,6 +61,8 @@ class Actor
     std::deque<Commands::CMD> _commandQueue;
     std::deque<Tile*> _travelPath;
     Commands::CMD getCommandFromTiles(Tile& start, Tile& end);
+
+    Inventory _inventory;
     
     bool attemptMove(int newX, int newY);
     Tile* checkCanMove(int newX, int newY);

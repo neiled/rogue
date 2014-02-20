@@ -5,7 +5,7 @@
 #include "level.h"
 #include "player.h"
 #include "monster.h"
-
+#include "monster_factory.h"
 
 
 LevelBuilder::LevelBuilder()
@@ -51,7 +51,7 @@ void LevelBuilder::generateMonsters(Level& level)
     auto randomTile = level.getRandomTileOfType(Tile::TileType::Floor);
     if(!randomTile->actor())
     {
-      Monster* monster = new Monster(*randomTile, Monster::MonsterType::Orc, Monster::MonsterState::Awake);
+      auto monster = MonsterFactory::Build(*randomTile);
       level.addMonster(monster);
       ++i;
     }

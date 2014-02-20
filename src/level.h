@@ -33,7 +33,7 @@ class Level
     Player* player();
     void set_player(Player* player);
     
-    int getDepth();
+    int depth();
 
     const static int LEVEL_WIDTH = 100;
     const static int LEVEL_HEIGHT = 100;

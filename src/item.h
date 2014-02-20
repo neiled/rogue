@@ -5,15 +5,22 @@
 class Item
 {
 public:
-  enum class ItemType {ORC_CORPSE=0, WEAPON_KNIFE, WEAPON_SWORD, WEAPON_CLUB, WEAPON_AXE, POTION};
+  enum class ItemType {CORPSE=0, WEAPON, POTION};
+  enum class ItemSubtype {
+    CORPSE_ORC,
+    WEAPON_KNIFE,
+    POTION_HEALTH
+  };
   
-  Item (ItemType itemType);
+  Item (ItemType itemType, ItemSubtype subtype);
   virtual ~Item ();
   
   ItemType item_type();
+  ItemSubtype item_subtype();
 
 private:
   ItemType _item_type;
+  ItemSubtype _item_subtype;
 
 };
 #endif
