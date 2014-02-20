@@ -68,6 +68,8 @@ void Monster::die()
   auto corpse = generate_corpse();
   if(corpse)
     _currentTile->add_item(corpse);
+
+  drop_items();
 }
 
 Item* Monster::generate_corpse()

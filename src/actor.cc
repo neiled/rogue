@@ -270,3 +270,12 @@ Inventory* Actor::inventory()
 {
   return &_inventory;
 }
+
+void Actor::drop_items()
+{
+  for(auto item : _inventory.items())
+  {
+    _currentTile->add_item(item);
+  }
+  _inventory.empty();
+}

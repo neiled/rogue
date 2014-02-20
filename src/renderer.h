@@ -36,8 +36,7 @@ class Renderer {
     void render_messages(std::deque<std::string> messages);
     void update(World* world, int elapsed_time_in_ms);
 
-    const static int TILE_WIDTH = 32;
-    const static int TILE_HEIGHT = 32;
+    const static int TILE_SIZE = 32;
     
   private:
     array<Sprite*,5> _mapTiles;
@@ -70,6 +69,7 @@ class Renderer {
     
     void load_items();
     void load_corpses();
+    void load_potions();
 
 
 };

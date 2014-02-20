@@ -52,6 +52,8 @@ class Actor
     virtual int max_health() = 0;
     int health();
     bool can_see_something_interesting();
+
+    void drop_items();
     
   protected:
     Tile* _currentTile = nullptr;
