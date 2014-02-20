@@ -1,17 +1,20 @@
+#include <SDL2/SDL.h>
 #include "level.h"
 #include "monster.h"
 #include "tile.h"
 #include "player.h"
 #include "a_star.h"
-#include <SDL2/SDL.h>
+#include "item.h"
+#include "item_factory.h"
 
 Monster::Monster(Tile& startTile, Monster::MonsterType type, Monster::MonsterState state)
+  : Actor(max_health())
 {
   this->direction = static_cast<Actor::Direction>(Random::Between(0,3));
   setCurrentTile(startTile);
-  _monsterType = type;
+  _monster_type = type;
   _monsterState = state;
-  _health = 100;
+  populate_inventory();
 }
 
 Monster::~Monster()
@@ -20,15 +23,11 @@ Monster::~Monster()
 
 void Monster::update()
 {
-  //SDL_Log("Monster::update");
   if(dead())
     return;
-  //SDL_Log("not dead");
   Player* player = level().player();
-  //SDL_Log("got player");
   if(_monsterState != Monster::MonsterState::Hunting)
   {
-    //SDL_Log("not hunting");
     if(!player)
     {
       return;
@@ -40,28 +39,57 @@ void Monster::update()
   }
   
   if(_monsterState == Monster::MonsterState::Hunting)
-  {
-    _travelPath.clear();
-    AStar searcher;
-    _travelPath = searcher.plotPath(*_currentTile, *player->getCurrentTile());
-    if(_travelPath.empty() == false)
-    {
-      Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
-      _commandQueue.push_front(dirCommand);
-    }
-  }
+    hunt(*player);
   
+}
+
+void Monster::hunt(Player& player)
+{
+  _travelPath.clear();
+  AStar searcher;
+  _travelPath = searcher.plotPath(*_currentTile, *player.tile());
+  if(_travelPath.empty() == false)
+  {
+    Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
+    _commandQueue.push_front(dirCommand);
+  }
 }
 
 
 Monster::MonsterType Monster::getMonsterType()
 {
-  return _monsterType;
+  return _monster_type;
 }
 
 void Monster::die()
 {
   _commandQueue.clear();
   _currentTile->removeActor();
+  auto corpse = generate_corpse();
+  if(corpse)
+    _currentTile->add_item(corpse);
+
+  drop_items();
 }
 
+Item* Monster::generate_corpse()
+{
+  switch(_monster_type)
+  {
+    case MonsterType::Orc:
+      return new Item(Item::ItemType::CORPSE, Item::ItemSubtype::CORPSE_ORC);
+      break;
+    default:
+      return nullptr;
+  }
+}
+
+int Monster::max_health()
+{
+  return 10;
+}
+
+void Monster::populate_inventory()
+{
+  _inventory.add(ItemFactory::Build());
+}

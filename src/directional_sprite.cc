@@ -11,5 +11,5 @@ DirectionalSprite::~DirectionalSprite()
 
 void DirectionalSprite::update(Actor::Direction direction)
 {
-  _source_rect.x = ((int)direction) * Renderer::TILE_WIDTH;
+  _source_rect.x = ((int)direction) * Renderer::TILE_SIZE;
 }

@@ -31,7 +31,7 @@ void World::update()
   checkMoveLevel();
 }
 
-Player& World::getPlayer()
+Player& World::player()
 {
   return _player;
 }
@@ -43,20 +43,20 @@ Level& World::getCurrentLevel()
 
 void World::checkMoveLevel()
 {
-  if(_player.getCurrentTile()->getTileType() == Tile::TileType::StairsDown)
+  if(_player.tile()->tile_type() == Tile::TileType::StairsDown)
   {
-    int currentDepth = _player.level().getDepth();
+    int currentDepth = _player.level().depth();
     Level& currentLevel = _player.level();
     currentLevel.set_player(nullptr);
     auto nextLevel = getLevel(currentDepth+1);
     nextLevel->set_player(&_player);
-    auto tileUp = nextLevel->getTileOfType(Tile::TileType::StairsUp);
+    auto tileUp = nextLevel->tile_of_type(Tile::TileType::StairsUp);
     if(tileUp)
       _player.setCurrentTile(*tileUp);
   }
-  else if(_player.getCurrentTile()->getTileType() == Tile::TileType::StairsUp)
+  else if(_player.tile()->tile_type() == Tile::TileType::StairsUp)
   {
-    int currentDepth = _player.level().getDepth();
+    int currentDepth = _player.level().depth();
     if(currentDepth > 0)
     {
       Level& currentLevel = _player.level();
@@ -64,7 +64,7 @@ void World::checkMoveLevel()
       
       auto nextLevel = getLevel(currentDepth-1);
       nextLevel->set_player(&_player);      
-      auto tileDown = nextLevel->getTileOfType(Tile::TileType::StairsDown);
+      auto tileDown = nextLevel->tile_of_type(Tile::TileType::StairsDown);
       if(tileDown)
         _player.setCurrentTile(*tileDown);
     }

@@ -77,7 +77,6 @@ void ShadowCasting::castLight(int row, float start, float end, int xx, int xy, i
  
             //check if it's within the lightable area and light if needed
             if (radius(deltaX, deltaY) <= _radius) {
-                //float bright = (float) (1 - (radius(deltaX, deltaY) / _force));
                 float bright = (float) (1 - (_decay * radius(deltaX, deltaY) / _force));
 
                 _lightMap[currentY][currentX] = bright;
@@ -103,9 +102,9 @@ void ShadowCasting::castLight(int row, float start, float end, int xx, int xy, i
 }
 bool ShadowCasting::blockingCell(Tile* tile)
 {
-  if(tile->getTileType() == Tile::TileType::Rock)
+  if(tile->tile_type() == Tile::TileType::Rock)
     return true;
-  if(tile->getTileType() == Tile::TileType::Door)
+  if(tile->tile_type() == Tile::TileType::Door)
     return true;
   return false;
 }

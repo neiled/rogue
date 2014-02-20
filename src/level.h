@@ -21,17 +21,19 @@ class Level
     void setType(int x, int y, Tile::TileType tileType);
     void update(Player& player);
     void updateGraphics();
-    Level::LightType getTileLightMap(int x, int y);
-    Tile* getTile(int x, int y);
-    Tile* getTileOfType(Tile::TileType typeToLookFor);
+    Level::LightType light_map(int x, int y);
+    float light_intensity(int x, int y);
+    Tile* tile(int x, int y);
+    Tile* tile_of_type(Tile::TileType typeToLookFor);
     Tile* getRandomTileOfType(Tile::TileType typeToLookFor);
     std::vector<Monster*> getMonsters();
     void addMonster(Monster* monster);
+    std::vector<Tile*> visible_tiles();
     
     Player* player();
     void set_player(Player* player);
     
-    int getDepth();
+    int depth();
 
     const static int LEVEL_WIDTH = 100;
     const static int LEVEL_HEIGHT = 100;
@@ -48,6 +50,7 @@ class Level
     
     std::array<std::array<Tile*, LEVEL_WIDTH>, LEVEL_HEIGHT > _map;
     std::array<std::array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_map;
+    std::array<std::array<float, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_intensity;
 
     std::vector<Monster*> _monsters;
     Player* _player = nullptr;

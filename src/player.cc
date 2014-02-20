@@ -3,10 +3,9 @@
 #include "a_star.h"
 #include <deque>
 
-Player::Player()
+Player::Player() : Actor(max_health())
 {
   direction = Actor::Direction::EAST;
-  _health = 100;
 }
 
 Player::~Player()
@@ -21,6 +20,11 @@ void Player::die()
 
 void Player::update()
 {
+}
+
+int Player::max_health()
+{
+  return 100;
 }
 
 

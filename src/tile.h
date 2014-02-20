@@ -5,6 +5,7 @@
 
 class Level;
 class Actor;
+class Item;
 
 class Tile
 {
@@ -18,12 +19,15 @@ class Tile
     double distanceTo(const Tile otherTile);
     void removeActor();
     void setActor(Actor& actor);
+    void add_item(Item* item);
     
-    Actor* getActor();
-    Level& getLevel();
-    TileType getTileType();
+    Actor* actor();
+    Level& level();
+    std::vector<Item*> items();
+    TileType tile_type();
     int x() const;
     int y() const;
+    bool is_lit() const;
 
 
   private:
@@ -32,5 +36,6 @@ class Tile
     int _y;
     Level& _level;
     Actor* _actor = nullptr;
+    std::vector<Item*> _items;
 };
 #endif

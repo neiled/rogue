@@ -33,7 +33,7 @@ std::deque<Tile*> AStar::explore(Tile& startingPoint, Level& level)
 
     for(auto t : closed_list)
     {
-      if(level.getTileLightMap(t->x(),t->y()) == Level::LightType::Unseen)
+      if(level.light_map(t->x(),t->y()) == Level::LightType::Unseen)
       {
         unexploredTile = t;
         break;
@@ -149,12 +149,12 @@ std::vector<Tile*> AStar::surroundingValidTiles(Tile& start)
         continue;
       int x = startX + offsetx;
       int y = startY + offsety;
-      auto neighbour = start.getLevel().getTile(x,y);
+      auto neighbour = start.level().tile(x,y);
       if(!neighbour)
         continue;
       if(find(closed_list.begin(), closed_list.end(), neighbour) != closed_list.end())
         continue;
-      if(neighbour->getTileType() == Tile::TileType::Rock)
+      if(neighbour->tile_type() == Tile::TileType::Rock)
         continue;
       result.push_back(neighbour);
     }

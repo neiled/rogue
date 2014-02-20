@@ -75,7 +75,7 @@ Tile* Room::getRandomTile(bool avoidWalls)
   int x = Random::Between(minX,maxX) + _x;
   int y = Random::Between(minY,maxY) + _y;
 
-  return (_level.getTile(x, y));
+  return (_level.tile(x, y));
 }
 
 

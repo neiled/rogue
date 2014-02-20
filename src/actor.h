@@ -4,6 +4,7 @@
 
 #include <deque>
 #include "commands.h"
+#include "inventory.h"
 
 class Tile;
 class Level;
@@ -11,7 +12,7 @@ class Level;
 class Actor
 {
   public:
-    Actor();
+    Actor(int max_health);
     virtual ~Actor();
 
     enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
@@ -22,7 +23,9 @@ class Actor
     
     Level& level();
     void setCurrentTile(Tile& currentTile);
-    Tile* getCurrentTile() const;
+    Tile* tile() const;
+
+    Inventory* inventory();
     
     int x();
     int y();
@@ -30,7 +33,7 @@ class Actor
     void moveRight();
     void moveUp();
     void moveDown();
-    void explore();
+    bool explore();
     
     bool can_see_actor(Actor& actor);
     
@@ -46,6 +49,11 @@ class Actor
     
     int attack_score();
     int defense_score();
+    virtual int max_health() = 0;
+    int health();
+    bool can_see_something_interesting();
+
+    void drop_items();
     
   protected:
     Tile* _currentTile = nullptr;
@@ -55,12 +63,15 @@ class Actor
     std::deque<Commands::CMD> _commandQueue;
     std::deque<Tile*> _travelPath;
     Commands::CMD getCommandFromTiles(Tile& start, Tile& end);
+
+    Inventory _inventory;
     
     bool attemptMove(int newX, int newY);
     Tile* checkCanMove(int newX, int newY);
     void meleeAttack(Actor* other);
     float getToHitChance(Actor& other);
     virtual void die() = 0;
+    virtual bool is_player() = 0;
 
 
 };

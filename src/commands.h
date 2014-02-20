@@ -24,7 +24,7 @@ class CommandProcessor
 public:
   CommandProcessor ();
   virtual ~CommandProcessor ();
-  void Process(Commands::CMD command, Actor& actor);
+  bool Process(Commands::CMD command, Actor& actor);
 
 private:
   

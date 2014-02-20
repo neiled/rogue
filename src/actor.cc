@@ -1,12 +1,14 @@
 #include "actor.h"
 #include "level.h"
 #include "a_star.h"
+#include "messages.h"
 #include <deque>
 #include "random.h"
 #include <SDL2/SDL.h>
 
-Actor::Actor()
+Actor::Actor(int max_health)
 {
+  _health = max_health;
 }
 
 Actor::~Actor()
@@ -21,14 +23,14 @@ void Actor::setCurrentTile(Tile& newTile)
   _currentTile = &newTile;
 }
 
-Tile* Actor::getCurrentTile() const
+Tile* Actor::tile() const
 {
   return _currentTile;
 }
 
 Level& Actor::level()
 {
-  return _currentTile->getLevel();
+  return _currentTile->level();
 }
 
 void Actor::moveLeft()
@@ -65,16 +67,19 @@ int Actor::y()
 
 bool Actor::can_see_actor(Actor& actor)
 {
-  int visibility = 5;//TODO get this number from somewhere...
+  if(actor.tile()->is_lit() && this->tile()->is_lit())
+    return true;
+
+  //int visibility = 5;//TODO get this number from somewhere...
   
-  for(int y = this->y()-visibility; y < this->y() + visibility; ++y)
-  {
-    for(int x = this->x() - visibility; x < this->x() + visibility; ++x)
-    {
-      if(actor.x() == x && actor.y() == y)
-        return true;
-    }
-  }
+  //for(int y = this->y()-visibility; y < this->y() + visibility; ++y)
+  //{
+    //for(int x = this->x() - visibility; x < this->x() + visibility; ++x)
+    //{
+      //if(actor.x() == x && actor.y() == y)
+        //return true;
+    //}
+  //}
   return false;
 }
 
@@ -90,13 +95,16 @@ bool Actor::attemptMove(int xModifier, int yModifier)
   if(!newTile)
     return false;
 
-  auto otherActor = newTile->getActor();
+  auto otherActor = newTile->actor();
 
   if(otherActor)
   {
-    meleeAttack(otherActor);
-    if(otherActor->dead() == false)
-      otherActor->meleeAttack(this);
+    if((this->is_player() || otherActor->is_player()))
+    {
+      meleeAttack(otherActor);
+      if(otherActor->dead() == false)
+        otherActor->meleeAttack(this);
+    }
     return false;
   }
   else
@@ -106,22 +114,40 @@ bool Actor::attemptMove(int xModifier, int yModifier)
   }
 }
 
-void Actor::explore()
+bool Actor::explore()
 {
+  if(can_see_something_interesting())
+  {
+    Messages::Add("You see something and stop.");
+    return false;
+  }
   if(_travelPath.empty())
   {
     AStar searcher;
-    _travelPath = searcher.explore(*_currentTile, _currentTile->getLevel());
+    _travelPath = searcher.explore(*_currentTile, _currentTile->level());
     if(_travelPath.empty())
     {
       _targetTile = nullptr;
-      return; //no way to get to this square
+      return false; //no way to get to this square
     }
   }
-  Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
+  auto dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
   _travelPath.pop_front();
   _commandQueue.push_front(Commands::CMD::CMD_EXPLORE);
   _commandQueue.push_front(dirCommand);
+  return true;
+}
+
+bool Actor::can_see_something_interesting()
+{
+  auto visible_tiles = level().visible_tiles();
+  for(auto tile : visible_tiles)
+  {
+    if(tile->actor() && tile->actor()->is_player() == false)
+      return true;
+  }
+
+  return false;
 }
 
 void Actor::meleeAttack(Actor* other)
@@ -134,11 +160,11 @@ void Actor::meleeAttack(Actor* other)
   if(Random::CheckChance(toHit))
   {
     int damage = Random::Between(0,10);
+    if(is_player())
+      Messages::Add("You deal " + std::to_string(damage) + " damage");
     other->takeDamage(damage);
   }
 
-  SDL_Log("My health: %d", _health);
-  SDL_Log("Their health: %d", other->_health);
 
   return;
 }
@@ -164,9 +190,14 @@ float Actor::getToHitChance(Actor& other)
 
 void Actor::takeDamage(int amount)
 {
+  if(is_player())
+    Messages::Add("You take " + std::to_string(amount) + " damage");
   _health -= amount;
   if(_health <= 0)
+  {
+    _health = 0;
     die();
+  }
 }
 
 bool Actor::dead() const
@@ -184,8 +215,8 @@ Tile* Actor::checkCanMove(int newX, int newY)
     return nullptr;
   if(newY >= Level::LEVEL_HEIGHT)
     return nullptr;
-  auto newTile = level().getTile(newX, newY);
-  if(newTile->getTileType() == Tile::TileType::Rock)
+  auto newTile = level().tile(newX, newY);
+  if(newTile->tile_type() == Tile::TileType::Rock)
     return nullptr;
   return newTile;
 }
@@ -227,4 +258,24 @@ bool Actor::hasCommands() const
 {
 
   return _commandQueue.empty() == false;
+}
+
+
+int Actor::health()
+{
+  return _health;
+}
+
+Inventory* Actor::inventory()
+{
+  return &_inventory;
+}
+
+void Actor::drop_items()
+{
+  for(auto item : _inventory.items())
+  {
+    _currentTile->add_item(item);
+  }
+  _inventory.empty();
 }

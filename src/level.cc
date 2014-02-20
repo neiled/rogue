@@ -49,7 +49,7 @@ void Level::set_player(Player* player)
 void Level::updateLightMap(Player& player)
 {
   ShadowCasting caster;
-  std::vector<std::vector<float>> newLightMap = caster.calculateFOV(_map, player.x(), player.y(), 100.0f);
+  std::vector<std::vector<float>> newLightMap = caster.calculateFOV(_map, player.x(), player.y(), 10.0f);
 
    
   resetLightMap();
@@ -58,6 +58,7 @@ void Level::updateLightMap(Player& player)
   {
     for (int x = 0; x < newLightMap[y].size(); ++x)
     {
+      _light_intensity[y][x] = newLightMap[y][x];
       if(newLightMap[y][x] > 0)
       {
         _light_map[y][x] = Level::LightType::Lit;
@@ -80,23 +81,28 @@ void Level::resetLightMap()
   }
 }
 
-Level::LightType Level::getTileLightMap(int x, int y)
+Level::LightType Level::light_map(int x, int y)
 {
   return _light_map[y][x];
 }
 
-int Level::getDepth()
+float Level::light_intensity(int x, int y)
+{
+  return _light_intensity[y][x];
+}
+
+int Level::depth()
 {
   return _depth;
 }
 
-Tile* Level::getTileOfType(Tile::TileType typeToLookFor)
+Tile* Level::tile_of_type(Tile::TileType typeToLookFor)
 {
   for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
   {
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
-      if(_map[y][x]->getTileType() == typeToLookFor)
+      if(_map[y][x]->tile_type() == typeToLookFor)
         return _map[y][x];
     }
   }
@@ -108,7 +114,7 @@ Tile* Level::getRandomTileOfType(Tile::TileType typeToLookFor)
   do
   {
     auto testTile = getRandomTile();
-    if(testTile->getTileType() == typeToLookFor)
+    if(testTile->tile_type() == typeToLookFor)
       return testTile;
   }while(true);
 }
@@ -118,7 +124,7 @@ void Level::setType(int x, int y, Tile::TileType tileType)
   _map[y][x]->setTileType(tileType);
 }
 
-Tile* Level::getTile(int x, int y)
+Tile* Level::tile(int x, int y)
 {
   if(x >= Level::LEVEL_WIDTH)
     return nullptr;
@@ -146,9 +152,25 @@ Tile* Level::getRandomTile()
   int x = Random::Between(0, Level::LEVEL_WIDTH-1);
   int y = Random::Between(0, Level::LEVEL_HEIGHT-1);
 
-  Tile* foundTile = getTile(x,y);
+  Tile* foundTile = tile(x,y);
 
   return foundTile;
+}
+
+std::vector<Tile*> Level::visible_tiles()
+{
+  std::vector<Tile*> results;
+
+  for (int y = 0; y < LEVEL_HEIGHT; ++y)
+  {
+    for (int x = 0; x < LEVEL_WIDTH; ++x)
+    {
+      if(_light_map[y][x] == Level::LightType::Lit)
+        results.push_back(tile(x,y));
+    }
+  }
+
+  return results;
 }
 
 Level::~Level()

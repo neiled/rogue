@@ -4,6 +4,7 @@
 #include "actor.h"
 #include "player.h"
 #include "renderer.h"
+#include "messages.h"
 
 
 Game::Game() {
@@ -22,7 +23,7 @@ void Game::eventLoop()
   SDL_Event event;
   SDL_Log("Creating world");
   World world;
-  Player& player = world.getPlayer();
+  Player& player = world.player();
   SDL_Log("Creating renderer");
   Renderer renderer(&graphics);
   SDL_Log("Done renderer");
@@ -63,9 +64,10 @@ void Game::eventLoop()
 
     if(player.hasCommands())
     {
-      cProc.Process(player.popCommand(), player);
-      update(&world);
+      if(cProc.Process(player.popCommand(), player))
+        update(&world);
     }
+
 
     int current_time = SDL_GetTicks();
     updateGraphics(&world, &renderer, current_time - last_update_time);
@@ -90,8 +92,8 @@ void Game::delay(int start_time_ms)
 
 void Game::update(World* world)
 {
+  ++_turn;
   world->update();
-  
 }
 void Game::updateGraphics(World* world, Renderer* renderer, int elapsed_time_ms)
 {
@@ -103,7 +105,9 @@ void Game::draw(Graphics* graphics, Renderer* renderer, World* world)
 {
   graphics->clearScreen();
   renderer->render(world->getCurrentLevel());
-  renderer->render(world->getPlayer());
+  renderer->render(world->player());
+  renderer->render_info(world->player());
+  renderer->render_messages(Messages::AllMessages());
   graphics->render();
 }
    

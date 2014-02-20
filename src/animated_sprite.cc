@@ -20,10 +20,10 @@ void AnimatedSprite::update(int elapsed_time_in_ms)
     ++_current_frame;
     _elapsed_time = 0;
     if (_current_frame < _num_frames)
-      _source_rect.x += Renderer::TILE_WIDTH;
+      _source_rect.x += Renderer::TILE_SIZE;
     else
     {
-      _source_rect.x -= Renderer::TILE_WIDTH * (_num_frames - 1);
+      _source_rect.x -= Renderer::TILE_SIZE * (_num_frames - 1);
       _current_frame = 0;
     }
     

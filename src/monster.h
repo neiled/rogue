@@ -6,6 +6,8 @@
 #include "actor.h"
 
 class Tile;
+class Player;
+class Item;
 
 
 class Monster : public Actor
@@ -24,11 +26,17 @@ class Monster : public Actor
     
     
   private:
-    Monster::MonsterType _monsterType;
+    Monster::MonsterType _monster_type;
     Monster::MonsterState _monsterState;
 
     bool can_see_player(const Player& player);
 
+    void hunt(Player& player);
+    Item* generate_corpse();
+    void populate_inventory();
     virtual void die() override;
+    virtual int max_health() override;
+    virtual bool is_player() override { return false;}
+
 };
 #endif
