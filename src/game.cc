@@ -5,10 +5,12 @@
 #include "player.h"
 #include "renderer.h"
 #include "messages.h"
+#include "item_factory.h"
 
 
 Game::Game() {
   SDL_Init(SDL_INIT_EVERYTHING);
+  ItemFactory::Init();
   eventLoop();
 }
 

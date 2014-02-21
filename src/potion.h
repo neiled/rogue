@@ -2,11 +2,12 @@
 #define POTION_H
 #include "item.h"
 #include "actor.h"
+#include "attribute_modifiers.h"
 
 class Potion : public Item
 {
 public:
-  Potion (Item::ItemSubtype subtype);
+  Potion (Item::ItemSubtype subtype, std::vector<AttributeModifiers> modifiers);
   virtual ~Potion ();
   void drink(Actor& actor);
 

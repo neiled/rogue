@@ -16,6 +16,7 @@ class Actor
     virtual ~Actor();
 
     enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
+    enum class Attribute {ATK, DEF, HEALTH, CON};
     
     Direction direction;
     

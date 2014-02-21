@@ -1,6 +1,6 @@
 #include "potion.h"
 
-Potion::Potion(Item::ItemSubtype subtype) : Item(Item::ItemType::POTION, subtype)
+Potion::Potion(Item::ItemSubtype subtype, std::vector<AttributeModifiers> modifiers) : Item(Item::ItemType::POTION, subtype, modifiers)
 {
 }
 
