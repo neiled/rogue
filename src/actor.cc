@@ -28,16 +28,6 @@ void Actor::setCurrentTile(Tile& newTile)
 
 void Actor::pickup_items()
 {
-  for(auto item : _currentTile->items())
-  {
-    if(item->item_type() != Item::ItemType::CORPSE)
-      _inventory.add(item);
-  }
-
-  for(auto item : _inventory.items())
-  {
-    _currentTile->remove_item(item);
-  }
 }
 
 Tile* Actor::tile() const

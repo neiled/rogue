@@ -6,11 +6,15 @@
 #include "renderer.h"
 #include "messages.h"
 #include "item_factory.h"
+#include "command_decoder_game.h"
 
 
 Game::Game() {
   SDL_Init(SDL_INIT_EVERYTHING);
   ItemFactory::Init();
+  _world.init();
+  _decoders[Game::GameState::GAME] = new CommandDecoderGame();
+  _state = GameState::GAME;
   eventLoop();
 }
 
@@ -24,15 +28,14 @@ void Game::eventLoop()
   Graphics graphics;
   SDL_Event event;
   SDL_Log("Creating world");
-  World world;
-  Player& player = world.player();
+  Player* player = _world.player();
   SDL_Log("Creating renderer");
   Renderer renderer(&graphics);
   SDL_Log("Done renderer");
   CommandProcessor cProc;
   int last_update_time = SDL_GetTicks();
 
-  update(&world);
+  update();
 
   bool running = true;
   while (running == true)
@@ -40,47 +43,51 @@ void Game::eventLoop()
     const int start_time_ms = SDL_GetTicks();
     while(SDL_PollEvent(&event))
     {
+      auto decoder = _decoders[_state];
       switch(event.type)
       {
         case SDL_KEYDOWN:
-          if(event.key.keysym.sym == SDLK_ESCAPE)
-            running = false;
-          else if(event.key.keysym.sym == SDLK_UP)
-            player.pushCommand(Commands::CMD::CMD_MOVE_UP);
-          else if(event.key.keysym.sym == SDLK_DOWN)
-            player.pushCommand(Commands::CMD::CMD_MOVE_DOWN);
-          else if(event.key.keysym.sym == SDLK_LEFT)
-            player.pushCommand(Commands::CMD::CMD_MOVE_LEFT);
-          else if(event.key.keysym.sym == SDLK_RIGHT)
-            player.pushCommand(Commands::CMD::CMD_MOVE_RIGHT);
-          else if(event.key.keysym.sym == SDLK_o)
-            player.pushCommand(Commands::CMD::CMD_EXPLORE);
-          else if(event.key.keysym.sym == SDLK_p)
-            player.clearCommands();
+          decoder->Decode(event.key.keysym.sym, *this);
           break;
+          //if(event.key.keysym.sym == SDLK_ESCAPE)
+            //running = false;
         default:
           break;
       }
 
+      if(_state == GameState::STOPPED)
+        running = false;
+
     }
 
-    if(player.hasCommands())
+
+    if(player->hasCommands())
     {
-      if(cProc.Process(player.popCommand(), player))
-        update(&world);
+      if(cProc.Process(player->popCommand(), *player))
+        update();
     }
 
 
     int current_time = SDL_GetTicks();
-    updateGraphics(&world, &renderer, current_time - last_update_time);
+    updateGraphics(&renderer, current_time - last_update_time);
     last_update_time = current_time;
-    draw(&graphics, &renderer, &world);
+    draw(&graphics, &renderer);
 
     delay(start_time_ms);
 
 
   }
 
+}
+
+void Game::state(GameState state)
+{
+  _state = state;
+}
+
+Player* Game::player()
+{
+  return _world.player();
 }
 
 void Game::delay(int start_time_ms)
@@ -92,23 +99,24 @@ void Game::delay(int start_time_ms)
   SDL_Delay(timeToDelay);  
 }
 
-void Game::update(World* world)
+void Game::update()
 {
   ++_turn;
-  world->update();
+  _world.update();
 }
-void Game::updateGraphics(World* world, Renderer* renderer, int elapsed_time_ms)
+void Game::updateGraphics(Renderer* renderer, int elapsed_time_ms)
 {
-  world->updateGraphics();
-  renderer->update(world, elapsed_time_ms);
+  _world.updateGraphics();
+  renderer->update(&_world, elapsed_time_ms);
   
 }
-void Game::draw(Graphics* graphics, Renderer* renderer, World* world)
+void Game::draw(Graphics* graphics, Renderer* renderer)
 {
+  auto player = _world.player();
   graphics->clearScreen();
-  renderer->render(world->getCurrentLevel());
-  renderer->render(world->player());
-  renderer->render_info(world->player());
+  renderer->render(_world.getCurrentLevel());
+  renderer->render(*player);
+  renderer->render_info(*player);
   renderer->render_messages(Messages::AllMessages());
   graphics->render();
 }

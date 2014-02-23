@@ -1,13 +1,17 @@
 #include "item_factory.h"
 #include "item.h"
 #include "potion.h"
+#include <SDL2/SDL.h>
 
 std::map<Item::ItemType, std::map<Item::ItemSubtype, Item*>> ItemFactory::_prototypes;
 
 Item* ItemFactory::Build()
 {
+  SDL_Log("1a");
   auto proto = ItemFactory::getProtoPotion(Item::ItemSubtype::POTION_HEALTH);
+  SDL_Log("2a");
   auto newPotion =  new Potion(proto);
+  SDL_Log("3a");
   return newPotion;
 }
 

@@ -12,10 +12,11 @@ class World
 public:
   World ();
   virtual ~World ();
+  void init();
   void update();
   void updateGraphics();
   Level& getCurrentLevel();
-  Player& player();
+  Player* player();
 
 
 private:

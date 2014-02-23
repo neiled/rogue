@@ -84,7 +84,7 @@ class Actor
     virtual bool is_player() = 0;
 
     void apply_modifier(AttributeModifiers* modifier);
-    void pickup_items();
+    virtual void pickup_items();
 
 
 };

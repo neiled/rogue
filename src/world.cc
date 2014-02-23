@@ -7,6 +7,15 @@
 
 World::World()
 {
+}
+
+
+World::~World()
+{
+}
+
+void World::init()
+{
   SDL_Log("Creating first level");
   Level* firstLevel = new Level(0);
   firstLevel->set_player(&_player);
@@ -14,11 +23,6 @@ World::World()
   _builder.buildLevel(*firstLevel, _player);
   SDL_Log("Done.");
   _levels.push_back(firstLevel);
-}
-
-
-World::~World()
-{
 }
 
 void World::updateGraphics()
@@ -31,9 +35,9 @@ void World::update()
   checkMoveLevel();
 }
 
-Player& World::player()
+Player* World::player()
 {
-  return _player;
+  return &_player;
 }
 
 Level& World::getCurrentLevel()

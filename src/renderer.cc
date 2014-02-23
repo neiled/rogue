@@ -105,7 +105,8 @@ void Renderer::load_info()
 
 void Renderer::update(World* world, int elapsed_time_in_ms)
 {
-  updateCamera(world->player());
+  auto &player = *world->player();
+  updateCamera(player);
 }
 
 void Renderer::updateCamera(Player& player)
