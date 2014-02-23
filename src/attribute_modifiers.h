@@ -8,6 +8,11 @@ class AttributeModifiers
 public:
   AttributeModifiers (Actor::Attribute attr, int modifier, int turns);
   virtual ~AttributeModifiers ();
+  void apply(Actor& actor);
+
+  Actor::Attribute attr();
+  int modifier();
+  int turns();
 
 private:
   Actor::Attribute _attr;

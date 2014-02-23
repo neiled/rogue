@@ -20,6 +20,7 @@ class Tile
     void removeActor();
     void setActor(Actor& actor);
     void add_item(Item* item);
+    void remove_item(Item* item);
     
     Actor* actor();
     Level& level();

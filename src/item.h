@@ -22,7 +22,7 @@ public:
   ItemType item_type();
   ItemSubtype item_subtype();
 
-private:
+protected:
   ItemType _item_type;
   ItemSubtype _item_subtype;
   std::vector<AttributeModifiers> _modifiers;

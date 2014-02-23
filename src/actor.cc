@@ -4,7 +4,9 @@
 #include "messages.h"
 #include <deque>
 #include "random.h"
+#include "attribute_modifiers.h"
 #include <SDL2/SDL.h>
+#include "item.h"
 
 Actor::Actor(int max_health)
 {
@@ -21,6 +23,21 @@ void Actor::setCurrentTile(Tile& newTile)
     _currentTile->removeActor();
   newTile.setActor(*this);
   _currentTile = &newTile;
+  pickup_items();
+}
+
+void Actor::pickup_items()
+{
+  for(auto item : _currentTile->items())
+  {
+    if(item->item_type() != Item::ItemType::CORPSE)
+      _inventory.add(item);
+  }
+
+  for(auto item : _inventory.items())
+  {
+    _currentTile->remove_item(item);
+  }
 }
 
 Tile* Actor::tile() const
@@ -278,4 +295,17 @@ void Actor::drop_items()
     _currentTile->add_item(item);
   }
   _inventory.empty();
+}
+
+void Actor::add_modifier(AttributeModifiers* modifier)
+{
+  if(modifier->turns() == 0)
+    apply_modifier(modifier);
+  else
+    _modifiers.push_back(modifier);
+}
+
+void Actor::apply_modifier(AttributeModifiers* modifier)
+{
+  _attributes[modifier->attr()] += modifier->modifier();
 }

@@ -3,11 +3,13 @@
 
 
 #include <deque>
+#include <map>
 #include "commands.h"
 #include "inventory.h"
 
 class Tile;
 class Level;
+class AttributeModifiers;
 
 class Actor
 {
@@ -55,6 +57,8 @@ class Actor
     bool can_see_something_interesting();
 
     void drop_items();
+
+    void add_modifier(AttributeModifiers* modifier);
     
   protected:
     Tile* _currentTile = nullptr;
@@ -65,14 +69,22 @@ class Actor
     std::deque<Tile*> _travelPath;
     Commands::CMD getCommandFromTiles(Tile& start, Tile& end);
 
+    std::vector<AttributeModifiers*> _modifiers;
+
+    std::map<Actor::Attribute, int> _attributes;
+
     Inventory _inventory;
     
     bool attemptMove(int newX, int newY);
     Tile* checkCanMove(int newX, int newY);
     void meleeAttack(Actor* other);
     float getToHitChance(Actor& other);
+
     virtual void die() = 0;
     virtual bool is_player() = 0;
+
+    void apply_modifier(AttributeModifiers* modifier);
+    void pickup_items();
 
 
 };

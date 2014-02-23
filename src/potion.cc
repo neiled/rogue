@@ -11,4 +11,8 @@ Potion::~Potion()
 void Potion::drink(Actor& actor)
 {
   //TODO: drink the potion
+  for(auto attribute_modifier : _modifiers)
+  {
+    actor.add_modifier(&attribute_modifier);
+  }
 }

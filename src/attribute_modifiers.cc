@@ -10,3 +10,18 @@ AttributeModifiers::AttributeModifiers(Actor::Attribute attr, int modifier, int 
 AttributeModifiers::~AttributeModifiers()
 {
 }
+
+Actor::Attribute AttributeModifiers::attr()
+{
+  return _attr;
+}
+
+int AttributeModifiers::turns()
+{
+  return _turns;
+}
+
+int AttributeModifiers::modifier()
+{
+  return _modifier;
+}

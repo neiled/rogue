@@ -56,6 +56,11 @@ void Tile::add_item(Item * item)
   _items.push_back(item);
 }
 
+void Tile::remove_item(Item* item)
+{
+  _items.erase(remove(_items.begin(), _items.end(), item), _items.end());
+}
+
 int Tile::x() const
 {
   return _x;
