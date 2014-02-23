@@ -7,6 +7,7 @@
 #include "messages.h"
 #include "item_factory.h"
 #include "command_decoder_game.h"
+#include "command_decoder_inventory.h"
 
 
 Game::Game() {
@@ -14,6 +15,7 @@ Game::Game() {
   ItemFactory::Init();
   _world.init();
   _decoders[Game::GameState::GAME] = new CommandDecoderGame();
+  _decoders[Game::GameState::MENU_INVENTORY] = new CommandDecoderInventory();
   _state = GameState::GAME;
   eventLoop();
 }
