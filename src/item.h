@@ -2,6 +2,7 @@
 #define ITEM_H 
 
 #include <vector>
+#include <string>
 #include "attribute_modifiers.h"
 
 class Item
