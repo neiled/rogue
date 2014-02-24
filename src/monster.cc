@@ -74,10 +74,11 @@ void Monster::die()
 
 Item* Monster::generate_corpse()
 {
+  //TODO: This should use the prototypes from item builder
   switch(_monster_type)
   {
     case MonsterType::Orc:
-      return new Item(Item::ItemType::CORPSE, Item::ItemSubtype::CORPSE_ORC);
+      return new Item("Orc Corpse", Item::ItemType::CORPSE, Item::ItemSubtype::CORPSE_ORC);
       break;
     default:
       return nullptr;
