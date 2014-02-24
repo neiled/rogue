@@ -17,6 +17,8 @@ void CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
     player.clearCommands();
   else if(key == SDLK_i)
     game.state(Game::GameState::MENU_INVENTORY);
+  else if(key == SDLK_KP_5)
+    player.pushCommand(Commands::CMD::NOP);
   else if(key == SDLK_ESCAPE)
     game.state(Game::GameState::STOPPED);
 
