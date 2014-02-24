@@ -45,20 +45,14 @@ void Game::eventLoop()
     const int start_time_ms = SDL_GetTicks();
     while(SDL_PollEvent(&event))
     {
-      auto decoder = _decoders[_state];
       switch(event.type)
       {
         case SDL_KEYDOWN:
-          decoder->Decode(event.key.keysym.sym, *this);
+          _decoders[_state]->Decode(event.key.keysym.sym, *this);
           break;
-          //if(event.key.keysym.sym == SDLK_ESCAPE)
-            //running = false;
         default:
           break;
       }
-
-      if(_state == GameState::STOPPED)
-        running = false;
 
     }
 
@@ -77,6 +71,8 @@ void Game::eventLoop()
 
     delay(start_time_ms);
 
+    if(_state == GameState::STOPPED)
+      running = false;
 
   }
 
