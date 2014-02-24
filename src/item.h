@@ -15,8 +15,8 @@ public:
     POTION_HEALTH
   };
   
-  Item (ItemType itemType, ItemSubtype subtype, std::vector<AttributeModifiers> modifiers);
-  Item(ItemType itemType, ItemSubtype subtype);
+  Item (std::string name, ItemType itemType, ItemSubtype subtype, std::vector<AttributeModifiers> modifiers);
+  Item(std::string name, ItemType itemType, ItemSubtype subtype);
   virtual ~Item ();
   Item(Item& other);
   
