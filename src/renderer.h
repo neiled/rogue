@@ -2,6 +2,7 @@
 #define RENDERER_H_
 
 
+#include "game.h"
 #include "item.h"
 #include <vector>
 #include <array>
@@ -30,10 +31,7 @@ class Renderer {
     Renderer(Graphics* graphics);
     ~Renderer();
   
-    void render(Level& level);
-    void render(Player& player);
-    void render_info(Player& player);
-    void render_messages(std::deque<std::string> messages);
+    void render(Game& game);
     void update(World* world, int elapsed_time_in_ms);
 
     const static int TILE_SIZE = 32;
@@ -70,6 +68,13 @@ class Renderer {
     void load_items();
     void load_corpses();
     void load_potions();
+
+    void render(Level& level);
+    void render(Player& player);
+    void render_info(Player& player);
+    void render_messages(std::deque<std::string> messages);
+    void render_state(Game::GameState state, Player& player);
+    void render_inventory(Inventory& inventory);
 
 
 };

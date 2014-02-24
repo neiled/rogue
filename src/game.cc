@@ -87,9 +87,20 @@ void Game::state(GameState state)
   _state = state;
 }
 
+Game::GameState Game::state()
+{
+  return _state;
+}
+
 Player* Game::player()
 {
   return _world.player();
+}
+
+
+Level* Game::level()
+{
+  return &_world.getCurrentLevel();
 }
 
 void Game::delay(int start_time_ms)
@@ -116,10 +127,7 @@ void Game::draw(Graphics* graphics, Renderer* renderer)
 {
   auto player = _world.player();
   graphics->clearScreen();
-  renderer->render(_world.getCurrentLevel());
-  renderer->render(*player);
-  renderer->render_info(*player);
-  renderer->render_messages(Messages::AllMessages());
+  renderer->render(*this);
   graphics->render();
 }
    

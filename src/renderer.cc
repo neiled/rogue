@@ -8,6 +8,8 @@
 #include "monster.h"
 #include "world.h"
 #include "item.h"
+#include "game.h"
+#include "messages.h"
 
 Renderer::Renderer(Graphics* graphics)
 {
@@ -27,6 +29,16 @@ Renderer::Renderer(Graphics* graphics)
 Renderer::~Renderer()
 {
 
+}
+
+void Renderer::render(Game& game)
+{
+  render(*game.level());
+  render(*game.player());
+  render_info(*game.player());
+  render_messages(Messages::AllMessages());
+  render_state(game.state(), *game.player());
+  
 }
 
 
@@ -194,7 +206,6 @@ void Renderer::render(Player& player)
   auto currentTile = player.tile();
   _player->update(player.direction);
   draw_sprite(_player, *currentTile);
-  //draw_health(player);
 }
 
 void Renderer::draw_health(Actor& actor)
@@ -257,6 +268,34 @@ void Renderer::render_messages(std::deque<std::string> messages)
     SDL_DestroyTexture(messageT);
     
   }
+  SDL_RenderSetViewport(_graphics->Renderer, NULL);
+}
+
+void Renderer::render_state(Game::GameState state, Player& player)
+{
+  switch(state)
+  {
+    case Game::GameState::MENU_INVENTORY:
+      render_inventory(*player.inventory());
+      break;
+    default:
+      break;
+  }
+
+}
+
+void Renderer::render_inventory(Inventory& inventory)
+{
+  SDL_Rect vp_inv;
+  vp_inv.x = 100;
+  vp_inv.y = 100;
+  vp_inv.h = 800;
+  vp_inv.w = 800;
+
+  //SDL_RenderSetViewport(_graphics->Renderer, &vp_inv);
+  SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+  SDL_RenderFillRect(_graphics->Renderer, &vp_inv);
+
 }
 
 SDL_Texture* Renderer::render_message(std::string message, int height)

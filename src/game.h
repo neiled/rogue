@@ -16,7 +16,9 @@ class Game {
     enum class GameState {GAME, MENU_INVENTORY, STOPPED};
 
     void state(GameState state);
+    GameState state();
     Player* player();
+    Level* level();
 
   private:
     void eventLoop();
