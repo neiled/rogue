@@ -1,14 +1,15 @@
 #include "item.h"
 #include <SDL2/SDL.h>
 
-Item::Item(ItemType itemType, ItemSubtype subtype, std::vector<AttributeModifiers> modifiers )
+Item::Item(std::string name, ItemType itemType, ItemSubtype subtype, std::vector<AttributeModifiers> modifiers )
 {
   _item_type = itemType;
   _item_subtype = subtype;
   _modifiers = modifiers;
+  _name = name;
 }
 
-Item::Item(ItemType itemType, ItemSubtype subtype) : Item(itemType, subtype, std::vector<AttributeModifiers>())
+Item::Item(std::string name, ItemType itemType, ItemSubtype subtype) : Item(name, itemType, subtype, std::vector<AttributeModifiers>())
 {
 }
 
