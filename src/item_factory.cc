@@ -7,11 +7,8 @@ std::map<Item::ItemType, std::map<Item::ItemSubtype, Item*>> ItemFactory::_proto
 
 Item* ItemFactory::Build()
 {
-  SDL_Log("1a");
   auto proto = ItemFactory::getProtoPotion(Item::ItemSubtype::POTION_HEALTH);
-  SDL_Log("2a");
   auto newPotion =  new Potion(proto);
-  SDL_Log("3a");
   return newPotion;
 }
 
@@ -23,7 +20,7 @@ void ItemFactory::Init()
 void ItemFactory::init_potions()
 {
   ItemFactory::_prototypes[Item::ItemType::POTION][Item::ItemSubtype::POTION_HEALTH] = 
-    new Potion(Item::ItemSubtype::POTION_HEALTH, {{Actor::Attribute::HEALTH, 25, 0}});
+    new Potion("Small Health Potion", Item::ItemSubtype::POTION_HEALTH, {{Actor::Attribute::HEALTH, 25, 0}});
 }
 
 Potion& ItemFactory::getProtoPotion(Item::ItemSubtype subtype)
