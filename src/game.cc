@@ -35,9 +35,9 @@ void Game::eventLoop()
   Renderer renderer(&graphics);
   SDL_Log("Done renderer");
   CommandProcessor cProc;
-  int last_update_time = SDL_GetTicks();
+  //int last_update_time = SDL_GetTicks();
 
-  update();
+  update(renderer);
 
   bool running = true;
   while (running == true)
@@ -60,13 +60,13 @@ void Game::eventLoop()
     if(player->hasCommands())
     {
       if(cProc.Process(player->popCommand(), *player))
-        update();
+        update(renderer);
     }
 
 
-    int current_time = SDL_GetTicks();
-    updateGraphics(&renderer, current_time - last_update_time);
-    last_update_time = current_time;
+    //int current_time = SDL_GetTicks();
+    //updateGraphics(&renderer);
+    //last_update_time = current_time;
     draw(&graphics, &renderer);
 
     delay(start_time_ms);
@@ -102,23 +102,23 @@ Level* Game::level()
 void Game::delay(int start_time_ms)
 {
   const int elapsed_time_ms = SDL_GetTicks() - start_time_ms;
-  int timeToDelay = 1000 / 60 - elapsed_time_ms;
+  int timeToDelay = 1000 / 30 - elapsed_time_ms;
   timeToDelay = timeToDelay < 0 ? 0 : timeToDelay;
 
   SDL_Delay(timeToDelay);  
 }
 
-void Game::update()
+void Game::update(Renderer& renderer)
 {
   ++_turn;
   _world.update();
+  renderer.update(&_world);
 }
-void Game::updateGraphics(Renderer* renderer, int elapsed_time_ms)
-{
-  _world.updateGraphics();
-  renderer->update(&_world, elapsed_time_ms);
+//void Game::updateGraphics(Renderer* renderer, int elapsed_time_ms)
+//{
+  //_world.updateGraphics();
   
-}
+//}
 void Game::draw(Graphics* graphics, Renderer* renderer)
 {
   auto player = _world.player();

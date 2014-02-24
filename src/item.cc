@@ -22,6 +22,7 @@ Item::Item(Item& other)
   _item_type = other._item_type;
   _item_subtype = other._item_subtype;
   _modifiers = other._modifiers;
+  _name = other._name;
 }
 
 Item::ItemType Item::item_type()

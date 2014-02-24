@@ -32,7 +32,7 @@ class Renderer {
     ~Renderer();
   
     void render(Game& game);
-    void update(World* world, int elapsed_time_in_ms);
+    void update(World* world);
 
     const static int TILE_SIZE = 32;
     

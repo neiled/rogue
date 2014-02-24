@@ -63,7 +63,7 @@ class Actor
   protected:
     Tile* _currentTile = nullptr;
     Tile* _targetTile = nullptr;
-    int _health;
+    //int _health;
 
     std::deque<Commands::CMD> _commandQueue;
     std::deque<Tile*> _travelPath;

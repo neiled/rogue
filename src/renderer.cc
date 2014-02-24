@@ -115,7 +115,7 @@ void Renderer::load_info()
   _info_char = new Sprite(_graphics, "../content/outline.png", 0, 0, 150, 271);
 }
 
-void Renderer::update(World* world, int elapsed_time_in_ms)
+void Renderer::update(World* world)
 {
   auto &player = *world->player();
   updateCamera(player);
@@ -254,20 +254,16 @@ void Renderer::render_messages(std::deque<std::string> messages)
   SDL_RenderSetViewport(_graphics->Renderer, &_vp_msg);
 
   int message_h = 16;
-  int total_messages = _vp_msg.h / message_h;
+  int max_messages = _vp_msg.h / message_h;
+  int start_message = messages.size()-max_messages;
+  if(start_message < 0)
+    start_message = 0;
 
-  for (int i = 1; i <= messages.size() && i <= total_messages; ++i)
+  int current = 0;
+  for (int i = start_message; i < messages.size() && current <= max_messages; ++i)
   {
-    std::string message = messages.at(messages.size() - i);
-    render_string(message, 25, (i-1)*message_h, message_h);
-    //auto messageT = render_message(message, message_h);
-    //SDL_Rect dst;
-    //dst.x = 25;
-    //dst.y = (i-1)*message_h;
-    //SDL_QueryTexture(messageT, NULL, NULL, &dst.w, &dst.h);
-    //SDL_RenderCopy(_graphics->Renderer, messageT, NULL, &dst);
-    //SDL_DestroyTexture(messageT);
-    
+    std::string message = messages.at(i);
+    render_string(message, 25, current++*message_h, message_h);
   }
   SDL_RenderSetViewport(_graphics->Renderer, NULL);
 }
@@ -280,7 +276,7 @@ void Renderer::render_string(std::string message, int x, int y, int h)
     dst.y = y;
     SDL_QueryTexture(messageT, NULL, NULL, &dst.w, &dst.h);
     SDL_RenderCopy(_graphics->Renderer, messageT, NULL, &dst);
-    SDL_DestroyTexture(messageT);  
+    SDL_DestroyTexture(messageT);
 }
 
 void Renderer::render_state(Game::GameState state, Player& player)
@@ -311,8 +307,9 @@ void Renderer::render_inventory(Inventory& inventory)
   int count = 0;
   for(Item* item : inventory.items())
   {
-    _items[item->item_type()][item->item_subtype()]->draw(0, count*TILE_SIZE, 0, 0, alpha);
-    render_string(TILE_SIZE*2, count * (TILE_SIZE / 2), 16);
+    _items[item->item_type()][item->item_subtype()]->draw(vp_inv.x + TILE_SIZE, vp_inv.y + count*TILE_SIZE, 0, 0, SDL_ALPHA_OPAQUE);
+    render_string(std::to_string(count), vp_inv.x , vp_inv.y + 8 + (count * TILE_SIZE), 16);
+    render_string(item->name(), vp_inv.x + TILE_SIZE*2, vp_inv.y + 8 + (count * TILE_SIZE), 16);
     count++;
   }  
 

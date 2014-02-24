@@ -22,8 +22,8 @@ class Game {
 
   private:
     void eventLoop();
-    void update();
-    void updateGraphics(Renderer* renderer,  int elapsed_time_ms);
+    void update(Renderer& renderer);
+    //void updateGraphics(Renderer* renderer,  int elapsed_time_ms);
     void draw(Graphics* graphics, Renderer* renderer);
 
     void delay(int start_time_ms);

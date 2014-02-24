@@ -8,9 +8,10 @@
 #include <SDL2/SDL.h>
 #include "item.h"
 
-Actor::Actor(int max_health)
+Actor::Actor(int max_health) : _inventory(this)
 {
-  _health = max_health;
+  _attributes[Attribute::HEALTH] = max_health;
+  _attributes[Attribute::CON] = max_health;
 }
 
 Actor::~Actor()
@@ -190,17 +191,17 @@ void Actor::takeDamage(int amount)
 {
   if(is_player())
     Messages::Add("You take " + std::to_string(amount) + " damage");
-  _health -= amount;
-  if(_health <= 0)
+  _attributes[Attribute::HEALTH] -= amount;
+  if(_attributes[Attribute::HEALTH] <= 0)
   {
-    _health = 0;
+    _attributes[Attribute::HEALTH] = 0;
     die();
   }
 }
 
 bool Actor::dead() const
 {
-  return _health <= 0;
+  return _attributes.at(Attribute::HEALTH) <= 0;
 }
 
 Tile* Actor::checkCanMove(int newX, int newY)
@@ -261,7 +262,9 @@ bool Actor::hasCommands() const
 
 int Actor::health()
 {
-  return _health;
+  if(_attributes[Attribute::HEALTH] > _attributes[Attribute::CON])
+    _attributes[Attribute::HEALTH] = _attributes[Attribute::CON];
+  return _attributes[Attribute::HEALTH];
 }
 
 Inventory* Actor::inventory()
