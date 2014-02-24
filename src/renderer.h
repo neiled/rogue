@@ -58,6 +58,7 @@ class Renderer {
     void renderLevel(Level& level);
     void renderMonsters(Level& level);
     void render_items(Tile& tile, int alpha);
+    void render_string(std::string message, int x, int y, int h);
     SDL_Texture* render_message(std::string message, int height);
 
     void draw_sprite(Sprite* sprite, Tile& tile);
