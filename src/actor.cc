@@ -77,16 +77,7 @@ bool Actor::can_see_actor(Actor& actor)
   if(actor.tile()->is_lit() && this->tile()->is_lit())
     return true;
 
-  //int visibility = 5;//TODO get this number from somewhere...
-  
-  //for(int y = this->y()-visibility; y < this->y() + visibility; ++y)
-  //{
-    //for(int x = this->x() - visibility; x < this->x() + visibility; ++x)
-    //{
-      //if(actor.x() == x && actor.y() == y)
-        //return true;
-    //}
-  //}
+
   return false;
 }
 
@@ -109,8 +100,8 @@ bool Actor::attemptMove(int xModifier, int yModifier)
     if((this->is_player() || otherActor->is_player()))
     {
       meleeAttack(otherActor);
-      if(otherActor->dead() == false)
-        otherActor->meleeAttack(this);
+      //if(otherActor->dead() == false)
+        //otherActor->meleeAttack(this);
     }
     return false;
   }
