@@ -32,3 +32,8 @@ Item::ItemSubtype Item::item_subtype()
 {
   return _item_subtype;
 }
+
+std::string Item::name()
+{
+  return _name;
+}
