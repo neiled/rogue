@@ -259,16 +259,28 @@ void Renderer::render_messages(std::deque<std::string> messages)
   for (int i = 1; i <= messages.size() && i <= total_messages; ++i)
   {
     std::string message = messages.at(messages.size() - i);
-    auto messageT = render_message(message, message_h);
-    SDL_Rect dst;
-    dst.x = 25;
-    dst.y = (i-1)*message_h;
-    SDL_QueryTexture(messageT, NULL, NULL, &dst.w, &dst.h);
-    SDL_RenderCopy(_graphics->Renderer, messageT, NULL, &dst);
-    SDL_DestroyTexture(messageT);
+    render_string(message, 25, (i-1)*message_h, message_h);
+    //auto messageT = render_message(message, message_h);
+    //SDL_Rect dst;
+    //dst.x = 25;
+    //dst.y = (i-1)*message_h;
+    //SDL_QueryTexture(messageT, NULL, NULL, &dst.w, &dst.h);
+    //SDL_RenderCopy(_graphics->Renderer, messageT, NULL, &dst);
+    //SDL_DestroyTexture(messageT);
     
   }
   SDL_RenderSetViewport(_graphics->Renderer, NULL);
+}
+
+void Renderer::render_string(std::string message, int x, int y, int h)
+{
+    auto messageT = render_message(message, h);
+    SDL_Rect dst;
+    dst.x = x;
+    dst.y = y;
+    SDL_QueryTexture(messageT, NULL, NULL, &dst.w, &dst.h);
+    SDL_RenderCopy(_graphics->Renderer, messageT, NULL, &dst);
+    SDL_DestroyTexture(messageT);  
 }
 
 void Renderer::render_state(Game::GameState state, Player& player)
@@ -295,6 +307,14 @@ void Renderer::render_inventory(Inventory& inventory)
   //SDL_RenderSetViewport(_graphics->Renderer, &vp_inv);
   SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
   SDL_RenderFillRect(_graphics->Renderer, &vp_inv);
+  
+  int count = 0;
+  for(Item* item : inventory.items())
+  {
+    _items[item->item_type()][item->item_subtype()]->draw(0, count*TILE_SIZE, 0, 0, alpha);
+    render_string(TILE_SIZE*2, count * (TILE_SIZE / 2), 16);
+    count++;
+  }  
 
 }
 
