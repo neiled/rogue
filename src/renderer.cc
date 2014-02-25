@@ -11,9 +11,8 @@
 #include "game.h"
 #include "messages.h"
 #include "render_monsters.h"
-#include "render_inventory.h"
 
-Renderer::Renderer(Graphics* graphics)
+Renderer::Renderer(Graphics* graphics) : _render_inv(graphics)
 {
   _graphics = graphics;
   loadMapTiles();
@@ -270,6 +269,7 @@ void Renderer::render_string(std::string message, int x, int y, int h)
 
 void Renderer::render_state(Game::GameState state, Player& player)
 {
+  SDL_RenderSetViewport(_graphics->Renderer, NULL);
   switch(state)
   {
     case Game::GameState::MENU_INVENTORY:
@@ -283,7 +283,7 @@ void Renderer::render_state(Game::GameState state, Player& player)
 
 void Renderer::render_inventory(Inventory& inventory)
 {
-  RenderInventory::Render(*this, *_graphics, _items, inventory);
+  _render_inv.render(*this, _items, inventory);
 }
 
 SDL_Texture* Renderer::render_message(std::string message, int height)

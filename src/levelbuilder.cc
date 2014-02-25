@@ -46,21 +46,14 @@ void LevelBuilder::buildLevel(Level& level, Player& player)
 
 void LevelBuilder::generateMonsters(Level& level)
 {
-  SDL_Log("1");
   for (int i = 0; i < Level::LEVEL_MONSTER_COUNT;)
   {
-  SDL_Log("2");
     auto randomTile = level.getRandomTileOfType(Tile::TileType::Floor);
-  SDL_Log("3");
     if(!randomTile->actor())
     {
-  SDL_Log("4");
       auto monster = MonsterFactory::Build(*randomTile);
-  SDL_Log("5");
       level.addMonster(monster);
-  SDL_Log("6");
       ++i;
-  SDL_Log("7");
     }
   }
 }

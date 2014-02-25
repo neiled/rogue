@@ -12,6 +12,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2_Image/SDL_Image.h>
 #include <SDL2_ttf/SDL_ttf.h>
+#include "render_inventory.h"
 
 using std::vector;
 using std::array;
@@ -47,6 +48,8 @@ class Renderer {
     DirectionalSprite* _player = nullptr;
     Graphics* _graphics = nullptr;
     Sprite* _info_char = nullptr;
+
+    RenderInventory _render_inv;
 
     SDL_Rect _vp_main;
     SDL_Rect _vp_msg;
