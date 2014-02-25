@@ -10,6 +10,8 @@
 #include "item.h"
 #include "game.h"
 #include "messages.h"
+#include "render_monsters.h"
+#include "render_inventory.h"
 
 Renderer::Renderer(Graphics* graphics)
 {
@@ -74,7 +76,7 @@ void Renderer::init_viewports()
 
 void Renderer::loadMonsterTiles()
 {
-  _monsters[(int)Monster::MonsterType::Orc] = new DirectionalSprite(_graphics, "../content/monsters/monster_orc.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _monsters[Monster::MonsterType::Orc] = new DirectionalSprite(_graphics, "../content/monsters/monster_orc.png", 0, 0, TILE_SIZE, TILE_SIZE);
 }
 
 void Renderer::loadMapTiles()
@@ -138,27 +140,14 @@ void Renderer::updateCamera(Player& player)
 void Renderer::render(Level& level)
 {
   SDL_RenderSetViewport(_graphics->Renderer, &_vp_main);
-  renderLevel(level);
-  renderMonsters(level);
+  render_level(level);
+  render_monsters(level);
   SDL_RenderSetViewport(_graphics->Renderer, NULL);
 }
 
-void Renderer::renderMonsters(Level& level)
+void Renderer::render_monsters(Level& level)
 {
-  vector<Monster*> monsters = level.getMonsters();
-  for(Monster* m : monsters)
-  {
-    if(m->dead())
-      continue;
-    auto currentTile = m->tile();
-    auto lit = level.light_map(currentTile->x(), currentTile->y());
-    if(lit != Level::LightType::Lit)
-      continue;
-    auto sprite = _monsters[(int)m->getMonsterType()];
-    sprite->update(m->direction);
-    draw_sprite(sprite, *currentTile);
-    draw_health(*m);
-  }
+  RenderMonsters::Render(*this, _monsters, level);
 }
 
 void Renderer::render_items(Tile& tile, int alpha)
@@ -170,7 +159,7 @@ void Renderer::render_items(Tile& tile, int alpha)
 
 }
 
-void Renderer::renderLevel(Level& level)
+void Renderer::render_level(Level& level)
 {
   for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
   {
@@ -294,25 +283,7 @@ void Renderer::render_state(Game::GameState state, Player& player)
 
 void Renderer::render_inventory(Inventory& inventory)
 {
-  SDL_Rect vp_inv;
-  vp_inv.x = 100;
-  vp_inv.y = 100;
-  vp_inv.h = 800;
-  vp_inv.w = 800;
-
-  //SDL_RenderSetViewport(_graphics->Renderer, &vp_inv);
-  SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-  SDL_RenderFillRect(_graphics->Renderer, &vp_inv);
-  
-  int count = 0;
-  for(Item* item : inventory.items())
-  {
-    _items[item->item_type()][item->item_subtype()]->draw(vp_inv.x + TILE_SIZE, vp_inv.y + count*TILE_SIZE, 0, 0, SDL_ALPHA_OPAQUE);
-    render_string(std::to_string(count), vp_inv.x , vp_inv.y + 8 + (count * TILE_SIZE), 16);
-    render_string(item->name(), vp_inv.x + TILE_SIZE*2, vp_inv.y + 8 + (count * TILE_SIZE), 16);
-    count++;
-  }  
-
+  RenderInventory::Render(*this, *_graphics, _items, inventory);
 }
 
 SDL_Texture* Renderer::render_message(std::string message, int height)

@@ -35,11 +35,15 @@ class Renderer {
     void update(World* world);
 
     const static int TILE_SIZE = 32;
+
+    void draw_sprite(Sprite* sprite, Tile& tile);
+    void draw_health(Actor& actor);
+    void render_string(std::string message, int x, int y, int h);
     
   private:
     array<Sprite*,5> _mapTiles;
-    array<DirectionalSprite*, 1> _monsters;
-    std::map<Item::ItemType, std::map<Item::ItemSubtype, Sprite*>> _items;
+    Game::monster_sprites_t _monsters;
+    Game::item_sprites_t _items;
     DirectionalSprite* _player = nullptr;
     Graphics* _graphics = nullptr;
     Sprite* _info_char = nullptr;
@@ -55,14 +59,11 @@ class Renderer {
     void init_viewports();
     void draw_health_bar(int x, int y, int width, int height, int health, int max_health);
 
-    void renderLevel(Level& level);
-    void renderMonsters(Level& level);
+    void render_level(Level& level);
+    void render_monsters(Level& level);
     void render_items(Tile& tile, int alpha);
-    void render_string(std::string message, int x, int y, int h);
     SDL_Texture* render_message(std::string message, int height);
 
-    void draw_sprite(Sprite* sprite, Tile& tile);
-    void draw_health(Actor& actor);
     
     SDL_Rect _cameraRect;
     

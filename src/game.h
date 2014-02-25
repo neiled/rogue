@@ -2,17 +2,25 @@
 #define GAME_H_
 
 #include <map>
+#include <array>
 #include "world.h"
+#include "monster.h"
+#include "item.h"
 
 class Renderer;
 class Graphics;
 class CommandDecoder;
+class DirectionalSprite;
+class Sprite;
+
 
 class Game {
   public:
     Game();
     ~Game();
 
+    typedef std::map<Monster::MonsterType, DirectionalSprite*> monster_sprites_t;
+    typedef std::map<Item::ItemType, std::map<Item::ItemSubtype, Sprite*>> item_sprites_t;
     enum class GameState {GAME, MENU_INVENTORY, STOPPED};
 
     void state(GameState state);
