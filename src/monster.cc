@@ -7,8 +7,8 @@
 #include "item.h"
 #include "item_factory.h"
 
-Monster::Monster(Tile& startTile, Monster::MonsterType type, Monster::MonsterState state)
-  : Actor(max_health())
+Monster::Monster(Tile& startTile, Monster::MonsterType type, Monster::MonsterState state, int xp_level)
+  : Actor(max_health(), xp_level)
 {
   this->direction = static_cast<Actor::Direction>(Random::Between(0,3));
   setCurrentTile(startTile);
