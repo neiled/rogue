@@ -15,7 +15,7 @@ class AttributeModifiers;
 class Actor
 {
   public:
-    Actor(int max_health);
+    Actor(int max_health, int xp_level);
     virtual ~Actor();
 
     enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
