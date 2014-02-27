@@ -293,3 +293,23 @@ void Actor::apply_modifier(AttributeModifiers* modifier)
 {
   _attributes[modifier->attr()] += modifier->modifier();
 }
+
+int32_t Actor::xp()
+{
+  return _xp;
+}
+
+int32_t Actor::max_xp()
+{
+  return _max_xp;
+}
+
+int Actor::xp_level()
+{
+  return _xp_level;
+}
+
+int32_t Actor::calc_max_xp()
+{
+  return xp_level()*(xp_level()+1)*100+4000*(xp_level()/10)
+}
