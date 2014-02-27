@@ -4,6 +4,7 @@
 
 #include <deque>
 #include <map>
+#include <cstdint>
 #include "commands.h"
 #include "inventory.h"
 
@@ -52,13 +53,17 @@ class Actor
     
     int attack_score();
     int defense_score();
+    
     virtual int max_health() = 0;
     int health();
+    
     bool can_see_something_interesting();
 
     void drop_items();
 
     void add_modifier(AttributeModifiers* modifier);
+    
+    uint32_t xp();
     
   protected:
     Tile* _currentTile = nullptr;
@@ -85,6 +90,8 @@ class Actor
 
     void apply_modifier(AttributeModifiers* modifier);
     virtual void pickup_items();
+    
+    uint32_t _xp;
 
 
 };
