@@ -63,7 +63,7 @@ class Actor
 
     void add_modifier(AttributeModifiers* modifier);
     
-    uint32_t xp();
+    int32_t xp();
     
   protected:
     Tile* _currentTile = nullptr;
@@ -91,7 +91,7 @@ class Actor
     void apply_modifier(AttributeModifiers* modifier);
     virtual void pickup_items();
     
-    uint32_t _xp;
+    int32_t _xp;
 
 
 };
