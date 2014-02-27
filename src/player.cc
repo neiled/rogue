@@ -4,7 +4,7 @@
 #include "item.h"
 #include <deque>
 
-Player::Player() : Actor(max_health())
+Player::Player() : Actor(max_health(), 1)
 {
   direction = Actor::Direction::EAST;
 }
