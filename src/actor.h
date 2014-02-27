@@ -65,6 +65,8 @@ class Actor
     
     int32_t xp();
     int32_t max_xp();
+    int xp_level();
+
     
   protected:
     Tile* _currentTile = nullptr;
@@ -95,6 +97,8 @@ class Actor
     int32_t _xp;
     int32_t _max_xp;
     int32_t calc_max_xp();
+    int _xp_level;
+
 
 
 };
