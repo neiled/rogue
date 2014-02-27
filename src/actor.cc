@@ -8,7 +8,7 @@
 #include <SDL2/SDL.h>
 #include "item.h"
 
-Actor::Actor(int max_health) : _inventory(this)
+Actor::Actor(int max_health, int xp_level) : _inventory(this), _xp_level(xp_level)
 {
   _attributes[Attribute::HEALTH] = max_health;
   _attributes[Attribute::CON] = max_health;
