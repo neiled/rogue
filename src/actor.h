@@ -64,6 +64,7 @@ class Actor
     void add_modifier(AttributeModifiers* modifier);
     
     int32_t xp();
+    int32_t max_xp();
     
   protected:
     Tile* _currentTile = nullptr;
@@ -92,6 +93,8 @@ class Actor
     virtual void pickup_items();
     
     int32_t _xp;
+    int32_t _max_xp;
+    int32_t calc_max_xp();
 
 
 };
