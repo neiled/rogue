@@ -154,11 +154,11 @@ void Actor::meleeAttack(Actor* other)
   if(!other)
     return;
 
-  float toHit = getToHitChance(*other);
+  float toHit = hit_chance(*other);
 
   if(Random::CheckChance(toHit))
   {
-    int damage = Random::Between(0,10);
+    int damage = calc_damage(*other);
     if(is_player())
       Messages::Add("You deal " + std::to_string(damage) + " damage");
     other->takeDamage(damage);
@@ -179,7 +179,22 @@ int Actor::defense_score()
   return 100;
 }
 
-float Actor::getToHitChance(Actor& other)
+int Actor::atk()
+{
+  return _attributes[Attribute::ATK];
+}
+
+int Actor::calc_damage(Actor& other)
+{
+  int damage = 0;
+  if(_weapon)
+    damage =  _weapon->calc_damage(other);
+  else
+    damage = atk();
+  return Random::BetweenNormal(0,damage);
+}
+
+float Actor::hit_chance(Actor& other)
 {
   float attackFloat = attack_score();
   float defenseFloat = other.defense_score();

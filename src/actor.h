@@ -86,7 +86,10 @@ class Actor
     bool attemptMove(int newX, int newY);
     Tile* checkCanMove(int newX, int newY);
     void meleeAttack(Actor* other);
-    float getToHitChance(Actor& other);
+    float hit_chance(Actor& other);
+    int calc_damage(Actor&);
+
+    int atk();
 
     virtual void die() = 0;
     virtual bool is_player() = 0;
@@ -98,6 +101,8 @@ class Actor
     int32_t _max_xp;
     int32_t calc_max_xp();
     int _xp_level;
+
+    Item* _weapon;
 
 
 

@@ -15,7 +15,7 @@ void RenderMonsters::Render(Renderer& renderer, Game::monster_sprites_t monster_
     auto lit = level.light_map(currentTile->x(), currentTile->y());
     if(lit != Level::LightType::Lit)
       continue;
-    auto sprite = monster_sprites[m->getMonsterType()];
+    auto sprite = monster_sprites[m->monster_type()];
     sprite->update(m->direction);
     renderer.draw_sprite(sprite, *currentTile);
     renderer.draw_health(*m);

@@ -56,7 +56,7 @@ void Monster::hunt(Player& player)
 }
 
 
-Monster::MonsterType Monster::getMonsterType()
+Monster::MonsterType Monster::monster_type()
 {
   return _monster_type;
 }
@@ -92,5 +92,9 @@ int Monster::max_health()
 
 void Monster::populate_inventory()
 {
-  _inventory.add(ItemFactory::Build());
+  //TODO: This should be populated when the player sees the monster and use their current luck score
+  if(Random::Between(0,100) < 50)
+    _inventory.add(ItemFactory::Build(monster_type(), xp_level()));
+  if(Random::Between(0,100) < 25)
+    _inventory.add(ItemFactory::Build(monster_type(), xp_level()));
 }

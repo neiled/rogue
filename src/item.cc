@@ -39,3 +39,8 @@ std::string Item::name()
 {
   return _name;
 }
+
+int Item::calc_damage(Actor& other)
+{
+  return 20;
+}

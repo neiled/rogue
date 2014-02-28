@@ -22,7 +22,7 @@ class Monster : public Actor
     
     virtual void update() override;
 
-    Monster::MonsterType getMonsterType();
+    Monster::MonsterType monster_type();
     
     
   private:
