@@ -12,5 +12,6 @@ public:
 
 private:
   static Monster::MonsterType calc_monster_type(int depth);
+  static int calc_xp_level(int depth);
 };
 #endif

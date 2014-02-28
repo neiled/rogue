@@ -311,5 +311,5 @@ int Actor::xp_level()
 
 int32_t Actor::calc_max_xp()
 {
-  return xp_level()*(xp_level()+1)*100+4000*(xp_level()/10)
+  return xp_level()*(xp_level()+1)*100+4000*(xp_level()/10);
 }
