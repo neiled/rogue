@@ -42,7 +42,7 @@ class Actor
     bool can_see_actor(Actor& actor);
     
 
-    void pushCommand(Commands::CMD command);
+    void push_command(Commands::CMD command);
     Commands::CMD popCommand();
     bool hasCommands() const;
     void clearCommands();
@@ -90,6 +90,7 @@ class Actor
     int calc_damage(Actor&);
 
     int atk();
+    int def();
 
     virtual void die() = 0;
     virtual bool is_player() = 0;

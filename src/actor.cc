@@ -12,6 +12,8 @@ Actor::Actor(int max_health, int xp_level) : _inventory(this), _xp_level(xp_leve
 {
   _attributes[Attribute::HEALTH] = max_health;
   _attributes[Attribute::CON] = max_health;
+  _attributes[Attribute::ATK] = Random::BetweenNormal(1,_xp_level*5);
+  _attributes[Attribute::DEF] = Random::BetweenNormal(1,_xp_level*5);
 }
 
 Actor::~Actor()
@@ -163,6 +165,8 @@ void Actor::meleeAttack(Actor* other)
       Messages::Add("You deal " + std::to_string(damage) + " damage");
     other->takeDamage(damage);
   }
+  else
+    Messages::Add("You missed! chance of " + std::to_string(toHit));
 
 
   return;
@@ -171,17 +175,22 @@ void Actor::meleeAttack(Actor* other)
 int Actor::attack_score()
 {
   //TODO make this a calc
-  return 100;
+  return atk() * 5;
 }
 int Actor::defense_score()
 {
   //TODO make this a calc  
-  return 100;
+  return def() * 5;
 }
 
 int Actor::atk()
 {
   return _attributes[Attribute::ATK];
+}
+
+int Actor::def()
+{
+  return _attributes[Attribute::DEF];
 }
 
 int Actor::calc_damage(Actor& other)
@@ -190,7 +199,7 @@ int Actor::calc_damage(Actor& other)
   if(_weapon)
     damage =  _weapon->calc_damage(other);
   else
-    damage = atk();
+    damage = atk()*5;
   return Random::BetweenNormal(0,damage);
 }
 
@@ -256,7 +265,7 @@ Commands::CMD Actor::getCommandFromTiles(Tile& start, Tile& end)
   return Commands::CMD::NOP;
 }
 
-void Actor::pushCommand(Commands::CMD command)
+void Actor::push_command(Commands::CMD command)
 {
   _commandQueue.push_back(command);
 }

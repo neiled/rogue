@@ -3,6 +3,7 @@
 
 #include <random>
 #include <type_traits>
+#include <SDL2/SDL.h>
 
 class Random
 {
