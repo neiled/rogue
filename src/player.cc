@@ -5,12 +5,11 @@
 #include "messages.h"
 #include <deque>
 
-Player::Player() : Actor(100, 1)
+Player::Player() : Actor(100, 1), _xp(0)
 {
   direction = Actor::Direction::EAST;
-  SDL_Log("New MinXP %d", _min_xp);
-  SDL_Log("New MaxXP %d", _max_xp);
-  SDL_Log("New XP %d", _xp);
+  _max_xp = calc_max_xp();
+  _min_xp = calc_min_xp();
 }
 
 Player::~Player()
@@ -46,4 +45,52 @@ void Player::pickup_items()
   }
 }
 
+void Player::killed(Actor* other)
+{
+  int xp_gained = 30;//TODO: calc xp for real
+  increase_xp(xp_gained);
+}
 
+int32_t Player::calc_max_xp()
+{
+  return ((xp_level()*(xp_level()+1))*100)+(4000*(xp_level()/10.0));
+}
+
+int32_t Player::calc_min_xp()
+{
+  return ((xp_level()-1)*xp_level()*100)+(4000*((xp_level()-1)/10.0));
+}
+int32_t Player::xp()
+{
+  return _xp;
+}
+
+void Player::increase_xp(int amount)
+{
+  _xp += amount;
+  while(_xp > calc_max_xp())
+  {
+    increase_level();
+  }
+}
+
+void Player::increase_level()
+{
+  ++_xp_level;
+  _max_xp = calc_max_xp();
+  _min_xp = calc_min_xp();
+  _attributes[Attribute::ATK]++;
+  _attributes[Attribute::DEF]++;
+  _attributes[Attribute::CON]+=10;
+  _attributes[Attribute::HEALTH] = max_health();
+}
+
+int32_t Player::max_xp()
+{
+  return _max_xp;
+}
+
+int32_t Player::min_xp()
+{
+  return _min_xp;
+}

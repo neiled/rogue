@@ -8,14 +8,12 @@
 #include <SDL2/SDL.h>
 #include "item.h"
 
-Actor::Actor(int max_health, int xp_level) : _xp_level(xp_level), _xp(0)
+Actor::Actor(int max_health, int xp_level) : _xp_level(xp_level)
 {
   _attributes[Attribute::HEALTH] = max_health;
   _attributes[Attribute::CON] = max_health;
   _attributes[Attribute::ATK] = Random::BetweenNormal(1,_xp_level*5);
   _attributes[Attribute::DEF] = Random::BetweenNormal(1,_xp_level*5);
-  _max_xp = calc_max_xp();
-  _min_xp = calc_min_xp();
 }
 
 Actor::~Actor()
@@ -179,11 +177,6 @@ void Actor::meleeAttack(Actor* other)
   return;
 }
 
-void Actor::killed(Actor* other)
-{
-  int xp_gained = 30;//TODO: calc xp for real
-  increase_xp(xp_gained);
-}
 
 int Actor::attack_score()
 {
@@ -332,53 +325,10 @@ void Actor::apply_modifier(AttributeModifiers* modifier)
   _attributes.at(modifier->attr()) += modifier->modifier();
 }
 
-int32_t Actor::xp()
-{
-  return _xp;
-}
-
-void Actor::increase_xp(int amount)
-{
-  _xp += amount;
-  while(_xp > calc_max_xp())
-  {
-    increase_level();
-  }
-}
-
-void Actor::increase_level()
-{
-  ++_xp_level;
-  _max_xp = calc_max_xp();
-  _min_xp = calc_min_xp();
-  _attributes[Attribute::ATK]++;
-  _attributes[Attribute::DEF]++;
-  _attributes[Attribute::CON]+=10;
-  _attributes[Attribute::HEALTH] = max_health();
-}
-
-int32_t Actor::max_xp()
-{
-  return _max_xp;
-}
-
-int32_t Actor::min_xp()
-{
-  return _min_xp;
-}
 
 int Actor::xp_level()
 {
   return _xp_level;
 }
 
-int32_t Actor::calc_max_xp()
-{
-  return ((xp_level()*(xp_level()+1))*100)+(4000*(xp_level()/10.0));
-}
-
-int32_t Actor::calc_min_xp()
-{
-  return ((xp_level()-1)*xp_level()*100)+(4000*((xp_level()-1)/10.0));
-}
 

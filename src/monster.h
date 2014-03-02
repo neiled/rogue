@@ -37,6 +37,7 @@ class Monster : public Actor
     virtual void die() override;
     virtual int max_health() override;
     virtual bool is_player() override { return false;}
+    virtual void killed(Actor* other) override {}
 
 };
 #endif
