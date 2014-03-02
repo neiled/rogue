@@ -8,6 +8,9 @@
 Player::Player() : Actor(100, 1)
 {
   direction = Actor::Direction::EAST;
+  SDL_Log("New MinXP %d", _min_xp);
+  SDL_Log("New MaxXP %d", _max_xp);
+  SDL_Log("New XP %d", _xp);
 }
 
 Player::~Player()

@@ -32,6 +32,7 @@ void Game::reset()
   _world.init();
   Messages::Clear();
   _state = GameState::GAME;
+  end_turn();
 }
 
 void Game::eventLoop()
@@ -43,31 +44,19 @@ void Game::eventLoop()
   Renderer renderer(&graphics);
   SDL_Log("Done renderer");
   CommandProcessor cProc;
+  end_turn();
   //int last_update_time = SDL_GetTicks();
 
-  update(renderer);
-  draw(&graphics, &renderer);
 
   bool running = true;
   while (running == true)
   {
     Player* player = _world.player();
-    const int start_time_ms = SDL_GetTicks();
+    //const int start_time_ms = SDL_GetTicks();
+    draw(&graphics, &renderer);
     SDL_WaitEvent(&event);
 
-    switch(event.type)
-    {
-      case SDL_KEYDOWN:
-      {
-        auto decoded = _decoders[_state]->Decode(event.key.keysym.sym, *this);
-        if(decoded)
-          draw(&graphics, &renderer);
-        break;
-      }
-      default:
-        break;
-    }
-
+    decode_event(event, graphics, renderer);
 
     if(_state == GameState::GAME && player->dead())
       _state = GameState::DEAD;
@@ -77,7 +66,7 @@ void Game::eventLoop()
       {
         if(cProc.Process(player->popCommand(), *player))
         {
-          update(renderer);
+          end_turn();
           draw(&graphics, &renderer);
         }
       }
@@ -93,13 +82,43 @@ void Game::eventLoop()
     if(_state == GameState::STARTING)
     {
       reset();
-      update(renderer);
     }
     if(_state == GameState::STOP)
       running = false;
 
   }
 
+}
+
+//draw the screen
+//let the monsters have their turn
+//update the camera
+//check the player has moved down a level
+//update the turn count
+//
+
+void Game::end_turn()
+{
+  ++_turn;
+  _world.update();
+}
+
+void Game::decode_event(SDL_Event& event, Graphics& graphics, Renderer& renderer)
+{
+  switch(event.type)
+  {
+    case SDL_KEYDOWN:
+    {
+      auto decoded = _decoders[_state]->Decode(event.key.keysym.sym, *this);
+      if(decoded)
+      {
+        draw(&graphics, &renderer);
+      }
+      break;
+    }
+    default:
+      break;
+  }
 }
 
 void Game::state(GameState state)
@@ -132,19 +151,9 @@ void Game::delay(int start_time_ms)
   SDL_Delay(timeToDelay);  
 }
 
-void Game::update(Renderer& renderer)
-{
-  ++_turn;
-  _world.update();
-  renderer.update(&_world);
-}
-//void Game::updateGraphics(Renderer* renderer, int elapsed_time_ms)
-//{
-  //_world.updateGraphics();
-  
-//}
 void Game::draw(Graphics* graphics, Renderer* renderer)
 {
+  renderer->update(&_world);
   graphics->clearScreen();
   renderer->render(*this);
   graphics->render();

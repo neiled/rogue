@@ -6,12 +6,14 @@
 #include "world.h"
 #include "monster.h"
 #include "item.h"
+#include <SDL2/SDL.h>
 
 class Renderer;
 class Graphics;
 class CommandDecoder;
 class DirectionalSprite;
 class Sprite;
+
 
 
 class Game {
@@ -31,11 +33,13 @@ class Game {
   private:
     void reset();
     void eventLoop();
-    void update(Renderer& renderer);
+    //void update(Renderer& renderer);
     //void updateGraphics(Renderer* renderer,  int elapsed_time_ms);
     void draw(Graphics* graphics, Renderer* renderer);
+    void end_turn();
 
     void delay(int start_time_ms);
+    void decode_event(SDL_Event&, Graphics&, Renderer&);
 
     int _turn;
 

@@ -36,8 +36,8 @@ void World::updateGraphics()
 
 void World::update()
 {
-  _player.level().update(_player);
   checkMoveLevel();
+  _player.level().update(_player);
 }
 
 Player* World::player()
