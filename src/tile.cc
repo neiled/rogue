@@ -14,6 +14,13 @@ Tile::Tile(TileType tileType, Level& level, int x, int y) :_level(level)
 
 Tile::~Tile()
 {
+  for(auto item : _items)
+  {
+    if(item)
+    {
+      delete item;
+    }
+  }
 }
 
 void Tile::setActor(Actor& actor)
@@ -77,7 +84,7 @@ bool Tile::is_lit() const
   return _level.light_map(_x, _y) == Level::LightType::Lit;
 }
 
-double Tile::distanceTo(const Tile otherTile)
+double Tile::distanceTo(const Tile& otherTile)
 {
   return sqrt((otherTile.x() - _x)*(otherTile.x() - _x) + (otherTile.y() - _y) * (otherTile.y() - _y));
 }

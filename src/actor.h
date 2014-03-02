@@ -69,7 +69,10 @@ class Actor
     int xp_level();
     void increase_xp(int amount);
 
+    virtual bool is_player() = 0;
     
+    int atk();
+    int def();
   protected:
     Tile* _currentTile = nullptr;
     Tile* _targetTile = nullptr;
@@ -91,11 +94,8 @@ class Actor
     float hit_chance(Actor& other);
     int calc_damage(Actor&);
 
-    int atk();
-    int def();
 
     virtual void die() = 0;
-    virtual bool is_player() = 0;
     void killed(Actor* other);
 
     void apply_modifier(AttributeModifiers* modifier);

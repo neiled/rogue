@@ -6,6 +6,12 @@ std::deque<std::string> Messages::_messages;
 void Messages::Add(std::string new_message)
 {
   Messages::_messages.push_back(new_message);
+  SDL_Log(new_message.c_str());
+}
+
+void Messages::Clear()
+{
+  Messages::_messages.clear();
 }
 
 bool Messages::HasMessages()

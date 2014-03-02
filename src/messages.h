@@ -11,6 +11,7 @@ public:
   static bool HasMessages();
   static std::string PopMessage();
   static std::deque<std::string> AllMessages();
+  static void Clear();
 
 private:
   static std::deque<std::string> _messages;

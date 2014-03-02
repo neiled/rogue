@@ -1,6 +1,7 @@
 #include "a_star.h"
 #include "tile.h"
 #include "level.h"
+#include "actor.h"
 #include <SDL2/SDL.h>
 
 
@@ -155,6 +156,8 @@ std::vector<Tile*> AStar::surroundingValidTiles(Tile& start)
       if(find(closed_list.begin(), closed_list.end(), neighbour) != closed_list.end())
         continue;
       if(neighbour->tile_type() == Tile::TileType::Rock)
+        continue;
+      if(neighbour->actor() && neighbour->actor()->is_player() == false) //avoid other monthers
         continue;
       result.push_back(neighbour);
     }

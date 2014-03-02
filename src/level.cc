@@ -175,4 +175,16 @@ std::vector<Tile*> Level::visible_tiles()
 
 Level::~Level()
 {
+  for(auto monster : _monsters)
+  {
+    delete monster;
+  }
+
+  for (int y = 0; y < LEVEL_HEIGHT; ++y)
+  {
+    for (int x = 0; x < LEVEL_WIDTH; ++x)
+    {
+      delete _map[y][x];
+    }
+  }
 }

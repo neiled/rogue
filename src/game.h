@@ -21,7 +21,7 @@ class Game {
 
     typedef std::map<Monster::MonsterType, DirectionalSprite*> monster_sprites_t;
     typedef std::map<Item::ItemType, std::map<Item::ItemSubtype, Sprite*>> item_sprites_t;
-    enum class GameState {GAME, MENU_INVENTORY, STOPPED};
+    enum class GameState {MENU_START, GAME, MENU_INVENTORY, DEAD, STARTING, STOP};
 
     void state(GameState state);
     GameState state();
@@ -29,6 +29,7 @@ class Game {
     Level* level();
 
   private:
+    void reset();
     void eventLoop();
     void update(Renderer& renderer);
     //void updateGraphics(Renderer* renderer,  int elapsed_time_ms);

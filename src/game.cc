@@ -8,6 +8,7 @@
 #include "item_factory.h"
 #include "command_decoder_game.h"
 #include "command_decoder_inventory.h"
+#include "command_decoder_dead.h"
 
 
 Game::Game() {
@@ -16,12 +17,21 @@ Game::Game() {
   _world.init();
   _decoders[Game::GameState::GAME] = new CommandDecoderGame();
   _decoders[Game::GameState::MENU_INVENTORY] = new CommandDecoderInventory();
+  _decoders[Game::GameState::DEAD] = new CommandDecoderDead();
   _state = GameState::GAME;
   eventLoop();
 }
 
 Game::~Game() {
   SDL_Quit();
+}
+
+void Game::reset()
+{
+  _world = World();
+  _world.init();
+  Messages::Clear();
+  _state = GameState::GAME;
 }
 
 void Game::eventLoop()
@@ -56,11 +66,15 @@ void Game::eventLoop()
 
     }
 
-
-    if(player->hasCommands())
+    if(_state == GameState::GAME && player->dead())
+      _state = GameState::DEAD;
+    else
     {
-      if(cProc.Process(player->popCommand(), *player))
-        update(renderer);
+      if(player->hasCommands())
+      {
+        if(cProc.Process(player->popCommand(), *player))
+          update(renderer);
+      }
     }
 
 
@@ -71,7 +85,13 @@ void Game::eventLoop()
 
     delay(start_time_ms);
 
-    if(_state == GameState::STOPPED)
+    if(_state == GameState::STARTING)
+    {
+      reset();
+      player = _world.player();
+      update(renderer);
+    }
+    if(_state == GameState::STOP)
       running = false;
 
   }

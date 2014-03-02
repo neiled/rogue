@@ -2,6 +2,7 @@
 #include "item.h"
 #include "potion.h"
 #include "actor.h"
+#include <SDL2/SDL.h>
 
 Inventory::Inventory(Actor* actor)
 {
@@ -10,6 +11,8 @@ Inventory::Inventory(Actor* actor)
 
 Inventory::~Inventory()
 {
+  for(auto item : _items)
+    delete item;
 }
 
 void Inventory::add(Item* item)
@@ -34,7 +37,9 @@ void Inventory::remove(Item* item)
 
 void Inventory::use(int index)
 {
-  auto item = _items[index];
+  if(index >= _items.size())
+    return;
+  auto item = _items.at(index);
   if(item->item_type() == Item::ItemType::POTION)
   {
     auto potion = static_cast<Potion*>(item);

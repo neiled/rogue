@@ -2,9 +2,10 @@
 #include "level.h"
 #include "a_star.h"
 #include "item.h"
+#include "messages.h"
 #include <deque>
 
-Player::Player() : Actor(max_health(), 1)
+Player::Player() : Actor(100, 1)
 {
   direction = Actor::Direction::EAST;
 }
@@ -16,7 +17,7 @@ Player::~Player()
 
 void Player::die() 
 {
-  //TODO: End the game...
+  Messages::Add("You died, do you want to try again? Y/N");
 }
 
 void Player::update()
@@ -25,7 +26,7 @@ void Player::update()
 
 int Player::max_health()
 {
-  return 100;
+  return _attributes[Attribute::CON];
 }
 
 void Player::pickup_items()

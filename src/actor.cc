@@ -341,22 +341,13 @@ int32_t Actor::xp()
 
 void Actor::increase_xp(int amount)
 {
-  SDL_Log("Current XP: %d", _xp);
-  SDL_Log("Current Max XP: %d", _max_xp);
-  SDL_Log("Current Min XP: %d", _min_xp);
-  SDL_Log("Current Level: %d", _xp_level);
   _xp += amount;
-  SDL_Log("New XP: %d", _xp);
   while(_xp > calc_max_xp())
   {
     ++_xp_level;
     _max_xp = calc_max_xp();
     _min_xp = calc_min_xp();
   }
-  SDL_Log("New Level: %d", _xp_level);
-  SDL_Log("New Max XP: %d", _max_xp);
-  SDL_Log("New Min XP: %d", _min_xp);
-
 }
 
 int32_t Actor::max_xp()

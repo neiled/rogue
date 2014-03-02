@@ -12,6 +12,11 @@ World::World()
 
 World::~World()
 {
+  for(auto level : _levels)
+  {
+    delete level;
+  }
+
 }
 
 void World::init()
@@ -61,7 +66,7 @@ void World::checkMoveLevel()
   else if(_player.tile()->tile_type() == Tile::TileType::StairsUp)
   {
     int currentDepth = _player.level().depth();
-    if(currentDepth > 0)
+    if(currentDepth > 1)
     {
       Level& currentLevel = _player.level();
       currentLevel.set_player(nullptr);      

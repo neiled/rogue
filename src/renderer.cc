@@ -215,7 +215,12 @@ void Renderer::render_info(Player& player)
   _info_char->draw(0, 0, 0, 0);
   draw_health_bar(0, 300, 150, 20, player.health(), player.max_health());
 
-  draw_health_bar(0, 350, 150, 20, player.xp() - player.min_xp(), player.max_xp());
+  draw_health_bar(0, 330, 150, 20, player.xp() - player.min_xp(), player.max_xp());
+
+  render_string("Lvl: " + std::to_string(player.xp_level()), 0, 360, 16);
+  render_string("Atk: " + std::to_string(player.atk()), 0, 390, 16);
+  render_string("Def: " + std::to_string(player.def()), 0, 420, 16);
+
 }
 
 void Renderer::draw_health_bar(int x, int y, int width, int height, int current_health, int max_health)
