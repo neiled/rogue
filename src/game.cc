@@ -47,12 +47,10 @@ void Game::eventLoop()
 
   update(renderer);
   draw(&graphics, &renderer);
-  SDL_Log("here1");
 
   bool running = true;
   while (running == true)
   {
-  SDL_Log("here2");
     Player* player = _world.player();
     const int start_time_ms = SDL_GetTicks();
     SDL_WaitEvent(&event);
