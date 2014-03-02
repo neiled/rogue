@@ -65,7 +65,9 @@ class Actor
     
     int32_t xp();
     int32_t max_xp();
+    int32_t min_xp();
     int xp_level();
+    void increase_xp(int amount);
 
     
   protected:
@@ -94,13 +96,16 @@ class Actor
 
     virtual void die() = 0;
     virtual bool is_player() = 0;
+    void killed(Actor* other);
 
     void apply_modifier(AttributeModifiers* modifier);
     virtual void pickup_items();
     
     int32_t _xp;
     int32_t _max_xp;
+    int32_t _min_xp;
     int32_t calc_max_xp();
+    int32_t calc_min_xp();
     int _xp_level;
 
     Item* _weapon;

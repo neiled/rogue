@@ -14,6 +14,8 @@ Actor::Actor(int max_health, int xp_level) : _inventory(this), _xp_level(xp_leve
   _attributes[Attribute::CON] = max_health;
   _attributes[Attribute::ATK] = Random::BetweenNormal(1,_xp_level*5);
   _attributes[Attribute::DEF] = Random::BetweenNormal(1,_xp_level*5);
+  _max_xp = calc_max_xp();
+  _min_xp = calc_min_xp();
 }
 
 Actor::~Actor()
@@ -153,7 +155,7 @@ bool Actor::can_see_something_interesting()
 
 void Actor::meleeAttack(Actor* other)
 {
-  if(!other)
+  if(!other || other->dead())
     return;
 
   float toHit = hit_chance(*other);
@@ -164,12 +166,26 @@ void Actor::meleeAttack(Actor* other)
     if(is_player())
       Messages::Add("You deal " + std::to_string(damage) + " damage");
     other->takeDamage(damage);
+    if(other->dead())
+    {
+      if(is_player())
+        Messages::Add("You killed them."); //TODO: Use the actors name
+      killed(other);
+    }
   }
-  else
+  else if(is_player())
+  {
     Messages::Add("You missed! chance of " + std::to_string(toHit));
+  }
 
 
   return;
+}
+
+void Actor::killed(Actor* other)
+{
+  int xp_gained = 30;//TODO: calc xp for real
+  increase_xp(xp_gained);
 }
 
 int Actor::attack_score()
@@ -323,9 +339,34 @@ int32_t Actor::xp()
   return _xp;
 }
 
+void Actor::increase_xp(int amount)
+{
+  SDL_Log("Current XP: %d", _xp);
+  SDL_Log("Current Max XP: %d", _max_xp);
+  SDL_Log("Current Min XP: %d", _min_xp);
+  SDL_Log("Current Level: %d", _xp_level);
+  _xp += amount;
+  SDL_Log("New XP: %d", _xp);
+  while(_xp > calc_max_xp())
+  {
+    ++_xp_level;
+    _max_xp = calc_max_xp();
+    _min_xp = calc_min_xp();
+  }
+  SDL_Log("New Level: %d", _xp_level);
+  SDL_Log("New Max XP: %d", _max_xp);
+  SDL_Log("New Min XP: %d", _min_xp);
+
+}
+
 int32_t Actor::max_xp()
 {
   return _max_xp;
+}
+
+int32_t Actor::min_xp()
+{
+  return _min_xp;
 }
 
 int Actor::xp_level()
@@ -335,5 +376,10 @@ int Actor::xp_level()
 
 int32_t Actor::calc_max_xp()
 {
-  return xp_level()*(xp_level()+1)*100+4000*(xp_level()/10);
+  return ((xp_level()*(xp_level()+1))*100)+(4000*(xp_level()/10.0));
+}
+
+int32_t Actor::calc_min_xp()
+{
+  return ((xp_level()-1)*xp_level()*100)+(4000*((xp_level()-1)/10.0));
 }

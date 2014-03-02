@@ -214,6 +214,8 @@ void Renderer::render_info(Player& player)
   SDL_RenderSetViewport(_graphics->Renderer, &_vp_info);
   _info_char->draw(0, 0, 0, 0);
   draw_health_bar(0, 300, 150, 20, player.health(), player.max_health());
+
+  draw_health_bar(0, 350, 150, 20, player.xp() - player.min_xp(), player.max_xp());
 }
 
 void Renderer::draw_health_bar(int x, int y, int width, int height, int current_health, int max_health)
