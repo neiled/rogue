@@ -167,6 +167,14 @@ void Renderer::render_level(Level& level)
       Level::LightType lit = level.light_map(x, y);
       if(lit == Level::LightType::Unseen)
         continue;
+      if(y*TILE_SIZE < _cameraRect.y)
+        continue;
+      if(y*TILE_SIZE > _cameraRect.y + _cameraRect.h)
+        continue;
+      if(x*TILE_SIZE > _cameraRect.x + _cameraRect.w)
+        continue;
+      if(x*TILE_SIZE < _cameraRect.x)
+        continue;
 
       auto currentTile = level.tile(x, y);
       auto tileType = (int)currentTile->tile_type();

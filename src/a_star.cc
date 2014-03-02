@@ -92,7 +92,7 @@ Tile* AStar::search(Tile& start, Tile* end)
   open_list.erase(remove(open_list.begin(), open_list.end(), currentTile), open_list.end());
   closed_list.push_back(currentTile);  
 
-  std::vector<Tile*> otherTiles = surroundingValidTiles(*currentTile);
+  std::vector<Tile*> otherTiles = surroundingValidTiles(*currentTile, end != nullptr);
   for(auto t : otherTiles)
   {
     //if not on the open list
@@ -138,7 +138,7 @@ Tile* AStar::findLowestScore(Tile& currentSquare, Tile* end)
   return bestTile;
 }
 
-std::vector<Tile*> AStar::surroundingValidTiles(Tile& start)
+std::vector<Tile*> AStar::surroundingValidTiles(Tile& start, bool avoid_monsters)
 {
   std::vector<Tile*> result;
   int startX = start.x();
@@ -158,7 +158,7 @@ std::vector<Tile*> AStar::surroundingValidTiles(Tile& start)
         continue;
       if(neighbour->tile_type() == Tile::TileType::Rock)
         continue;
-      if(neighbour->actor() && neighbour->actor()->is_player() == false) //avoid other monthers
+      if(avoid_monsters && neighbour->actor() && neighbour->actor()->is_player() == false) //avoid other monthers
         continue;
       result.push_back(neighbour);
     }

@@ -1,6 +1,6 @@
 #include "command_decoder_game.h"
 
-void CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
+bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
 {
   auto &player = *game.player();
   if(key == SDLK_UP)
@@ -21,5 +21,8 @@ void CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
     player.push_command(Commands::CMD::NOP);
   else if(key == SDLK_ESCAPE)
     game.state(Game::GameState::STOP);
+  else return false;
+
+  return true;
 
 }

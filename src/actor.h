@@ -106,6 +106,7 @@ class Actor
     int32_t _min_xp;
     int32_t calc_max_xp();
     int32_t calc_min_xp();
+    void increase_level();
     int _xp_level;
 
     Item* _weapon;

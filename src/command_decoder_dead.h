@@ -6,7 +6,7 @@
 class CommandDecoderDead : public CommandDecoder
 {
 public:
-  virtual void Decode(SDL_Keycode key, Game& game) override;
+  virtual bool Decode(SDL_Keycode key, Game& game) override;
 
 };
 #endif

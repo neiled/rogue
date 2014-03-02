@@ -46,33 +46,42 @@ void Game::eventLoop()
   //int last_update_time = SDL_GetTicks();
 
   update(renderer);
+  draw(&graphics, &renderer);
+  SDL_Log("here1");
 
   bool running = true;
   while (running == true)
   {
+  SDL_Log("here2");
     Player* player = _world.player();
     const int start_time_ms = SDL_GetTicks();
-    while(SDL_PollEvent(&event))
-    {
-      switch(event.type)
-      {
-        case SDL_KEYDOWN:
-          _decoders[_state]->Decode(event.key.keysym.sym, *this);
-          break;
-        default:
-          break;
-      }
+    SDL_WaitEvent(&event);
 
+    switch(event.type)
+    {
+      case SDL_KEYDOWN:
+      {
+        auto decoded = _decoders[_state]->Decode(event.key.keysym.sym, *this);
+        if(decoded)
+          draw(&graphics, &renderer);
+        break;
+      }
+      default:
+        break;
     }
+
 
     if(_state == GameState::GAME && player->dead())
       _state = GameState::DEAD;
     else
     {
-      if(player->hasCommands())
+      while(player->hasCommands())
       {
         if(cProc.Process(player->popCommand(), *player))
+        {
           update(renderer);
+          draw(&graphics, &renderer);
+        }
       }
     }
 
@@ -80,9 +89,8 @@ void Game::eventLoop()
     //int current_time = SDL_GetTicks();
     //updateGraphics(&renderer);
     //last_update_time = current_time;
-    draw(&graphics, &renderer);
 
-    delay(start_time_ms);
+    //delay(start_time_ms);
 
     if(_state == GameState::STARTING)
     {
@@ -139,7 +147,6 @@ void Game::update(Renderer& renderer)
 //}
 void Game::draw(Graphics* graphics, Renderer* renderer)
 {
-  auto player = _world.player();
   graphics->clearScreen();
   renderer->render(*this);
   graphics->render();

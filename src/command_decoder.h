@@ -9,7 +9,7 @@
 class CommandDecoder
 {
 public:
-  virtual void Decode(SDL_Keycode key, Game& game) = 0;
+  virtual bool Decode(SDL_Keycode key, Game& game) = 0;
 
 };
 #endif

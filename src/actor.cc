@@ -342,10 +342,19 @@ void Actor::increase_xp(int amount)
   _xp += amount;
   while(_xp > calc_max_xp())
   {
-    ++_xp_level;
-    _max_xp = calc_max_xp();
-    _min_xp = calc_min_xp();
+    increase_level();
   }
+}
+
+void Actor::increase_level()
+{
+  ++_xp_level;
+  _max_xp = calc_max_xp();
+  _min_xp = calc_min_xp();
+  _attributes[Attribute::ATK]++;
+  _attributes[Attribute::DEF]++;
+  _attributes[Attribute::CON]+=10;
+  _attributes[Attribute::HEALTH] = max_health();
 }
 
 int32_t Actor::max_xp()
