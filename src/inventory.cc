@@ -3,10 +3,11 @@
 #include "potion.h"
 #include "actor.h"
 #include <SDL2/SDL.h>
+#include <assert.h>
+#include "random.h"
 
-Inventory::Inventory(Actor* actor)
+Inventory::Inventory()
 {
-  _actor = actor;
 }
 
 Inventory::~Inventory()
@@ -35,7 +36,7 @@ void Inventory::remove(Item* item)
   _items.erase(std::remove(_items.begin(), _items.end(), item), _items.end());
 }
 
-void Inventory::use(int index)
+void Inventory::use(int index, Actor& actor)
 {
   if(index >= _items.size())
     return;
@@ -43,7 +44,7 @@ void Inventory::use(int index)
   if(item->item_type() == Item::ItemType::POTION)
   {
     auto potion = static_cast<Potion*>(item);
-    potion->drink(*_actor);
+    potion->drink(actor);
   }
   remove(item);
 }

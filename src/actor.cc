@@ -8,7 +8,7 @@
 #include <SDL2/SDL.h>
 #include "item.h"
 
-Actor::Actor(int max_health, int xp_level) : _inventory(this), _xp_level(xp_level)
+Actor::Actor(int max_health, int xp_level) : _xp_level(xp_level)
 {
   _attributes[Attribute::HEALTH] = max_health;
   _attributes[Attribute::CON] = max_health;
@@ -124,15 +124,12 @@ bool Actor::explore()
     Messages::Add("You see something and stop.");
     return false;
   }
+  AStar searcher;
+  _travelPath = searcher.explore(*_currentTile, _currentTile->level());
   if(_travelPath.empty())
   {
-    AStar searcher;
-    _travelPath = searcher.explore(*_currentTile, _currentTile->level());
-    if(_travelPath.empty())
-    {
-      _targetTile = nullptr;
-      return false; //no way to get to this square
-    }
+    _targetTile = nullptr;
+    return false; //no where to explore
   }
   auto dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
   _travelPath.pop_front();
@@ -331,7 +328,8 @@ void Actor::add_modifier(AttributeModifiers* modifier)
 
 void Actor::apply_modifier(AttributeModifiers* modifier)
 {
-  _attributes[modifier->attr()] += modifier->modifier();
+  SDL_Log("Attribute size: %d",_attributes.size());
+  _attributes.at(modifier->attr()) += modifier->modifier();
 }
 
 int32_t Actor::xp()
@@ -374,3 +372,4 @@ int32_t Actor::calc_min_xp()
 {
   return ((xp_level()-1)*xp_level()*100)+(4000*((xp_level()-1)/10.0));
 }
+

@@ -3,6 +3,7 @@
 #include "level.h"
 #include "actor.h"
 #include <SDL2/SDL.h>
+#include "messages.h"
 
 
 AStar::AStar()
@@ -28,7 +29,7 @@ std::deque<Tile*> AStar::explore(Tile& startingPoint, Level& level)
     result = search(*result, nullptr);
     if(!result)
     {
-      SDL_Log("Nowhere left to explore...");
+      Messages::Add("Nowhere left to explore.");
       return std::deque<Tile*>();
     }
 

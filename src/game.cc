@@ -39,8 +39,6 @@ void Game::eventLoop()
   SDL_Log("Creating Graphics");
   Graphics graphics;
   SDL_Event event;
-  SDL_Log("Creating world");
-  Player* player = _world.player();
   SDL_Log("Creating renderer");
   Renderer renderer(&graphics);
   SDL_Log("Done renderer");
@@ -52,6 +50,7 @@ void Game::eventLoop()
   bool running = true;
   while (running == true)
   {
+    Player* player = _world.player();
     const int start_time_ms = SDL_GetTicks();
     while(SDL_PollEvent(&event))
     {
@@ -88,7 +87,6 @@ void Game::eventLoop()
     if(_state == GameState::STARTING)
     {
       reset();
-      player = _world.player();
       update(renderer);
     }
     if(_state == GameState::STOP)
