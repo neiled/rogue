@@ -18,6 +18,8 @@ public:
 
 private:
   static void init_potions();
+  static void calc_cdf();
+  
   static Item* get_item(Item::ItemType, Item::ItemSubtype);
   static Item::ItemType calc_item_type(Monster::MonsterType monster_type, int xp_level);
   static Item::ItemSubtype calc_item_subtype(Item::ItemType item_type, Monster::MonsterType monster_type, int xp_level);
