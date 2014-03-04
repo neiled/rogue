@@ -12,7 +12,7 @@ public:
   Weapon(Weapon& other);
   virtual ~Weapon ();
   
-  int max_damage();
+  virtual int max_damage() override;
   virtual int calc_damage(Actor&) override;
   
 private:

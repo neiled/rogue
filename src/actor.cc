@@ -172,6 +172,10 @@ void Actor::meleeAttack(Actor* other)
   {
     Messages::Add("You missed! chance of " + std::to_string(toHit));
   }
+  else
+  {
+    Messages::Add("They missed!");
+  }
 
 
   return;
@@ -204,6 +208,7 @@ int Actor::calc_damage(Actor& other)
   int damage = 0;
   if(_weapon)
   {
+    Messages::Add("Using your " + _weapon->name());
     damage =  _weapon->calc_damage(other);
   }
   else

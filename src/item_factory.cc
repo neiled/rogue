@@ -120,7 +120,7 @@ Item::ItemSubtype ItemFactory::calc_item_subtype(Item::ItemType item_type, int x
   
   for(auto current_weighting : weightings)
   {
-    if(random_number < current_weighting.second)
+    if(random_number <= current_weighting.second)
       return current_weighting.first;
   }
 

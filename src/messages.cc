@@ -2,11 +2,22 @@
 #include <SDL2/SDL.h>
 
 std::deque<std::string> Messages::_messages;
+std::string Messages::_current_message = "";
 
 void Messages::Add(std::string new_message)
 {
-  Messages::_messages.push_back(new_message);
+  Messages::_current_message += " " + new_message;
+  //Messages::_messages.push_back(new_message);
   SDL_Log(new_message.c_str());
+}
+
+void Messages::Push()
+{
+  if(_current_message.length() > 0)
+  {
+    Messages::_messages.push_back(_current_message);
+    _current_message = "";
+  }
 }
 
 void Messages::Clear()

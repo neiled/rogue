@@ -11,9 +11,11 @@ public:
   static bool HasMessages();
   static std::string PopMessage();
   static std::deque<std::string> AllMessages();
+  static void Push();
   static void Clear();
 
 private:
   static std::deque<std::string> _messages;
+  static std::string _current_message;
 };
 #endif

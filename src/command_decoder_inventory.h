@@ -8,6 +8,7 @@ class CommandDecoderInventory : public CommandDecoder
 {
 public:
   virtual bool Decode(SDL_Keycode key, Game& game) override;
+  void use_item(Player& player, int item);
 
 private:
   /* data */

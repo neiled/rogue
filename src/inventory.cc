@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include <assert.h>
 #include "random.h"
+#include "messages.h"
 
 Inventory::Inventory()
 {
@@ -51,6 +52,7 @@ void Inventory::use(int index, Actor& actor)
     if(actor.weapon())
       add(actor.weapon());
     actor.weapon(item);
+    Messages::Add("You start to wield the " + item->name());
   }
   remove(item);
 }

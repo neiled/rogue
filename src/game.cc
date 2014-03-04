@@ -101,6 +101,7 @@ void Game::end_turn()
 {
   ++_turn;
   _world.update();
+  Messages::Push();
 }
 
 void Game::decode_event(SDL_Event& event, Graphics& graphics, Renderer& renderer)

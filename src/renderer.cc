@@ -228,6 +228,12 @@ void Renderer::render_info(Player& player)
 {
   SDL_RenderSetViewport(_graphics->Renderer, &_vp_info);
   _info_char->draw(0, 0, 0, 0);
+  if(player.weapon())
+  {
+    auto item = _items[player.weapon()->item_type()][player.weapon()->item_subtype()];
+    item->draw(140, 125, 0, 0, SDL_ALPHA_OPAQUE);
+    render_string("Wpn: " + player.weapon()->name() + " : " + std::to_string(player.weapon()->max_damage()), 0, 450, 16);
+  }
   draw_health_bar(0, 300, 150, 20, player.health(), player.max_health());
 
   draw_health_bar(0, 330, 150, 20, player.xp() - player.min_xp(), player.max_xp());

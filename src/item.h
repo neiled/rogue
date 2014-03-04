@@ -29,6 +29,7 @@ public:
   std::string name();
 
   virtual int calc_damage(Actor&);
+  virtual int max_damage() {return 1;};
 
 protected:
   ItemType _item_type;
