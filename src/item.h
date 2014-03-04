@@ -25,7 +25,7 @@ public:
   
   std::string name();
 
-  int calc_damage(Actor&);
+  virtual int calc_damage(Actor&);
 
 protected:
   ItemType _item_type;
