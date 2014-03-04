@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 
 std::map<Item::ItemType, std::map<Item::ItemSubtype, Item*>> ItemFactory::_prototypes;
+std::map<Item::ItemType, std::map<Item::ItemSubtype, int>> ItemFactory::_weighting;
 
 Item* ItemFactory::Build()
 {
@@ -17,6 +18,11 @@ Item* ItemFactory::Build(Monster::MonsterType monster_type, int xp_level)
   return ItemFactory::get_item(item_type, item_subtype);
 }
 
+Item* ItemFactory::Build(Item::ItemType item_type, int xp_level)
+{
+  auto item_subtype = ItemFactory::calc_item_subtype(item_type, xp_level);  
+  return ItemFactory::get_item(item_type, item_subtype);
+}
 
 void ItemFactory::Init()
 {
@@ -27,6 +33,7 @@ void ItemFactory::init_potions()
 {
   ItemFactory::_prototypes[Item::ItemType::POTION][Item::ItemSubtype::POTION_HEALTH] = 
     new Potion("Small Health Potion", Item::ItemSubtype::POTION_HEALTH, {{Actor::Attribute::HEALTH, 25, 0}});
+  ItemFactory::_weighting[Item::ItemType::POTION][Item::ItemSubtype::POTION_HEALTH] =  7500;
 }
 
 Potion* ItemFactory::get_potion(Item::ItemSubtype subtype)
