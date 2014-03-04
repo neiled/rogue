@@ -10,8 +10,11 @@ class Item
 public:
   enum class ItemType {CORPSE=0, WEAPON, POTION, SCROLL};
   enum class ItemSubtype {
+    //CORPSE
     CORPSE_ORC,
-    WEAPON_KNIFE,
+    //WEAPON
+    WEAPON_KRISS,
+    //POTION
     POTION_HEALTH
   };
   
