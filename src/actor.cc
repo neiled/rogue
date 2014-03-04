@@ -205,7 +205,7 @@ int Actor::calc_damage(Actor& other)
   if(_weapon)
     damage =  _weapon->calc_damage(other);
   else
-    damage = atk()*5;
+    damage = atk();
   return Random::BetweenNormal(0,damage);
 }
 
