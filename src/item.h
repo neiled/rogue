@@ -12,6 +12,7 @@ public:
   enum class ItemSubtype {
     //CORPSE
     CORPSE_ORC,
+    CORPSE_DEVIL,
     //WEAPON
     WEAPON_KRIS,
     //POTION

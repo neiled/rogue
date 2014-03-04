@@ -14,7 +14,11 @@ Monster* MonsterFactory::Build(Tile& tile)
 
 Monster::MonsterType MonsterFactory::calc_monster_type(int depth)
 {
-  return Monster::MonsterType::Orc;
+  int random = Random::Between(0,1);
+  if(random < 1)
+    return Monster::MonsterType::Orc;
+  else
+    return Monster::MonsterType::Devil;
 }
 
 int MonsterFactory::calc_xp_level(int depth)

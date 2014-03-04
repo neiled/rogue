@@ -80,7 +80,10 @@ Item* Monster::generate_corpse()
     case MonsterType::Orc:
       return new Item("Orc Corpse", Item::ItemType::CORPSE, Item::ItemSubtype::CORPSE_ORC);
       break;
+    case MonsterType::Devil:
+      return new Item("Devil Corpse", Item::ItemType::CORPSE, Item::ItemSubtype::CORPSE_DEVIL);
     default:
+      SDL_Log("Need to generate a corpse for this monster type");
       return nullptr;
   }
 }
@@ -93,8 +96,8 @@ int Monster::max_health()
 void Monster::populate_inventory()
 {
   //TODO: This should be populated when the player sees the monster and use their current luck score
-  if(Random::Between(0,100) < 50)
-    _inventory.add(ItemFactory::Build(monster_type(), xp_level()));
   if(Random::Between(0,100) < 25)
+    _inventory.add(ItemFactory::Build(monster_type(), xp_level()));
+  if(Random::Between(0,100) < 12)
     _inventory.add(ItemFactory::Build(monster_type(), xp_level()));
 }

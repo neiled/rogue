@@ -10,6 +10,8 @@ Player::Player() : Actor(100, 1), _xp(0)
   direction = Actor::Direction::EAST;
   _max_xp = calc_max_xp();
   _min_xp = calc_min_xp();
+  _attributes[Attribute::ATK] = 5;
+  _attributes[Attribute::DEF] = 5;
 }
 
 Player::~Player()
@@ -20,6 +22,7 @@ Player::~Player()
 void Player::die() 
 {
   Messages::Add("You died, do you want to try again? Y/N");
+  //TODO: Message generation should be somewhere else...
 }
 
 void Player::update()

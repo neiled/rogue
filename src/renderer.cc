@@ -76,6 +76,7 @@ void Renderer::init_viewports()
 void Renderer::loadMonsterTiles()
 {
   _monsters[Monster::MonsterType::Orc] = new DirectionalSprite(_graphics, "../content/monsters/monster_orc.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _monsters[Monster::MonsterType::Devil] = new DirectionalSprite(_graphics, "../content/monsters/monster_devil.png", 0, 0, TILE_SIZE, TILE_SIZE);
 }
 
 void Renderer::loadMapTiles()
@@ -102,6 +103,7 @@ void Renderer::load_corpses()
 {
   _items[Item::ItemType::CORPSE] = std::map<Item::ItemSubtype, Sprite*>();
   _items[Item::ItemType::CORPSE][Item::ItemSubtype::CORPSE_ORC] = new Sprite(_graphics, "../content/corpse.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _items[Item::ItemType::CORPSE][Item::ItemSubtype::CORPSE_DEVIL] = new Sprite(_graphics, "../content/corpse.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
 
 
 }
@@ -228,19 +230,26 @@ void Renderer::render_info(Player& player)
 {
   SDL_RenderSetViewport(_graphics->Renderer, &_vp_info);
   _info_char->draw(0, 0, 0, 0);
+  int string_y = 360;
+  int string_gap = 25;
   if(player.weapon())
   {
     auto item = _items[player.weapon()->item_type()][player.weapon()->item_subtype()];
     item->draw(140, 125, 0, 0, SDL_ALPHA_OPAQUE);
-    render_string("Wpn: " + player.weapon()->name() + " : " + std::to_string(player.weapon()->max_damage()), 0, 450, 16);
+    render_string("Wpn: " + player.weapon()->name() + " : " + std::to_string(player.weapon()->max_damage()), 0, string_y, 16);
   }
   draw_health_bar(0, 300, 150, 20, player.health(), player.max_health());
 
   draw_health_bar(0, 330, 150, 20, player.xp() - player.min_xp(), player.max_xp());
 
-  render_string("Lvl: " + std::to_string(player.xp_level()), 0, 360, 16);
-  render_string("Atk: " + std::to_string(player.atk()), 0, 390, 16);
-  render_string("Def: " + std::to_string(player.def()), 0, 420, 16);
+  string_y += string_gap;
+  render_string("Lvl: " + std::to_string(player.xp_level()), 0, string_y, 16);
+  string_y += string_gap;
+  render_string("Atk: " + std::to_string(player.atk()), 0, string_y, 16);
+  string_y += string_gap;
+  render_string("Def: " + std::to_string(player.def()), 0, string_y, 16);
+  string_y += string_gap;
+  render_string("Dpth: " + std::to_string(player.level().depth()), 0, string_y, 16);
 
 }
 

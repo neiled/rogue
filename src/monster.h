@@ -13,7 +13,7 @@ class Item;
 class Monster : public Actor
 {
   public:
-    enum class MonsterType {Orc};
+    enum class MonsterType {Orc, Devil};
     enum class MonsterState {Asleep, Awake, Hunting};
 
     Monster(Tile& startTile, Monster::MonsterType type, Monster::MonsterState state, int xp_level);
