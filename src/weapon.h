@@ -3,10 +3,13 @@
 
 #include "item.h"
 
+class Actor;
+
 class Weapon : public Item
 {
 public:
   Weapon(std::string name, Item::ItemSubtype subtype, int max_damage, std::vector<AttributeModifiers> modifiers);
+  Weapon(Weapon& other);
   virtual ~Weapon ();
   
   int max_damage();

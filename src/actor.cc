@@ -203,9 +203,13 @@ int Actor::calc_damage(Actor& other)
 {
   int damage = 0;
   if(_weapon)
+  {
     damage =  _weapon->calc_damage(other);
+  }
   else
+  {
     damage = atk();
+  }
   return Random::BetweenNormal(0,damage);
 }
 
@@ -331,4 +335,12 @@ int Actor::xp_level()
   return _xp_level;
 }
 
+Item* Actor::weapon()
+{
+  return _weapon;
+}
 
+void Actor::weapon(Item* weapon)
+{
+  _weapon = weapon;
+}

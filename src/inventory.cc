@@ -46,5 +46,11 @@ void Inventory::use(int index, Actor& actor)
     auto potion = static_cast<Potion*>(item);
     potion->drink(actor);
   }
+  else if(item->item_type() == Item::ItemType::WEAPON)
+  {
+    if(actor.weapon())
+      add(actor.weapon());
+    actor.weapon(item);
+  }
   remove(item);
 }

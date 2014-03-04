@@ -95,6 +95,7 @@ void Renderer::load_items()
 {
   load_corpses();
   load_potions();
+  load_weapons();
 }
 
 void Renderer::load_corpses()
@@ -109,6 +110,12 @@ void Renderer::load_potions()
 {
   _items[Item::ItemType::POTION] = std::map<Item::ItemSubtype, Sprite*>();
   _items[Item::ItemType::POTION][Item::ItemSubtype::POTION_HEALTH] = new Sprite(_graphics, "content/potion.png", 0, 0, TILE_SIZE, TILE_SIZE); 
+}
+
+void Renderer::load_weapons()
+{
+  _items[Item::ItemType::WEAPON] = std::map<Item::ItemSubtype, Sprite*>();
+  _items[Item::ItemType::WEAPON][Item::ItemSubtype::WEAPON_KRIS] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
 }
 
 void Renderer::load_info()

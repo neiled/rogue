@@ -13,7 +13,7 @@ public:
     //CORPSE
     CORPSE_ORC,
     //WEAPON
-    WEAPON_KRISS,
+    WEAPON_KRIS,
     //POTION
     POTION_HEALTH
   };

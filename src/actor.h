@@ -11,6 +11,7 @@
 class Tile;
 class Level;
 class AttributeModifiers;
+class Weapon;
 
 class Actor
 {
@@ -69,6 +70,9 @@ class Actor
     
     int atk();
     int def();
+
+    Item* weapon();
+    void weapon(Item* weapon);
   protected:
     Tile* _currentTile = nullptr;
     Tile* _targetTile = nullptr;
@@ -99,7 +103,7 @@ class Actor
 
     int _xp_level;
 
-    Item* _weapon;
+    Item* _weapon = nullptr;
 
 
 
