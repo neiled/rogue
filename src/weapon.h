@@ -6,10 +6,12 @@
 class Weapon : public Item
 {
 public:
-  Weapon(std::string name, Item::ItemSubtype subtype, std::vector<AttributeModifiers> modifiers);
+  Weapon(std::string name, Item::ItemSubtype subtype, int max_damage, std::vector<AttributeModifiers> modifiers);
   virtual ~Weapon ();
-
+  
+  virtual int calc_damage(Actor&) override;
+  
 private:
-  /* data */
+  int _max_damage;
 };
 #endif
