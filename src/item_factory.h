@@ -18,6 +18,7 @@ public:
 
 private:
   static void init_potions();
+  static void init_weapons();
   static void calc_cdf();
   
   static Item* get_item(Item::ItemType, Item::ItemSubtype);
