@@ -89,9 +89,14 @@ Item::ItemType ItemFactory::calc_item_type(Monster::MonsterType monster_type, in
 
 Item::ItemSubtype ItemFactory::calc_item_subtype(Item::ItemType item_type, Monster::MonsterType monster_type, int xp_level)
 {
-  switch(item_type)
+  int max_random_number = _sum_weights[item_type];
+  int random_number = Random::Between(0,max_random_number);
+  
+  auto weightings = _weightings[item_type];
+  
+  for(auto current_weighting : weightings)
   {
-    case Item::ItemType::POTION:
-      return Item::ItemSubtype::POTION_HEALTH;
+    if(random_number < current_weighting->second)
+      return current_weighting->first;
   }
 }
