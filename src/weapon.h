@@ -9,6 +9,7 @@ public:
   Weapon(std::string name, Item::ItemSubtype subtype, int max_damage, std::vector<AttributeModifiers> modifiers);
   virtual ~Weapon ();
   
+  int max_damage();
   virtual int calc_damage(Actor&) override;
   
 private:
