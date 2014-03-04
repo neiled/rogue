@@ -25,6 +25,7 @@ private:
   static Item::ItemSubtype calc_item_subtype(Item::ItemType item_type, Monster::MonsterType monster_type, int xp_level);
   static std::map<Item::ItemType, std::map<Item::ItemSubtype, Item*>> _prototypes;
   static std::map<Item::ItemType, std::map<Item::ItemSubtype, int>> _weightings;
+  static std::map<Item::ItemType, int> ItemFactory::_sum_weights;
   static void add_item(Item* item, int weighting);
 
   static Potion* get_potion(Item::ItemSubtype subtype);
