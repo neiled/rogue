@@ -29,6 +29,7 @@ Item* ItemFactory::Build(Item::ItemType item_type, int xp_level)
 void ItemFactory::Init()
 {
   ItemFactory::init_potions();
+  ItemFactory::init_weapons();
   ItemFactory::calc_cdf();
 }
 
@@ -56,6 +57,13 @@ void ItemFactory::init_potions()
     2500);    
 }
 
+void ItemFactory::init_weapons()
+{
+  ItemFactory::add_item(
+    new Weapon("Small Kirss", Item::ItemSubtype::WEAPON_KRISS, 5 {}),
+    7500);
+
+}
 void ItemFactory::add_item(Item* item, int weighting)
 {
   ItemFactory::_prototypes[item->item_type()][item->item_subtype()] = item;
