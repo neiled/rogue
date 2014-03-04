@@ -6,6 +6,7 @@
 std::map<Item::ItemType, std::map<Item::ItemSubtype, Item*>> ItemFactory::_prototypes;
 std::map<Item::ItemType, std::map<Item::ItemSubtype, int>> ItemFactory::_weightings;
 std::map<Item::ItemType, std::map<Item::ItemSubtype, int>> ItemFactory::_cdf;
+std::map<Item::ItemType, int> ItemFactory::_sum_weights;
 
 Item* ItemFactory::Build()
 {
@@ -39,8 +40,9 @@ void ItemFactory::calc_cdf()
     for(auto subtypes : _weightings[types->first])
     {
       sum += subtypes->second;
+      _cdf[types->first][subtypes->first] = sum;
     }
-    _cdf[types->first][subtypes->first] = sum;
+    _sum_weights[types->first] = sum;
   }
 }
 
