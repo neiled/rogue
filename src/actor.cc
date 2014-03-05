@@ -215,7 +215,9 @@ int Actor::calc_damage(Actor& other)
   {
     damage = atk();
   }
-  return Random::BetweenNormal(0,damage);
+  if(damage < 1)
+    damage = 1;
+  return Random::BetweenNormal(1,damage);
 }
 
 float Actor::hit_chance(Actor& other)
