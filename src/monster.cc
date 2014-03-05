@@ -26,7 +26,7 @@ void Monster::update()
   if(dead())
     return;
   Player* player = level().player();
-  if(_monsterState == MonsterState::Awake)
+  if(_monsterState != MonsterState::Hunting)
   {
     look_for_player();
   }
@@ -53,6 +53,17 @@ void Monster::look_for_player()
 
 void Monster::wander()
 {
+  if(_travelPath.empty() || Random::CheckChance(10))
+  {
+    auto target_tile = level().getRandomTileOfType(Tile::TileType::FLOOR);
+    AStar searcher;
+    _travelPath = searcher.plotPath(*_currentTile, target_tile);
+  }
+  if(_travelPath.empty() == false)
+  {
+    Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
+    _commandQueue.push_front(dirCommand);
+  }  
 }
 void Monster::hunt(Player& player)
 {
