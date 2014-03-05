@@ -26,23 +26,34 @@ void Monster::update()
   if(dead())
     return;
   Player* player = level().player();
-  if(_monsterState != Monster::MonsterState::Hunting)
+  if(_monsterState == MonsterState::Awake)
   {
-    if(!player)
-    {
-      return;
-    }
-    if(can_see_actor(*player))
-    {
-      _monsterState = Monster::MonsterState::Hunting;
-    }
+    look_for_player();
   }
   
-  if(_monsterState == Monster::MonsterState::Hunting)
+  if(_monsterState == MonsterState::Hunting)
     hunt(*player);
+  if(_monsterState == MonsterState::Wandering)
+  {
+    wander();
+  }
   
 }
 
+void Monster::look_for_player()
+{
+  if(!level().player())
+    return;
+
+  if(can_see_actor(*level().player()))
+  {
+    _monsterState = Monster::MonsterState::Hunting;
+  }
+}
+
+void Monster::wander()
+{
+}
 void Monster::hunt(Player& player)
 {
   _travelPath.clear();
