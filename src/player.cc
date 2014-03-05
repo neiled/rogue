@@ -5,7 +5,7 @@
 #include "messages.h"
 #include <deque>
 
-Player::Player() : Actor(100, 1), _xp(0)
+Player::Player() : Actor(100, 1, 10), _xp(0)
 {
   direction = Actor::Direction::EAST;
   _max_xp = calc_max_xp();
