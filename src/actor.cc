@@ -12,8 +12,8 @@ Actor::Actor(int max_health, int xp_level) : _xp_level(xp_level)
 {
   _attributes[Attribute::HEALTH] = max_health;
   _attributes[Attribute::CON] = max_health;
-  _attributes[Attribute::ATK] = Random::BetweenNormal(1,_xp_level);
-  _attributes[Attribute::DEF] = Random::BetweenNormal(1,_xp_level);
+  _attributes[Attribute::ATK] = xp_level;//Random::BetweenNormal(1,_xp_level);
+  _attributes[Attribute::DEF] = xp_level;//Random::BetweenNormal(1,_xp_level);
 }
 
 Actor::~Actor()
