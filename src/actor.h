@@ -16,8 +16,8 @@ class Weapon;
 class Actor
 {
   public:
-    Actor(int max_health, int xp_level);
-    Actor(int max_health, int xp_level, int inventory_size);
+    Actor(std::string name, int max_health, int xp_level);
+    Actor(std::string name, int max_health, int xp_level, int inventory_size);
     virtual ~Actor();
 
     enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
@@ -74,6 +74,8 @@ class Actor
 
     Item* weapon();
     void weapon(Item* weapon);
+    
+    std::string name();
   protected:
     Tile* _currentTile = nullptr;
     Tile* _targetTile = nullptr;
@@ -105,6 +107,8 @@ class Actor
     int _xp_level;
 
     Item* _weapon = nullptr;
+    
+    std::string _name;
 
 
 
