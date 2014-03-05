@@ -17,6 +17,7 @@ class Actor
 {
   public:
     Actor(int max_health, int xp_level);
+    Actor(int max_health, int xp_level, int inventory_size);
     virtual ~Actor();
 
     enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
