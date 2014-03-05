@@ -16,6 +16,8 @@ public:
   void remove(Item* item);
   std::vector<Item*> items();
   void empty();
+  bool full();
+  int count();
   void use(int index, Actor& actor);
 
 private:
