@@ -56,3 +56,18 @@ void Inventory::use(int index, Actor& actor)
   }
   remove(item);
 }
+
+bool Inventory::full()
+{
+  return _items.size() >= _max_items;
+}
+
+int Inventory::count()
+{
+  return _items.size();
+}
+
+int Inventory::max_items()
+{
+  return _max_items;
+}
