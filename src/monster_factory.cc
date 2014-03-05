@@ -28,6 +28,21 @@ int MonsterFactory::calc_xp_level(int depth)
   return depth;
 }
 
+Monster* MonsterFactory::get_monster(Monster::MonsterType type)
+{
+  auto name = MonsterFactory::get_name(type);  
+  switch(type)
+  {
+    case Monster::MonsterType::Orc:
+      return new Monster(name, tile, type, Monster::MonsterState::Awake, calc_xp_level(depth));
+    case Monster::MonsterType::Devil:
+      return new Monster(name, tile, type, Monster::MonsterState::Wandering, calc_xp_level(depth));
+    default:
+      SDL_Log("Need to add this new monster type to MonsterFactory::get_monster");
+      break;
+  }
+}
+
 std::string MonsterFactoy::get_name(Monster::MonsterType type)
 {
   switch(type)
