@@ -185,12 +185,12 @@ void Actor::meleeAttack(Actor* other)
 int Actor::attack_score()
 {
   //TODO make this a calc
-  return atk() * 5;
+  return atk();
 }
 int Actor::defense_score()
 {
   //TODO make this a calc  
-  return def() * 5;
+  return def();
 }
 
 int Actor::atk()
