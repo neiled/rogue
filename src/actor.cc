@@ -8,11 +8,11 @@
 #include <SDL2/SDL.h>
 #include "item.h"
 
-Actor::Actor(int max_health, int xp_level) : Actor(max_health, xp_level, 5)
+Actor::Actor(std::string name, int max_health, int xp_level) : Actor(name, max_health, xp_level, 5)
 {
 }
 
-Actor::Actor(int max_health, int xp_level, int inventory_size) : _xp_level(xp_level), _inventory(inventory_size)
+Actor::Actor(std::string name, int max_health, int xp_level, int inventory_size) : _xp_level(xp_level), _inventory(inventory_size), _name(name)
 {
   _attributes[Attribute::HEALTH] = max_health;
   _attributes[Attribute::CON] = max_health;
@@ -354,4 +354,9 @@ Item* Actor::weapon()
 void Actor::weapon(Item* weapon)
 {
   _weapon = weapon;
+}
+
+std::string name()
+{
+  return _name;
 }
