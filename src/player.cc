@@ -38,8 +38,18 @@ void Player::pickup_items()
 {
   for(auto item : _currentTile->items())
   {
-    if(item->item_type() != Item::ItemType::CORPSE)
-      _inventory.add(item);
+    if(_inventory.full() == false)
+    {
+      if(item->item_type() != Item::ItemType::CORPSE)
+      {
+        _inventory.add(item);
+      }
+    }
+    else
+    {
+      Messages.Add("You cannot carry any more items.");
+      break;
+    }
   }
 
   for(auto item : _inventory.items())
