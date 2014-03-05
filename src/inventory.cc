@@ -7,7 +7,7 @@
 #include "random.h"
 #include "messages.h"
 
-Inventory::Inventory()
+Inventory::Inventory(int max_items) : _max_items(max_items)
 {
 }
 
