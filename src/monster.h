@@ -29,6 +29,8 @@ class Monster : public Actor
     Monster::MonsterType _monster_type;
     Monster::MonsterState _monsterState;
 
+    void look_for_player();
+    void wander();
     bool can_see_player(const Player& player);
 
     void hunt(Player& player);
