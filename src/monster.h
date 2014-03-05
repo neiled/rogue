@@ -14,7 +14,7 @@ class Monster : public Actor
 {
   public:
     enum class MonsterType {Orc, Devil};
-    enum class MonsterState {Asleep, Awake, Hunting};
+    enum class MonsterState {Asleep, Awake, Hunting, Wandering};
 
     Monster(std::string name, Tile& startTile, Monster::MonsterType type, Monster::MonsterState state, int xp_level);
     virtual ~Monster();
