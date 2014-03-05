@@ -132,7 +132,6 @@ bool Player::explore()
 void Player::set_tile(Tile& tile)
 {
   Actor::set_tile(tile);
-  add_seen_items();
 }
 
 bool Player::add_seen_items()

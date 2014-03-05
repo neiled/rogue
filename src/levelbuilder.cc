@@ -58,8 +58,6 @@ void LevelBuilder::generate_items(Level& level)
     {
       auto item = ItemFactory::Build(level.depth());
       randomTile->add_item(item);
-      //auto monster = MonsterFactory::Build(*randomTile);
-      //level.addMonster(monster);
       ++i;
     }
   }

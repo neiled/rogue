@@ -45,6 +45,7 @@ void Game::eventLoop()
   SDL_Log("Done renderer");
   CommandProcessor cProc;
   end_turn();
+  player()->add_seen_items();
   //int last_update_time = SDL_GetTicks();
 
 
@@ -90,12 +91,6 @@ void Game::eventLoop()
 
 }
 
-//draw the screen
-//let the monsters have their turn
-//update the camera
-//check the player has moved down a level
-//update the turn count
-//
 
 void Game::end_turn()
 {
@@ -118,6 +113,7 @@ void Game::decode_event(SDL_Event& event, Graphics& graphics, Renderer& renderer
       auto decoded = _decoders[_state]->Decode(event.key.keysym.sym, *this);
       if(decoded)
       {
+        player()->add_seen_items();
         draw(&graphics, &renderer);
       }
       break;

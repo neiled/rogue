@@ -20,6 +20,7 @@ class Player : public Actor
 
     bool explore();
     virtual void set_tile(Tile& newTile) override;
+    bool add_seen_items();
 
   protected:
     virtual void pickup_items() override;
@@ -29,7 +30,6 @@ class Player : public Actor
     virtual bool is_player() override { return true;}
     virtual void killed(Actor* other) override ;
     bool can_see_something_interesting();
-    bool add_seen_items();
 
     int32_t _xp;
     int32_t _max_xp;
