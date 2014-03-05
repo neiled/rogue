@@ -12,7 +12,7 @@
 class ItemFactory
 {
 public:
-  static Item* Build();
+  static Item* Build(int depth);
   static Item* Build(Monster::MonsterType monster_type, int xp_level);
   static Item* Build(Item::ItemType item_type, int xp_level);
   static void Init();
@@ -25,7 +25,7 @@ private:
   
   static Item* get_item(Item::ItemType, Item::ItemSubtype);
   static Item::ItemType calc_item_type(Monster::MonsterType monster_type, int xp_level);
-  //static Item::ItemSubtype calc_item_subtype(Item::ItemType item_type, Monster::MonsterType monster_type, int xp_level);
+  static Item::ItemType calc_item_type(int xp_level);
   static Item::ItemSubtype calc_item_subtype(Item::ItemType item_type, int xp_level);
   static std::map<Item::ItemType, std::map<Item::ItemSubtype, Item*>> _prototypes;
   static std::map<Item::ItemType, std::map<Item::ItemSubtype, int>> _weightings;

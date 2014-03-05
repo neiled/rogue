@@ -119,6 +119,37 @@ Tile* Level::getRandomTileOfType(Tile::TileType typeToLookFor)
   }while(true);
 }
 
+Tile* Level::get_near_random_of_type(Tile& tile_near, int radius, Tile::TileType type)
+{
+  do
+  {
+    auto testTile = get_near_random(tile_near, radius);
+    if(testTile->tile_type() == type)
+      return testTile;
+  }while(true);
+}
+
+Tile* Level::get_near_random(Tile& start, int radius)
+{
+  int min_x = start.x()-radius;
+  if(min_x < 0) min_x = 0;
+  int min_y = start.y()-radius;
+  if(min_y < 0) min_y = 0;
+
+  int max_x = start.x() + radius;
+  if(max_x >= Level::LEVEL_WIDTH) max_x = Level::LEVEL_WIDTH-1;
+
+  int max_y = start.y() + radius;
+  if(max_y >= Level::LEVEL_HEIGHT) max_y = Level::LEVEL_HEIGHT-1;
+
+  int x = Random::Between(min_x, max_x);
+  int y = Random::Between(min_y, max_y);
+
+  Tile* foundTile = tile(x,y);
+
+  return foundTile;
+}
+
 void Level::setType(int x, int y, Tile::TileType tileType)
 {
   _map[y][x]->setTileType(tileType);

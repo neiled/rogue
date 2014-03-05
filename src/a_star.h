@@ -14,7 +14,7 @@ public:
   AStar ();
   virtual ~AStar ();
 
-  std::deque<Tile*> plotPath(Tile& startingPoint, Tile& end);
+  std::deque<Tile*> plotPath(Tile& startingPoint, Tile& end, int max_count = -1);
   std::deque<Tile*> explore(Tile& startingPoint, Level& level);
 
 private:
@@ -26,5 +26,6 @@ private:
   std::vector<Tile*> surroundingValidTiles(Tile& startingPoint, bool avoid_monsters);
   Tile* findLowestScore(Tile& start, Tile* end);
   Tile* search(Tile& currentSquare, Tile* end);
+  float score(Tile& start, Tile& end);
 };
 #endif

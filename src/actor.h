@@ -4,6 +4,7 @@
 
 #include <deque>
 #include <map>
+#include <string>
 #include <cstdint>
 #include "commands.h"
 #include "inventory.h"
@@ -28,7 +29,7 @@ class Actor
     virtual void update() = 0;
     
     Level& level();
-    void setCurrentTile(Tile& currentTile);
+    virtual void set_tile(Tile& currentTile);
     Tile* tile() const;
 
     Inventory* inventory();
@@ -39,8 +40,7 @@ class Actor
     void moveRight();
     void moveUp();
     void moveDown();
-    bool explore();
-    
+
     bool can_see_actor(Actor& actor);
     
 
@@ -59,7 +59,6 @@ class Actor
     virtual int max_health() = 0;
     int health();
     
-    bool can_see_something_interesting();
 
     void drop_items();
 

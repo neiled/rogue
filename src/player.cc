@@ -47,7 +47,7 @@ void Player::pickup_items()
     }
     else
     {
-      Messages.Add("You cannot carry any more items.");
+      Messages::Add("You cannot carry any more items.");
       break;
     }
   }
@@ -106,4 +106,68 @@ int32_t Player::max_xp()
 int32_t Player::min_xp()
 {
   return _min_xp;
+}
+
+bool Player::explore()
+{
+  if(can_see_something_interesting())
+  {
+    Messages::Add("You see something and stop.");
+    return false;
+  }
+  AStar searcher;
+  _travelPath = searcher.explore(*_currentTile, _currentTile->level());
+  if(_travelPath.empty())
+  {
+    _targetTile = nullptr;
+    return false; //no where to explore
+  }
+  auto dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
+  _travelPath.pop_front();
+  _commandQueue.push_front(Commands::CMD::CMD_EXPLORE);
+  _commandQueue.push_front(dirCommand);
+  return true;
+}
+
+void Player::set_tile(Tile& tile)
+{
+  Actor::set_tile(tile);
+  add_seen_items();
+}
+
+bool Player::add_seen_items()
+{
+  bool seen = false;
+  auto visible_tiles = _currentTile->level().visible_tiles();
+  for(auto tile : visible_tiles)
+  {
+    for(auto item : tile->items())
+    {
+      if(item->interesting() == false)
+        continue;
+      if(find(_items_seen.begin(), _items_seen.end(), item) == _items_seen.end())
+      {
+        _items_seen.push_back(item);
+        seen = true;
+      }
+    }
+  }
+
+  return seen;
+}
+
+bool Player::can_see_something_interesting()
+{
+  auto visible_tiles = level().visible_tiles();
+  bool seen = false;
+  for(auto tile : visible_tiles)
+  {
+    if(tile->actor() && tile->actor()->is_player() == false)
+      return true;
+    bool seen_items = add_seen_items();
+    if(seen_items)
+      seen = true;
+  }
+
+  return seen;
 }

@@ -44,3 +44,8 @@ int Item::calc_damage(Actor& other)
 {
   return 1;
 }
+
+bool Item::interesting()
+{
+  return _item_type != Item::ItemType::CORPSE;
+}

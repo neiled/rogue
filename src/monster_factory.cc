@@ -10,7 +10,7 @@ Monster* MonsterFactory::Build(Tile& tile)
   auto type = MonsterFactory::calc_monster_type(depth);
   //auto name = MonsterFactory::get_name(type);
   //auto monster = new Monster(name, tile, type, Monster::MonsterState::Awake, calc_xp_level(depth));
-  return MonsterFactory::get_monster(type);
+  return MonsterFactory::get_monster(type, tile, calc_xp_level(depth));
 }
 
 Monster::MonsterType MonsterFactory::calc_monster_type(int depth)
@@ -28,22 +28,22 @@ int MonsterFactory::calc_xp_level(int depth)
   return depth;
 }
 
-Monster* MonsterFactory::get_monster(Monster::MonsterType type)
+Monster* MonsterFactory::get_monster(Monster::MonsterType type, Tile& tile, int xp_level)
 {
   auto name = MonsterFactory::get_name(type);  
   switch(type)
   {
     case Monster::MonsterType::Orc:
-      return new Monster(name, tile, type, Monster::MonsterState::Awake, calc_xp_level(depth));
+      return new Monster(name, tile, type, Monster::MonsterState::Awake, xp_level);
     case Monster::MonsterType::Devil:
-      return new Monster(name, tile, type, Monster::MonsterState::Wandering, calc_xp_level(depth));
+      return new Monster(name, tile, type, Monster::MonsterState::Wandering, xp_level);
     default:
       SDL_Log("Need to add this new monster type to MonsterFactory::get_monster");
       break;
   }
 }
 
-std::string MonsterFactoy::get_name(Monster::MonsterType type)
+std::string MonsterFactory::get_name(Monster::MonsterType type)
 {
   switch(type)
   {

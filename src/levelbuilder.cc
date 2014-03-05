@@ -6,6 +6,7 @@
 #include "player.h"
 #include "monster.h"
 #include "monster_factory.h"
+#include "item_factory.h"
 
 
 LevelBuilder::LevelBuilder()
@@ -16,11 +17,11 @@ void LevelBuilder::buildLevel(Level& level, Player& player)
 {
 
   SDL_Log("Creating Rooms...");
-  std::vector<Room*> rooms = createRooms(Level::LEVEL_ROOM_COUNT, level);
+  std::vector<Room*> rooms = create_rooms(Level::LEVEL_ROOM_COUNT, level);
   SDL_Log("Done.");
 
   SDL_Log("Connecting Rooms...");
-  connectRooms(rooms);
+  connect_rooms(rooms);
   SDL_Log("Done.");
 
   SDL_Log("Digging Corridors...");
@@ -31,10 +32,6 @@ void LevelBuilder::buildLevel(Level& level, Player& player)
   Room* startRoom = positionStairs(rooms);
   SDL_Log("Done.");
 
-  SDL_Log("Positioning Player...");
-  positionPlayer(startRoom, player);
-  SDL_Log("Done.");
-
   SDL_Log("Adding doors...");
   addDoors(level);
   SDL_Log("Done.");
@@ -42,6 +39,30 @@ void LevelBuilder::buildLevel(Level& level, Player& player)
   SDL_Log("Generating monsters...");
   generateMonsters(level);
   SDL_Log("Done.");
+
+  SDL_Log("Generating items...");
+  generate_items(level);
+  SDL_Log("Done.");
+
+  SDL_Log("Positioning Player...");
+  positionPlayer(startRoom, player);
+  SDL_Log("Done.");
+}
+
+void LevelBuilder::generate_items(Level& level)
+{
+  for (int i = 0; i < Level::LEVEL_ITEM_COUNT;)
+  {
+    auto randomTile = level.getRandomTileOfType(Tile::TileType::Floor);
+    if(!randomTile->actor())
+    {
+      auto item = ItemFactory::Build(level.depth());
+      randomTile->add_item(item);
+      //auto monster = MonsterFactory::Build(*randomTile);
+      //level.addMonster(monster);
+      ++i;
+    }
+  }
 }
 
 void LevelBuilder::generateMonsters(Level& level)
@@ -110,7 +131,7 @@ bool LevelBuilder::doorFits(int x, int y, Level& level)
 
 void LevelBuilder::positionPlayer(Room* room, Player& player)
 {
-  player.setCurrentTile(*room->getRandomTile());
+  player.set_tile(*room->getRandomTile());
 }
 
 Room* LevelBuilder::positionStairs(std::vector<Room*> rooms)
@@ -164,7 +185,7 @@ void LevelBuilder::digCorridors(std::vector<Room*> rooms, Level& level)
   }
 }
 
-void LevelBuilder::connectRooms(std::vector<Room*> rooms)
+void LevelBuilder::connect_rooms(std::vector<Room*> rooms)
 {
   std::vector<Room*> connectedRooms;
   connectedRooms.push_back(rooms.front());
@@ -202,7 +223,7 @@ void LevelBuilder::connectRooms(std::vector<Room*> rooms)
 
 }
 
-std::vector<Room*> LevelBuilder::createRooms(int amount, Level& level)
+std::vector<Room*> LevelBuilder::create_rooms(int amount, Level& level)
 {
   std::vector<Room*> rooms;
 

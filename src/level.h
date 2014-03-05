@@ -25,6 +25,8 @@ class Level
     float light_intensity(int x, int y);
     Tile* tile(int x, int y);
     Tile* tile_of_type(Tile::TileType typeToLookFor);
+    Tile* get_near_random_of_type(Tile&, int, Tile::TileType);
+    Tile* get_near_random(Tile&, int);
     Tile* getRandomTileOfType(Tile::TileType typeToLookFor);
     std::vector<Monster*> getMonsters();
     void addMonster(Monster* monster);
@@ -39,6 +41,7 @@ class Level
     const static int LEVEL_HEIGHT = 100;
     const static int LEVEL_ROOM_COUNT = 150;
     const static int LEVEL_MONSTER_COUNT = 75;
+    const static int LEVEL_ITEM_COUNT = 25;
 
   private:
     int _depth; 

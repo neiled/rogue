@@ -29,6 +29,7 @@ class Game {
     GameState state();
     Player* player();
     Level* level();
+    int turn();
 
   private:
     void reset();

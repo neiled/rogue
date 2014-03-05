@@ -104,6 +104,11 @@ void Game::end_turn()
   Messages::Push();
 }
 
+int Game::turn()
+{
+  return _turn;
+}
+
 void Game::decode_event(SDL_Event& event, Graphics& graphics, Renderer& renderer)
 {
   switch(event.type)

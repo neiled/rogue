@@ -1,6 +1,7 @@
 #include "commands.h"
 #include "world.h"
 #include "actor.h"
+#include "player.h"
 
 CommandProcessor::CommandProcessor()
 {
@@ -27,7 +28,7 @@ bool CommandProcessor::Process(Commands::CMD command, Actor& actor)
       actor.moveRight();
       break;
     case Commands::CMD::CMD_EXPLORE:
-      return actor.explore();
+      return static_cast<Player&>(actor).explore();
       break;
     default:
       break;

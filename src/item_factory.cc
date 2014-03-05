@@ -10,9 +10,11 @@ std::map<Item::ItemType, std::map<Item::ItemSubtype, int>> ItemFactory::_weighti
 std::map<Item::ItemType, std::map<Item::ItemSubtype, int>> ItemFactory::_cdf;
 std::map<Item::ItemType, int> ItemFactory::_sum_weights;
 
-Item* ItemFactory::Build()
+Item* ItemFactory::Build(int depth)
 {
-  return ItemFactory::get_potion(Item::ItemSubtype::POTION_HEALTH);
+  auto type = ItemFactory::calc_item_type(depth);
+  auto subtype = ItemFactory::calc_item_subtype(type, depth);
+  return ItemFactory::get_item(type, subtype);
 }
 
 Item* ItemFactory::Build(Monster::MonsterType monster_type, int xp_level)
@@ -109,6 +111,16 @@ Item::ItemType ItemFactory::calc_item_type(Monster::MonsterType monster_type, in
   if(random < 50)
     return Item::ItemType::POTION;
   return Item::ItemType::WEAPON;
+}
+
+Item::ItemType ItemFactory::calc_item_type(int depth)
+{
+  int random = Random::Between(0,100);
+
+  if(random < 50)
+    return Item::ItemType::POTION;
+  return Item::ItemType::WEAPON;
+
 }
 
 Item::ItemSubtype ItemFactory::calc_item_subtype(Item::ItemType item_type, int xp_level)

@@ -18,8 +18,8 @@ class LevelBuilder
 
   private:
 
-    std::vector<Room*> createRooms(int amount, Level& level);
-    void connectRooms(std::vector<Room*> rooms);
+    std::vector<Room*> create_rooms(int amount, Level& level);
+    void connect_rooms(std::vector<Room*> rooms);
     Room* generateRoom(Level& level, int maxWidth, int maxHeight);
     void digRoom(Room* room, Level& level);
     bool roomFits(Room* room, Level& level);
@@ -31,6 +31,7 @@ class LevelBuilder
     void addDoors(Level& level);
     bool doorFits(int x, int y, Level& level);
     void generateMonsters(Level& level);
+    void generate_items(Level& level);
 
     const static int ROOM_HEIGHT = 8;
     const static int ROOM_WIDTH = 8;

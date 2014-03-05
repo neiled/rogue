@@ -2,6 +2,7 @@
 #define MONSTER_FACTORY_H 
 
 #include "monster.h"
+#include <string>
 
 class Tile;
 
@@ -13,6 +14,7 @@ public:
 private:
   static Monster::MonsterType calc_monster_type(int depth);
   static int calc_xp_level(int depth);
-  static Monster* get_monster(Monster::MonsterType)
+  static Monster* get_monster(Monster::MonsterType, Tile& tile, int xp_level);
+  static std::string get_name(Monster::MonsterType);
 };
 #endif

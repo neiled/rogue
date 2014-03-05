@@ -24,7 +24,7 @@ Actor::~Actor()
 {
 }
 
-void Actor::setCurrentTile(Tile& newTile)
+void Actor::set_tile(Tile& newTile)
 {
   if(_currentTile)
     _currentTile->removeActor();
@@ -114,43 +114,12 @@ bool Actor::attemptMove(int xModifier, int yModifier)
   }
   else
   {
-    this->setCurrentTile(*newTile);
+    this->set_tile(*newTile);
     return true;
   }
 }
 
-bool Actor::explore()
-{
-  if(can_see_something_interesting())
-  {
-    Messages::Add("You see something and stop.");
-    return false;
-  }
-  AStar searcher;
-  _travelPath = searcher.explore(*_currentTile, _currentTile->level());
-  if(_travelPath.empty())
-  {
-    _targetTile = nullptr;
-    return false; //no where to explore
-  }
-  auto dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
-  _travelPath.pop_front();
-  _commandQueue.push_front(Commands::CMD::CMD_EXPLORE);
-  _commandQueue.push_front(dirCommand);
-  return true;
-}
 
-bool Actor::can_see_something_interesting()
-{
-  auto visible_tiles = level().visible_tiles();
-  for(auto tile : visible_tiles)
-  {
-    if(tile->actor() && tile->actor()->is_player() == false)
-      return true;
-  }
-
-  return false;
-}
 
 void Actor::meleeAttack(Actor* other)
 {
@@ -163,12 +132,12 @@ void Actor::meleeAttack(Actor* other)
   {
     int damage = calc_damage(*other);
     if(is_player())
-      Messages::Add("You deal " + std::to_string(damage) + " damage");
+      Messages::Add("You deal " + std::to_string(damage) + " damage to the " + other->name() +".");
     other->takeDamage(damage);
     if(other->dead())
     {
       if(is_player())
-        Messages::Add("You killed them."); //TODO: Use the actors name
+        Messages::Add("You killed the " + other->name() + "."); //TODO: Use the actors name
       killed(other);
     }
   }
@@ -336,7 +305,6 @@ void Actor::add_modifier(AttributeModifiers* modifier)
 
 void Actor::apply_modifier(AttributeModifiers* modifier)
 {
-  SDL_Log("Attribute size: %d",_attributes.size());
   _attributes.at(modifier->attr()) += modifier->modifier();
 }
 
@@ -356,7 +324,7 @@ void Actor::weapon(Item* weapon)
   _weapon = weapon;
 }
 
-std::string name()
+std::string Actor::name()
 {
   return _name;
 }

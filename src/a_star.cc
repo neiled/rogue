@@ -55,7 +55,7 @@ std::deque<Tile*> AStar::explore(Tile& startingPoint, Level& level)
 }
 
 
-std::deque<Tile*> AStar::plotPath(Tile& startingPoint, Tile& end)
+std::deque<Tile*> AStar::plotPath(Tile& startingPoint, Tile& end, int max_count)
 {
   std::deque<Tile*> results;
 
@@ -66,9 +66,9 @@ std::deque<Tile*> AStar::plotPath(Tile& startingPoint, Tile& end)
   while(find(closed_list.begin(), closed_list.end(), &end) == closed_list.end())
   {
     result = search(*result, &end);
-    if(!result)
+    if(!result || (max_count >0 && closed_list.size() >= max_count))
     {
-      SDL_Log("No way to get to square!");
+      SDL_Log("No way to get to square! List Count %d", closed_list.size());
       return std::deque<Tile*>();
     }
   }
@@ -125,7 +125,7 @@ Tile* AStar::findLowestScore(Tile& currentSquare, Tile* end)
   {
     float distance = 0;
     if(end)
-      distance = currentTile->distanceTo(*end);
+      distance = score(currentSquare, *end);//currentTile->distanceTo(*end);
     int gScore = gCost[&currentSquare] + 10;
     float fScore = distance + gScore;
     if(fScore < bestFScore || bestFScore <= 0)
@@ -136,6 +136,11 @@ Tile* AStar::findLowestScore(Tile& currentSquare, Tile* end)
   }
 
   return bestTile;
+}
+
+float AStar::score(Tile& start, Tile& end)
+{
+  return abs(start.x() - end.x()) + abs(start.y() - end.y());
 }
 
 std::vector<Tile*> AStar::surroundingValidTiles(Tile& start, bool avoid_monsters)

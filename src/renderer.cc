@@ -36,7 +36,7 @@ void Renderer::render(Game& game)
 {
   render(*game.level());
   render(*game.player());
-  render_info(*game.player());
+  render_info(game, *game.player());
   render_messages(Messages::AllMessages());
   render_state(game.state(), *game.player());
   
@@ -226,7 +226,7 @@ void Renderer::draw_health(Actor& actor)
   draw_health_bar(x, y, w, h, actor.health(), actor.max_health());
 }
 
-void Renderer::render_info(Player& player)
+void Renderer::render_info(Game& game, Player& player)
 {
   SDL_RenderSetViewport(_graphics->Renderer, &_vp_info);
   _info_char->draw(0, 0, 0, 0);
@@ -250,6 +250,8 @@ void Renderer::render_info(Player& player)
   render_string("Def: " + std::to_string(player.def()), 0, string_y, 16);
   string_y += string_gap;
   render_string("Dpth: " + std::to_string(player.level().depth()), 0, string_y, 16);
+  string_y += string_gap;
+  render_string("Turn: " + std::to_string(game.turn()), 0, string_y, 16);
 
 }
 

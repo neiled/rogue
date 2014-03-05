@@ -11,7 +11,7 @@ Monster::Monster(std::string name, Tile& startTile, Monster::MonsterType type, M
   : Actor(name, max_health(), xp_level)
 {
   this->direction = static_cast<Actor::Direction>(Random::Between(0,3));
-  setCurrentTile(startTile);
+  set_tile(startTile);
   _monster_type = type;
   _monsterState = state;
   populate_inventory();
@@ -53,15 +53,16 @@ void Monster::look_for_player()
 
 void Monster::wander()
 {
-  if(_travelPath.empty() || Random::CheckChance(10))
+  if(_travelPath.empty())
   {
-    auto target_tile = level().getRandomTileOfType(Tile::TileType::FLOOR);
+    auto target_tile = level().get_near_random_of_type(*_currentTile, 5, Tile::TileType::Floor);
     AStar searcher;
-    _travelPath = searcher.plotPath(*_currentTile, target_tile);
+    _travelPath = searcher.plotPath(*_currentTile, *target_tile, 50);
   }
   if(_travelPath.empty() == false)
   {
     Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
+    _travelPath.pop_front();
     _commandQueue.push_front(dirCommand);
   }  
 }
