@@ -10,7 +10,7 @@ class Actor;
 class Inventory
 {
 public:
-  Inventory();
+  Inventory(int max_items);
   virtual ~Inventory ();
   void add(Item* item);
   void remove(Item* item);
@@ -18,9 +18,11 @@ public:
   void empty();
   bool full();
   int count();
+  int max_items();
   void use(int index, Actor& actor);
 
 private:
   std::vector<Item*> _items;
+  int _max_items;
 };
 #endif
