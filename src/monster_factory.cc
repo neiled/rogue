@@ -8,9 +8,9 @@ Monster* MonsterFactory::Build(Tile& tile)
 {
   auto depth = tile.level().depth();
   auto type = MonsterFactory::calc_monster_type(depth);
-  auto name = MonsterFactory::get_name(type);
-  auto monster = new Monster(name, tile, type, Monster::MonsterState::Awake, calc_xp_level(depth));
-  return monster;
+  //auto name = MonsterFactory::get_name(type);
+  //auto monster = new Monster(name, tile, type, Monster::MonsterState::Awake, calc_xp_level(depth));
+  return MonsterFactory::get_monster(type);
 }
 
 Monster::MonsterType MonsterFactory::calc_monster_type(int depth)
