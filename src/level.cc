@@ -11,11 +11,21 @@ Level::Level(int depth)
   {
     for (int x = 0; x < LEVEL_WIDTH; ++x)
     {
-      auto t = new Tile(Tile::TileType::Rock, *this, x, y);
+      auto t = new Tile(TileType::Rock, *this, x, y);
       _map[y][x] = t;
       _light_map[y][x] = Level::LightType::Unseen;
     }
   }
+}
+
+int Level::width()
+{
+  return LEVEL_WIDTH;
+}
+
+int Level::height()
+{
+  return LEVEL_HEIGHT;
 }
 
 void Level::update(Player& player)
@@ -96,7 +106,7 @@ int Level::depth()
   return _depth;
 }
 
-Tile* Level::tile_of_type(Tile::TileType typeToLookFor)
+Tile* Level::tile_of_type(TileType typeToLookFor)
 {
   for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
   {
@@ -109,7 +119,7 @@ Tile* Level::tile_of_type(Tile::TileType typeToLookFor)
   return nullptr;
 }
 
-Tile* Level::getRandomTileOfType(Tile::TileType typeToLookFor)
+Tile* Level::getRandomTileOfType(TileType typeToLookFor)
 {
   do
   {
@@ -119,7 +129,7 @@ Tile* Level::getRandomTileOfType(Tile::TileType typeToLookFor)
   }while(true);
 }
 
-Tile* Level::get_near_random_of_type(Tile& tile_near, int radius, Tile::TileType type)
+Tile* Level::get_near_random_of_type(Tile& tile_near, int radius, TileType type)
 {
   do
   {
@@ -150,7 +160,7 @@ Tile* Level::get_near_random(Tile& start, int radius)
   return foundTile;
 }
 
-void Level::setType(int x, int y, Tile::TileType tileType)
+void Level::setType(int x, int y, TileType tileType)
 {
   _map[y][x]->setTileType(tileType);
 }

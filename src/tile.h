@@ -2,6 +2,7 @@
 #define TILE_H_
 
 #include <vector>
+#include "game_types.h"
 
 class Level;
 class Actor;
@@ -10,7 +11,6 @@ class Item;
 class Tile
 {
   public:
-    enum struct TileType {Floor = 0, Rock=1, StairsDown=2, StairsUp=3, Door=4};
 
 
     Tile (TileType tileType, Level& level, int x, int y);

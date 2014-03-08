@@ -43,7 +43,7 @@ void Tile::setTileType(TileType tileType)
   _tileType = tileType;
 }
 
-Tile::TileType Tile::tile_type()
+TileType Tile::tile_type()
 {
   return _tileType;
 }

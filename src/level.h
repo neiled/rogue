@@ -18,19 +18,21 @@ class Level
 
     enum class LightType {Unseen, Unlit, Lit};
 
-    void setType(int x, int y, Tile::TileType tileType);
+    void setType(int x, int y, TileType tileType);
     void update(Player& player);
     void updateGraphics();
     Level::LightType light_map(int x, int y);
     float light_intensity(int x, int y);
     Tile* tile(int x, int y);
-    Tile* tile_of_type(Tile::TileType typeToLookFor);
-    Tile* get_near_random_of_type(Tile&, int, Tile::TileType);
+    Tile* tile_of_type(TileType typeToLookFor);
+    Tile* get_near_random_of_type(Tile&, int, TileType);
     Tile* get_near_random(Tile&, int);
-    Tile* getRandomTileOfType(Tile::TileType typeToLookFor);
+    Tile* getRandomTileOfType(TileType typeToLookFor);
     std::vector<Monster*> getMonsters();
     void addMonster(Monster* monster);
     std::vector<Tile*> visible_tiles();
+    int width();
+    int height();
     
     Player* player();
     void set_player(Player* player);

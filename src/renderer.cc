@@ -12,7 +12,7 @@
 #include "messages.h"
 #include "render_monsters.h"
 
-Renderer::Renderer(Graphics* graphics) : _graphics(graphics), _render_inv(graphics)
+Renderer::Renderer(Graphics* graphics) : _graphics(graphics), _render_inv(graphics), _render_level(graphics)
 {
 
 }
@@ -86,15 +86,15 @@ void Renderer::loadMonsterTiles()
 
 void Renderer::loadMapTiles()
 {
-  _mapTiles[(int)Tile::TileType::Floor] =  new Sprite(_graphics, "../content/dungeon_tiles_32.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
+  _tiles[TileType::Floor] =  new Sprite(_graphics, "../content/dungeon_tiles_32.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
 
-  _mapTiles[(int)Tile::TileType::StairsUp] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 12*TILE_SIZE, 2*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _tiles[TileType::StairsUp] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 12*TILE_SIZE, 2*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-  _mapTiles[(int)Tile::TileType::StairsDown] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 11*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _tiles[TileType::StairsDown] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 11*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-  _mapTiles[(int)Tile::TileType::Rock] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 12*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _tiles[TileType::Rock] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 12*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-  _mapTiles[(int)Tile::TileType::Door] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 13*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _tiles[TileType::Door] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 13*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 }
 
 void Renderer::load_items()
@@ -165,51 +165,10 @@ void Renderer::render_monsters(Level& level)
   RenderMonsters::Render(*this, _monsters, level);
 }
 
-void Renderer::render_items(Tile& tile, int alpha)
-{
-  for(Item* item : tile.items())
-  {
-    _items[item->item_type()][item->item_subtype()]->draw(tile.x()*TILE_SIZE, tile.y()*TILE_SIZE, _cameraRect.x, _cameraRect.y, alpha);
-  }
-
-}
 
 void Renderer::render_level(Level& level)
 {
-  for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
-  {
-    for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
-    {
-      Level::LightType lit = level.light_map(x, y);
-      if(lit == Level::LightType::Unseen)
-        continue;
-      if(y*TILE_SIZE < _cameraRect.y)
-        continue;
-      if(y*TILE_SIZE > _cameraRect.y + _cameraRect.h)
-        continue;
-      if(x*TILE_SIZE > _cameraRect.x + _cameraRect.w)
-        continue;
-      if(x*TILE_SIZE < _cameraRect.x)
-        continue;
-
-      auto currentTile = level.tile(x, y);
-      auto tileType = (int)currentTile->tile_type();
-      int alpha = 255;
-
-      if(lit == Level::LightType::Unlit)
-        alpha = 100;
-      else
-      {
-        auto intensity = level.light_intensity(x,y);
-        alpha = static_cast<int>(255.0f * intensity);
-        if(alpha < 128) alpha = 128;
-      }
-
-      _mapTiles[tileType]->draw(x*TILE_SIZE,y*TILE_SIZE, _cameraRect.x, _cameraRect.y, alpha);
-      if(lit == Level::LightType::Lit)
-        render_items(*currentTile, alpha);
-    }
-  }
+  _render_level.render(*this, _cameraRect, _tiles, _items, level);
 }
 
 Tile* Renderer::get_tile_from_coord(Level& level, int x, int y)

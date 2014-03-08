@@ -161,11 +161,11 @@ std::vector<Tile*> AStar::surroundingValidTiles(Tile& start, bool avoid_monsters
         continue;
       if(find(closed_list.begin(), closed_list.end(), neighbour) != closed_list.end())
         continue;
-      if(neighbour->tile_type() == Tile::TileType::Rock)
+      if(neighbour->tile_type() == TileType::Rock)
         continue;
-      if(neighbour->tile_type() == Tile::TileType::StairsDown)
+      if(neighbour->tile_type() == TileType::StairsDown)
         continue;
-      if(neighbour->tile_type() == Tile::TileType::StairsUp)
+      if(neighbour->tile_type() == TileType::StairsUp)
         continue;
       if(avoid_monsters && neighbour->actor() && neighbour->actor()->is_player() == false) //avoid other monthers
         continue;

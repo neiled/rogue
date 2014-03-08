@@ -12,6 +12,7 @@
 #include <SDL2_Image/SDL_Image.h>
 #include <SDL2_ttf/SDL_ttf.h>
 #include "render_inventory.h"
+#include "render_level.h"
 #include "game_types.h"
 
 using std::vector;
@@ -47,14 +48,16 @@ class Renderer {
     Tile* get_tile_from_coord(Level& level, int x, int y);
     
   private:
-    array<Sprite*,5> _mapTiles;
+    //array<Sprite*,5> _mapTiles;
     monster_sprites_t _monsters;
     item_sprites_t _items;
+    level_sprites_t _tiles;
     DirectionalSprite* _player = nullptr;
     Graphics* _graphics = nullptr;
     Sprite* _info_char = nullptr;
 
     RenderInventory _render_inv;
+    RenderLevel _render_level;
 
     SDL_Rect _vp_main;
     SDL_Rect _vp_msg;

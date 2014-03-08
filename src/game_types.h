@@ -23,8 +23,11 @@ enum class ItemSubtype {
   POTION_HEALTH_LARGE
 };
 
+enum struct TileType {Floor = 0, Rock, StairsDown, StairsUp, Door};
+
 typedef std::map<MonsterType, DirectionalSprite*> monster_sprites_t;
 typedef std::map<ItemType, std::map<ItemSubtype, Sprite*>> item_sprites_t;
+typedef std::map<TileType, Sprite*> level_sprites_t;
 enum class GameState {MENU_START, GAME, MENU_INVENTORY, DEAD, STARTING, STOP};
 
 #endif

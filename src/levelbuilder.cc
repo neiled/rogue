@@ -53,7 +53,7 @@ void LevelBuilder::generate_items(Level& level)
 {
   for (int i = 0; i < Level::LEVEL_ITEM_COUNT;)
   {
-    auto randomTile = level.getRandomTileOfType(Tile::TileType::Floor);
+    auto randomTile = level.getRandomTileOfType(TileType::Floor);
     if(!randomTile->actor())
     {
       auto item = ItemFactory::Build(level.depth());
@@ -67,7 +67,7 @@ void LevelBuilder::generateMonsters(Level& level)
 {
   for (int i = 0; i < Level::LEVEL_MONSTER_COUNT;)
   {
-    auto randomTile = level.getRandomTileOfType(Tile::TileType::Floor);
+    auto randomTile = level.getRandomTileOfType(TileType::Floor);
     if(!randomTile->actor())
     {
       auto monster = MonsterFactory::Build(*randomTile);
@@ -84,7 +84,7 @@ void LevelBuilder::addDoors(Level& level)
     for (int x = 0; x < Level::LEVEL_WIDTH-1; ++x)
     {
       if(doorFits(x, y, level))
-          level.tile(x, y)->setTileType(Tile::TileType::Door);
+          level.tile(x, y)->setTileType(TileType::Door);
     }
 
   }
@@ -95,28 +95,28 @@ bool LevelBuilder::doorFits(int x, int y, Level& level)
   if(x <= 0 || y <= 0)
     return false;
   auto currentTile = level.tile(x, y);
-  if(currentTile->tile_type() != Tile::TileType::Floor)
+  if(currentTile->tile_type() != TileType::Floor)
     return false;
-  if(level.tile(x,y-1)->tile_type() == Tile::TileType::Floor)
+  if(level.tile(x,y-1)->tile_type() == TileType::Floor)
   {
-    if(level.tile(x-1,y)->tile_type() != Tile::TileType::Rock)
+    if(level.tile(x-1,y)->tile_type() != TileType::Rock)
       return false;
-    if(level.tile(x+1,y)->tile_type() != Tile::TileType::Rock)
+    if(level.tile(x+1,y)->tile_type() != TileType::Rock)
       return false;
     if(level.tile(x-1,y-1)->tile_type() != level.tile(x+1,y-1)->tile_type())
       return false;
-    if(level.tile(x,y+1)->tile_type() != Tile::TileType::Floor)
+    if(level.tile(x,y+1)->tile_type() != TileType::Floor)
       return false;
     if(level.tile(x-1,y+1)->tile_type() != level.tile(x+1,y+1)->tile_type())
       return false;
     return true;
   }
-  else if(level.tile(x-1, y)->tile_type() == Tile::TileType::Floor &&
-      level.tile(x+1, y)->tile_type() == Tile::TileType::Floor)
+  else if(level.tile(x-1, y)->tile_type() == TileType::Floor &&
+      level.tile(x+1, y)->tile_type() == TileType::Floor)
   {
-    if(level.tile(x, y-1)->tile_type() != Tile::TileType::Rock)
+    if(level.tile(x, y-1)->tile_type() != TileType::Rock)
       return false;
-    if(level.tile(x, y+1)->tile_type() != Tile::TileType::Rock)
+    if(level.tile(x, y+1)->tile_type() != TileType::Rock)
       return false;
     if(level.tile(x-1,y-1)->tile_type() != level.tile(x-1,y+1)->tile_type())
       return false;
@@ -153,10 +153,10 @@ Room* LevelBuilder::positionStairs(std::vector<Room*> rooms)
   }
 
   auto startTile = startRoom->getRandomTile(true);
-  startTile->setTileType(Tile::TileType::StairsUp);
+  startTile->setTileType(TileType::StairsUp);
 
   auto endTile = endRoom->getRandomTile(true);
-  endTile->setTileType(Tile::TileType::StairsDown);
+  endTile->setTileType(TileType::StairsDown);
 
   return startRoom;
 }
@@ -280,7 +280,7 @@ void LevelBuilder::digCorridor(SDL_Point startPoint, SDL_Point endPoint, Room* r
 {
 
   auto tileToCheck = level.tile(startPoint.x, startPoint.y);
-  tileToCheck->setTileType(Tile::TileType::Floor);
+  tileToCheck->setTileType(TileType::Floor);
   int x = startPoint.x;
   int y = startPoint.y;
 
@@ -342,7 +342,7 @@ bool LevelBuilder::roomFits(Room* room, Level& level)
       if(y >= Level::LEVEL_HEIGHT-1)
         return false;
 
-      if(level.tile(x, y)->tile_type() == Tile::TileType::Floor)
+      if(level.tile(x, y)->tile_type() == TileType::Floor)
         return false;
     }
   }
@@ -355,7 +355,7 @@ void LevelBuilder::digRoom(Room* room, Level& level)
   {
     for (int x = room->x(); x < room->x()+room->getWidth(); ++x)
     {
-      level.tile(x, y)->setTileType(Tile::TileType::Floor);
+      level.tile(x, y)->setTileType(TileType::Floor);
     }
   }
 }

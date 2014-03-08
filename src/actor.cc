@@ -279,7 +279,7 @@ Tile* Actor::checkCanMove(int newX, int newY)
   if(newY >= Level::LEVEL_HEIGHT)
     return nullptr;
   auto newTile = level().tile(newX, newY);
-  if(newTile->tile_type() == Tile::TileType::Rock)
+  if(newTile->tile_type() == TileType::Rock)
     return nullptr;
   return newTile;
 }
