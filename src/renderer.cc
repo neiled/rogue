@@ -223,7 +223,12 @@ Tile* Renderer::get_tile_from_coord(Level& level, int x, int y)
   final_x /= TILE_SIZE;
   final_y /= TILE_SIZE;
 
-  return level.tile(final_x, final_y);
+  auto tile = level.tile(final_x, final_y);
+  auto lit = level.light_map(final_x, final_y);
+  if(lit == Level::LightType::Unseen)
+    return nullptr;
+
+  return tile;
 
 }
 
@@ -258,11 +263,11 @@ void Renderer::render_info(Game& game, Player& player)
   {
     auto item = _items[player.weapon()->item_type()][player.weapon()->item_subtype()];
     item->draw(140, 125, 0, 0, SDL_ALPHA_OPAQUE);
-    render_string("Wpn: " + player.weapon()->name() + " : " + std::to_string(player.weapon()->max_damage()), 25, string_y, 16);
+    render_string("Wpn Dmg: " + std::to_string(player.weapon()->max_damage()), 25, string_y, 16);
   }
   draw_health_bar(25, 300, 150, 20, player.health(), player.max_health());
 
-  draw_health_bar(25, 330, 150, 20, player.xp() - player.min_xp(), player.max_xp());
+  draw_xp_bar(25, 330, 150, 20, player.xp() - player.min_xp(), player.max_xp());
 
   string_y += string_gap;
   render_string("Lvl: " + std::to_string(player.xp_level()), 25, string_y, 16);
@@ -277,7 +282,7 @@ void Renderer::render_info(Game& game, Player& player)
 
 }
 
-void Renderer::draw_health_bar(int x, int y, int width, int height, int current_health, int max_health)
+void Renderer::draw_bar(int x, int y, int width, int height, int current, int max, int r, int g, int b)
 {
   SDL_Rect health;
   health.x = x;
@@ -290,10 +295,55 @@ void Renderer::draw_health_bar(int x, int y, int width, int height, int current_
   health.x++;
   health.y++;
   health.h-=2;
-  health.w = (width-2) * (static_cast<float>(current_health) / max_health);
-  SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+  health.w = (width-2) * (static_cast<float>(current) / max);
+  SDL_SetRenderDrawColor(_graphics->Renderer, r, g, b, SDL_ALPHA_OPAQUE);
   SDL_RenderFillRect(_graphics->Renderer, &health);
   SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+}
+
+void Renderer::draw_xp_bar(int x, int y, int width, int height, int current, int max)
+{
+  draw_bar(x, y, width, height, current, max, 81, 95, 240);
+}
+
+void Renderer::draw_health_bar(int x, int y, int width, int height, int current_health, int max_health)
+{
+  int r,g,b;
+  float current_percent = (static_cast<float>(current_health) / max_health);
+  if(current_percent < 0.25)
+  {
+    r = 255;
+    g = 0;
+    b = 0;
+  }
+  else if(current_percent < 0.5)
+  {
+    r = 255;
+    g = 187;
+    b = 0;
+  }
+  else
+  {
+    r = 0;
+    g = 255;
+    b = 0;
+  }
+  draw_bar(x, y, width, height, current_health, max_health, r, g, b);
+  //SDL_Rect health;
+  //health.x = x;
+  //health.y = y;
+  //health.w = width;
+  //health.h = height;
+  //SDL_SetRenderDrawColor(_graphics->Renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+  //SDL_RenderDrawRect(_graphics->Renderer, &health);
+
+  //health.x++;
+  //health.y++;
+  //health.h-=2;
+  //health.w = (width-2) * (static_cast<float>(current_health) / max_health);
+  //SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+  //SDL_RenderFillRect(_graphics->Renderer, &health);
+  //SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 
 void Renderer::render_messages(std::deque<std::string> messages)

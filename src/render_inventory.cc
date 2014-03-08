@@ -34,4 +34,6 @@ void RenderInventory::render(Renderer& renderer, item_sprites_t items, Inventory
     renderer.render_string(item->name(), x + Renderer::TILE_SIZE*2, y+8, 16);
     count++;
   }  
+  renderer.render_string("To drop an item press d then", vp_inv.x + 30, 682, 32);
+  renderer.render_string("the number of the item to drop.", vp_inv.x + 30, 714, 32);
 }

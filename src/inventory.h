@@ -6,6 +6,7 @@
 
 class Item;
 class Actor;
+class Tile;
 
 class Inventory
 {
@@ -20,6 +21,7 @@ public:
   int count();
   int max_items();
   void use(int index, Actor& actor);
+  void drop(int index, Tile& tile);
 
 private:
   std::vector<Item*> _items;

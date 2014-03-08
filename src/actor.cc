@@ -73,6 +73,16 @@ void Actor::move_to(Tile* tile)
   push_command(Commands::CMD::CMD_MOVE_TO_TILE);
 }
 
+bool Actor::can_see_something_interesting(bool quiet)
+{
+  return false;
+}
+
+bool Actor::can_see_monster(bool quiet)
+{
+  return false;
+}
+
 bool Actor::move_to_target()
 {
   if(!_targetTile)
@@ -81,21 +91,36 @@ bool Actor::move_to_target()
   if(_targetTile == _currentTile)
   {
     _targetTile = nullptr;
+    _travelPath.clear();
     return false;
   }
 
-  AStar searcher;
-  _travelPath = searcher.plotPath(*_currentTile, *_targetTile);
+  if(can_see_monster())
+  {
+    _targetTile = nullptr;
+    _travelPath.clear();
+    return false;
+  }
+
+  if(_travelPath.empty())
+  {
+    AStar searcher;
+    _travelPath = searcher.plotPath(*_currentTile, *_targetTile);
+    Messages::Push("Moving to tile.");
+  }
+
   if(_travelPath.empty() == false)
   {
     Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
+    _travelPath.pop_front();
     _commandQueue.push_front(Commands::CMD::CMD_MOVE_TO_TILE);
     _commandQueue.push_front(dirCommand);
   }
   else
   {
-    Messages::Add("No way to get to that location, too many obstacles!");
+    Messages::Add("No way to get to that location, too many obstacles");
     _targetTile = nullptr;
+    _travelPath.clear();
     return false;
   }
 
@@ -167,22 +192,22 @@ void Actor::meleeAttack(Actor* other)
   {
     int damage = calc_damage(*other);
     if(is_player())
-      Messages::Add("You deal " + std::to_string(damage) + " damage to the " + other->name() +".");
+      Messages::Add("You deal " + std::to_string(damage) + " damage to the " + other->name());
     other->takeDamage(damage);
     if(other->dead())
     {
       if(is_player())
-        Messages::Add("You killed the " + other->name() + ".");
+        Messages::Add("You killed the " + other->name());
       killed(other);
     }
   }
   else if(is_player())
   {
-    Messages::Add("You missed the " + other->name() +"! chance of " + std::to_string(toHit));
+    Messages::Add("You missed the " + other->name() +"! chance of " + std::to_string(static_cast<int>(toHit)));
   }
   else
   {
-    Messages::Add("The " + name() + " missed!");
+    Messages::Add("The " + name() + " missed");
   }
 
 
@@ -315,6 +340,8 @@ void Actor::drop_items()
 {
   for(auto item : _inventory.items())
   {
+    if(is_player() == false)
+      Messages::Add("The " + name() + " dropped " + item->name());
     _currentTile->add_item(item);
   }
   _inventory.empty();

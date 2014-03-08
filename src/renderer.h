@@ -66,6 +66,8 @@ class Renderer {
     void load_info();
     void init_viewports();
     void draw_health_bar(int x, int y, int width, int height, int health, int max_health);
+    void draw_xp_bar(int x, int y, int width, int height, int current, int max);
+    void draw_bar(int x, int y, int width, int height, int health, int max_health, int r, int g, int b);
 
     void render_level(Level& level);
     void render_monsters(Level& level);

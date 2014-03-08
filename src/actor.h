@@ -45,6 +45,8 @@ class Actor
 
 
     bool can_see_actor(Actor& actor);
+    virtual bool can_see_something_interesting(bool quiet = true);
+    virtual bool can_see_monster(bool quiet = true);
     
 
     void push_command(Commands::CMD command);

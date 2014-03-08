@@ -15,6 +15,8 @@ public:
   
   virtual int max_damage() override;
   virtual int calc_damage(Actor&) override;
+
+  virtual std::string name() override;
   
 private:
   int _max_damage;

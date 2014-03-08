@@ -15,7 +15,6 @@ Player::Player() : Actor("player", 1, 10), _xp(0)
   _attributes[Attribute::DEF] = 1;
   _attributes[Attribute::CON] = 50;
   _attributes[Attribute::HEALTH] = max_health();
-  _weapon = ItemFactory::Build(ItemType::WEAPON, ItemSubtype::WEAPON_KRIS_RUSTED);
 }
 
 Player::~Player()
@@ -52,7 +51,7 @@ void Player::pickup_items()
     }
     else
     {
-      Messages::Add("You cannot carry any more items.");
+      Messages::Add("You cannot carry any more items");
       break;
     }
   }
@@ -118,7 +117,7 @@ int Player::max_damage(Actor& other)
   int damage = 0;
   if(_weapon)
   {
-    Messages::Add("Using your " + _weapon->name());
+    Messages::Add("You attack with your " + _weapon->name());
     damage =  _weapon->calc_damage(other);
   }
   else
@@ -133,13 +132,15 @@ int Player::max_damage(Actor& other)
 
 bool Player::explore()
 {
-  if(can_see_something_interesting())
+  if(can_see_something_interesting(false))
   {
-    Messages::Add("You see something and stop.");
     return false;
   }
-  AStar searcher;
-  _travelPath = searcher.explore(*_currentTile, _currentTile->level());
+  if(_travelPath.empty())
+  {
+    AStar searcher;
+    _travelPath = searcher.explore(*_currentTile, _currentTile->level());
+  }
   if(_travelPath.empty())
   {
     _targetTile = nullptr;
@@ -157,7 +158,91 @@ void Player::set_tile(Tile& tile)
   Actor::set_tile(tile);
 }
 
-bool Player::add_seen_items()
+void Player::add_seen_items()
+{
+  auto visible_tiles = _currentTile->level().visible_tiles();
+  for(auto tile : visible_tiles)
+  {
+    if(tile->interesting())
+    {
+      if(find(_interesting_tiles_seen.begin(), _interesting_tiles_seen.end(), tile)
+          == _interesting_tiles_seen.end())
+      {
+        _interesting_tiles_seen.push_back(tile);
+      }
+    }
+    for(auto item : tile->items())
+    {
+      if(item->interesting())
+      {
+        if(find(_interesting_items_seen.begin(), _interesting_items_seen.end(), item)
+            == _interesting_items_seen.end())
+        {
+          _interesting_items_seen.push_back(item);
+        }
+      }
+    }
+  }
+
+
+
+}
+
+bool Player::can_see_something_interesting(bool quiet)
+{
+  bool seen = false;
+
+  if(can_see_monster(quiet))
+    seen = true;
+  if(can_see_unknown_item(quiet))
+  {
+    seen = true;
+  }
+  if(can_see_interesting_tile(quiet))
+  {
+    seen = true;
+  }
+  if(seen && quiet == false)
+    Messages::Push();
+  add_seen_items();
+  return seen;
+}
+
+bool Player::can_see_monster(bool quiet)
+{
+  bool seen = false;
+  auto visible_tiles = level().visible_tiles();
+  for(auto tile : visible_tiles)
+  {
+    if(tile->actor() && tile->actor()->is_player() == false)
+    {
+      if(!quiet)
+        Messages::Add("You see a " + tile->actor()->name());
+      seen = true;
+    }
+  }
+  return seen;
+}
+
+bool Player::can_see_interesting_tile(bool quiet)
+{
+  bool seen = false;
+  auto visible_tiles = _currentTile->level().visible_tiles();
+  for(auto tile : visible_tiles)
+  {
+      if(tile->interesting() == false)
+        continue;
+      if(find(_interesting_tiles_seen.begin(), _interesting_tiles_seen.end(), tile)
+          == _interesting_tiles_seen.end())
+      {
+        if(!quiet)
+          Messages::Add("You see " + tile->name());
+        seen = true;
+      }
+  }
+  return seen;
+}
+bool Player::can_see_unknown_item(bool quiet)
 {
   bool seen = false;
   auto visible_tiles = _currentTile->level().visible_tiles();
@@ -167,29 +252,14 @@ bool Player::add_seen_items()
     {
       if(item->interesting() == false)
         continue;
-      if(find(_items_seen.begin(), _items_seen.end(), item) == _items_seen.end())
+      if(find(_interesting_items_seen.begin(), _interesting_items_seen.end(), item)
+          == _interesting_items_seen.end())
       {
-        _items_seen.push_back(item);
+        if(!quiet)
+          Messages::Add("You can see a " + item->name());
         seen = true;
       }
     }
   }
-
-  return seen;
-}
-
-bool Player::can_see_something_interesting()
-{
-  auto visible_tiles = level().visible_tiles();
-  bool seen = false;
-  for(auto tile : visible_tiles)
-  {
-    if(tile->actor() && tile->actor()->is_player() == false)
-      return true;
-    bool seen_items = add_seen_items();
-    if(seen_items)
-      seen = true;
-  }
-
   return seen;
 }

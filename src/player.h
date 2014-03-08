@@ -21,7 +21,11 @@ class Player : public Actor
 
     bool explore();
     virtual void set_tile(Tile& newTile) override;
-    bool add_seen_items();
+    void add_seen_items();
+    bool can_see_something_interesting(bool quiet = true) override;
+    bool can_see_monster(bool quiet = true);
+    bool can_see_unknown_item(bool quiet = true);
+    bool can_see_interesting_tile(bool quiet = true);
 
   protected:
     virtual void pickup_items() override;
@@ -30,7 +34,6 @@ class Player : public Actor
     virtual void die() override;
     virtual bool is_player() override { return true;}
     virtual void killed(Actor* other) override ;
-    bool can_see_something_interesting();
 
     int32_t _xp;
     int32_t _max_xp;
@@ -39,7 +42,8 @@ class Player : public Actor
     int32_t calc_min_xp();
     void increase_level();
 
-    std::vector<Item*> _items_seen;
+    std::vector<Item*> _interesting_items_seen;
+    std::vector<Tile*> _interesting_tiles_seen;
 
 
 };

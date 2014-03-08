@@ -12,6 +12,7 @@ public:
   static std::string PopMessage();
   static std::deque<std::string> AllMessages();
   static void Push();
+  static void Push(std::string message);
   static void Clear();
 
 private:

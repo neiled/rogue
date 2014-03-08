@@ -1,6 +1,7 @@
 #include "command_decoder_game.h"
 #include "game_types.h"
 #include "tile.h"
+#include "messages.h"
 
 bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
 {
@@ -32,12 +33,13 @@ bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
 bool CommandDecoderGame::Decode(Uint8 button, Uint8 clicks, Sint32 x, Sint32 y, Game& game)
 {
   auto &player = *game.player();
-  SDL_Log("Clicked at %d, %d", x, y);
   Tile* tile = game.get_tile_from_click(x, y);
   if(tile)
   {
-    player.move_to(tile);
-    SDL_Log("Tile Type: %d", tile->tile_type());
+    if(player.can_see_monster() == false)
+      player.move_to(tile);
+    else
+      Messages::Push("It's too dangerous right now.");
   }
   return false;
 }

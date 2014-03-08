@@ -18,7 +18,7 @@ public:
   ItemType item_type();
   ItemSubtype item_subtype();
   
-  std::string name();
+  virtual std::string name();
 
   virtual int calc_damage(Actor&);
   virtual int max_damage() {return 1;};

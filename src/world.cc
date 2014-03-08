@@ -4,6 +4,7 @@
 #include "player.h"
 #include "tile.h"
 #include <SDL2/SDL.h>
+#include "item_factory.h"
 
 World::World()
 {
@@ -28,6 +29,7 @@ void World::init()
   _builder.buildLevel(*firstLevel, _player);
   SDL_Log("Done.");
   _levels.push_back(firstLevel);
+  _player.weapon(ItemFactory::Build(ItemType::WEAPON, ItemSubtype::WEAPON_KRIS_RUSTED));
 }
 
 void World::updateGraphics()

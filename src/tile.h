@@ -29,6 +29,8 @@ class Tile
     int x() const;
     int y() const;
     bool is_lit() const;
+    bool interesting();
+    std::string name();
 
 
   private:

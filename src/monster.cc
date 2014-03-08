@@ -73,7 +73,7 @@ void Monster::hunt(Player& player)
 {
   _travelPath.clear();
   AStar searcher;
-  _travelPath = searcher.plotPath(*_currentTile, *player.tile(), 50);
+  _travelPath = searcher.plotPath(*_currentTile, *player.tile(), 200);
   if(_travelPath.empty() == false)
   {
     Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
@@ -118,9 +118,9 @@ int Monster::max_health()
   switch(_monster_type)
   {
     case MonsterType::Orc:
-      return 15 * xp_level();
+      return 10 * xp_level();
     case MonsterType::Devil:
-      return 20 * xp_level();
+      return 15 * xp_level();
   }
 }
 
@@ -138,7 +138,7 @@ int Monster::max_damage(Actor& other)
 void Monster::populate_inventory()
 {
   //TODO: This should be populated when the player sees the monster and use their current luck score
-  if(Random::Between(0,100) < 25)
+  if(Random::Between(0,100) < 33)
     _inventory.add(ItemFactory::Build(monster_type(), xp_level()));
   if(Random::Between(0,100) < 12)
     _inventory.add(ItemFactory::Build(monster_type(), xp_level()));

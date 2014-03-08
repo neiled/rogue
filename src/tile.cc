@@ -88,3 +88,30 @@ double Tile::distanceTo(const Tile& otherTile)
 {
   return sqrt((otherTile.x() - _x)*(otherTile.x() - _x) + (otherTile.y() - _y) * (otherTile.y() - _y));
 }
+
+bool Tile::interesting()
+{
+  if(_tileType == TileType::StairsDown)
+    return true;
+  if(_tileType == TileType::StairsUp)
+    return true;
+  return false;
+}
+
+std::string Tile::name()
+{
+  switch(_tileType)
+  {
+    case TileType::StairsDown:
+      return "Stairs Down";
+    case TileType::StairsUp:
+      return "Stairs Up";
+    case TileType::Rock:
+      return "Rock";
+    case TileType::Floor:
+      return "Floor";
+    case TileType::Door:
+      return "Door";
+  }
+}
+

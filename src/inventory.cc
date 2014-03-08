@@ -6,6 +6,7 @@
 #include <assert.h>
 #include "random.h"
 #include "messages.h"
+#include "tile.h"
 
 Inventory::Inventory(int max_items) : _max_items(max_items)
 {
@@ -55,6 +56,16 @@ void Inventory::use(int index, Actor& actor)
     Messages::Add("You start to wield the " + item->name());
   }
   remove(item);
+}
+
+void Inventory::drop(int index, Tile& tile)
+{
+  if(index >= _items.size())
+    return;
+  auto item = _items.at(index);
+  remove(item);
+  tile.add_item(item);
+  Messages::Add("You drop the " + item->name());
 }
 
 bool Inventory::full()
