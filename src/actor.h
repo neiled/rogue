@@ -40,6 +40,9 @@ class Actor
     void moveRight();
     void moveUp();
     void moveDown();
+    void move_to(Tile* tile);
+    bool move_to_target();
+
 
     bool can_see_actor(Actor& actor);
     

@@ -69,6 +69,43 @@ void Actor::moveDown()
   attemptMove(0,1);
 }
 
+void Actor::move_to(Tile* tile)
+{
+  _targetTile = tile;
+  push_command(Commands::CMD::CMD_MOVE_TO_TILE);
+}
+
+bool Actor::move_to_target()
+{
+  if(!_targetTile)
+    return false;
+
+  if(_targetTile == _currentTile)
+  {
+    _targetTile = nullptr;
+    return false;
+  }
+
+  AStar searcher;
+  _travelPath = searcher.plotPath(*_currentTile, *_targetTile);
+  if(_travelPath.empty() == false)
+  {
+    Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
+    _commandQueue.push_front(Commands::CMD::CMD_MOVE_TO_TILE);
+    _commandQueue.push_front(dirCommand);
+  }
+  else
+  {
+    Messages::Add("No way to get to that location, too many obstacles!");
+    _targetTile = nullptr;
+    return false;
+  }
+
+  return true;
+
+  
+}
+
 int Actor::x()
 {
   return _currentTile->x();

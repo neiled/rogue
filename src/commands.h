@@ -16,7 +16,8 @@ struct Commands
                   CMD_MOVE_DOWN_LEFT,
                   CMD_MOVE_LEFT,
                   CMD_MOVE_UP_LEFT,
-                  CMD_EXPLORE };
+                  CMD_EXPLORE,
+                  CMD_MOVE_TO_TILE};
 };
 
 class CommandProcessor

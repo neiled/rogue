@@ -86,15 +86,15 @@ void Renderer::loadMonsterTiles()
 
 void Renderer::loadMapTiles()
 {
-  _mapTiles[(int)Tile::TileType::Floor] =  new Sprite(_graphics, "../content/dungeon_tiles_0.bmp", 64, 64, TILE_SIZE, TILE_SIZE);
+  _mapTiles[(int)Tile::TileType::Floor] =  new Sprite(_graphics, "../content/dungeon_tiles_32.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
 
-  _mapTiles[(int)Tile::TileType::StairsUp] = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 12*TILE_SIZE, 2*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _mapTiles[(int)Tile::TileType::StairsUp] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 12*TILE_SIZE, 2*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-  _mapTiles[(int)Tile::TileType::StairsDown] = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 11*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _mapTiles[(int)Tile::TileType::StairsDown] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 11*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-  _mapTiles[(int)Tile::TileType::Rock] = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 12*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _mapTiles[(int)Tile::TileType::Rock] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 12*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-  _mapTiles[(int)Tile::TileType::Door] = new Sprite(_graphics, "../content/dungeon_tiles_32.bmp", 13*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _mapTiles[(int)Tile::TileType::Door] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 13*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 }
 
 void Renderer::load_items()

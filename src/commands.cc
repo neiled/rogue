@@ -30,6 +30,8 @@ bool CommandProcessor::Process(Commands::CMD command, Actor& actor)
     case Commands::CMD::CMD_EXPLORE:
       return static_cast<Player&>(actor).explore();
       break;
+    case Commands::CMD::CMD_MOVE_TO_TILE:
+      return actor.move_to_target();
     default:
       break;
   }
