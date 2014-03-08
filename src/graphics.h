@@ -10,8 +10,9 @@
 class Graphics
 {
   public:
-      Graphics ();
+    Graphics ();
     virtual ~Graphics ();
+    void init();
     SDL_Renderer* Renderer;
 
     SDL_Texture* loadTexture( std::string path );

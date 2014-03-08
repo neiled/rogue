@@ -1,4 +1,6 @@
 #include "command_decoder_game.h"
+#include "game_types.h"
+#include "tile.h"
 
 bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
 {
@@ -16,13 +18,22 @@ bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
   else if(key == SDLK_p)
     player.clearCommands();
   else if(key == SDLK_i)
-    game.state(Game::GameState::MENU_INVENTORY);
+    game.state(GameState::MENU_INVENTORY);
   else if(key == SDLK_KP_5)
     player.push_command(Commands::CMD::NOP);
   else if(key == SDLK_ESCAPE)
-    game.state(Game::GameState::STOP);
+    game.state(GameState::STOP);
   else return false;
 
   return true;
 
+}
+
+bool CommandDecoderGame::Decode(Uint8 button, Uint8 clicks, Sint32 x, Sint32 y, Game& game)
+{
+  SDL_Log("Clicked at %d, %d", x, y);
+  Tile* tile = game.get_tile_from_click(x, y);
+  if(tile)
+    SDL_Log("Tile Type: %d", tile->tile_type());
+  return false;
 }

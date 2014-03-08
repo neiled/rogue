@@ -12,9 +12,18 @@
 #include "messages.h"
 #include "render_monsters.h"
 
-Renderer::Renderer(Graphics* graphics) : _render_inv(graphics)
+Renderer::Renderer(Graphics* graphics) : _graphics(graphics), _render_inv(graphics)
 {
-  _graphics = graphics;
+
+}
+
+Renderer::~Renderer()
+{
+
+}
+
+void Renderer::init()
+{
   loadMapTiles();
   loadMonsterTiles();
   load_items();
@@ -25,11 +34,7 @@ Renderer::Renderer(Graphics* graphics) : _render_inv(graphics)
 
   init_viewports();
 
-}
-
-Renderer::~Renderer()
-{
-
+  _render_inv.init();
 }
 
 void Renderer::render(Game& game)
@@ -205,6 +210,21 @@ void Renderer::render_level(Level& level)
   }
 }
 
+Tile* Renderer::get_tile_from_coord(Level& level, int x, int y)
+{
+  if(x > _cameraRect.w)
+    return nullptr;
+  if(y > _cameraRect.h)
+    return nullptr;
+  int final_x = x + _cameraRect.x;
+  int final_y = y + _cameraRect.y;
+  final_x /= TILE_SIZE;
+  final_y /= TILE_SIZE;
+
+  return level.tile(final_x, final_y);
+
+}
+
 
 void Renderer::render(Player& player)
 {
@@ -306,12 +326,12 @@ void Renderer::render_string(std::string message, int x, int y, int h)
     SDL_DestroyTexture(messageT);
 }
 
-void Renderer::render_state(Game::GameState state, Player& player)
+void Renderer::render_state(GameState state, Player& player)
 {
   SDL_RenderSetViewport(_graphics->Renderer, NULL);
   switch(state)
   {
-    case Game::GameState::MENU_INVENTORY:
+    case GameState::MENU_INVENTORY:
       render_inventory(*player.inventory());
       break;
     default:

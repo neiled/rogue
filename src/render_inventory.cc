@@ -6,10 +6,15 @@
 
 RenderInventory::RenderInventory(Graphics* graphics) : _graphics(graphics)
 {
-  _panel = graphics->loadTexture("../content/blue_panel.png");
 
 }
-void RenderInventory::render(Renderer& renderer, Game::item_sprites_t items, Inventory& inventory)
+
+void RenderInventory::init()
+{
+  _panel = _graphics->loadTexture("../content/blue_panel.png");
+}
+
+void RenderInventory::render(Renderer& renderer, item_sprites_t items, Inventory& inventory)
 {
   SDL_Rect vp_inv;
   vp_inv.x = 250;

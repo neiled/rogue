@@ -137,17 +137,17 @@ void Actor::meleeAttack(Actor* other)
     if(other->dead())
     {
       if(is_player())
-        Messages::Add("You killed the " + other->name() + "."); //TODO: Use the actors name
+        Messages::Add("You killed the " + other->name() + ".");
       killed(other);
     }
   }
   else if(is_player())
   {
-    Messages::Add("You missed! chance of " + std::to_string(toHit));
+    Messages::Add("You missed the " + other->name() +"! chance of " + std::to_string(toHit));
   }
   else
   {
-    Messages::Add("They missed!");
+    Messages::Add("The " + name() + " missed!");
   }
 
 

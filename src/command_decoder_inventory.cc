@@ -1,12 +1,13 @@
 #include "command_decoder_inventory.h"
+#include "game_types.h"
 #include <SDL2/SDL.h>
 
 bool CommandDecoderInventory::Decode(SDL_Keycode key, Game& game)
 {
   if(key == SDLK_ESCAPE)
-    game.state(Game::GameState::GAME);
+    game.state(GameState::GAME);
   else if(key == SDLK_i)
-    game.state(Game::GameState::GAME);
+    game.state(GameState::GAME);
   else if(key == SDLK_0)
     use_item(*game.player(), 0);
   else if(key == SDLK_1)
@@ -37,4 +38,9 @@ void CommandDecoderInventory::use_item(Player& player, int index)
 {
     player.inventory()->use(index, player);
     player.push_command(Commands::CMD::NOP);
+}
+
+bool CommandDecoderInventory::Decode(Uint8 button, Uint8 clicks, Sint32 x, Sint32 y, Game& game)
+{
+  return false;
 }

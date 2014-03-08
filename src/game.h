@@ -7,23 +7,21 @@
 #include "monster.h"
 #include "item.h"
 #include <SDL2/SDL.h>
+#include "graphics.h"
+#include "renderer.h"
+#include "game_types.h"
 
-class Renderer;
-class Graphics;
 class CommandDecoder;
 class DirectionalSprite;
 class Sprite;
-
-
 
 class Game {
   public:
     Game();
     ~Game();
 
-    typedef std::map<Monster::MonsterType, DirectionalSprite*> monster_sprites_t;
-    typedef std::map<Item::ItemType, std::map<Item::ItemSubtype, Sprite*>> item_sprites_t;
-    enum class GameState {MENU_START, GAME, MENU_INVENTORY, DEAD, STARTING, STOP};
+    void start();
+
 
     void state(GameState state);
     GameState state();
@@ -31,12 +29,16 @@ class Game {
     Level* level();
     int turn();
 
+    Tile* get_tile_from_click(int x, int y);
+
   private:
+    Graphics _graphics;
+    Renderer _renderer;
     void reset();
     void eventLoop();
     //void update(Renderer& renderer);
     //void updateGraphics(Renderer* renderer,  int elapsed_time_ms);
-    void draw(Graphics* graphics, Renderer* renderer);
+    void draw(Graphics& graphics, Renderer& renderer);
     void end_turn();
 
     void delay(int start_time_ms);
@@ -46,7 +48,7 @@ class Game {
 
     GameState _state;
 
-    std::map<Game::GameState, CommandDecoder*> _decoders;
+    std::map<GameState, CommandDecoder*> _decoders;
     World _world;
 
 };

@@ -4,7 +4,7 @@
 #include "directional_sprite.h"
 #include "renderer.h"
 
-void RenderMonsters::Render(Renderer& renderer, Game::monster_sprites_t monster_sprites, Level& level)
+void RenderMonsters::Render(Renderer& renderer, monster_sprites_t monster_sprites, Level& level)
 {
   std::vector<Monster*> monsters = level.getMonsters();
   for(Monster* m : monsters)
@@ -13,8 +13,8 @@ void RenderMonsters::Render(Renderer& renderer, Game::monster_sprites_t monster_
       continue;
     auto currentTile = m->tile();
     auto lit = level.light_map(currentTile->x(), currentTile->y());
-    //if(lit != Level::LightType::Lit)
-      //continue;
+    if(lit != Level::LightType::Lit)
+      continue;
     auto sprite = monster_sprites[m->monster_type()];
     sprite->update(m->direction);
     renderer.draw_sprite(sprite, *currentTile);

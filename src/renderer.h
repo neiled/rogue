@@ -2,7 +2,6 @@
 #define RENDERER_H_
 
 
-#include "game.h"
 #include "item.h"
 #include <vector>
 #include <array>
@@ -13,6 +12,7 @@
 #include <SDL2_Image/SDL_Image.h>
 #include <SDL2_ttf/SDL_ttf.h>
 #include "render_inventory.h"
+#include "game_types.h"
 
 using std::vector;
 using std::array;
@@ -26,11 +26,15 @@ class Level;
 class Monster;
 class Tile;
 class Actor;
+class Game;
+
 
 class Renderer {
   public:
     Renderer(Graphics* graphics);
     ~Renderer();
+
+    void init();
   
     void render(Game& game);
     void update(World* world);
@@ -40,11 +44,12 @@ class Renderer {
     void draw_sprite(Sprite* sprite, Tile& tile);
     void draw_health(Actor& actor);
     void render_string(std::string message, int x, int y, int h);
+    Tile* get_tile_from_coord(Level& level, int x, int y);
     
   private:
     array<Sprite*,5> _mapTiles;
-    Game::monster_sprites_t _monsters;
-    Game::item_sprites_t _items;
+    monster_sprites_t _monsters;
+    item_sprites_t _items;
     DirectionalSprite* _player = nullptr;
     Graphics* _graphics = nullptr;
     Sprite* _info_char = nullptr;
@@ -79,7 +84,7 @@ class Renderer {
     void render(Player& player);
     void render_info(Game& game, Player& player);
     void render_messages(std::deque<std::string> messages);
-    void render_state(Game::GameState state, Player& player);
+    void render_state(GameState state, Player& player);
     void render_inventory(Inventory& inventory);
 
 

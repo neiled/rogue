@@ -1,9 +1,7 @@
 #include "game.h"
-#include "graphics.h"
 #include "world.h"
 #include "actor.h"
 #include "player.h"
-#include "renderer.h"
 #include "messages.h"
 #include "item_factory.h"
 #include "command_decoder_game.h"
@@ -11,19 +9,27 @@
 #include "command_decoder_dead.h"
 
 
-Game::Game() {
-  SDL_Init(SDL_INIT_EVERYTHING);
-  ItemFactory::Init();
-  _world.init();
-  _decoders[Game::GameState::GAME] = new CommandDecoderGame();
-  _decoders[Game::GameState::MENU_INVENTORY] = new CommandDecoderInventory();
-  _decoders[Game::GameState::DEAD] = new CommandDecoderDead();
-  _state = GameState::GAME;
-  eventLoop();
+Game::Game() : _graphics(), _renderer(&_graphics)
+{
 }
 
 Game::~Game() {
   SDL_Quit();
+}
+
+void Game::start()
+{
+  SDL_Init(SDL_INIT_EVERYTHING);
+  _graphics.init();
+  _renderer.init();
+  //_renderer = Renderer(&_graphics);
+  ItemFactory::Init();
+  _world.init();
+  _decoders[GameState::GAME] = new CommandDecoderGame();
+  _decoders[GameState::MENU_INVENTORY] = new CommandDecoderInventory();
+  _decoders[GameState::DEAD] = new CommandDecoderDead();
+  _state = GameState::GAME;
+  eventLoop();
 }
 
 void Game::reset()
@@ -38,10 +44,10 @@ void Game::reset()
 void Game::eventLoop()
 {
   SDL_Log("Creating Graphics");
-  Graphics graphics;
+  //Graphics graphics;
   SDL_Event event;
   SDL_Log("Creating renderer");
-  Renderer renderer(&graphics);
+  //Renderer renderer(&graphics);
   SDL_Log("Done renderer");
   CommandProcessor cProc;
   end_turn();
@@ -54,10 +60,10 @@ void Game::eventLoop()
   {
     Player* player = _world.player();
     //const int start_time_ms = SDL_GetTicks();
-    draw(&graphics, &renderer);
+    draw(_graphics, _renderer);
     SDL_WaitEvent(&event);
 
-    decode_event(event, graphics, renderer);
+    decode_event(event, _graphics, _renderer);
 
     if(_state == GameState::GAME && player->dead())
       _state = GameState::DEAD;
@@ -68,7 +74,7 @@ void Game::eventLoop()
         if(cProc.Process(player->popCommand(), *player))
         {
           end_turn();
-          draw(&graphics, &renderer);
+          draw(_graphics, _renderer);
         }
       }
     }
@@ -114,13 +120,23 @@ void Game::decode_event(SDL_Event& event, Graphics& graphics, Renderer& renderer
       if(decoded)
       {
         player()->add_seen_items();
-        draw(&graphics, &renderer);
+        draw(graphics, renderer);
       }
       break;
+    }
+    case SDL_MOUSEBUTTONDOWN:
+    {
+      auto decoded = _decoders[_state]->Decode(event.button.button, 1, event.button.x, event.button.y, *this);
+
     }
     default:
       break;
   }
+}
+
+Tile* Game::get_tile_from_click(int x, int y)
+{
+  return _renderer.get_tile_from_coord(*level(), x, y);
 }
 
 void Game::state(GameState state)
@@ -128,7 +144,7 @@ void Game::state(GameState state)
   _state = state;
 }
 
-Game::GameState Game::state()
+GameState Game::state()
 {
   return _state;
 }
@@ -153,11 +169,11 @@ void Game::delay(int start_time_ms)
   SDL_Delay(timeToDelay);  
 }
 
-void Game::draw(Graphics* graphics, Renderer* renderer)
+void Game::draw(Graphics& graphics, Renderer& renderer)
 {
-  renderer->update(&_world);
-  graphics->clearScreen();
-  renderer->render(*this);
-  graphics->render();
+  renderer.update(&_world);
+  graphics.clearScreen();
+  renderer.render(*this);
+  graphics.render();
 }
    
