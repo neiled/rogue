@@ -4,13 +4,14 @@
 #include "item.h"
 #include "game_types.h"
 
-class Scroll : Item
+class Scroll : public Item
 {
 public:
   Scroll(std::string name, ItemSubtype subtype, std::vector<AttributeModifiers> modifiers);
   virtual ~Scroll ();
+  void cast(Actor& owner, Actor* target);
 
 private:
-  /* data */
+  void blink(Actor& owner);
 };
 #endif

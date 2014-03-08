@@ -2,6 +2,7 @@
 #include "item.h"
 #include "potion.h"
 #include "weapon.h"
+#include "scroll.h"
 #include "random.h"
 #include <SDL2/SDL.h>
 
@@ -40,6 +41,7 @@ void ItemFactory::Init()
   ItemFactory::init_potions();
   ItemFactory::init_weapons();
   ItemFactory::init_corpses();
+  ItemFactory::init_scrolls();
   ItemFactory::calc_cdf();
 }
 
@@ -87,6 +89,13 @@ void ItemFactory::init_weapons()
     5000);
 
 }
+
+void ItemFactory::init_scrolls()
+{
+  ItemFactory::add_item(
+      new Scroll("Blink Scroll", ItemSubtype::SCROLL_BLINK, {}),
+      100);
+}
 void ItemFactory::add_item(Item* item, int weighting)
 {
   ItemFactory::_prototypes[item->item_type()][item->item_subtype()] = item;
@@ -109,6 +118,14 @@ Weapon* ItemFactory::get_weapon(ItemSubtype subtype)
   return newWeapon;
 }
 
+Scroll* ItemFactory::get_scroll(ItemSubtype subtype)
+{
+  auto current = ItemFactory::_prototypes[ItemType::SCROLL][subtype];
+  auto scroll = static_cast<Scroll*>(current);
+  auto newScroll = new Scroll(*scroll);
+  return newScroll;
+}
+
 Item* ItemFactory::get_item(ItemType item_type, ItemSubtype item_subtype)
 {
   switch(item_type)
@@ -117,6 +134,8 @@ Item* ItemFactory::get_item(ItemType item_type, ItemSubtype item_subtype)
       return ItemFactory::get_potion(item_subtype);
     case ItemType::WEAPON:
       return ItemFactory::get_weapon(item_subtype);
+    case ItemType::SCROLL:
+      return ItemFactory::get_scroll(item_subtype);
     case ItemType::CORPSE:
       return new Item(*ItemFactory::_prototypes[item_type][item_subtype]);
     default:
@@ -129,9 +148,14 @@ ItemType ItemFactory::calc_item_type(MonsterType monster_type, int xp_level)
 {
   int random = Random::Between(0,100);
 
+
+
   if(random < 50)
     return ItemType::POTION;
-  return ItemType::WEAPON;
+  else if(random < 90)
+    return ItemType::WEAPON;
+  else
+    return ItemType::SCROLL;
 }
 
 ItemType ItemFactory::calc_item_type(int depth)
@@ -140,8 +164,10 @@ ItemType ItemFactory::calc_item_type(int depth)
 
   if(random < 50)
     return ItemType::POTION;
-  return ItemType::WEAPON;
-
+  else if(random < 90)
+    return ItemType::WEAPON;
+  else
+    return ItemType::SCROLL;
 }
 
 ItemSubtype ItemFactory::calc_item_subtype(ItemType item_type, int xp_level)

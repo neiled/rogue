@@ -20,7 +20,9 @@ enum class ItemSubtype {
   WEAPON_KRIS_SMALL,
   //POTION
   POTION_HEALTH_SMALL,
-  POTION_HEALTH_LARGE
+  POTION_HEALTH_LARGE,
+  //SCROLL
+  SCROLL_BLINK
 };
 
 enum struct TileType {Floor = 0, Rock, StairsDown, StairsUp, Door};

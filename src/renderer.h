@@ -84,6 +84,7 @@ class Renderer {
     void load_corpses();
     void load_potions();
     void load_weapons();
+    void load_scrolls();
 
     void render(Level& level);
     void render(Player& player);

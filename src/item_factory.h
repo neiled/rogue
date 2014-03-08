@@ -3,11 +3,12 @@
 
 #include <map>
 
-#include "item.h"
-#include "potion.h"
-#include "weapon.h"
-#include "monster.h"
+#include "game_types.h"
 
+class Potion;
+class Weapon;
+class Scroll;
+class Item;
 
 class ItemFactory
 {
@@ -23,6 +24,7 @@ private:
   static void init_potions();
   static void init_weapons();
   static void init_corpses();
+  static void init_scrolls();
   static void calc_cdf();
   
   static Item* get_item(ItemType, ItemSubtype);
@@ -37,5 +39,6 @@ private:
 
   static Potion* get_potion(ItemSubtype subtype);
   static Weapon* get_weapon(ItemSubtype subtype);
+  static Scroll* get_scroll(ItemSubtype subtype);
 };
 #endif

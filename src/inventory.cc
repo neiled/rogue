@@ -1,6 +1,7 @@
 #include "inventory.h"
 #include "item.h"
 #include "potion.h"
+#include "scroll.h"
 #include "actor.h"
 #include <SDL2/SDL.h>
 #include <assert.h>
@@ -54,6 +55,11 @@ void Inventory::use(int index, Actor& actor)
       add(actor.weapon());
     actor.weapon(item);
     Messages::Add("You start to wield the " + item->name());
+  }
+  else if(item->item_type() == ItemType::SCROLL)
+  {
+    auto scroll = static_cast<Scroll*>(item);
+    scroll->cast(actor, nullptr);
   }
   remove(item);
 }

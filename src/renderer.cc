@@ -102,6 +102,7 @@ void Renderer::load_items()
   load_corpses();
   load_potions();
   load_weapons();
+  load_scrolls();
 }
 
 void Renderer::load_corpses()
@@ -125,6 +126,12 @@ void Renderer::load_weapons()
   _items[ItemType::WEAPON] = std::map<ItemSubtype, Sprite*>();
   _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_SMALL] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
   _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_RUSTED] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
+}
+
+void Renderer::load_scrolls()
+{
+  _items[ItemType::SCROLL] = std::map<ItemSubtype, Sprite*>();
+  _items[ItemType::SCROLL][ItemSubtype::SCROLL_BLINK] = new Sprite(_graphics, "content/scroll.png", 0, 0, TILE_SIZE, TILE_SIZE);
 }
 
 void Renderer::load_info()
@@ -288,21 +295,6 @@ void Renderer::draw_health_bar(int x, int y, int width, int height, int current_
     b = 0;
   }
   draw_bar(x, y, width, height, current_health, max_health, r, g, b);
-  //SDL_Rect health;
-  //health.x = x;
-  //health.y = y;
-  //health.w = width;
-  //health.h = height;
-  //SDL_SetRenderDrawColor(_graphics->Renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
-  //SDL_RenderDrawRect(_graphics->Renderer, &health);
-
-  //health.x++;
-  //health.y++;
-  //health.h-=2;
-  //health.w = (width-2) * (static_cast<float>(current_health) / max_health);
-  //SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-  //SDL_RenderFillRect(_graphics->Renderer, &health);
-  //SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 
 void Renderer::render_messages(std::deque<std::string> messages)

@@ -150,7 +150,7 @@ bool Player::explore()
   _travelPath.pop_front();
   _commandQueue.push_front(Commands::CMD::CMD_EXPLORE);
   _commandQueue.push_front(dirCommand);
-  return true;
+  return false; //don't spend a turn on actual explore command, just on movement
 }
 
 void Player::set_tile(Tile& tile)

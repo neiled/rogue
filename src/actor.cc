@@ -124,7 +124,7 @@ bool Actor::move_to_target()
     return false;
   }
 
-  return true;
+  return false;//Don't spend a turn setting up, turns spent on actual movement
 
   
 }
