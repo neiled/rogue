@@ -2,11 +2,12 @@
 #define SCROLL_H 
 
 #include "item.h"
+#include "game_types.h"
 
 class Scroll : Item
 {
 public:
-  Scroll(std::string name, Item::ItemSubtype subtype, std::vector<AttributeModifiers> modifiers);
+  Scroll(std::string name, ItemSubtype subtype, std::vector<AttributeModifiers> modifiers);
   virtual ~Scroll ();
 
 private:

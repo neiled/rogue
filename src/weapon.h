@@ -2,13 +2,14 @@
 #define WEAPON_H 
 
 #include "item.h"
+#include "game_types.h"
 
 class Actor;
 
 class Weapon : public Item
 {
 public:
-  Weapon(std::string name, Item::ItemSubtype subtype, int max_damage, std::vector<AttributeModifiers> modifiers);
+  Weapon(std::string name, ItemSubtype subtype, int max_damage, std::vector<AttributeModifiers> modifiers);
   Weapon(Weapon& other);
   virtual ~Weapon ();
   

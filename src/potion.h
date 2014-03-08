@@ -8,7 +8,7 @@
 class Potion : public Item
 {
 public:
-  Potion (std::string name, Item::ItemSubtype subtype, std::vector<AttributeModifiers> modifiers);
+  Potion (std::string name, ItemSubtype subtype, std::vector<AttributeModifiers> modifiers);
   virtual ~Potion ();
   void drink(Actor& actor);
 

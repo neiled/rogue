@@ -3,6 +3,7 @@
 #include "level.h"
 #include "directional_sprite.h"
 #include "renderer.h"
+#include "monster.h"
 
 void RenderMonsters::Render(Renderer& renderer, monster_sprites_t monster_sprites, Level& level)
 {

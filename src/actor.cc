@@ -8,14 +8,12 @@
 #include <SDL2/SDL.h>
 #include "item.h"
 
-Actor::Actor(std::string name, int max_health, int xp_level) : Actor(name, max_health, xp_level, 5)
+Actor::Actor(std::string name, int xp_level) : Actor(name, xp_level, 5)
 {
 }
 
-Actor::Actor(std::string name, int max_health, int xp_level, int inventory_size) : _xp_level(xp_level), _inventory(inventory_size), _name(name)
+Actor::Actor(std::string name, int xp_level, int inventory_size) : _xp_level(xp_level), _inventory(inventory_size), _name(name)
 {
-  _attributes[Attribute::HEALTH] = max_health;
-  _attributes[Attribute::CON] = max_health;
   _attributes[Attribute::ATK] = xp_level;//Random::BetweenNormal(1,_xp_level);
   _attributes[Attribute::DEF] = xp_level;//Random::BetweenNormal(1,_xp_level);
 }
@@ -213,20 +211,10 @@ int Actor::def()
   return _attributes[Attribute::DEF];
 }
 
+
 int Actor::calc_damage(Actor& other)
 {
-  int damage = 0;
-  if(_weapon)
-  {
-    Messages::Add("Using your " + _weapon->name());
-    damage =  _weapon->calc_damage(other);
-  }
-  else
-  {
-    damage = atk();
-  }
-  if(damage < 1)
-    damage = 1;
+  int damage = max_damage(other);
   return Random::BetweenNormal(1,damage);
 }
 

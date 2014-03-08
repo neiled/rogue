@@ -1,6 +1,7 @@
 #include "item.h"
 #include <SDL2/SDL.h>
 
+
 Item::Item(std::string name, ItemType itemType, ItemSubtype subtype, std::vector<AttributeModifiers> modifiers )
 {
   _item_type = itemType;
@@ -25,12 +26,12 @@ Item::Item(Item& other)
   _name = other._name;
 }
 
-Item::ItemType Item::item_type()
+ItemType Item::item_type()
 {
   return _item_type;
 }
 
-Item::ItemSubtype Item::item_subtype()
+ItemSubtype Item::item_subtype()
 {
   return _item_subtype;
 }
@@ -47,5 +48,5 @@ int Item::calc_damage(Actor& other)
 
 bool Item::interesting()
 {
-  return _item_type != Item::ItemType::CORPSE;
+  return _item_type != ItemType::CORPSE;
 }

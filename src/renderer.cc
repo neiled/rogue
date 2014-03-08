@@ -80,8 +80,8 @@ void Renderer::init_viewports()
 
 void Renderer::loadMonsterTiles()
 {
-  _monsters[Monster::MonsterType::Orc] = new DirectionalSprite(_graphics, "../content/monsters/monster_orc.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _monsters[Monster::MonsterType::Devil] = new DirectionalSprite(_graphics, "../content/monsters/monster_devil.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _monsters[MonsterType::Orc] = new DirectionalSprite(_graphics, "../content/monsters/monster_orc.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _monsters[MonsterType::Devil] = new DirectionalSprite(_graphics, "../content/monsters/monster_devil.png", 0, 0, TILE_SIZE, TILE_SIZE);
 }
 
 void Renderer::loadMapTiles()
@@ -106,23 +106,25 @@ void Renderer::load_items()
 
 void Renderer::load_corpses()
 {
-  _items[Item::ItemType::CORPSE] = std::map<Item::ItemSubtype, Sprite*>();
-  _items[Item::ItemType::CORPSE][Item::ItemSubtype::CORPSE_ORC] = new Sprite(_graphics, "../content/corpse.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _items[Item::ItemType::CORPSE][Item::ItemSubtype::CORPSE_DEVIL] = new Sprite(_graphics, "../content/corpse.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::CORPSE] = std::map<ItemSubtype, Sprite*>();
+  _items[ItemType::CORPSE][ItemSubtype::CORPSE_ORC] = new Sprite(_graphics, "../content/corpse.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::CORPSE][ItemSubtype::CORPSE_DEVIL] = new Sprite(_graphics, "../content/corpse.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
 
 
 }
 
 void Renderer::load_potions()
 {
-  _items[Item::ItemType::POTION] = std::map<Item::ItemSubtype, Sprite*>();
-  _items[Item::ItemType::POTION][Item::ItemSubtype::POTION_HEALTH] = new Sprite(_graphics, "content/potion.png", 0, 0, TILE_SIZE, TILE_SIZE); 
+  _items[ItemType::POTION] = std::map<ItemSubtype, Sprite*>();
+  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_LARGE] = new Sprite(_graphics, "content/potion.png", 0, 0, TILE_SIZE, TILE_SIZE); 
+  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_SMALL] = new Sprite(_graphics, "content/potion.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE); 
 }
 
 void Renderer::load_weapons()
 {
-  _items[Item::ItemType::WEAPON] = std::map<Item::ItemSubtype, Sprite*>();
-  _items[Item::ItemType::WEAPON][Item::ItemSubtype::WEAPON_KRIS] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
+  _items[ItemType::WEAPON] = std::map<ItemSubtype, Sprite*>();
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_SMALL] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_RUSTED] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
 }
 
 void Renderer::load_info()
@@ -249,29 +251,29 @@ void Renderer::draw_health(Actor& actor)
 void Renderer::render_info(Game& game, Player& player)
 {
   SDL_RenderSetViewport(_graphics->Renderer, &_vp_info);
-  _info_char->draw(0, 0, 0, 0);
+  _info_char->draw(25, 0, 0, 0);
   int string_y = 360;
   int string_gap = 25;
   if(player.weapon())
   {
     auto item = _items[player.weapon()->item_type()][player.weapon()->item_subtype()];
     item->draw(140, 125, 0, 0, SDL_ALPHA_OPAQUE);
-    render_string("Wpn: " + player.weapon()->name() + " : " + std::to_string(player.weapon()->max_damage()), 0, string_y, 16);
+    render_string("Wpn: " + player.weapon()->name() + " : " + std::to_string(player.weapon()->max_damage()), 25, string_y, 16);
   }
-  draw_health_bar(0, 300, 150, 20, player.health(), player.max_health());
+  draw_health_bar(25, 300, 150, 20, player.health(), player.max_health());
 
-  draw_health_bar(0, 330, 150, 20, player.xp() - player.min_xp(), player.max_xp());
+  draw_health_bar(25, 330, 150, 20, player.xp() - player.min_xp(), player.max_xp());
 
   string_y += string_gap;
-  render_string("Lvl: " + std::to_string(player.xp_level()), 0, string_y, 16);
+  render_string("Lvl: " + std::to_string(player.xp_level()), 25, string_y, 16);
   string_y += string_gap;
-  render_string("Atk: " + std::to_string(player.atk()), 0, string_y, 16);
+  render_string("Atk: " + std::to_string(player.atk()), 25, string_y, 16);
   string_y += string_gap;
-  render_string("Def: " + std::to_string(player.def()), 0, string_y, 16);
+  render_string("Def: " + std::to_string(player.def()), 25, string_y, 16);
   string_y += string_gap;
-  render_string("Dpth: " + std::to_string(player.level().depth()), 0, string_y, 16);
+  render_string("Dpth: " + std::to_string(player.level().depth()), 25, string_y, 16);
   string_y += string_gap;
-  render_string("Turn: " + std::to_string(game.turn()), 0, string_y, 16);
+  render_string("Turn: " + std::to_string(game.turn()), 25, string_y, 16);
 
 }
 

@@ -5,13 +5,13 @@
 bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
 {
   auto &player = *game.player();
-  if(key == SDLK_UP)
+  if(key == SDLK_UP || key == SDLK_KP_8)
     player.push_command(Commands::CMD::CMD_MOVE_UP);
-  else if(key == SDLK_DOWN)
+  else if(key == SDLK_DOWN || key == SDLK_KP_2)
     player.push_command(Commands::CMD::CMD_MOVE_DOWN);
-  else if(key == SDLK_LEFT)
+  else if(key == SDLK_LEFT || key == SDLK_KP_4)
     player.push_command(Commands::CMD::CMD_MOVE_LEFT);
-  else if(key == SDLK_RIGHT)
+  else if(key == SDLK_RIGHT || key == SDLK_KP_6)
     player.push_command(Commands::CMD::CMD_MOVE_RIGHT);
   else if(key == SDLK_o)
     player.push_command(Commands::CMD::CMD_EXPLORE);

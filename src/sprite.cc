@@ -23,6 +23,7 @@ void Sprite::draw(int x, int y, int offsetX, int offsetY, int alpha)
   destination.w = _source_rect.w;
   destination.h = _source_rect.h;
 
+  SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
   SDL_SetTextureAlphaMod(_texture, alpha);
   SDL_RenderCopy(_graphics->Renderer, _texture, &_source_rect, &destination);
 }

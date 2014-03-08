@@ -4,14 +4,18 @@
 #include "item.h"
 #include "messages.h"
 #include <deque>
+#include "item_factory.h"
 
-Player::Player() : Actor("player", 100, 1, 10), _xp(0)
+Player::Player() : Actor("player", 1, 10), _xp(0)
 {
   direction = Actor::Direction::EAST;
   _max_xp = calc_max_xp();
   _min_xp = calc_min_xp();
-  _attributes[Attribute::ATK] = 5;
-  _attributes[Attribute::DEF] = 5;
+  _attributes[Attribute::ATK] = 2;
+  _attributes[Attribute::DEF] = 1;
+  _attributes[Attribute::CON] = 50;
+  _attributes[Attribute::HEALTH] = max_health();
+  _weapon = ItemFactory::Build(ItemType::WEAPON, ItemSubtype::WEAPON_KRIS_RUSTED);
 }
 
 Player::~Player()
@@ -40,9 +44,10 @@ void Player::pickup_items()
   {
     if(_inventory.full() == false)
     {
-      if(item->item_type() != Item::ItemType::CORPSE)
+      if(item->item_type() != ItemType::CORPSE)
       {
         _inventory.add(item);
+        Messages::Add("You pick up the " + item->name());
       }
     }
     else
@@ -106,6 +111,24 @@ int32_t Player::max_xp()
 int32_t Player::min_xp()
 {
   return _min_xp;
+}
+
+int Player::max_damage(Actor& other)
+{
+  int damage = 0;
+  if(_weapon)
+  {
+    Messages::Add("Using your " + _weapon->name());
+    damage =  _weapon->calc_damage(other);
+  }
+  else
+  {
+    damage = atk();
+  }
+  if(damage < 1)
+    damage = 1;
+
+  return damage;
 }
 
 bool Player::explore()

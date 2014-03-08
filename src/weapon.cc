@@ -1,7 +1,7 @@
 #include "weapon.h"
 
-Weapon::Weapon(std::string name, Item::ItemSubtype subtype, int max_damage, std::vector<AttributeModifiers> modifiers)
-  : _max_damage(max_damage), Item(name, Item::ItemType::WEAPON, subtype, modifiers)
+Weapon::Weapon(std::string name, ItemSubtype subtype, int max_damage, std::vector<AttributeModifiers> modifiers)
+  : _max_damage(max_damage), Item(name, ItemType::WEAPON, subtype, modifiers)
 {
 }
 

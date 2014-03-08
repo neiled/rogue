@@ -5,10 +5,10 @@
 #include "random.h"
 #include <SDL2/SDL.h>
 
-std::map<Item::ItemType, std::map<Item::ItemSubtype, Item*>> ItemFactory::_prototypes;
-std::map<Item::ItemType, std::map<Item::ItemSubtype, int>> ItemFactory::_weightings;
-std::map<Item::ItemType, std::map<Item::ItemSubtype, int>> ItemFactory::_cdf;
-std::map<Item::ItemType, int> ItemFactory::_sum_weights;
+std::map<ItemType, std::map<ItemSubtype, Item*>> ItemFactory::_prototypes;
+std::map<ItemType, std::map<ItemSubtype, int>> ItemFactory::_weightings;
+std::map<ItemType, std::map<ItemSubtype, int>> ItemFactory::_cdf;
+std::map<ItemType, int> ItemFactory::_sum_weights;
 
 Item* ItemFactory::Build(int depth)
 {
@@ -17,23 +17,29 @@ Item* ItemFactory::Build(int depth)
   return ItemFactory::get_item(type, subtype);
 }
 
-Item* ItemFactory::Build(Monster::MonsterType monster_type, int xp_level)
+Item* ItemFactory::Build(MonsterType monster_type, int xp_level)
 {
   auto item_type = ItemFactory::calc_item_type(monster_type, xp_level);
   auto item_subtype = ItemFactory::calc_item_subtype(item_type, xp_level);
   return ItemFactory::get_item(item_type, item_subtype);
 }
 
-Item* ItemFactory::Build(Item::ItemType item_type, int xp_level)
+Item* ItemFactory::Build(ItemType item_type, int xp_level)
 {
   auto item_subtype = ItemFactory::calc_item_subtype(item_type, xp_level);  
   return ItemFactory::get_item(item_type, item_subtype);
+}
+
+Item* ItemFactory::Build(ItemType item_type, ItemSubtype subtype)
+{
+  return ItemFactory::get_item(item_type, subtype);
 }
 
 void ItemFactory::Init()
 {
   ItemFactory::init_potions();
   ItemFactory::init_weapons();
+  ItemFactory::init_corpses();
   ItemFactory::calc_cdf();
 }
 
@@ -54,18 +60,31 @@ void ItemFactory::calc_cdf()
 void ItemFactory::init_potions()
 {
   ItemFactory::add_item(
-    new Potion("Small Health Potion", Item::ItemSubtype::POTION_HEALTH, {{Actor::Attribute::HEALTH, 25, 0}}),
+    new Potion("Small Health Potion", ItemSubtype::POTION_HEALTH_SMALL, {{Actor::Attribute::HEALTH, 25, 0}}),
     7500);
   ItemFactory::add_item(
-    new Potion("Large Health Potion", Item::ItemSubtype::POTION_HEALTH, {{Actor::Attribute::HEALTH, 50, 0}}),
+    new Potion("Large Health Potion", ItemSubtype::POTION_HEALTH_LARGE, {{Actor::Attribute::HEALTH, 50, 0}}),
     2500);    
+}
+
+void ItemFactory::init_corpses()
+{
+  ItemFactory::add_item(
+      new Item("Orc Corpse", ItemType::CORPSE, ItemSubtype::CORPSE_ORC),
+      0);
+  ItemFactory::add_item(
+      new Item("Devil Corpse", ItemType::CORPSE, ItemSubtype::CORPSE_DEVIL),
+      0);
 }
 
 void ItemFactory::init_weapons()
 {
   ItemFactory::add_item(
-    new Weapon("Small Kris", Item::ItemSubtype::WEAPON_KRIS, 5, {}),
+    new Weapon("Small Rusted Kris", ItemSubtype::WEAPON_KRIS_RUSTED, 3, {}),
     7500);
+  ItemFactory::add_item(
+    new Weapon("Small Kris", ItemSubtype::WEAPON_KRIS_SMALL, 6, {}),
+    5000);
 
 }
 void ItemFactory::add_item(Item* item, int weighting)
@@ -74,64 +93,69 @@ void ItemFactory::add_item(Item* item, int weighting)
   ItemFactory::_weightings[item->item_type()][item->item_subtype()] = weighting;
 }
 
-Potion* ItemFactory::get_potion(Item::ItemSubtype subtype)
+Potion* ItemFactory::get_potion(ItemSubtype subtype)
 {
-  auto current = ItemFactory::_prototypes[Item::ItemType::POTION][subtype];
+  auto current = ItemFactory::_prototypes[ItemType::POTION][subtype];
   auto potion =  static_cast<Potion*>(current);
   auto newPotion =  new Potion(*potion);
   return newPotion;
 }
 
-Weapon* ItemFactory::get_weapon(Item::ItemSubtype subtype)
+Weapon* ItemFactory::get_weapon(ItemSubtype subtype)
 {
-  auto current = ItemFactory::_prototypes[Item::ItemType::WEAPON][subtype];
+  auto current = ItemFactory::_prototypes[ItemType::WEAPON][subtype];
   auto weapon = static_cast<Weapon*>(current);
   auto newWeapon = new Weapon(*weapon);
   return newWeapon;
 }
 
-Item* ItemFactory::get_item(Item::ItemType item_type, Item::ItemSubtype item_subtype)
+Item* ItemFactory::get_item(ItemType item_type, ItemSubtype item_subtype)
 {
   switch(item_type)
   {
-    case Item::ItemType::POTION:
+    case ItemType::POTION:
       return ItemFactory::get_potion(item_subtype);
-    case Item::ItemType::WEAPON:
+    case ItemType::WEAPON:
       return ItemFactory::get_weapon(item_subtype);
+    case ItemType::CORPSE:
+      return new Item(*ItemFactory::_prototypes[item_type][item_subtype]);
     default:
       SDL_Log("You need to add this type of item...");
       return nullptr;
   }
 }
 
-Item::ItemType ItemFactory::calc_item_type(Monster::MonsterType monster_type, int xp_level)
+ItemType ItemFactory::calc_item_type(MonsterType monster_type, int xp_level)
 {
   int random = Random::Between(0,100);
 
   if(random < 50)
-    return Item::ItemType::POTION;
-  return Item::ItemType::WEAPON;
+    return ItemType::POTION;
+  return ItemType::WEAPON;
 }
 
-Item::ItemType ItemFactory::calc_item_type(int depth)
+ItemType ItemFactory::calc_item_type(int depth)
 {
   int random = Random::Between(0,100);
 
   if(random < 50)
-    return Item::ItemType::POTION;
-  return Item::ItemType::WEAPON;
+    return ItemType::POTION;
+  return ItemType::WEAPON;
 
 }
 
-Item::ItemSubtype ItemFactory::calc_item_subtype(Item::ItemType item_type, int xp_level)
+ItemSubtype ItemFactory::calc_item_subtype(ItemType item_type, int xp_level)
 {
   int max_random_number = _sum_weights[item_type];
+  SDL_Log("Max: %d", max_random_number);
   int random_number = Random::Between(0,max_random_number);
+  SDL_Log("Random: %d", random_number);
   
-  auto weightings = _weightings[item_type];
+  auto weightings = _cdf[item_type];
   
   for(auto current_weighting : weightings)
   {
+    SDL_Log("Current: %d", random_number);
     if(random_number <= current_weighting.second)
       return current_weighting.first;
   }

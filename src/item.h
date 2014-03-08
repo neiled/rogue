@@ -4,20 +4,11 @@
 #include <vector>
 #include <string>
 #include "attribute_modifiers.h"
+#include "game_types.h"
 
 class Item
 {
 public:
-  enum class ItemType {CORPSE=0, WEAPON, POTION, SCROLL};
-  enum class ItemSubtype {
-    //CORPSE
-    CORPSE_ORC,
-    CORPSE_DEVIL,
-    //WEAPON
-    WEAPON_KRIS,
-    //POTION
-    POTION_HEALTH
-  };
   
   Item (std::string name, ItemType itemType, ItemSubtype subtype, std::vector<AttributeModifiers> modifiers);
   Item(std::string name, ItemType itemType, ItemSubtype subtype);

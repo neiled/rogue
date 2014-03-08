@@ -34,6 +34,7 @@ void Game::start()
 
 void Game::reset()
 {
+  _turn = 0;
   _world = World();
   _world.init();
   Messages::Clear();

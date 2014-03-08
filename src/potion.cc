@@ -2,7 +2,7 @@
 #include "messages.h"
 #include <string>
 
-Potion::Potion(std::string name, Item::ItemSubtype subtype, std::vector<AttributeModifiers> modifiers) : Item(name, Item::ItemType::POTION, subtype, modifiers)
+Potion::Potion(std::string name, ItemSubtype subtype, std::vector<AttributeModifiers> modifiers) : Item(name, ItemType::POTION, subtype, modifiers)
 {
 }
 

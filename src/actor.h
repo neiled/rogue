@@ -17,8 +17,8 @@ class Weapon;
 class Actor
 {
   public:
-    Actor(std::string name, int max_health, int xp_level);
-    Actor(std::string name, int max_health, int xp_level, int inventory_size);
+    Actor(std::string name, int xp_level);
+    Actor(std::string name, int xp_level, int inventory_size);
     virtual ~Actor();
 
     enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
@@ -53,6 +53,7 @@ class Actor
     void clearCommands();
 
     void takeDamage(int amount);
+    virtual int max_damage(Actor& other) = 0;
 
     bool dead() const;
     

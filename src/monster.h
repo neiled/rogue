@@ -4,6 +4,7 @@
 
 #include <deque>
 #include "actor.h"
+#include "game_types.h"
 
 class Tile;
 class Player;
@@ -13,21 +14,21 @@ class Item;
 class Monster : public Actor
 {
   public:
-    enum class MonsterType {Orc, Devil};
-    enum class MonsterState {Asleep, Awake, Hunting, Wandering};
 
-    Monster(std::string name, Tile& startTile, Monster::MonsterType type, Monster::MonsterState state, int xp_level);
+    Monster(std::string name, Tile& startTile, MonsterType type, MonsterState state, int xp_level);
     virtual ~Monster();
     void explore();
     
     virtual void update() override;
 
-    Monster::MonsterType monster_type();
+    MonsterType monster_type();
+
+    virtual int max_damage(Actor& other) override;
     
     
   private:
-    Monster::MonsterType _monster_type;
-    Monster::MonsterState _monsterState;
+    MonsterType _monster_type;
+    MonsterState _monsterState;
 
     void look_for_player();
     void wander();

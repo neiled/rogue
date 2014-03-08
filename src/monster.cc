@@ -6,14 +6,17 @@
 #include "a_star.h"
 #include "item.h"
 #include "item_factory.h"
+#include "game_types.h"
 
-Monster::Monster(std::string name, Tile& startTile, Monster::MonsterType type, Monster::MonsterState state, int xp_level)
-  : Actor(name, max_health(), xp_level)
+Monster::Monster(std::string name, Tile& startTile, MonsterType type, MonsterState state, int xp_level)
+  : Actor(name, xp_level), _monster_type(type), _monsterState(state)
 {
   this->direction = static_cast<Actor::Direction>(Random::Between(0,3));
   set_tile(startTile);
-  _monster_type = type;
-  _monsterState = state;
+  //_monster_type = type;
+  //_monsterState = state;
+  _attributes[Attribute::HEALTH] = max_health();
+  _attributes[Attribute::CON] = max_health();
   populate_inventory();
 }
 
@@ -47,7 +50,7 @@ void Monster::look_for_player()
 
   if(can_see_actor(*level().player()))
   {
-    _monsterState = Monster::MonsterState::Hunting;
+    _monsterState = MonsterState::Hunting;
   }
 }
 
@@ -70,7 +73,7 @@ void Monster::hunt(Player& player)
 {
   _travelPath.clear();
   AStar searcher;
-  _travelPath = searcher.plotPath(*_currentTile, *player.tile());
+  _travelPath = searcher.plotPath(*_currentTile, *player.tile(), 50);
   if(_travelPath.empty() == false)
   {
     Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
@@ -79,7 +82,7 @@ void Monster::hunt(Player& player)
 }
 
 
-Monster::MonsterType Monster::monster_type()
+MonsterType Monster::monster_type()
 {
   return _monster_type;
 }
@@ -97,14 +100,13 @@ void Monster::die()
 
 Item* Monster::generate_corpse()
 {
-  //TODO: This should use the prototypes from item builder
   switch(_monster_type)
   {
     case MonsterType::Orc:
-      return new Item("Orc Corpse", Item::ItemType::CORPSE, Item::ItemSubtype::CORPSE_ORC);
+      return ItemFactory::Build(ItemType::CORPSE, ItemSubtype::CORPSE_ORC);
       break;
     case MonsterType::Devil:
-      return new Item("Devil Corpse", Item::ItemType::CORPSE, Item::ItemSubtype::CORPSE_DEVIL);
+      return ItemFactory::Build(ItemType::CORPSE, ItemSubtype::CORPSE_DEVIL);
     default:
       SDL_Log("Need to generate a corpse for this monster type");
       return nullptr;
@@ -113,7 +115,24 @@ Item* Monster::generate_corpse()
 
 int Monster::max_health()
 {
-  return 10;
+  switch(_monster_type)
+  {
+    case MonsterType::Orc:
+      return 15 * xp_level();
+    case MonsterType::Devil:
+      return 20 * xp_level();
+  }
+}
+
+int Monster::max_damage(Actor& other)
+{
+  switch(_monster_type)
+  {
+    case MonsterType::Orc:
+      return 6 * xp_level();
+    case MonsterType::Devil:
+      return 3 * xp_level();
+  }
 }
 
 void Monster::populate_inventory()
