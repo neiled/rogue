@@ -50,6 +50,7 @@ bool CommandDecoderInventory::use_chosen_item(SDL_Keycode key, Game& game)
   else
     return false;
 
+  game.state(GameState::GAME);
   return true;
 }
 

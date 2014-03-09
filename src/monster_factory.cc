@@ -8,16 +8,16 @@ Monster* MonsterFactory::Build(Tile& tile)
 {
   auto depth = tile.level().depth();
   auto type = MonsterFactory::calc_monster_type(depth);
-  //auto name = MonsterFactory::get_name(type);
-  //auto monster = new Monster(name, tile, type, MonsterState::Awake, calc_xp_level(depth));
   return MonsterFactory::get_monster(type, tile, calc_xp_level(depth));
 }
 
 MonsterType MonsterFactory::calc_monster_type(int depth)
 {
-  int random = Random::Between(0,1);
-  if(random < 1)
+  int random = Random::Between(0,100);
+  if(random < 33)
     return MonsterType::Orc;
+  else if(random < 66)
+    return MonsterType::Skeleton;
   else
     return MonsterType::Devil;
 }
@@ -37,6 +37,8 @@ Monster* MonsterFactory::get_monster(MonsterType type, Tile& tile, int xp_level)
       return new Monster(name, tile, type, MonsterState::Awake, xp_level);
     case MonsterType::Devil:
       return new Monster(name, tile, type, MonsterState::Wandering, xp_level);
+    case MonsterType::Skeleton:
+      return new Monster(name, tile, type, MonsterState::Awake, xp_level);
     default:
       SDL_Log("Need to add this new monster type to MonsterFactory::get_monster");
       break;
@@ -51,6 +53,8 @@ std::string MonsterFactory::get_name(MonsterType type)
       return "Orc";
     case MonsterType::Devil:
       return "Devil";
+    case MonsterType::Skeleton:
+      return "Skeleton";
     default:
       return "Unknown type";
   }

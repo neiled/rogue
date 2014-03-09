@@ -82,6 +82,7 @@ void Renderer::loadMonsterTiles()
 {
   _monsters[MonsterType::Orc] = new DirectionalSprite(_graphics, "../content/monsters/monster_orc.png", 0, 0, TILE_SIZE, TILE_SIZE);
   _monsters[MonsterType::Devil] = new DirectionalSprite(_graphics, "../content/monsters/monster_devil.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _monsters[MonsterType::Skeleton] = new DirectionalSprite(_graphics, "../content/monsters/monster_skeleton.png", 0, 0, TILE_SIZE, TILE_SIZE);
 }
 
 void Renderer::loadMapTiles()
@@ -110,6 +111,7 @@ void Renderer::load_corpses()
   _items[ItemType::CORPSE] = std::map<ItemSubtype, Sprite*>();
   _items[ItemType::CORPSE][ItemSubtype::CORPSE_ORC] = new Sprite(_graphics, "../content/corpse.png", 0, 0, TILE_SIZE, TILE_SIZE);
   _items[ItemType::CORPSE][ItemSubtype::CORPSE_DEVIL] = new Sprite(_graphics, "../content/corpse.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::CORPSE][ItemSubtype::CORPSE_SKELETON] = new Sprite(_graphics, "../content/corpse.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
 
 
 }

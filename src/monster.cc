@@ -104,9 +104,10 @@ Item* Monster::generate_corpse()
   {
     case MonsterType::Orc:
       return ItemFactory::Build(ItemType::CORPSE, ItemSubtype::CORPSE_ORC);
-      break;
     case MonsterType::Devil:
       return ItemFactory::Build(ItemType::CORPSE, ItemSubtype::CORPSE_DEVIL);
+    case MonsterType::Skeleton:
+      return ItemFactory::Build(ItemType::CORPSE, ItemSubtype::CORPSE_SKELETON);
     default:
       SDL_Log("Need to generate a corpse for this monster type");
       return nullptr;
@@ -121,6 +122,8 @@ int Monster::max_health()
       return 10 * xp_level();
     case MonsterType::Devil:
       return 15 * xp_level();
+    case MonsterType::Skeleton:
+      return 10 * xp_level();
   }
 }
 
@@ -132,6 +135,8 @@ int Monster::max_damage(Actor& other)
       return 6 * xp_level();
     case MonsterType::Devil:
       return 3 * xp_level();
+    case MonsterType::Skeleton:
+      return 2 * xp_level();
   }
 }
 

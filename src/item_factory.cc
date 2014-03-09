@@ -77,6 +77,9 @@ void ItemFactory::init_corpses()
   ItemFactory::add_item(
       new Item("Devil Corpse", ItemType::CORPSE, ItemSubtype::CORPSE_DEVIL),
       0);
+  ItemFactory::add_item(
+      new Item("Skeleton Corpse", ItemType::CORPSE, ItemSubtype::CORPSE_SKELETON),
+      0);
 }
 
 void ItemFactory::init_weapons()

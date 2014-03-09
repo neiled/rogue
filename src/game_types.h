@@ -7,7 +7,11 @@ class DirectionalSprite;
 class Sprite;
 
 
-enum class MonsterType {Orc, Devil};
+enum class MonsterType {
+  Orc,
+  Devil,
+  Skeleton
+};
 enum class MonsterState {Asleep, Awake, Hunting, Wandering};
 
 enum class ItemType {CORPSE=0, WEAPON, POTION, SCROLL};
@@ -15,6 +19,7 @@ enum class ItemSubtype {
   //CORPSE
   CORPSE_ORC,
   CORPSE_DEVIL,
+  CORPSE_SKELETON,
   //WEAPON
   WEAPON_KRIS_RUSTED,
   WEAPON_KRIS_SMALL,
