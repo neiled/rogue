@@ -29,7 +29,7 @@ void Renderer::init()
   load_items();
   load_info();
 
-  _player = new DirectionalSprite(_graphics, "../content/player.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _player = new DirectionalSprite(_graphics, "./content/player.png", 0, 0, TILE_SIZE, TILE_SIZE);
 
 
   init_viewports();
@@ -80,22 +80,22 @@ void Renderer::init_viewports()
 
 void Renderer::loadMonsterTiles()
 {
-  _monsters[MonsterType::Orc] = new DirectionalSprite(_graphics, "../content/monsters/monster_orc.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _monsters[MonsterType::Devil] = new DirectionalSprite(_graphics, "../content/monsters/monster_devil.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _monsters[MonsterType::Skeleton] = new DirectionalSprite(_graphics, "../content/monsters/monster_skeleton.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _monsters[MonsterType::Orc] = new DirectionalSprite(_graphics, "./content/monsters/monster_orc.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _monsters[MonsterType::Devil] = new DirectionalSprite(_graphics, "./content/monsters/monster_devil.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _monsters[MonsterType::Skeleton] = new DirectionalSprite(_graphics, "./content/monsters/monster_skeleton.png", 0, 0, TILE_SIZE, TILE_SIZE);
 }
 
 void Renderer::loadMapTiles()
 {
-  _tiles[TileType::Floor] =  new Sprite(_graphics, "../content/dungeon_tiles_32.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
+  _tiles[TileType::Floor] =  new Sprite(_graphics, "./content/dungeon_tiles_32.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
 
-  _tiles[TileType::StairsUp] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 12*TILE_SIZE, 2*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _tiles[TileType::StairsUp] = new Sprite(_graphics, "./content/dungeon_tiles_32.png", 12*TILE_SIZE, 2*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-  _tiles[TileType::StairsDown] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 11*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _tiles[TileType::StairsDown] = new Sprite(_graphics, "./content/dungeon_tiles_32.png", 11*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-  _tiles[TileType::Rock] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 12*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _tiles[TileType::Rock] = new Sprite(_graphics, "./content/dungeon_tiles_32.png", 12*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
-  _tiles[TileType::Door] = new Sprite(_graphics, "../content/dungeon_tiles_32.png", 13*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _tiles[TileType::Door] = new Sprite(_graphics, "./content/dungeon_tiles_32.png", 13*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
 }
 
 void Renderer::load_items()
@@ -109,9 +109,9 @@ void Renderer::load_items()
 void Renderer::load_corpses()
 {
   _items[ItemType::CORPSE] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::CORPSE][ItemSubtype::CORPSE_ORC] = new Sprite(_graphics, "../content/corpse.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _items[ItemType::CORPSE][ItemSubtype::CORPSE_DEVIL] = new Sprite(_graphics, "../content/corpse.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
-  _items[ItemType::CORPSE][ItemSubtype::CORPSE_SKELETON] = new Sprite(_graphics, "../content/corpse.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::CORPSE][ItemSubtype::CORPSE_ORC] = new Sprite(_graphics, "./content/corpse.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::CORPSE][ItemSubtype::CORPSE_DEVIL] = new Sprite(_graphics, "./content/corpse.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::CORPSE][ItemSubtype::CORPSE_SKELETON] = new Sprite(_graphics, "./content/corpse.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
 
 
 }
@@ -138,7 +138,7 @@ void Renderer::load_scrolls()
 
 void Renderer::load_info()
 {
-  _info_char = new Sprite(_graphics, "../content/outline.png", 0, 0, 150, 271);
+  _info_char = new Sprite(_graphics, "./content/outline.png", 0, 0, 150, 271);
 }
 
 void Renderer::update(World* world)
@@ -352,7 +352,7 @@ void Renderer::render_inventory(Inventory& inventory)
 
 SDL_Texture* Renderer::render_message(std::string message, int height)
 {
-  return _graphics->renderText(message, "../content/secrcode.ttf", SDL_Color {255,255,255}, height);
+  return _graphics->renderText(message, "./content/secrcode.ttf", SDL_Color {255,255,255}, height);
 }
 
 void Renderer::draw_sprite(Sprite* sprite, Tile& tile)

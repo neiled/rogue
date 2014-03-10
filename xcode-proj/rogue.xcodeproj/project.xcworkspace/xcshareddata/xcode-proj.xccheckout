@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>EA04131B-4284-4668-B4AF-DB7DDCD18371</string>
+	<key>IDESourceControlProjectName</key>
+	<string>xcode-proj</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>DABA90C7-1032-4508-9919-15F04EA681C5</key>
+		<string>ssh://github.com/neiled/rogue.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>xcode-proj/xcode-proj.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>DABA90C7-1032-4508-9919-15F04EA681C5</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/neiled/rogue.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>DABA90C7-1032-4508-9919-15F04EA681C5</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>DABA90C7-1032-4508-9919-15F04EA681C5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>rogue</string>
+		</dict>
+	</array>
+</dict>
+</plist>

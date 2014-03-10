@@ -190,4 +190,5 @@ ItemSubtype ItemFactory::calc_item_subtype(ItemType item_type, int xp_level)
   }
 
   SDL_Log("Something wrong with the CDF as should never see this!");
+  return ItemSubtype::CORPSE_DEVIL;
 }
