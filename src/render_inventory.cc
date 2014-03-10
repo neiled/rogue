@@ -11,7 +11,7 @@ RenderInventory::RenderInventory(Graphics* graphics) : _graphics(graphics)
 
 void RenderInventory::init()
 {
-  _panel = _graphics->loadTexture("../content/blue_panel.png");
+  _panel = _graphics->loadTexture("./content/blue_panel.png");
 }
 
 void RenderInventory::render(Renderer& renderer, item_sprites_t items, Inventory& inventory)
