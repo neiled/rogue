@@ -51,7 +51,7 @@ void Player::pickup_items()
     }
     else
     {
-      Messages::Add("You cannot carry any more items");
+      Messages::AddBad("You cannot carry any more items");
       break;
     }
   }
@@ -100,6 +100,7 @@ void Player::increase_level()
   _attributes[Attribute::DEF]++;
   _attributes[Attribute::CON]+=10;
   _attributes[Attribute::HEALTH] = max_health();
+  Messages::PushGood("Your level increased to " + std::to_string(_xp_level)+"!");
 }
 
 int32_t Player::max_xp()

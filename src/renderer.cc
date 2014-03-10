@@ -299,7 +299,7 @@ void Renderer::draw_health_bar(int x, int y, int width, int height, int current_
   draw_bar(x, y, width, height, current_health, max_health, r, g, b);
 }
 
-void Renderer::render_messages(std::deque<std::string> messages)
+void Renderer::render_messages(std::deque<std::vector<Message>> messages)
 {
   if(messages.empty())
     return;
@@ -314,10 +314,41 @@ void Renderer::render_messages(std::deque<std::string> messages)
   int current = 0;
   for (int i = start_message; i < messages.size() && current <= max_messages; ++i)
   {
-    std::string message = messages.at(i);
-    render_string(message, 25, current++*message_h, message_h);
+    auto current_messages = messages.at(i);
+    render_message(current_messages, 25, current++ * message_h, message_h);
+
+    //std::string message = messages.at(i);
+    //render_string(message, 25, current++*message_h, message_h);
   }
   SDL_RenderSetViewport(_graphics->Renderer, NULL);
+}
+
+void Renderer::render_message(std::vector<Message> messages, int x, int y, int h)
+{
+  SDL_Rect dst;
+  dst.x = x;
+  dst.y = y;
+  for(auto message : messages)
+  {
+    auto current = render_message(message.message, h, calc_color(message.message_type));
+    SDL_QueryTexture(current, NULL, NULL, &dst.w, &dst.h);
+    SDL_RenderCopy(_graphics->Renderer, current, NULL, &dst);
+    SDL_DestroyTexture(current);
+    dst.x += dst.w;
+  }
+}
+
+SDL_Color Renderer::calc_color(MessageType type)
+{
+  switch(type)
+  {
+    case MessageType::Normal:
+      return SDL_Color{255,255,255};
+    case MessageType::Good:
+      return SDL_Color{0,255,0};
+    case MessageType::Bad:
+      return SDL_Color{255,0,0};
+  }
 }
 
 void Renderer::render_string(std::string message, int x, int y, int h)
@@ -350,9 +381,9 @@ void Renderer::render_inventory(Inventory& inventory)
   _render_inv.render(*this, _items, inventory);
 }
 
-SDL_Texture* Renderer::render_message(std::string message, int height)
+SDL_Texture* Renderer::render_message(std::string message, int height, SDL_Color color)
 {
-  return _graphics->renderText(message, "./content/secrcode.ttf", SDL_Color {255,255,255}, height);
+  return _graphics->renderText(message, "./content/secrcode.ttf", color, height);
 }
 
 void Renderer::draw_sprite(Sprite* sprite, Tile& tile)

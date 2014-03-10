@@ -28,6 +28,7 @@ class Monster;
 class Tile;
 class Actor;
 class Game;
+struct Message;
 
 
 class Renderer {
@@ -45,6 +46,7 @@ class Renderer {
     void draw_sprite(Sprite* sprite, Tile& tile);
     void draw_health(Actor& actor);
     void render_string(std::string message, int x, int y, int h);
+    void render_message(std::vector<Message> messages, int x, int y, int h);
     Tile* get_tile_from_coord(Level& level, int x, int y);
     
   private:
@@ -75,7 +77,8 @@ class Renderer {
     void render_level(Level& level);
     void render_monsters(Level& level);
     void render_items(Tile& tile, int alpha);
-    SDL_Texture* render_message(std::string message, int height);
+    //SDL_Texture* render_message(std::string message, int height);
+    SDL_Texture* render_message(std::string message, int height, SDL_Color color = SDL_Color{255,255,255});
 
     
     SDL_Rect _cameraRect;
@@ -89,9 +92,11 @@ class Renderer {
     void render(Level& level);
     void render(Player& player);
     void render_info(Game& game, Player& player);
-    void render_messages(std::deque<std::string> messages);
+    void render_messages(std::deque<std::vector<Message>> messages);
     void render_state(GameState state, Player& player);
     void render_inventory(Inventory& inventory);
+
+    SDL_Color calc_color(MessageType type);
 
 
 };

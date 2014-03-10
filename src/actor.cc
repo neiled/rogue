@@ -192,18 +192,18 @@ void Actor::meleeAttack(Actor* other)
   {
     int damage = calc_damage(*other);
     if(is_player())
-      Messages::Add("You deal " + std::to_string(damage) + " damage to the " + other->name());
+      Messages::AddGood("You deal " + std::to_string(damage) + " damage to the " + other->name());
     other->takeDamage(damage);
     if(other->dead())
     {
       if(is_player())
-        Messages::Add("You killed the " + other->name());
+        Messages::AddGood("You killed the " + other->name());
       killed(other);
     }
   }
   else if(is_player())
   {
-    Messages::Add("You missed the " + other->name() +"! chance of " + std::to_string(static_cast<int>(toHit)));
+    Messages::AddBad("You missed the " + other->name() +"! chance of " + std::to_string(static_cast<int>(toHit)));
   }
   else
   {
@@ -254,7 +254,7 @@ float Actor::hit_chance(Actor& other)
 void Actor::takeDamage(int amount)
 {
   if(is_player())
-    Messages::Add("You take " + std::to_string(amount) + " damage");
+    Messages::AddBad("You take " + std::to_string(amount) + " damage");
   _attributes[Attribute::HEALTH] -= amount;
   if(_attributes[Attribute::HEALTH] <= 0)
   {

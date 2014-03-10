@@ -25,11 +25,12 @@ void Scroll::blink(Actor& owner)
   auto newTile = owner.level().getRandomTileOfType(TileType::Floor);
   if(newTile->actor())
   {
-    Messages::Push("Blink failed.");
+    Messages::PushBad("Blink failed.");
   }
   else
   {
     owner.set_tile(*newTile);
+    Messages::PushGood("You open your eyes in a new area.");
   }
 
 }
