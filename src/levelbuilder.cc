@@ -44,8 +44,12 @@ void LevelBuilder::buildLevel(Level& level, Player& player)
   generate_items(level);
   SDL_Log("Done.");
 
+  SDL_Log("Generating chests...");
+  generate_chests(level);
+  SDL_Log("Done.");
+
   SDL_Log("Positioning Player...");
-  positionPlayer(startRoom, player);
+  positionPlayer(*startRoom, player);
   SDL_Log("Done.");
 }
 
@@ -57,6 +61,20 @@ void LevelBuilder::generate_items(Level& level)
     if(!randomTile->actor())
     {
       auto item = ItemFactory::Build(level.depth());
+      randomTile->add_item(item);
+      ++i;
+    }
+  }
+}
+
+void LevelBuilder::generate_chests(Level& level)
+{
+  for (int i = 0; i < Level::LEVEL_ITEM_COUNT;)
+  {
+    auto randomTile = level.getRandomTileOfType(TileType::Floor);
+    if(!randomTile->actor())
+    {
+      auto item = ItemFactory::Build(ItemType::CHEST, ItemSubtype::CHEST);
       randomTile->add_item(item);
       ++i;
     }
@@ -127,9 +145,15 @@ bool LevelBuilder::doorFits(int x, int y, Level& level)
   return false;
 }
 
-void LevelBuilder::positionPlayer(Room* room, Player& player)
+void LevelBuilder::positionPlayer(Room& room, Player& player)
 {
-  player.set_tile(*room->getRandomTile());
+  Tile* chosenTile;
+  do
+  {
+    chosenTile = room.getRandomTile();
+  }while(chosenTile->actor());
+
+  player.set_tile(*chosenTile);
 }
 
 Room* LevelBuilder::positionStairs(std::vector<Room*> rooms)

@@ -104,6 +104,14 @@ void Renderer::load_items()
   load_potions();
   load_weapons();
   load_scrolls();
+  load_scenery();
+}
+
+void Renderer::load_scenery()
+{
+  _items[ItemType::CHEST] = std::map<ItemSubtype, Sprite*>();
+  _items[ItemType::CHEST][ItemSubtype::CHEST] = new Sprite(_graphics, "./content/chest.png", 0, 0, TILE_SIZE, TILE_SIZE);
+
 }
 
 void Renderer::load_corpses()

@@ -25,6 +25,7 @@ private:
   static void init_weapons();
   static void init_corpses();
   static void init_scrolls();
+  static void init_other();
   static void calc_cdf();
   
   static Item* get_item(ItemType, ItemSubtype);

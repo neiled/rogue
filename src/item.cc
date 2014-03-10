@@ -50,3 +50,8 @@ bool Item::interesting()
 {
   return _item_type != ItemType::CORPSE;
 }
+
+bool Item::can_pick_up()
+{
+  return _item_type != ItemType::CORPSE;
+}

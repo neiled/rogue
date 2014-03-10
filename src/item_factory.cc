@@ -3,6 +3,7 @@
 #include "potion.h"
 #include "weapon.h"
 #include "scroll.h"
+#include "chest.h"
 #include "random.h"
 #include <SDL2/SDL.h>
 
@@ -42,6 +43,7 @@ void ItemFactory::Init()
   ItemFactory::init_weapons();
   ItemFactory::init_corpses();
   ItemFactory::init_scrolls();
+  ItemFactory::init_other();
   ItemFactory::calc_cdf();
 }
 
@@ -99,6 +101,13 @@ void ItemFactory::init_scrolls()
       new Scroll("Blink Scroll", ItemSubtype::SCROLL_BLINK, {}),
       100);
 }
+
+void ItemFactory::init_other()
+{
+  ItemFactory::add_item(
+      new Chest(),
+      0);
+}
 void ItemFactory::add_item(Item* item, int weighting)
 {
   ItemFactory::_prototypes[item->item_type()][item->item_subtype()] = item;
@@ -141,6 +150,8 @@ Item* ItemFactory::get_item(ItemType item_type, ItemSubtype item_subtype)
       return ItemFactory::get_scroll(item_subtype);
     case ItemType::CORPSE:
       return new Item(*ItemFactory::_prototypes[item_type][item_subtype]);
+    case ItemType::CHEST:
+      return new Chest(*static_cast<Chest*>(ItemFactory::_prototypes[item_type][item_subtype]));
     default:
       SDL_Log("You need to add this type of item...");
       return nullptr;

@@ -43,7 +43,7 @@ void Player::pickup_items()
   {
     if(_inventory.full() == false)
     {
-      if(item->item_type() != ItemType::CORPSE)
+      if(item->can_pick_up())
       {
         _inventory.add(item);
         Messages::Add("You pick up the " + item->name());

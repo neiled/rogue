@@ -27,11 +27,12 @@ class LevelBuilder
     void digCorridor(SDL_Point startPoint, SDL_Point endPoint, Room* roomTarget, Level& level);
     void digCorridors(std::vector<Room*> rooms, Level& level);
     Room* positionStairs(std::vector<Room*> rooms);
-    void positionPlayer(Room* room, Player& player);
+    void positionPlayer(Room& room, Player& player);
     void addDoors(Level& level);
     bool doorFits(int x, int y, Level& level);
     void generateMonsters(Level& level);
     void generate_items(Level& level);
+    void generate_chests(Level& level);
 
     const static int ROOM_HEIGHT = 8;
     const static int ROOM_WIDTH = 8;
