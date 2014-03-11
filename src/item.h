@@ -20,9 +20,9 @@ public:
   
   virtual std::string name();
 
-  virtual int calc_damage(Actor&);
-  virtual int max_damage() {return 1;};
-  virtual int min_damage() {return 1;};
+  //virtual int calc_damage(Actor&);
+  virtual int max_damage(Actor&) {return 1;};
+  virtual int min_damage(Actor&) {return 1;};
   virtual bool interesting();
   virtual bool can_pick_up();
 
