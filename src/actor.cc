@@ -252,8 +252,10 @@ int Actor::def()
 
 int Actor::calc_damage(Actor& other)
 {
-  int damage = max_damage(other);
-  return Random::BetweenNormal(1,damage);
+  int max_damage = max_damage(other);
+  int min_damage = min_damage(other);
+  
+  return Random::BetweenNormal(min_damage, max_damage);
 }
 
 float Actor::hit_chance(Actor& other)
