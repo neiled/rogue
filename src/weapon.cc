@@ -29,6 +29,6 @@ int Weapon::min_damage()
 std::string Weapon::name()
 {
   std::ostringstream s;
-  s << _name << " (" << max_damage() << ")";
+  s << _name << " (" << min_damage() << "-" << max_damage() << ")";
   return s.str();
 }
