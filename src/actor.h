@@ -58,6 +58,7 @@ class Actor
 
     void takeDamage(int amount);
     virtual int max_damage(Actor& other) = 0;
+    virtual int min_damage(Actor& other) = 0;
 
     bool dead() const;
     
