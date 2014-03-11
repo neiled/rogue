@@ -11,6 +11,7 @@
 #include "game.h"
 #include "messages.h"
 #include "render_monsters.h"
+#include "chest.h"
 
 Renderer::Renderer(Graphics* graphics) : _graphics(graphics), _render_inv(graphics), _render_level(graphics)
 {
@@ -378,6 +379,8 @@ void Renderer::render_state(GameState state, Player& player)
     case GameState::MENU_INVENTORY:
       render_inventory(*player.inventory());
       break;
+    case GameState::MENU_CHEST:
+      render_chest(*player.chest()->inventory());
     default:
       break;
   }
@@ -386,7 +389,12 @@ void Renderer::render_state(GameState state, Player& player)
 
 void Renderer::render_inventory(Inventory& inventory)
 {
-  _render_inv.render(*this, _items, inventory);
+  _render_inv.render_player_inventory(*this, _items, inventory);
+}
+
+void Renderer::render_chest(Inventory& inventory)
+{
+  _render_inv.render_chest_inventory(*this, _items, inventory);
 }
 
 SDL_Texture* Renderer::render_message(std::string message, int height, SDL_Color color)

@@ -11,6 +11,7 @@ public:
   virtual ~Chest ();
   virtual bool interesting() override {return true;}
   virtual bool can_pick_up() override {return false;}
+  Inventory* inventory();
 
 private:
   Inventory _inventory;

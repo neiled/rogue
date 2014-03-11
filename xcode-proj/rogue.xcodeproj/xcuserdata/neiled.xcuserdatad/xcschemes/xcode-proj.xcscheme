@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6E31AC0718CC9F8400627DCB"
-               BuildableName = "xcode-proj.app"
+               BuildableName = "rogue.app"
                BlueprintName = "rogue"
                ReferencedContainer = "container:rogue.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6E31AC0718CC9F8400627DCB"
-            BuildableName = "xcode-proj.app"
+            BuildableName = "rogue.app"
             BlueprintName = "rogue"
             ReferencedContainer = "container:rogue.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6E31AC0718CC9F8400627DCB"
-            BuildableName = "xcode-proj.app"
+            BuildableName = "rogue.app"
             BlueprintName = "rogue"
             ReferencedContainer = "container:rogue.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6E31AC0718CC9F8400627DCB"
-            BuildableName = "xcode-proj.app"
+            BuildableName = "rogue.app"
             BlueprintName = "rogue"
             ReferencedContainer = "container:rogue.xcodeproj">
          </BuildableReference>

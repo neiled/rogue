@@ -45,6 +45,14 @@ enum class MessageType {Normal, Good, Bad};
 typedef std::map<MonsterType, DirectionalSprite*> monster_sprites_t;
 typedef std::map<ItemType, std::map<ItemSubtype, Sprite*>> item_sprites_t;
 typedef std::map<TileType, Sprite*> level_sprites_t;
-enum class GameState {MENU_START, GAME, MENU_INVENTORY, DEAD, STARTING, STOP};
+enum class GameState {
+  MENU_START,
+  MENU_CHEST,
+  MENU_INVENTORY,
+  GAME, 
+  DEAD,
+  STARTING,
+  STOP
+};
 
 #endif

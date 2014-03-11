@@ -7,6 +7,7 @@
 #include "attribute_modifiers.h"
 #include <SDL2/SDL.h>
 #include "item.h"
+#include "chest.h"
 
 Actor::Actor(std::string name, int xp_level) : Actor(name, xp_level, 5)
 {
@@ -212,6 +213,18 @@ void Actor::meleeAttack(Actor* other)
 
 
   return;
+}
+
+Chest* Actor::chest()
+{
+  for(auto current_item : tile()->items())
+  {
+    if(current_item->item_type() == ItemType::CHEST)
+      return static_cast<Chest*>(current_item);
+  }
+
+  return nullptr;
+
 }
 
 

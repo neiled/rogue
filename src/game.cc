@@ -7,6 +7,7 @@
 #include "command_decoder_game.h"
 #include "command_decoder_inventory.h"
 #include "command_decoder_dead.h"
+#include "command_decoder_chest.h"
 
 
 Game::Game() : _graphics(), _renderer(&_graphics)
@@ -27,6 +28,7 @@ void Game::start()
   _world.init();
   _decoders[GameState::GAME] = new CommandDecoderGame();
   _decoders[GameState::MENU_INVENTORY] = new CommandDecoderInventory();
+  _decoders[GameState::MENU_CHEST] = new CommandDecoderChest();
   _decoders[GameState::DEAD] = new CommandDecoderDead();
   _state = GameState::GAME;
   eventLoop();
@@ -44,16 +46,12 @@ void Game::reset()
 
 void Game::eventLoop()
 {
-  SDL_Log("Creating Graphics");
-  //Graphics graphics;
   SDL_Event event;
-  SDL_Log("Creating renderer");
-  //Renderer renderer(&graphics);
-  SDL_Log("Done renderer");
   CommandProcessor cProc;
+
   end_turn();
   player()->add_seen_items();
-  //int last_update_time = SDL_GetTicks();
+  draw(_graphics, _renderer);
 
 
   bool running = true;
@@ -61,7 +59,6 @@ void Game::eventLoop()
   {
     Player* player = _world.player();
     //const int start_time_ms = SDL_GetTicks();
-    draw(_graphics, _renderer);
     SDL_WaitEvent(&event);
 
     decode_event(event, _graphics, _renderer);
@@ -75,7 +72,6 @@ void Game::eventLoop()
         if(cProc.Process(player->popCommand(), *player))
         {
           end_turn();
-          draw(_graphics, _renderer);
         }
       }
     }
@@ -104,6 +100,7 @@ void Game::end_turn()
   ++_turn;
   _world.update();
   Messages::Push();
+  draw(_graphics, _renderer);
 }
 
 int Game::turn()

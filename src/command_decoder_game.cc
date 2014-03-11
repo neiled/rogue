@@ -20,6 +20,11 @@ bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
     player.clearCommands();
   else if(key == SDLK_i)
     game.state(GameState::MENU_INVENTORY);
+  else if(key == SDLK_PERIOD)
+  {
+    if(game.player()->chest())
+      game.state(GameState::MENU_CHEST);
+  }
   else if(key == SDLK_KP_5)
     player.push_command(Commands::CMD::NOP);
   else if(key == SDLK_ESCAPE)

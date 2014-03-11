@@ -74,6 +74,15 @@ void Inventory::drop(int index, Tile& tile)
   Messages::Add("You drop the " + item->name());
 }
 
+Item* Inventory::remove(int index)
+{
+  if(index >= _items.size())
+    return nullptr;
+  auto item = _items.at(index);
+  remove(item);
+  return item;
+}
+
 bool Inventory::full()
 {
   return _items.size() >= _max_items;

@@ -60,7 +60,7 @@ void Monster::wander()
   {
     auto target_tile = level().get_near_random_of_type(*_currentTile, 5, TileType::Floor);
     AStar searcher;
-    _travelPath = searcher.plotPath(*_currentTile, *target_tile, 50);
+    _travelPath = searcher.plotPath(*_currentTile, *target_tile, 100);
   }
   if(_travelPath.empty() == false)
   {

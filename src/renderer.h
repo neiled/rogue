@@ -77,7 +77,6 @@ class Renderer {
     void render_level(Level& level);
     void render_monsters(Level& level);
     void render_items(Tile& tile, int alpha);
-    //SDL_Texture* render_message(std::string message, int height);
     SDL_Texture* render_message(std::string message, int height, SDL_Color color = SDL_Color{255,255,255});
 
     
@@ -96,6 +95,7 @@ class Renderer {
     void render_messages(std::deque<std::vector<Message>> messages);
     void render_state(GameState state, Player& player);
     void render_inventory(Inventory& inventory);
+    void render_chest(Inventory& inventory);
 
     SDL_Color calc_color(MessageType type);
 

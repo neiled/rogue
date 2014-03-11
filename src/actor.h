@@ -13,6 +13,7 @@ class Tile;
 class Level;
 class AttributeModifiers;
 class Weapon;
+class Chest;
 
 class Actor
 {
@@ -33,6 +34,7 @@ class Actor
     Tile* tile() const;
 
     Inventory* inventory();
+    Chest* chest();
     
     int x();
     int y();

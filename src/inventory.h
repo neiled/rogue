@@ -15,6 +15,7 @@ public:
   virtual ~Inventory ();
   void add(Item* item);
   void remove(Item* item);
+  Item* remove(int index);
   std::vector<Item*> items();
   void empty();
   bool full();

@@ -51,6 +51,9 @@ void LevelBuilder::buildLevel(Level& level, Player& player)
   SDL_Log("Positioning Player...");
   positionPlayer(*startRoom, player);
   SDL_Log("Done.");
+
+  for(auto current_room : rooms)
+    delete current_room;
 }
 
 void LevelBuilder::generate_items(Level& level)

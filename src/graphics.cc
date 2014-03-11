@@ -1,6 +1,6 @@
 #include "graphics.h"
-#include <SDL2_ttf/SDL_ttf.h>
 #include <iostream>
+#include <SDL2_ttf/SDL_ttf.h>
 
 Graphics::Graphics() {
 }
@@ -82,18 +82,20 @@ SDL_Texture* Graphics::loadTexture( std::string path )
 SDL_Texture* Graphics::renderText(std::string message, std::string fontFile, 
                         SDL_Color color, int fontSize)
 {
-    //Open the font
-    TTF_Font *font = nullptr;
-    font = TTF_OpenFont(fontFile.c_str(), fontSize);
-    if (font == nullptr)
-        throw std::runtime_error("Failed to load font: " + fontFile + TTF_GetError());
-  
-    //Render the message to an SDL_Surface, as that's what TTF_RenderText_X returns
-    SDL_Surface *surf = TTF_RenderText_Blended(font, message.c_str(), color);
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(Renderer, surf);
-    //Clean up unneeded stuff
-    SDL_FreeSurface(surf);
-    TTF_CloseFont(font);
- 
-    return texture;
+  auto key = fontFile + std::to_string(fontSize);
+  if(_fonts.find(key) == _fonts.end())
+    _fonts[key]= TTF_OpenFont(fontFile.c_str(), fontSize);
+  //Open the font
+  auto font = _fonts[key];
+  if (font == nullptr)
+      throw std::runtime_error("Failed to load font: " + fontFile + TTF_GetError());
+
+  //Render the message to an SDL_Surface, as that's what TTF_RenderText_X returns
+  SDL_Surface *surf = TTF_RenderText_Blended(font, message.c_str(), color);
+  SDL_Texture *texture = SDL_CreateTextureFromSurface(Renderer, surf);
+  //Clean up unneeded stuff
+  SDL_FreeSurface(surf);
+  //TTF_CloseFont(font);
+
+  return texture;
 }

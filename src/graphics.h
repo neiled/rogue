@@ -5,6 +5,9 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2_Image/SDL_Image.h>
+#include <SDL2_ttf/SDL_ttf.h>
+#include <map>
+
 
 
 class Graphics
@@ -30,6 +33,8 @@ class Graphics
     SDL_Window* _window;
 
     void initTTF();
+
+    std::map<std::string, TTF_Font*> _fonts;
 };
 
 #endif
