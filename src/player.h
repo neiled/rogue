@@ -17,6 +17,7 @@ class Player : public Actor
     int32_t max_xp();
     int32_t min_xp();
     int max_damage(Actor& other) override;
+    int min_damage(Actor& other) override;
     void increase_xp(int amount);
 
     bool explore();
