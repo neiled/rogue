@@ -24,6 +24,7 @@ class Monster : public Actor
     MonsterType monster_type();
 
     virtual int max_damage(Actor& other) override;
+    virtual int min_damage(Actor& other) override;
     
     
   private:
