@@ -118,7 +118,7 @@ int Player::max_damage(Actor& other)
   int damage = 0;
   if(_weapon)
   {
-    damage =  _weapon->calc_max_damage(other);
+    damage =  _weapon->max_damage();
   }
   else
   {
@@ -132,7 +132,7 @@ int Player::min_damage(Actor& other)
   int damage = 1;
   if(_weapon)
   {
-    damage =  _weapon->calc_min_damage(other);
+    damage =  _weapon->min_damage();
   }
   else
     damage = 1;
