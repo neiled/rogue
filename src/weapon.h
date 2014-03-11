@@ -13,8 +13,8 @@ public:
   Weapon(Weapon& other);
   virtual ~Weapon ();
   
-  virtual int max_damage(Actor&) override;
-  virtual int min_damage(Actor&) override;
+  virtual int max_damage() override;
+  virtual int min_damage() override;
   //virtual int calc_damage(Actor&) override;
 
   virtual std::string name() override;
