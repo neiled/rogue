@@ -9,7 +9,7 @@ class Actor;
 class Weapon : public Item
 {
 public:
-  Weapon(std::string name, ItemSubtype subtype, int max_damage, std::vector<AttributeModifiers> modifiers);
+  Weapon(std::string name, ItemSubtype subtype, int min_damage, int max_damage, std::vector<AttributeModifiers> modifiers);
   Weapon(Weapon& other);
   virtual ~Weapon ();
   
@@ -21,5 +21,6 @@ public:
   
 private:
   int _max_damage;
+  int _min_damage;
 };
 #endif
