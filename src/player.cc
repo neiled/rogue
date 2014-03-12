@@ -257,7 +257,7 @@ bool Player::can_see_unknown_item(bool quiet)
           == _interesting_items_seen.end())
       {
         if(!quiet)
-          Messages::Add("You can see a " + item->name());
+          Messages::Push("You see a " + item->name());
         seen = true;
       }
     }

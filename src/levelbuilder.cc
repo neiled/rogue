@@ -7,6 +7,7 @@
 #include "monster.h"
 #include "monster_factory.h"
 #include "item_factory.h"
+#include "chest.h"
 
 
 LevelBuilder::LevelBuilder()
@@ -72,13 +73,19 @@ void LevelBuilder::generate_items(Level& level)
 
 void LevelBuilder::generate_chests(Level& level)
 {
-  for (int i = 0; i < Level::LEVEL_ITEM_COUNT;)
+  for (int i = 0; i < Level::LEVEL_CHEST_COUNT;)
   {
     auto randomTile = level.getRandomTileOfType(TileType::Floor);
     if(!randomTile->actor())
     {
-      auto item = ItemFactory::Build(ItemType::CHEST, ItemSubtype::CHEST);
-      randomTile->add_item(item);
+      auto chest = static_cast<Chest*>(ItemFactory::Build(ItemType::CHEST, ItemSubtype::CHEST));
+      while(true)
+      {
+        chest->inventory()->add(ItemFactory::Build(level.depth()));
+        if(Random::CheckChance(10) == false)
+          break;
+      }
+      randomTile->add_item(chest);
       ++i;
     }
   }

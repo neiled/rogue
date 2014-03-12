@@ -44,6 +44,7 @@ class Level
     const static int LEVEL_ROOM_COUNT = 150;
     const static int LEVEL_MONSTER_COUNT = 75;
     const static int LEVEL_ITEM_COUNT = 25;
+    const static int LEVEL_CHEST_COUNT = 5;
 
   private:
     int _depth; 
