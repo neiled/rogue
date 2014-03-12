@@ -6,7 +6,7 @@
 #include <deque>
 #include "item_factory.h"
 
-Player::Player() : Actor("player", 1, 10), _xp(0)
+Player::Player() : Actor("player", 1, 10), _xp(0), _auto_pickup(true)
 {
   direction = Actor::Direction::EAST;
   _max_xp = calc_max_xp();
@@ -39,6 +39,9 @@ int Player::max_health()
 
 void Player::pickup_items()
 {
+  if(_auto_pickup == false)
+    return;
+  
   for(auto item : _currentTile->items())
   {
     if(_inventory.full() == false)
@@ -142,8 +145,10 @@ int Player::min_damage(Actor& other)
 
 bool Player::explore()
 {
+  _auto_pickup = false;
   if(can_see_something_interesting(false))
   {
+    _auto_pickup = true;
     return false;
   }
   if(_travelPath.empty())
@@ -154,7 +159,8 @@ bool Player::explore()
   if(_travelPath.empty())
   {
     _targetTile = nullptr;
-    return false; //no where to explore
+    _auto_pickup = true;
+    return false;
   }
   auto dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
   _travelPath.pop_front();
