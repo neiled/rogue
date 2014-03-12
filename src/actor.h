@@ -58,6 +58,7 @@ class Actor
 
     void takeDamage(int amount);
     virtual int max_damage(Actor& other) = 0;
+    virtual int min_damage(Actor& other) = 0;
 
     bool dead() const;
     
@@ -102,7 +103,8 @@ class Actor
     Tile* checkCanMove(int newX, int newY);
     void meleeAttack(Actor* other);
     float hit_chance(Actor& other);
-    int calc_damage(Actor&);
+    int calc_min_damage(Actor&);
+    int calc_max_damage(Actor&);
 
 
     virtual void die() = 0;

@@ -140,6 +140,19 @@ int Monster::max_damage(Actor& other)
   }
 }
 
+int Monster::min_damage(Actor& other)
+{
+  switch(_monster_type)
+  {
+    case MonsterType::Orc:
+      return 2 * xp_level();
+    case MonsterType::Devil:
+      return 1 * xp_level();
+    case MonsterType::Skeleton:
+      return 1 * xp_level();
+  }
+}
+
 void Monster::populate_inventory()
 {
   //TODO: This should be populated when the player sees the monster and use their current luck score

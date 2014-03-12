@@ -118,14 +118,23 @@ int Player::max_damage(Actor& other)
   int damage = 0;
   if(_weapon)
   {
-    Messages::Add("You attack with your " + _weapon->name());
-    damage =  _weapon->calc_damage(other);
+    damage =  _weapon->max_damage();
   }
   else
   {
     damage = atk();
   }
-  if(damage < 1)
+  return damage;
+}
+
+int Player::min_damage(Actor& other)
+{
+  int damage = 1;
+  if(_weapon)
+  {
+    damage =  _weapon->min_damage();
+  }
+  else
     damage = 1;
 
   return damage;
