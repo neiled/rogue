@@ -38,11 +38,30 @@ bool CommandDecoderChest::Decode(SDL_Keycode key, Game& game)
     use_item(*game.player(), 8);
   else if(key == SDLK_9)
     use_item(*game.player(), 9);
+  else if(key == SDLK_a)
+  {
+    take_all(*game.player());
+    game.state(GameState::GAME);
+  }
   else
     return false;
 
   return true;
 
+}
+
+void CommandDecoderChest::take_all(Player& player)
+{
+  while(player.chest()->inventory()->empty() == false)
+  {
+    if(player.inventory()->full())
+    {
+      Messages::Push("You cannot carry any more items.");
+      return;
+    }
+
+    use_item(player, 0);
+  }
 }
 
 void CommandDecoderChest::use_item(Player& player, int index)

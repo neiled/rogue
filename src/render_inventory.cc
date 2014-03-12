@@ -40,7 +40,8 @@ void RenderInventory::render_chest_inventory(Renderer& renderer, item_sprites_t 
 
   render(renderer, items, inventory, vp_inv);
   renderer.render_string("Chest Contents:", x, vp_inv.y+50, 32);
-  renderer.render_string("To take an item press the number.", x, 782, 32);
+  renderer.render_string("To take an item press the number.", x, 750, 32);
+  renderer.render_string("To take all items press the 'a' key.", x, 782, 32);
 }
 
 void RenderInventory::render(Renderer& renderer, item_sprites_t items, Inventory& inventory, SDL_Rect vp_inv)

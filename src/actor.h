@@ -57,6 +57,7 @@ class Actor
     void clearCommands();
 
     void takeDamage(int amount);
+    int calc_damage(Actor& other);
     virtual int max_damage(Actor& other) = 0;
     virtual int min_damage(Actor& other) = 0;
 

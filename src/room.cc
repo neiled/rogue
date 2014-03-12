@@ -78,6 +78,30 @@ Tile* Room::getRandomTile(bool avoidWalls)
   return (_level.tile(x, y));
 }
 
+bool Room::dead_end()
+{
+  int door_count = 0;
+  int wall_x = _x-1;
+  int wall_y = _y-1;
+  for(int y = wall_y; y <= _y + _height; ++y)
+  {
+    for(int x = wall_x; x <= _x + _width; ++x)
+    {
+      if((y == wall_y || y == _y + _height ) ||
+         (x == wall_x || x == _x + _width ))
+      {
+        auto tile = _level.tile(x,y);
+        if(tile && tile->tile_type() != TileType::Rock)
+          door_count++;
+        if(door_count > 1)
+          return false;
+      }
+
+    }
+  }
+  return true;
+}
+
 
 double Room::distanceTo(Room* otherRoom)
 {

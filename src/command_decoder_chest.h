@@ -14,6 +14,7 @@ public:
 
 private:
   void use_item(Player& player, int index);
+  void take_all(Player& player);
   
 };
 #endif

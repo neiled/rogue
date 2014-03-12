@@ -46,7 +46,7 @@ void LevelBuilder::buildLevel(Level& level, Player& player)
   SDL_Log("Done.");
 
   SDL_Log("Generating chests...");
-  generate_chests(level);
+  generate_chests(level, rooms);
   SDL_Log("Done.");
 
   SDL_Log("Positioning Player...");
@@ -71,23 +71,22 @@ void LevelBuilder::generate_items(Level& level)
   }
 }
 
-void LevelBuilder::generate_chests(Level& level)
+void LevelBuilder::generate_chests(Level& level, std::vector<Room*> rooms)
 {
-  for (int i = 0; i < Level::LEVEL_CHEST_COUNT;)
+  for(auto room : rooms)
   {
-    auto randomTile = level.getRandomTileOfType(TileType::Floor);
-    if(!randomTile->actor())
+    if(room->dead_end() == false)
+      continue;
+    SDL_Log("Placing chest");
+    auto randomTile = room->getRandomTile();
+    auto chest = static_cast<Chest*>(ItemFactory::Build(ItemType::CHEST, ItemSubtype::CHEST));
+    while(true)
     {
-      auto chest = static_cast<Chest*>(ItemFactory::Build(ItemType::CHEST, ItemSubtype::CHEST));
-      while(true)
-      {
-        chest->inventory()->add(ItemFactory::Build(level.depth()));
-        if(Random::CheckChance(10) == false)
-          break;
-      }
-      randomTile->add_item(chest);
-      ++i;
+      chest->inventory()->add(ItemFactory::Build(level.depth()));
+      if(Random::CheckChance(10) == false)
+        break;
     }
+    randomTile->add_item(chest);
   }
 }
 

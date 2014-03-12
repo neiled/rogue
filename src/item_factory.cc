@@ -187,15 +187,12 @@ ItemType ItemFactory::calc_item_type(int depth)
 ItemSubtype ItemFactory::calc_item_subtype(ItemType item_type, int xp_level)
 {
   int max_random_number = _sum_weights[item_type];
-  SDL_Log("Max: %d", max_random_number);
   int random_number = Random::Between(0,max_random_number);
-  SDL_Log("Random: %d", random_number);
   
   auto weightings = _cdf[item_type];
   
   for(auto current_weighting : weightings)
   {
-    SDL_Log("Current: %d", random_number);
     if(random_number <= current_weighting.second)
       return current_weighting.first;
   }

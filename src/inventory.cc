@@ -29,7 +29,7 @@ std::vector<Item*> Inventory::items()
   return _items;
 }
 
-void Inventory::empty()
+void Inventory::clear()
 {
   _items.clear();
 }
@@ -86,6 +86,11 @@ Item* Inventory::remove(int index)
 bool Inventory::full()
 {
   return _items.size() >= _max_items;
+}
+
+bool Inventory::empty()
+{
+  return _items.size() == 0;
 }
 
 int Inventory::count()

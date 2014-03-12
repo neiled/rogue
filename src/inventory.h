@@ -17,7 +17,8 @@ public:
   void remove(Item* item);
   Item* remove(int index);
   std::vector<Item*> items();
-  void empty();
+  void clear();
+  bool empty();
   bool full();
   int count();
   int max_items();

@@ -25,6 +25,8 @@ public:
   bool containsTile(Tile* tile);
   Tile* getRandomTile(bool avoidWalls = false);
 
+  bool dead_end();
+
 private:
   Level& _level;
   int _x;

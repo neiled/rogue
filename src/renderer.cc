@@ -240,7 +240,10 @@ void Renderer::render_info(Game& game, Player& player)
   {
     auto item = _items[player.weapon()->item_type()][player.weapon()->item_subtype()];
     item->draw(140, 125, 0, 0, SDL_ALPHA_OPAQUE);
-    render_string("Wpn Dmg: " + std::to_string(player.weapon()->max_damage()), 25, string_y, 16);
+    render_string("Wpn Dmg: " +
+        std::to_string(player.weapon()->max_damage()) +
+        "-" +
+        std::to_string(player.weapon()->min_damage()), 25, string_y, 16);
   }
   draw_health_bar(25, 300, 150, 20, player.health(), player.max_health());
 

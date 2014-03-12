@@ -252,8 +252,8 @@ int Actor::def()
 
 int Actor::calc_damage(Actor& other)
 {
-  int max_damage = max_damage(other);
-  int min_damage = min_damage(other);
+  int max_damage = this->max_damage(other);
+  int min_damage = this->min_damage(other);
   
   return Random::BetweenNormal(min_damage, max_damage);
 }
@@ -359,7 +359,7 @@ void Actor::drop_items()
       Messages::Add("The " + name() + " dropped " + item->name());
     _currentTile->add_item(item);
   }
-  _inventory.empty();
+  _inventory.clear();
 }
 
 void Actor::add_modifier(AttributeModifiers* modifier)
