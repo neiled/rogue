@@ -25,7 +25,12 @@ MonsterType MonsterFactory::calc_monster_type(int depth)
 int MonsterFactory::calc_xp_level(int depth)
 {
   //TODO: this needs some better logic
-  return depth;
+  int min_level = depth-2;
+  if(min_level < 1) min_level = 1;
+  
+  int max_level = depth+2;
+  
+  return Random::BetweenNormal(min_level, max_level);
 }
 
 Monster* MonsterFactory::get_monster(MonsterType type, Tile& tile, int xp_level)
