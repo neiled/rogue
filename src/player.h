@@ -45,6 +45,8 @@ class Player : public Actor
 
     std::vector<Item*> _interesting_items_seen;
     std::vector<Tile*> _interesting_tiles_seen;
+    
+    bool _auto_pickup;
 
 
 };
