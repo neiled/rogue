@@ -13,5 +13,6 @@ public:
 
 private:
   void blink(Actor& owner);
+  void reveal(Actor& owner);
 };
 #endif
