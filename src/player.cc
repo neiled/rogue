@@ -28,7 +28,11 @@ void Player::die()
   //TODO: Message generation should be somewhere else...
 }
 
-void Player::update()
+void Player::start_turn()
+{
+}
+
+void Player::end_turn()
 {
 }
 
