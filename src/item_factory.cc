@@ -87,11 +87,14 @@ void ItemFactory::init_corpses()
 void ItemFactory::init_weapons()
 {
   ItemFactory::add_item(
-    new Weapon("Small Rusted Kris", ItemSubtype::WEAPON_KRIS_RUSTED, 1, 3, {}),
+    new Weapon("Rusted Kris", ItemSubtype::WEAPON_KRIS_RUSTED, 1, 3, {}),
     7500);
   ItemFactory::add_item(
-    new Weapon("Small Kris", ItemSubtype::WEAPON_KRIS_SMALL, 2, 6, {}),
+    new Weapon("Low quality Kris", ItemSubtype::WEAPON_KRIS_LOW, 2, 5, {}),
     5000);
+  ItemFactory::add_item(
+    new Weapon("Kris", ItemSubtype::WEAPON_KRIS, 3, 6, {}),
+    1000);    
 
 }
 
