@@ -17,6 +17,9 @@ void Scroll::cast(Actor& owner, Actor* target)
     case ItemSubtype::SCROLL_BLINK:
       blink(owner);
       break;
+    case ItemSubtype::SCROLL_REVEAL:
+      reveal(owner);
+      break;
   }
 }
 
@@ -33,4 +36,10 @@ void Scroll::blink(Actor& owner)
     Messages::PushGood("You open your eyes in a new area.");
   }
 
+}
+
+void Scroll::reveal(Actor& owner)
+{
+  owner.level()->reveal();
+  Messages::PushGood("You gain knowledge of the current area.");
 }
