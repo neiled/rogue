@@ -45,7 +45,7 @@ class Actor
     void move_to(Tile* tile);
     bool move_to_target();
     
-    void end_turn();
+    virtual void end_turn();
 
 
     bool can_see_actor(Actor& actor);
