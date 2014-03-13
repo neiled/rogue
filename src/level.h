@@ -16,7 +16,12 @@ class Level
     Level (int depth);
     virtual ~Level ();
 
-    enum class LightType {Unseen, Unlit, Lit};
+    enum class LightType {
+      Unseen, //player has no knowledge
+      Unlit,  //player has seen but currently not lit
+      Lit,    //player can currently see it and it's lit
+      Revealed//player knows via magic but never actually seen it
+    };
 
     void setType(int x, int y, TileType tileType);
     void update(Player& player);
