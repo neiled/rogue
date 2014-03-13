@@ -27,7 +27,7 @@ class Actor
     
     Direction direction;
     
-    virtual void update() = 0;
+    //virtual void update() = 0;
     
     Level& level();
     virtual void set_tile(Tile& currentTile);
