@@ -68,6 +68,7 @@ class Actor
     
     virtual int max_health() = 0;
     int health();
+    int previous_health();
     
 
     void drop_items();
@@ -115,6 +116,8 @@ class Actor
     virtual void pickup_items();
 
     int _xp_level;
+    
+    int _previous_health;
 
     Item* _weapon = nullptr;
     
