@@ -43,7 +43,7 @@ void Actor::start_turn()
 
 void Actor::end_turn()
 {
-  _previous_health
+  
 }
 
 Tile* Actor::tile() const
