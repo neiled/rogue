@@ -341,9 +341,15 @@ bool Actor::hasCommands() const
 
 int Actor::health()
 {
+  //TODO: This check souldn't be here...
   if(_attributes[Attribute::HEALTH] > _attributes[Attribute::CON])
     _attributes[Attribute::HEALTH] = _attributes[Attribute::CON];
   return _attributes[Attribute::HEALTH];
+}
+
+int Actor::previous_health()
+{
+  return _previous_health;
 }
 
 Inventory* Actor::inventory()
