@@ -19,7 +19,8 @@ class Monster : public Actor
     virtual ~Monster();
     void explore();
     
-    virtual void update() override;
+    //virtual void update() override;
+    virtual void start_turn() override;
 
     MonsterType monster_type();
 
