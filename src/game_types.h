@@ -35,6 +35,7 @@ enum class ItemSubtype {
   POTION_HEALTH_LARGE,
   //SCROLL
   SCROLL_BLINK,
+  SCROLL_REVEAL,
   //CHEST
   CHEST
 };
