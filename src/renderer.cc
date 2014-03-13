@@ -227,7 +227,7 @@ void Renderer::draw_health(Actor& actor)
   int w = TILE_SIZE;
   int h = 5;
 
-  draw_health_bar(x, y, w, h, actor.health(), actor.max_health());
+  draw_health_bar(x, y, w, h, actor.health(), actor.max_health(), actor.previous_health());
 }
 
 void Renderer::render_info(Game& game, Player& player)
@@ -286,7 +286,7 @@ void Renderer::draw_xp_bar(int x, int y, int width, int height, int current, int
   draw_bar(x, y, width, height, current, max, 81, 95, 240);
 }
 
-void Renderer::draw_health_bar(int x, int y, int width, int height, int current_health, int max_health)
+void Renderer::draw_health_bar(int x, int y, int width, int height, int current_health, int max_health, int previous_health)
 {
   int r,g,b;
   float current_percent = (static_cast<float>(current_health) / max_health);
@@ -308,6 +308,7 @@ void Renderer::draw_health_bar(int x, int y, int width, int height, int current_
     g = 255;
     b = 0;
   }
+  draw_bar(x, y, width, height, previous_health, max_health, 150, 0, 0);
   draw_bar(x, y, width, height, current_health, max_health, r, g, b);
 }
 
