@@ -314,7 +314,7 @@ void Renderer::draw_health_bar(int x, int y, int width, int height, int current_
     b = 0;
   }
   draw_bar(x, y, width, height, previous_health, max_health, 150, 0, 0);
-  draw_bar(x, y, width, height, current_health, max_health, r, g, b);
+  draw_bar(x, y, width, height, current_health, max_health, r, g, b, false);
 }
 
 void Renderer::render_messages(std::deque<std::vector<Message>> messages)
