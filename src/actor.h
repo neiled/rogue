@@ -45,6 +45,7 @@ class Actor
     void move_to(Tile* tile);
     bool move_to_target();
     
+    virtual void start_turn();
     virtual void end_turn();
 
 
