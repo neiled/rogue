@@ -72,7 +72,7 @@ class Renderer {
     void init_viewports();
     void draw_health_bar(int x, int y, int width, int height, int health, int max_health, int previous_health);
     void draw_xp_bar(int x, int y, int width, int height, int current, int max);
-    void draw_bar(int x, int y, int width, int height, int health, int max_health, int r, int g, int b);
+    void draw_bar(int x, int y, int width, int height, int health, int max_health, int r, int g, int b, bool background = true);
 
     void render_level(Level& level);
     void render_monsters(Level& level);
@@ -94,11 +94,4 @@ class Renderer {
     void render_info(Game& game, Player& player);
     void render_messages(std::deque<std::vector<Message>> messages);
     void render_state(GameState state, Player& player);
-    void render_inventory(Inventory& inventory);
-    void render_chest(Inventory& inventory);
-
-    SDL_Color calc_color(MessageType type);
-
-
-};
-#endif
+    void render_inventory(
