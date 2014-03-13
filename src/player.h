@@ -10,7 +10,9 @@ class Player : public Actor
   public:
     Player();
     virtual ~Player();
-    virtual void update() override;
+    //virtual void update() override;
+    virtual void start_turn() override;
+    virtual void end_turn() override;
     virtual int max_health() override;
   
     int32_t xp();
