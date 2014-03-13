@@ -11,10 +11,11 @@ Player::Player() : Actor("player", 1, 10), _xp(0), _auto_pickup(true)
   direction = Actor::Direction::EAST;
   _max_xp = calc_max_xp();
   _min_xp = calc_min_xp();
-  _attributes[Attribute::ATK] = 2;
-  _attributes[Attribute::DEF] = 1;
+  _attributes[Attribute::ATK] = 5;
+  _attributes[Attribute::DEF] = 5;
   _attributes[Attribute::CON] = 50;
   _attributes[Attribute::HEALTH] = max_health();
+  _previous_health = max_health();
 }
 
 Player::~Player()
@@ -30,10 +31,12 @@ void Player::die()
 
 void Player::start_turn()
 {
+  Actor::start_turn();
 }
 
 void Player::end_turn()
 {
+  Actor::end_turn();
 }
 
 int Player::max_health()
@@ -256,7 +259,7 @@ bool Player::can_see_interesting_tile(bool quiet)
           == _interesting_tiles_seen.end())
       {
         if(!quiet)
-          Messages::Add("You see " + tile->name());
+          Messages::Push("You see " + tile->name());
         seen = true;
       }
   }

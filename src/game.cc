@@ -72,7 +72,7 @@ void Game::eventLoop()
         player->start_turn();
         if(cProc.Process(player->popCommand(), *player))
         {
-          player->start_turn();
+          player->end_turn();
           end_turn();
         }
       }

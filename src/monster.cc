@@ -17,6 +17,7 @@ Monster::Monster(std::string name, Tile& startTile, MonsterType type, MonsterSta
   //_monsterState = state;
   _attributes[Attribute::HEALTH] = max_health();
   _attributes[Attribute::CON] = max_health();
+  _previous_health = max_health();
   populate_inventory();
 }
 
@@ -26,6 +27,7 @@ Monster::~Monster()
 
 void Monster::start_turn()
 {
+  Actor::start_turn();
   if(dead())
     return;
   Player* player = level().player();
@@ -41,6 +43,11 @@ void Monster::start_turn()
     wander();
   }
   
+}
+
+void Monster::end_turn()
+{
+  Actor::end_turn();
 }
 
 void Monster::look_for_player()

@@ -98,7 +98,7 @@ void Level::reveal()
   {
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
-      if(_light_map[y][x] == Level::LightType::Unknown)
+      if(_light_map[y][x] == Level::LightType::Unseen)
         _light_map[y][x] = Level::LightType::Revealed;
     }
   }

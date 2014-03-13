@@ -144,6 +144,7 @@ void Renderer::load_scrolls()
 {
   _items[ItemType::SCROLL] = std::map<ItemSubtype, Sprite*>();
   _items[ItemType::SCROLL][ItemSubtype::SCROLL_BLINK] = new Sprite(_graphics, "content/scroll.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::SCROLL][ItemSubtype::SCROLL_REVEAL] = new Sprite(_graphics, "content/scroll.png", 0, 0, TILE_SIZE, TILE_SIZE);
 }
 
 void Renderer::load_info()
@@ -242,11 +243,11 @@ void Renderer::render_info(Game& game, Player& player)
     auto item = _items[player.weapon()->item_type()][player.weapon()->item_subtype()];
     item->draw(140, 125, 0, 0, SDL_ALPHA_OPAQUE);
     render_string("Wpn Dmg: " +
-        std::to_string(player.weapon()->max_damage()) +
+        std::to_string(player.weapon()->min_damage()) +
         "-" +
-        std::to_string(player.weapon()->min_damage()), 25, string_y, 16);
+        std::to_string(player.weapon()->max_damage()), 25, string_y, 16);
   }
-  draw_health_bar(25, 300, 150, 20, player.health(), player.max_health());
+  draw_health_bar(25, 300, 150, 20, player.health(), player.max_health(), player.previous_health());
 
   draw_xp_bar(25, 330, 150, 20, player.xp() - player.min_xp(), player.max_xp());
 
@@ -314,7 +315,7 @@ void Renderer::draw_health_bar(int x, int y, int width, int height, int current_
     g = 255;
     b = 0;
   }
-  draw_bar(x, y, width, height, previous_health, max_health, 150, 0, 0);
+  draw_bar(x, y, width, height, previous_health, max_health, 100, 0, 0);
   draw_bar(x, y, width, height, current_health, max_health, r, g, b, false);
 }
 

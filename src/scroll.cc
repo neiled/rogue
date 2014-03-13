@@ -40,6 +40,6 @@ void Scroll::blink(Actor& owner)
 
 void Scroll::reveal(Actor& owner)
 {
-  owner.level()->reveal();
+  owner.level().reveal();
   Messages::PushGood("You gain knowledge of the current area.");
 }

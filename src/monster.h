@@ -21,6 +21,7 @@ class Monster : public Actor
     
     //virtual void update() override;
     virtual void start_turn() override;
+    virtual void end_turn() override;
 
     MonsterType monster_type();
 

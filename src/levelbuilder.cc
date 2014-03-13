@@ -77,7 +77,6 @@ void LevelBuilder::generate_chests(Level& level, std::vector<Room*> rooms)
   {
     if(room->dead_end() == false)
       continue;
-    SDL_Log("Placing chest");
     auto randomTile = room->getRandomTile();
     auto chest = static_cast<Chest*>(ItemFactory::Build(ItemType::CHEST, ItemSubtype::CHEST));
     while(true)

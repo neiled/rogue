@@ -15,8 +15,8 @@ Actor::Actor(std::string name, int xp_level) : Actor(name, xp_level, 5)
 
 Actor::Actor(std::string name, int xp_level, int inventory_size) : _xp_level(xp_level), _inventory(inventory_size), _name(name)
 {
-  _attributes[Attribute::ATK] = xp_level;//Random::BetweenNormal(1,_xp_level);
-  _attributes[Attribute::DEF] = xp_level;//Random::BetweenNormal(1,_xp_level);
+  _attributes[Attribute::ATK] = xp_level+5;//Random::BetweenNormal(1,_xp_level);
+  _attributes[Attribute::DEF] = xp_level+5;//Random::BetweenNormal(1,_xp_level);
 }
 
 Actor::~Actor()

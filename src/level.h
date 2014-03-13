@@ -16,12 +16,7 @@ class Level
     Level (int depth);
     virtual ~Level ();
 
-    enum class LightType {
-      Unseen, //player has no knowledge
-      Unlit,  //player has seen but currently not lit
-      Lit,    //player can currently see it and it's lit
-      Revealed//player knows via magic but never actually seen it
-    };
+    enum class LightType {Unseen, Unlit, Lit, Revealed};
 
     void setType(int x, int y, TileType tileType);
     void update(Player& player);
@@ -43,7 +38,6 @@ class Level
     void set_player(Player* player);
     
     int depth();
-    
     void reveal();
 
     const static int LEVEL_WIDTH = 100;
@@ -81,4 +75,24 @@ struct random_selector
  
   template <typename Iter>
   Iter select(Iter start, Iter end) {
-    std::uniform_int_distribution<> dis(0, std::distance(start, end) -
+    std::uniform_int_distribution<> dis(0, std::distance(start, end) - 1);
+    std::advance(start, dis(gen));
+    return start;
+  }
+ 
+  //convenience function
+  template <typename Iter>
+  Iter operator()(Iter start, Iter end) {
+    return select(start, end);
+  }
+ 
+  template <typename Container>
+  auto operator()(const Container& c) -> decltype(*begin(c))& {
+    return *select(begin(c), end(c));
+  }
+ 
+private:
+  RandomGenerator gen;
+};
+
+#endif
