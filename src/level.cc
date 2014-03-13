@@ -40,9 +40,10 @@ void Level::update_monsters(Player& player)
   CommandProcessor cProc;
   for(auto m : _monsters)
   {
-    m->update();
+    m->start_turn();
     if(m->hasCommands())
       cProc.Process(m->popCommand(), *m);
+    m->end_turn();      
   }
 }
 
