@@ -262,20 +262,25 @@ void Renderer::render_info(Game& game, Player& player)
 
 }
 
-void Renderer::draw_bar(int x, int y, int width, int height, int current, int max, int r, int g, int b)
+void Renderer::draw_bar(int x, int y, int width, int height, int current, int max, int r, int g, int b, bool background)
 {
   SDL_Rect health;
   health.x = x;
   health.y = y;
   health.w = width;
   health.h = height;
-  SDL_SetRenderDrawColor(_graphics->Renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
-  SDL_RenderDrawRect(_graphics->Renderer, &health);
+    
+  if(background)
+  {
+    SDL_SetRenderDrawColor(_graphics->Renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+    SDL_RenderDrawRect(_graphics->Renderer, &health);
+  }
 
   health.x++;
   health.y++;
   health.h-=2;
   health.w = (width-2) * (static_cast<float>(current) / max);
+  
   SDL_SetRenderDrawColor(_graphics->Renderer, r, g, b, SDL_ALPHA_OPAQUE);
   SDL_RenderFillRect(_graphics->Renderer, &health);
   SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
