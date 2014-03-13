@@ -24,7 +24,7 @@ Monster::~Monster()
 {
 }
 
-void Monster::update()
+void Monster::start_turn()
 {
   if(dead())
     return;
