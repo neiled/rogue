@@ -92,6 +92,18 @@ void Level::resetLightMap()
   }
 }
 
+void Level::reveal()
+{
+  for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
+  {
+    for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
+    {
+      if(_light_map[y][x] == Level::LightType::Unknown)
+        _light_map[y][x] = Level::LightType::Revealed;
+    }
+  }
+}
+
 Level::LightType Level::light_map(int x, int y)
 {
   return _light_map[y][x];
