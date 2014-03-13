@@ -135,7 +135,8 @@ void Renderer::load_potions()
 void Renderer::load_weapons()
 {
   _items[ItemType::WEAPON] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_SMALL] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_LOW] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
   _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_RUSTED] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
 }
 
