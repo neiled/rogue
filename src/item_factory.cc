@@ -103,6 +103,9 @@ void ItemFactory::init_scrolls()
   ItemFactory::add_item(
       new Scroll("Blink Scroll", ItemSubtype::SCROLL_BLINK, {}),
       100);
+  ItemFactory::add_item(
+      new Scroll("Reveal Scroll", ItemSubtype::SCROLL_REVEAL, {}),
+      50);      
 }
 
 void ItemFactory::init_other()
