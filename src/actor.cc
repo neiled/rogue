@@ -36,6 +36,16 @@ void Actor::pickup_items()
 {
 }
 
+void Actor::start_turn()
+{
+  _previous_health = health();
+}
+
+void Actor::end_turn()
+{
+  _previous_health
+}
+
 Tile* Actor::tile() const
 {
   return _currentTile;
