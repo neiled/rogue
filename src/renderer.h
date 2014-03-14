@@ -91,7 +91,11 @@ class Renderer {
 
     void render(Level& level);
     void render(Player& player);
+    
+    void render_player_info(Game& game, Player& player);
+    void render_actor_info(Game& game, Actor& actor);
     void render_info(Game& game, Player& player);
+    
     void render_messages(std::deque<std::vector<Message>> messages);
     void render_state(GameState state, Player& player);
     void render_inventory(Inventory& inventory);
