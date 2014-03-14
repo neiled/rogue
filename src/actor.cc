@@ -196,6 +196,8 @@ void Actor::meleeAttack(Actor* other)
 {
   if(!other || other->dead())
     return;
+    
+  _target_actor = other;
 
   float toHit = hit_chance(*other);
 
@@ -410,4 +412,14 @@ void Actor::weapon(Item* weapon)
 std::string Actor::name()
 {
   return _name;
+}
+
+Actor* Actor::target_actor()
+{
+  return _target_actor;
+}
+
+void Actor::target_actor(Actor* actor)
+{
+  _taret_actor = actor;
 }
