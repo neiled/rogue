@@ -82,7 +82,7 @@ void LevelBuilder::generate_chests(Level& level, std::vector<Room*> rooms)
     while(true)
     {
       chest->inventory()->add(ItemFactory::Build(level.depth()));
-      if(Random::CheckChance(10) == false)
+      if(Random::CheckChance(50) == false)
         break;
     }
     randomTile->add_item(chest);
