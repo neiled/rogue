@@ -93,7 +93,7 @@ class Renderer {
     void render(Player& player);
     
     void render_player_info(Game& game, Player& player);
-    void render_actor_info(Game& game, Actor& actor);
+    void render_actor_info(Game& game, Actor* actor);
     void render_info(Game& game, Player& player);
     
     void render_messages(std::deque<std::vector<Message>> messages);
