@@ -20,5 +20,6 @@ void RenderMonsters::Render(Renderer& renderer, monster_sprites_t monster_sprite
     sprite->update(m->direction);
     renderer.draw_sprite(sprite, *currentTile);
     renderer.draw_health(*m);
+    //TODO: If monster == player.target_monster() render a border
   }
 }
