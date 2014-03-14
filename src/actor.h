@@ -89,6 +89,8 @@ class Actor
     void weapon(Item* weapon);
     
     std::string name();
+    
+    Actor* target_actor();
   protected:
     Tile* _currentTile = nullptr;
     Tile* _targetTile = nullptr;
@@ -125,6 +127,8 @@ class Actor
     Item* _weapon = nullptr;
     
     std::string _name;
+    
+    Actor* _target_actor = nullptr;
 
 
 
