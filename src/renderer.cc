@@ -235,6 +235,12 @@ void Renderer::draw_health(Actor& actor)
 void Renderer::render_info(Game& game, Player& player)
 {
   SDL_RenderSetViewport(_graphics->Renderer, &_vp_info);
+  render_player_info(game, player);
+  render_actor_info(game, player);
+}
+
+void Renderer::render_player_info(Game& game, Player& player)
+{
   _info_char->draw(25, 0, 0, 0);
   int string_y = 360;
   int string_gap = 25;
@@ -242,7 +248,7 @@ void Renderer::render_info(Game& game, Player& player)
   {
     auto item = _items[player.weapon()->item_type()][player.weapon()->item_subtype()];
     item->draw(140, 125, 0, 0, SDL_ALPHA_OPAQUE);
-    render_string("Wpn Dmg: " +
+    render_string("Dmg: " +
         std::to_string(player.weapon()->min_damage()) +
         "-" +
         std::to_string(player.weapon()->max_damage()), 25, string_y, 16);
@@ -260,7 +266,29 @@ void Renderer::render_info(Game& game, Player& player)
   string_y += string_gap;
   render_string("Dpth: " + std::to_string(player.level().depth()), 25, string_y, 16);
   string_y += string_gap;
-  render_string("Turn: " + std::to_string(game.turn()), 25, string_y, 16);
+  render_string("Turn: " + std::to_string(game.turn()), 25, string_y, 16);  
+}
+
+void Renderer::render_actor_info(Game& game, Actor& actor)
+{
+  int string_y = 600;
+  int string_gap = 25;
+  
+  render_string("Name: " + actor.name(), 25, string_y, 16);
+  string_y += string_gap;  
+  
+  draw_health_bar(25, string_y, 150, 20, player.health(), player.max_health(), player.previous_health());
+  string_y += string_gap;
+  render_string("Dmg: " +
+        std::to_string(actor.min_damage(game.player()) +
+        "-" +
+        std::to_string(actor.min_damage(game.player()), 25, string_y, 16);
+  string_y += string_gap;
+  render_string("Lvl: " + std::to_string(player.xp_level()), 25, string_y, 16);
+  string_y += string_gap;
+  render_string("Atk: " + std::to_string(player.atk()), 25, string_y, 16);
+  string_y += string_gap;
+  render_string("Def: " + std::to_string(player.def()), 25, string_y, 16);
 
 }
 
