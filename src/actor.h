@@ -91,6 +91,8 @@ class Actor
     std::string name();
     
     Actor* target_actor();
+    void target_actor(Actor* actor);
+    
   protected:
     Tile* _currentTile = nullptr;
     Tile* _targetTile = nullptr;
