@@ -236,7 +236,7 @@ void Renderer::render_info(Game& game, Player& player)
 {
   SDL_RenderSetViewport(_graphics->Renderer, &_vp_info);
   render_player_info(game, player);
-  render_actor_info(game, player);
+  render_actor_info(game, player.target_actor());
 }
 
 void Renderer::render_player_info(Game& game, Player& player)
@@ -269,8 +269,10 @@ void Renderer::render_player_info(Game& game, Player& player)
   render_string("Turn: " + std::to_string(game.turn()), 25, string_y, 16);  
 }
 
-void Renderer::render_actor_info(Game& game, Actor& actor)
+void Renderer::render_actor_info(Game& game, Actor* actor)
 {
+  if(!actor)
+    return;
   int string_y = 600;
   int string_gap = 25;
   
