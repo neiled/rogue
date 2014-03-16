@@ -272,9 +272,9 @@ int Actor::calc_damage(Actor& other)
 
 float Actor::hit_chance(Actor& other)
 {
-  float attackFloat = attack_score();
+  float attackFloat = static_cast<float>(attack_score())*1.5;
   float defenseFloat = other.defense_score();
-  float floatChance = attackFloat / (attackFloat + defenseFloat);
+  float floatChance = attackFloat / (attack_score() + defenseFloat);
   return static_cast<int>(floatChance * 100.0);
 }
 
@@ -421,5 +421,5 @@ Actor* Actor::target_actor()
 
 void Actor::target_actor(Actor* actor)
 {
-  _taret_actor = actor;
+  _target_actor = actor;
 }
