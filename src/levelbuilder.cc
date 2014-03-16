@@ -78,7 +78,7 @@ void LevelBuilder::generate_chests(Level& level, std::vector<Room*> rooms)
     if(room->dead_end() == false)
       continue;
     auto randomTile = room->getRandomTile();
-    if(randomTile->items().count > 0)
+    if(randomTile->items().size() > 0)
       continue;
     auto chest = static_cast<Chest*>(ItemFactory::Build(ItemType::CHEST, ItemSubtype::CHEST));
     while(true)

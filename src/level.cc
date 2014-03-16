@@ -98,6 +98,8 @@ void Level::reveal()
   {
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
     {
+      if(_map[y][x]->tile_type() == TileType::Rock)
+        continue;
       if(_light_map[y][x] == Level::LightType::Unseen)
         _light_map[y][x] = Level::LightType::Revealed;
     }

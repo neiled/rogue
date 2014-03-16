@@ -129,6 +129,7 @@ void Renderer::load_potions()
 {
   _items[ItemType::POTION] = std::map<ItemSubtype, Sprite*>();
   _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_LARGE] = new Sprite(_graphics, "content/potion.png", 0, 0, TILE_SIZE, TILE_SIZE); 
+  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH] = new Sprite(_graphics, "content/potion.png", 0, 0, TILE_SIZE, TILE_SIZE); 
   _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_SMALL] = new Sprite(_graphics, "content/potion.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE); 
 }
 
@@ -273,24 +274,26 @@ void Renderer::render_actor_info(Game& game, Actor* actor)
 {
   if(!actor)
     return;
+  if(actor->dead())
+    return;
   int string_y = 600;
   int string_gap = 25;
   
-  render_string("Name: " + actor.name(), 25, string_y, 16);
+  render_string("Name: " + actor->name(), 25, string_y, 16);
   string_y += string_gap;  
   
-  draw_health_bar(25, string_y, 150, 20, player.health(), player.max_health(), player.previous_health());
+  draw_health_bar(25, string_y, 150, 20, actor->health(), actor->max_health(), actor->previous_health());
   string_y += string_gap;
   render_string("Dmg: " +
-        std::to_string(actor.min_damage(game.player()) +
+        std::to_string(actor->min_damage(*game.player())) +
         "-" +
-        std::to_string(actor.min_damage(game.player()), 25, string_y, 16);
+        std::to_string(actor->max_damage(*game.player())), 25, string_y, 16);
   string_y += string_gap;
-  render_string("Lvl: " + std::to_string(player.xp_level()), 25, string_y, 16);
+  render_string("Lvl: " + std::to_string(actor->xp_level()), 25, string_y, 16);
   string_y += string_gap;
-  render_string("Atk: " + std::to_string(player.atk()), 25, string_y, 16);
+  render_string("Atk: " + std::to_string(actor->atk()), 25, string_y, 16);
   string_y += string_gap;
-  render_string("Def: " + std::to_string(player.def()), 25, string_y, 16);
+  render_string("Def: " + std::to_string(actor->def()), 25, string_y, 16);
 
 }
 

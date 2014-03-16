@@ -13,7 +13,7 @@ Player::Player() : Actor("player", 1, 10), _xp(0), _auto_pickup(true)
   _min_xp = calc_min_xp();
   _attributes[Attribute::ATK] = 5;
   _attributes[Attribute::DEF] = 5;
-  _attributes[Attribute::CON] = 50;
+  _attributes[Attribute::CON] = 100;
   _attributes[Attribute::HEALTH] = max_health();
   _previous_health = max_health();
 }
@@ -74,8 +74,18 @@ void Player::pickup_items()
 
 void Player::killed(Actor* other)
 {
-  int xp_gained = 30;//TODO: calc xp for real
+  int xp_gained = calc_xp_gained(other);
   increase_xp(xp_gained);
+}
+
+int Player::calc_xp_gained(Actor* other)
+{
+  auto other_level = other->xp_level();
+  auto player_level = xp_level();
+  if(player_level - other_level > 4)
+    return 0;
+  auto multiplier = static_cast<float>(other_level*2)/(other_level+player_level);
+  return static_cast<int>(multiplier*100);
 }
 
 int32_t Player::calc_max_xp()
@@ -240,7 +250,7 @@ bool Player::can_see_monster(bool quiet)
     if(tile->actor() && tile->actor()->is_player() == false)
     {
       if(!quiet)
-        Messages::Add("You see a " + tile->actor()->name());
+        Messages::Push("You see a " + tile->actor()->name());
       seen = true;
     }
   }

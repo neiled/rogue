@@ -21,6 +21,7 @@ class Player : public Actor
     int max_damage(Actor& other) override;
     int min_damage(Actor& other) override;
     void increase_xp(int amount);
+    int calc_xp_gained(Actor* other);
 
     bool explore();
     virtual void set_tile(Tile& newTile) override;

@@ -64,11 +64,14 @@ void ItemFactory::calc_cdf()
 void ItemFactory::init_potions()
 {
   ItemFactory::add_item(
-    new Potion("Small Health Potion", ItemSubtype::POTION_HEALTH_SMALL, {{Actor::Attribute::HEALTH, 25, 0}}),
+    new Potion("Small Health Potion", ItemSubtype::POTION_HEALTH_SMALL, {{Actor::Attribute::HEALTH, 50, 0}}),
     7500);
   ItemFactory::add_item(
-    new Potion("Large Health Potion", ItemSubtype::POTION_HEALTH_LARGE, {{Actor::Attribute::HEALTH, 50, 0}}),
+    new Potion("Health Potion", ItemSubtype::POTION_HEALTH, {{Actor::Attribute::HEALTH, 100, 0}}),
     2500);    
+  ItemFactory::add_item(
+    new Potion("Large Health Potion", ItemSubtype::POTION_HEALTH_LARGE, {{Actor::Attribute::HEALTH, 150, 0}}),
+    1500);    
 }
 
 void ItemFactory::init_corpses()

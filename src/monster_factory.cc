@@ -24,7 +24,8 @@ MonsterType MonsterFactory::calc_monster_type(int depth)
 
 int MonsterFactory::calc_xp_level(int depth)
 {
-  //TODO: this needs some better logic
+  if(depth == 1)
+    return 1;
   int min_level = depth-2;
   if(min_level < 1) min_level = 1;
   
