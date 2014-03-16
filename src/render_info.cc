@@ -21,7 +21,45 @@ void RenderInfo::render(Renderer& renderer, Game& game, item_sprites_t items, SD
 {
   SDL_RenderSetViewport(_graphics->Renderer, &vp_info);
   render_player_info(renderer, game, *game.player(), items);
-  render_actor_info(renderer, game, game.player()->target_actor());
+  if(game.state() == GameState::GAME)
+    render_actor_info(renderer, game, game.player()->target_actor(), 550);
+  else if(game.state() == GameState::LOOK)
+    render_look(renderer, game, *game.player(), 550);
+}
+
+void RenderInfo::render_look(Renderer& renderer, Game& game, Player& player, int start_y)
+{
+  Tile* look_tile = player.level().look_tile();
+  if(!look_tile)
+    return;
+  if(player.can_see_tile(*player.level().look_tile()) == false)
+    return;
+
+  int string_y = start_y;
+  int string_gap = 25;
+
+  if(look_tile->items().size() > 0)
+  {
+    renderer.render_string("Items", 25, string_y, 16);
+    string_y += string_gap;
+    for(auto item : look_tile->items())
+    {
+      renderer.render_string("Name: " + item->name(), 25, string_y, 16);
+      string_y += string_gap;
+    }
+  }
+  if(look_tile->actor())
+  {
+    auto actor = look_tile->actor();
+    if(actor->is_player())
+      return;
+    if(actor->dead())
+      return;
+
+    render_actor_info(renderer, game, actor, string_y);
+  }
+
+  
 }
 
 void RenderInfo::render_player_info(Renderer& renderer, Game& game, Player& player, item_sprites_t items)
@@ -54,13 +92,13 @@ void RenderInfo::render_player_info(Renderer& renderer, Game& game, Player& play
   renderer.render_string("Turn: " + std::to_string(game.turn()), 25, string_y, 16);  
 }
 
-void RenderInfo::render_actor_info(Renderer& renderer, Game& game, Actor* actor)
+void RenderInfo::render_actor_info(Renderer& renderer, Game& game, Actor* actor, int start_y)
 {
   if(!actor)
     return;
   if(actor->dead())
     return;
-  int string_y = 600;
+  int string_y = start_y;
   int string_gap = 25;
   
   renderer.render_string("Name: " + actor->name(), 25, string_y, 16);
@@ -80,3 +118,4 @@ void RenderInfo::render_actor_info(Renderer& renderer, Game& game, Actor* actor)
   renderer.render_string("Def: " + std::to_string(actor->def()), 25, string_y, 16);
 
 }
+

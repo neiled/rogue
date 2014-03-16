@@ -18,7 +18,8 @@ public:
   void init();
   void render(Renderer& renderer, Game& game, item_sprites_t items, SDL_Rect vp_info);
   void render_player_info(Renderer& renderer, Game&, Player&, item_sprites_t items);
-  void render_actor_info(Renderer& renderer, Game&, Actor*);
+  void render_actor_info(Renderer& renderer, Game&, Actor*, int start_y);
+  void render_look(Renderer& renderer, Game& game, Player& player, int start_y);
 
 
 private:

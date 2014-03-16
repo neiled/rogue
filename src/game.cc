@@ -8,6 +8,7 @@
 #include "command_decoder_inventory.h"
 #include "command_decoder_dead.h"
 #include "command_decoder_chest.h"
+#include "command_decoder_look.h"
 
 
 Game::Game() : _graphics(), _renderer(&_graphics)
@@ -30,6 +31,7 @@ void Game::start()
   _decoders[GameState::MENU_INVENTORY] = new CommandDecoderInventory();
   _decoders[GameState::MENU_CHEST] = new CommandDecoderChest();
   _decoders[GameState::DEAD] = new CommandDecoderDead();
+  _decoders[GameState::LOOK] = new CommandDecoderLook();
   _state = GameState::GAME;
   eventLoop();
 }
@@ -129,7 +131,11 @@ void Game::decode_event(SDL_Event& event, Graphics& graphics, Renderer& renderer
     case SDL_MOUSEBUTTONDOWN:
     {
       auto decoded = _decoders[_state]->Decode(event.button.button, 1, event.button.x, event.button.y, *this);
-
+      if(decoded)
+      {
+        draw(graphics, renderer);
+      }
+      break;
     }
     default:
       break;

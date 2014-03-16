@@ -13,6 +13,7 @@ public:
   virtual bool Decode(Uint8 button, Uint8 clicks, Sint32 x, Sint32 y, Game& game) override;
 
 private:
+  void move_tile(Player& player, int x, int y);
   
 };
 #endif

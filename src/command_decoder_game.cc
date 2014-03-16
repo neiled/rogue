@@ -23,8 +23,7 @@ bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
     game.state(GameState::MENU_INVENTORY);
   else if(key == SDLK_SLASH)
   {
-    if(!game.level()->look_tile())
-      game.level()->look_tile(game.player()->tile());
+    game.level()->look_tile(game.player()->tile());
     game.state(GameState::LOOK);
   }
   else if(key == SDLK_PERIOD)

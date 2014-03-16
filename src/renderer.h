@@ -53,6 +53,8 @@ class Renderer {
     
     void draw_health_bar(int x, int y, int width, int height, int health, int max_health, int previous_health);
     void draw_xp_bar(int x, int y, int width, int height, int current, int max);
+
+    SDL_Point tile_to_screen(int x, int y);
   private:
     //array<Sprite*,5> _mapTiles;
     monster_sprites_t _monsters;
@@ -101,6 +103,7 @@ class Renderer {
     void render_state(GameState state, Player& player);
     void render_inventory(Inventory& inventory);
     void render_chest(Inventory& inventory);
+    void render_look(Player&);
 
     SDL_Color calc_color(MessageType type);
 

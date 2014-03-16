@@ -30,6 +30,7 @@ class Player : public Actor
     bool can_see_monster(bool quiet = true);
     bool can_see_unknown_item(bool quiet = true);
     bool can_see_interesting_tile(bool quiet = true);
+    bool can_see_tile(Tile& tile);
 
   protected:
     virtual void pickup_items() override;

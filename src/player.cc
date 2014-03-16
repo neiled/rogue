@@ -296,3 +296,9 @@ bool Player::can_see_unknown_item(bool quiet)
   }
   return seen;
 }
+
+bool Player::can_see_tile(Tile& tile)
+{
+  auto lit = level().light_map(tile.x(), tile.y());
+  return lit == Level::LightType::Lit;
+}

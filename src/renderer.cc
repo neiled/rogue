@@ -232,67 +232,7 @@ void Renderer::draw_health(Actor& actor)
 void Renderer::render_info(Game& game, Player& player)
 {
   _render_info.render(*this, game, _items, _vp_info);
-  //SDL_RenderSetViewport(_graphics->Renderer, &_vp_info);
-  //render_player_info(game, player);
-  //render_actor_info(game, player.target_actor());
 }
-
-//void Renderer::render_player_info(Game& game, Player& player)
-//{
-  //_info_char->draw(25, 0, 0, 0);
-  //int string_y = 360;
-  //int string_gap = 25;
-  //if(player.weapon())
-  //{
-    //auto item = _items[player.weapon()->item_type()][player.weapon()->item_subtype()];
-    //item->draw(140, 125, 0, 0, SDL_ALPHA_OPAQUE);
-    //render_string("Dmg: " +
-        //std::to_string(player.weapon()->min_damage()) +
-        //"-" +
-        //std::to_string(player.weapon()->max_damage()), 25, string_y, 16);
-  //}
-  //draw_health_bar(25, 300, 150, 20, player.health(), player.max_health(), player.previous_health());
-
-  //draw_xp_bar(25, 330, 150, 20, player.xp() - player.min_xp(), player.max_xp());
-
-  //string_y += string_gap;
-  //render_string("Lvl: " + std::to_string(player.xp_level()), 25, string_y, 16);
-  //string_y += string_gap;
-  //render_string("Atk: " + std::to_string(player.atk()), 25, string_y, 16);
-  //string_y += string_gap;
-  //render_string("Def: " + std::to_string(player.def()), 25, string_y, 16);
-  //string_y += string_gap;
-  //render_string("Dpth: " + std::to_string(player.level().depth()), 25, string_y, 16);
-  //string_y += string_gap;
-  //render_string("Turn: " + std::to_string(game.turn()), 25, string_y, 16);  
-//}
-
-//void Renderer::render_actor_info(Game& game, Actor* actor)
-//{
-  //if(!actor)
-    //return;
-  //if(actor->dead())
-    //return;
-  //int string_y = 600;
-  //int string_gap = 25;
-  
-  //render_string("Name: " + actor->name(), 25, string_y, 16);
-  //string_y += string_gap;  
-  
-  //draw_health_bar(25, string_y, 150, 20, actor->health(), actor->max_health(), actor->previous_health());
-  //string_y += string_gap;
-  //render_string("Dmg: " +
-        //std::to_string(actor->min_damage(*game.player())) +
-        //"-" +
-        //std::to_string(actor->max_damage(*game.player())), 25, string_y, 16);
-  //string_y += string_gap;
-  //render_string("Lvl: " + std::to_string(actor->xp_level()), 25, string_y, 16);
-  //string_y += string_gap;
-  //render_string("Atk: " + std::to_string(actor->atk()), 25, string_y, 16);
-  //string_y += string_gap;
-  //render_string("Def: " + std::to_string(actor->def()), 25, string_y, 16);
-
-//}
 
 void Renderer::draw_bar(int x, int y, int width, int height, int current, int max, int r, int g, int b, bool background)
 {
@@ -422,10 +362,37 @@ void Renderer::render_state(GameState state, Player& player)
       break;
     case GameState::MENU_CHEST:
       render_chest(*player.chest()->inventory());
+      break;
+    case GameState::LOOK:
+      render_look(player);
+      break;
     default:
       break;
   }
 
+}
+
+void Renderer::render_look(Player& player)
+{
+  if(!player.level().look_tile())
+    return;
+
+  auto point = tile_to_screen(player.level().look_tile()->x(), player.level().look_tile()->y());
+  SDL_Rect look;
+  look.x = point.x;
+  look.y = point.y;
+  look.w = TILE_SIZE;
+  look.h = TILE_SIZE;
+
+  if(look.x > _cameraRect.x + _cameraRect.w-TILE_SIZE)
+    return;
+  if(look.y > _cameraRect.y + _cameraRect.h-TILE_SIZE)
+    return;
+
+    
+  SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+  SDL_RenderDrawRect(_graphics->Renderer, &look);
+  SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 
 void Renderer::render_inventory(Inventory& inventory)
@@ -447,4 +414,13 @@ void Renderer::draw_sprite(Sprite* sprite, Tile& tile)
 {
   sprite->draw(tile.x()*TILE_SIZE, tile.y()*TILE_SIZE, _cameraRect.x, _cameraRect.y);
 
+}
+
+SDL_Point Renderer::tile_to_screen(int x, int y)
+{
+  SDL_Point p;
+  p.x = x*TILE_SIZE-_cameraRect.x;
+  p.y = y*TILE_SIZE-_cameraRect.y;
+
+  return p;
 }

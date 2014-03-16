@@ -94,6 +94,7 @@ bool Actor::can_see_monster(bool quiet)
   return false;
 }
 
+
 bool Actor::move_to_target()
 {
   if(!_targetTile)
