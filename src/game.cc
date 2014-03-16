@@ -75,6 +75,8 @@ void Game::eventLoop()
           player->end_turn();
           end_turn();
         }
+        else
+          draw(_graphics, _renderer);
       }
     }
 
