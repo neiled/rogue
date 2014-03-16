@@ -1,0 +1,82 @@
+#include "render_info.h"
+#include "renderer.h"
+#include "player.h"
+#include "item.h"
+#include "game.h"
+#include "sprite.h"
+#include "level.h"
+
+
+
+RenderInfo::RenderInfo(Graphics* g): _graphics(g)
+{
+}
+
+void RenderInfo::init()
+{
+  _info_char = new Sprite(_graphics, "./content/outline.png", 0, 0, 150, 271);
+}
+
+void RenderInfo::render(Renderer& renderer, Game& game, item_sprites_t items, SDL_Rect vp_info)
+{
+  SDL_RenderSetViewport(_graphics->Renderer, &vp_info);
+  render_player_info(renderer, game, *game.player(), items);
+  render_actor_info(renderer, game, game.player()->target_actor());
+}
+
+void RenderInfo::render_player_info(Renderer& renderer, Game& game, Player& player, item_sprites_t items)
+{
+  _info_char->draw(25, 0, 0, 0);
+  int string_y = 360;
+  int string_gap = 25;
+  if(player.weapon())
+  {
+    auto item = items[player.weapon()->item_type()][player.weapon()->item_subtype()];
+    item->draw(140, 125, 0, 0, SDL_ALPHA_OPAQUE);
+    renderer.render_string("Dmg: " +
+        std::to_string(player.weapon()->min_damage()) +
+        "-" +
+        std::to_string(player.weapon()->max_damage()), 25, string_y, 16);
+  }
+  renderer.draw_health_bar(25, 300, 150, 20, player.health(), player.max_health(), player.previous_health());
+
+  renderer.draw_xp_bar(25, 330, 150, 20, player.xp() - player.min_xp(), player.max_xp());
+
+  string_y += string_gap;
+  renderer.render_string("Lvl: " + std::to_string(player.xp_level()), 25, string_y, 16);
+  string_y += string_gap;
+  renderer.render_string("Atk: " + std::to_string(player.atk()), 25, string_y, 16);
+  string_y += string_gap;
+  renderer.render_string("Def: " + std::to_string(player.def()), 25, string_y, 16);
+  string_y += string_gap;
+  renderer.render_string("Dpth: " + std::to_string(player.level().depth()), 25, string_y, 16);
+  string_y += string_gap;
+  renderer.render_string("Turn: " + std::to_string(game.turn()), 25, string_y, 16);  
+}
+
+void RenderInfo::render_actor_info(Renderer& renderer, Game& game, Actor* actor)
+{
+  if(!actor)
+    return;
+  if(actor->dead())
+    return;
+  int string_y = 600;
+  int string_gap = 25;
+  
+  renderer.render_string("Name: " + actor->name(), 25, string_y, 16);
+  string_y += string_gap;  
+  
+  renderer.draw_health_bar(25, string_y, 150, 20, actor->health(), actor->max_health(), actor->previous_health());
+  string_y += string_gap;
+  renderer.render_string("Dmg: " +
+        std::to_string(actor->min_damage(*game.player())) +
+        "-" +
+        std::to_string(actor->max_damage(*game.player())), 25, string_y, 16);
+  string_y += string_gap;
+  renderer.render_string("Lvl: " + std::to_string(actor->xp_level()), 25, string_y, 16);
+  string_y += string_gap;
+  renderer.render_string("Atk: " + std::to_string(actor->atk()), 25, string_y, 16);
+  string_y += string_gap;
+  renderer.render_string("Def: " + std::to_string(actor->def()), 25, string_y, 16);
+
+}

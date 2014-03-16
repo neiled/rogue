@@ -2,6 +2,7 @@
 #include "game_types.h"
 #include "tile.h"
 #include "messages.h"
+#include "level.h"
 
 bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
 {
@@ -20,6 +21,12 @@ bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
     player.clearCommands();
   else if(key == SDLK_i)
     game.state(GameState::MENU_INVENTORY);
+  else if(key == SDLK_SLASH)
+  {
+    if(!game.level()->look_tile())
+      game.level()->look_tile(game.player()->tile());
+    game.state(GameState::LOOK);
+  }
   else if(key == SDLK_PERIOD)
   {
     if(game.player()->chest())

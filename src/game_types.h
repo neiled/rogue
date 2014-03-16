@@ -55,7 +55,8 @@ enum class GameState {
   GAME, 
   DEAD,
   STARTING,
-  STOP
+  STOP,
+  LOOK
 };
 
 #endif

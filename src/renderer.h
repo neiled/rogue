@@ -13,6 +13,7 @@
 #include <SDL2_ttf/SDL_ttf.h>
 #include "render_inventory.h"
 #include "render_level.h"
+#include "render_info.h"
 #include "game_types.h"
 
 using std::vector;
@@ -29,6 +30,7 @@ class Tile;
 class Actor;
 class Game;
 struct Message;
+
 
 
 class Renderer {
@@ -49,6 +51,8 @@ class Renderer {
     void render_message(std::vector<Message> messages, int x, int y, int h);
     Tile* get_tile_from_coord(Level& level, int x, int y);
     
+    void draw_health_bar(int x, int y, int width, int height, int health, int max_health, int previous_health);
+    void draw_xp_bar(int x, int y, int width, int height, int current, int max);
   private:
     //array<Sprite*,5> _mapTiles;
     monster_sprites_t _monsters;
@@ -56,9 +60,9 @@ class Renderer {
     level_sprites_t _tiles;
     DirectionalSprite* _player = nullptr;
     Graphics* _graphics = nullptr;
-    Sprite* _info_char = nullptr;
 
     RenderInventory _render_inv;
+    RenderInfo _render_info;
     RenderLevel _render_level;
 
     SDL_Rect _vp_main;
@@ -68,10 +72,7 @@ class Renderer {
     void updateCamera(Player& player);
     void loadMapTiles();
     void loadMonsterTiles();
-    void load_info();
     void init_viewports();
-    void draw_health_bar(int x, int y, int width, int height, int health, int max_health, int previous_health);
-    void draw_xp_bar(int x, int y, int width, int height, int current, int max);
     void draw_bar(int x, int y, int width, int height, int health, int max_health, int r, int g, int b, bool background = true);
 
     void render_level(Level& level);

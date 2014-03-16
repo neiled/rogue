@@ -244,3 +244,13 @@ Level::~Level()
     }
   }
 }
+
+void Level::look_tile(Tile* tile)
+{
+  _look_tile = tile;
+}
+
+Tile* Level::look_tile()
+{
+  return _look_tile;
+}

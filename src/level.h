@@ -40,6 +40,9 @@ class Level
     int depth();
     void reveal();
 
+    void look_tile(Tile* look_tile);
+    Tile* look_tile();
+
     const static int LEVEL_WIDTH = 100;
     const static int LEVEL_HEIGHT = 100;
     const static int LEVEL_ROOM_COUNT = 150;
@@ -61,6 +64,7 @@ class Level
 
     std::vector<Monster*> _monsters;
     Player* _player = nullptr;
+    Tile* _look_tile = nullptr;
   
 };
 
