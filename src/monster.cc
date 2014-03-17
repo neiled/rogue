@@ -78,6 +78,11 @@ void Monster::wander()
 }
 void Monster::hunt(Player& player)
 {
+  if(can_see_actor(*level().player()) == false)
+  {
+    _monsterState = MonsterState::Wandering;
+    return;
+  }
   _travelPath.clear();
   AStar searcher;
   _travelPath = searcher.plotPath(*_currentTile, *player.tile(), 200);

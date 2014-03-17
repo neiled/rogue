@@ -29,13 +29,14 @@ std::deque<Tile*> AStar::explore(Tile& startingPoint, Level& level)
     result = search(*result, nullptr);
     if(!result)
     {
-      Messages::Add("Nowhere left to explore.");
       return std::deque<Tile*>();
     }
 
     for(auto t : closed_list)
     {
-      if(level.light_map(t->x(),t->y()) == Level::LightType::Unseen)
+      auto light_type = level.light_map(t->x(),t->y()); 
+      if(light_type == Level::LightType::Unseen ||
+         light_type == Level::LightType::Revealed)
       {
         unexploredTile = t;
         break;

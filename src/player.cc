@@ -177,6 +177,7 @@ bool Player::explore()
   {
     _targetTile = nullptr;
     _auto_pickup = true;
+    Messages::Push("Nowhere left to explore.");
     return false;
   }
   auto dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
