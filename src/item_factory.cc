@@ -212,3 +212,14 @@ ItemSubtype ItemFactory::calc_item_subtype(ItemType item_type, int xp_level)
   SDL_Log("Something wrong with the CDF as should never see this!");
   return ItemSubtype::CORPSE_DEVIL;
 }
+
+std::vector<AttributeModifiers> ItemFactory::generate_magic_modifiers(int level)
+{
+  if(level <= 2)
+    return {};
+
+  return {};
+
+
+
+}

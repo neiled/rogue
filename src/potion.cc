@@ -12,10 +12,9 @@ Potion::~Potion()
 
 void Potion::drink(Actor& actor)
 {
-  //TODO: drink the potion
   Messages::Add("You drink the " + _name);
   for(auto attribute_modifier : _modifiers)
   {
-    actor.add_modifier(&attribute_modifier);
+    actor.add_modifier(attribute_modifier);
   }
 }

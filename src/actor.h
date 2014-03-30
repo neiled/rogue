@@ -23,7 +23,7 @@ class Actor
     virtual ~Actor();
 
     enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
-    enum class Attribute {ATK=0, DEF, HEALTH, CON};
+    enum class Attribute {ATK=0, DEF, HEALTH, CON, DMG};
     
     Direction direction;
     
@@ -64,8 +64,6 @@ class Actor
 
     bool dead() const;
     
-    int attack_score();
-    int defense_score();
     
     virtual int max_health() = 0;
     int health();
@@ -74,7 +72,7 @@ class Actor
 
     void drop_items();
 
-    void add_modifier(AttributeModifiers* modifier);
+    void add_modifier(AttributeModifiers modifier);
     
     int xp_level();
 
@@ -82,6 +80,8 @@ class Actor
     
     int atk();
     int def();
+    int dmg();
+    int con();
 
     Item* weapon();
     void weapon(Item* weapon);
@@ -100,7 +100,7 @@ class Actor
     std::deque<Tile*> _travelPath;
     Commands::CMD getCommandFromTiles(Tile& start, Tile& end);
 
-    std::vector<AttributeModifiers*> _modifiers;
+    std::vector<AttributeModifiers> _modifiers;
 
     std::map<Actor::Attribute, int> _attributes;
 
@@ -117,7 +117,9 @@ class Actor
     virtual void die() = 0;
     virtual void killed(Actor* other) = 0;
 
-    void apply_modifier(AttributeModifiers* modifier);
+    void apply_modifier(AttributeModifiers modifier);
+    int calc_modified(Actor::Attribute attr);
+
     virtual void pickup_items();
 
     int _xp_level;

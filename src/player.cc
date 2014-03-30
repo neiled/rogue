@@ -41,7 +41,7 @@ void Player::end_turn()
 
 int Player::max_health()
 {
-  return _attributes[Attribute::CON];
+  return calc_modified(Attribute::CON);
 }
 
 void Player::pickup_items()

@@ -17,6 +17,7 @@ Actor::Actor(std::string name, int xp_level, int inventory_size) : _xp_level(xp_
 {
   _attributes[Attribute::ATK] = xp_level+5;//Random::BetweenNormal(1,_xp_level);
   _attributes[Attribute::DEF] = xp_level+5;//Random::BetweenNormal(1,_xp_level);
+  _attributes[Attribute::DMG] = 0;
 }
 
 Actor::~Actor()
@@ -43,6 +44,8 @@ void Actor::start_turn()
 
 void Actor::end_turn()
 {
+  if(_attributes[Attribute::HEALTH] > _attributes[Attribute::CON])
+    _attributes[Attribute::HEALTH] = _attributes[Attribute::CON];
   
 }
 
@@ -207,7 +210,7 @@ void Actor::meleeAttack(Actor* other)
     int damage = calc_damage(*other);
     if(is_player())
       Messages::AddGood("You deal " + std::to_string(damage) + " damage to the " + other->name());
-    other->takeDamage(damage);
+    other->takeDamage(damage, this);
     if(other->dead())
     {
       if(is_player())
@@ -241,25 +244,22 @@ Chest* Actor::chest()
 }
 
 
-int Actor::attack_score()
-{
-  //TODO make this a calc
-  return atk();
-}
-int Actor::defense_score()
-{
-  //TODO make this a calc  
-  return def();
-}
 
 int Actor::atk()
 {
-  return _attributes[Attribute::ATK];
+  //return _attributes[Attribute::ATK];
+  return calc_modified(Attribute::ATK);
 }
 
 int Actor::def()
 {
-  return _attributes[Attribute::DEF];
+  //return _attributes[Attribute::DEF];
+  return calc_modified(Attribute::DEF);
+}
+
+int Actor::dmg()
+{
+  return calc_modified(Attribute::DMG);
 }
 
 
@@ -268,14 +268,18 @@ int Actor::calc_damage(Actor& other)
   int max_damage = this->max_damage(other);
   int min_damage = this->min_damage(other);
   
-  return Random::BetweenNormal(min_damage, max_damage);
+  auto base_damage = Random::BetweenNormal(min_damage, max_damage);
+  auto total_damage = base_damage;
+  total_damage += dmg();
+
+  return total_damage;
 }
 
 float Actor::hit_chance(Actor& other)
 {
-  float attackFloat = static_cast<float>(attack_score())*1.5;
-  float defenseFloat = other.defense_score();
-  float floatChance = attackFloat / (attack_score() + defenseFloat);
+  float attackFloat = static_cast<float>(atk())*1.5;
+  float defenseFloat = other.def();
+  float floatChance = attackFloat / (atk() + defenseFloat);
   return static_cast<int>(floatChance * 100.0);
 }
 
@@ -359,9 +363,6 @@ bool Actor::hasCommands() const
 
 int Actor::health()
 {
-  //TODO: This check souldn't be here...
-  if(_attributes[Attribute::HEALTH] > _attributes[Attribute::CON])
-    _attributes[Attribute::HEALTH] = _attributes[Attribute::CON];
   return _attributes[Attribute::HEALTH];
 }
 
@@ -386,17 +387,30 @@ void Actor::drop_items()
   _inventory.clear();
 }
 
-void Actor::add_modifier(AttributeModifiers* modifier)
+void Actor::add_modifier(AttributeModifiers modifier)
 {
-  if(modifier->turns() == 0)
+  if(modifier.turns() == 0)
     apply_modifier(modifier);
   else
     _modifiers.push_back(modifier);
 }
 
-void Actor::apply_modifier(AttributeModifiers* modifier)
+void Actor::apply_modifier(AttributeModifiers modifier)
 {
-  _attributes.at(modifier->attr()) += modifier->modifier();
+  _attributes.at(modifier.attr()) += modifier.modifier();
+}
+
+
+int Actor::calc_modified(Actor::Attribute attr)
+{
+  int base = _attributes[attr];
+  for(auto current_attr_mod : _modifiers)
+  {
+    if(current_attr_mod.attr() == attr)
+      base += current_attr_mod.modifier();
+  }
+
+  return base;
 }
 
 

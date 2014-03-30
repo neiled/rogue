@@ -4,6 +4,7 @@
 #include <map>
 
 #include "game_types.h"
+#include "attribute_modifiers.h"
 
 class Potion;
 class Weapon;
@@ -41,5 +42,7 @@ private:
   static Potion* get_potion(ItemSubtype subtype);
   static Weapon* get_weapon(ItemSubtype subtype);
   static Scroll* get_scroll(ItemSubtype subtype);
+
+  std::vector<AttributeModifiers> generate_magic_modifiers(int level);
 };
 #endif
