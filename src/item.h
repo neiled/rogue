@@ -26,6 +26,8 @@ public:
   virtual bool interesting();
   virtual bool can_pick_up();
 
+  std::vector<AttributeModifiers> modifiers();
+
 protected:
   ItemType _item_type;
   ItemSubtype _item_subtype;

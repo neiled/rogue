@@ -51,3 +51,8 @@ bool Item::can_pick_up()
 {
   return _item_type != ItemType::CORPSE;
 }
+
+std::vector<AttributeModifiers> Item::modifiers()
+{
+  return _modifiers;
+}

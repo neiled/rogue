@@ -410,6 +410,15 @@ int Actor::calc_modified(Actor::Attribute attr)
       base += current_attr_mod.modifier();
   }
 
+  if(_weapon)
+  {
+    for(auto current_attr_mod : _weapon->modifiers())
+    {
+      if(current_attr_mod.attr() == attr)
+        base += current_attr_mod.modifier();
+    }
+  }
+
   return base;
 }
 
