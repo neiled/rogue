@@ -25,10 +25,33 @@ int Weapon::min_damage()
   return _min_damage;
 }
 
+int Weapon::damage_modifier()
+{
+  for(auto current_attr_mod : _modifiers)
+  {
+    if(current_attr_mod.attr() == Actor::Attribute::DMG)
+      return current_attr_mod.modifier();
+  }
+  return 0;
+}
+
 
 std::string Weapon::name()
 {
   std::ostringstream s;
   s << _name << " (" << min_damage() << "-" << max_damage() << ")";
+  int dmg_mod = damage_modifier();
+  if(dmg_mod > 0)
+    s << " + " << dmg_mod;
+  return s.str();
+}
+
+std::string Weapon::damage_name()
+{
+  std::ostringstream s;
+  s << min_damage() << "-" << max_damage();
+  auto modifier = damage_modifier();
+  if(modifier > 0)
+    s << " + " << modifier;
   return s.str();
 }

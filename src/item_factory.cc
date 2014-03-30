@@ -16,25 +16,25 @@ Item* ItemFactory::Build(int depth)
 {
   auto type = ItemFactory::calc_item_type(depth);
   auto subtype = ItemFactory::calc_item_subtype(type, depth);
-  return ItemFactory::get_item(type, subtype);
+  return ItemFactory::get_item(type, subtype, depth);
 }
 
 Item* ItemFactory::Build(MonsterType monster_type, int xp_level)
 {
   auto item_type = ItemFactory::calc_item_type(monster_type, xp_level);
   auto item_subtype = ItemFactory::calc_item_subtype(item_type, xp_level);
-  return ItemFactory::get_item(item_type, item_subtype);
+  return ItemFactory::get_item(item_type, item_subtype, xp_level);
 }
 
 Item* ItemFactory::Build(ItemType item_type, int xp_level)
 {
   auto item_subtype = ItemFactory::calc_item_subtype(item_type, xp_level);  
-  return ItemFactory::get_item(item_type, item_subtype);
+  return ItemFactory::get_item(item_type, item_subtype, xp_level);
 }
 
-Item* ItemFactory::Build(ItemType item_type, ItemSubtype subtype)
+Item* ItemFactory::Build(ItemType item_type, ItemSubtype subtype, int level)
 {
-  return ItemFactory::get_item(item_type, subtype);
+  return ItemFactory::get_item(item_type, subtype, level);
 }
 
 void ItemFactory::Init()
@@ -126,7 +126,7 @@ void ItemFactory::add_item(Item* item, int weighting)
   ItemFactory::_weightings[item->item_type()][item->item_subtype()] = weighting;
 }
 
-Potion* ItemFactory::get_potion(ItemSubtype subtype)
+Potion* ItemFactory::get_potion(ItemSubtype subtype, int level)
 {
   auto current = ItemFactory::_prototypes[ItemType::POTION][subtype];
   auto potion =  static_cast<Potion*>(current);
@@ -134,15 +134,16 @@ Potion* ItemFactory::get_potion(ItemSubtype subtype)
   return newPotion;
 }
 
-Weapon* ItemFactory::get_weapon(ItemSubtype subtype)
+Weapon* ItemFactory::get_weapon(ItemSubtype subtype, int level)
 {
   auto current = ItemFactory::_prototypes[ItemType::WEAPON][subtype];
   auto weapon = static_cast<Weapon*>(current);
   auto newWeapon = new Weapon(*weapon);
+  newWeapon->modifiers(generate_magic_modifiers(level));
   return newWeapon;
 }
 
-Scroll* ItemFactory::get_scroll(ItemSubtype subtype)
+Scroll* ItemFactory::get_scroll(ItemSubtype subtype, int level)
 {
   auto current = ItemFactory::_prototypes[ItemType::SCROLL][subtype];
   auto scroll = static_cast<Scroll*>(current);
@@ -150,16 +151,16 @@ Scroll* ItemFactory::get_scroll(ItemSubtype subtype)
   return newScroll;
 }
 
-Item* ItemFactory::get_item(ItemType item_type, ItemSubtype item_subtype)
+Item* ItemFactory::get_item(ItemType item_type, ItemSubtype item_subtype, int level)
 {
   switch(item_type)
   {
     case ItemType::POTION:
-      return ItemFactory::get_potion(item_subtype);
+      return ItemFactory::get_potion(item_subtype, level);
     case ItemType::WEAPON:
-      return ItemFactory::get_weapon(item_subtype);
+      return ItemFactory::get_weapon(item_subtype, level);
     case ItemType::SCROLL:
-      return ItemFactory::get_scroll(item_subtype);
+      return ItemFactory::get_scroll(item_subtype, level);
     case ItemType::CORPSE:
       return new Item(*ItemFactory::_prototypes[item_type][item_subtype]);
     case ItemType::CHEST:
@@ -173,9 +174,6 @@ Item* ItemFactory::get_item(ItemType item_type, ItemSubtype item_subtype)
 ItemType ItemFactory::calc_item_type(MonsterType monster_type, int xp_level)
 {
   int random = Random::Between(0,100);
-
-
-
   if(random < 50)
     return ItemType::POTION;
   else if(random < 90)
@@ -215,11 +213,17 @@ ItemSubtype ItemFactory::calc_item_subtype(ItemType item_type, int xp_level)
 
 std::vector<AttributeModifiers> ItemFactory::generate_magic_modifiers(int level)
 {
-  if(level <= 2)
-    return {};
+  //if(level <= 2)
+    //return {};
+
+  int random_number = Random::Between(0,100);
+
+  if(random_number < (level) * 5)
+  {
+    SDL_Log("Building a magic weapon");
+    return {AttributeModifiers(Actor::Attribute::DMG, 2, 0)};
+  }
 
   return {};
-
-
 
 }

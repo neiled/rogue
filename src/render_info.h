@@ -25,5 +25,7 @@ public:
 private:
   Graphics* _graphics;
   Sprite* _info_char = nullptr;
+
+  void render_string(Renderer& renderer, std::string, int y);
 };
 #endif

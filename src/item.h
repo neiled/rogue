@@ -27,6 +27,7 @@ public:
   virtual bool can_pick_up();
 
   std::vector<AttributeModifiers> modifiers();
+  void modifiers(std::vector<AttributeModifiers>);
 
 protected:
   ItemType _item_type;

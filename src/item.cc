@@ -56,3 +56,8 @@ std::vector<AttributeModifiers> Item::modifiers()
 {
   return _modifiers;
 }
+
+void Item::modifiers(std::vector<AttributeModifiers> modifiers)
+{
+  _modifiers = modifiers;
+}

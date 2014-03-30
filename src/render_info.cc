@@ -5,6 +5,7 @@
 #include "game.h"
 #include "sprite.h"
 #include "level.h"
+#include "weapon.h"
 
 
 
@@ -71,25 +72,28 @@ void RenderInfo::render_player_info(Renderer& renderer, Game& game, Player& play
   {
     auto item = items[player.weapon()->item_type()][player.weapon()->item_subtype()];
     item->draw(140, 125, 0, 0, SDL_ALPHA_OPAQUE);
-    renderer.render_string("Dmg: " +
-        std::to_string(player.weapon()->min_damage()) +
-        "-" +
-        std::to_string(player.weapon()->max_damage()), 25, string_y, 16);
+    auto weapon = static_cast<Weapon*>(player.weapon());
+    render_string(renderer, "Dmg: " + weapon->damage_name() , string_y);
   }
   renderer.draw_health_bar(25, 300, 150, 20, player.health(), player.max_health(), player.previous_health());
 
   renderer.draw_xp_bar(25, 330, 150, 20, player.xp() - player.min_xp(), player.max_xp());
 
   string_y += string_gap;
-  renderer.render_string("Lvl: " + std::to_string(player.xp_level()), 25, string_y, 16);
+  render_string(renderer, "Lvl:  " + std::to_string(player.xp_level()), string_y);
   string_y += string_gap;
-  renderer.render_string("Atk: " + std::to_string(player.atk()), 25, string_y, 16);
+  render_string(renderer, "Atk:  " + std::to_string(player.atk()), string_y);
   string_y += string_gap;
-  renderer.render_string("Def: " + std::to_string(player.def()), 25, string_y, 16);
+  render_string(renderer, "Def:  " + std::to_string(player.def()), string_y);
   string_y += string_gap;
-  renderer.render_string("Dpth: " + std::to_string(player.level().depth()), 25, string_y, 16);
+  render_string(renderer, "Dpth: " + std::to_string(player.level().depth()), string_y);
   string_y += string_gap;
-  renderer.render_string("Turn: " + std::to_string(game.turn()), 25, string_y, 16);  
+  render_string(renderer, "Turn: " + std::to_string(game.turn()), string_y);  
+}
+
+void RenderInfo::render_string(Renderer& renderer, std::string message, int y)
+{
+  renderer.render_string(message, 25, y, 16);
 }
 
 void RenderInfo::render_actor_info(Renderer& renderer, Game& game, Actor* actor, int start_y)

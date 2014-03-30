@@ -115,11 +115,11 @@ Item* Monster::generate_corpse()
   switch(_monster_type)
   {
     case MonsterType::Orc:
-      return ItemFactory::Build(ItemType::CORPSE, ItemSubtype::CORPSE_ORC);
+      return ItemFactory::Build(ItemType::CORPSE, ItemSubtype::CORPSE_ORC, xp_level());
     case MonsterType::Devil:
-      return ItemFactory::Build(ItemType::CORPSE, ItemSubtype::CORPSE_DEVIL);
+      return ItemFactory::Build(ItemType::CORPSE, ItemSubtype::CORPSE_DEVIL, xp_level());
     case MonsterType::Skeleton:
-      return ItemFactory::Build(ItemType::CORPSE, ItemSubtype::CORPSE_SKELETON);
+      return ItemFactory::Build(ItemType::CORPSE, ItemSubtype::CORPSE_SKELETON, xp_level());
     default:
       SDL_Log("Need to generate a corpse for this monster type");
       return nullptr;

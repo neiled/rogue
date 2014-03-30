@@ -17,9 +17,11 @@ public:
   virtual int min_damage() override;
 
   virtual std::string name() override;
+  std::string damage_name();
   
 private:
   int _max_damage;
   int _min_damage;
+  int damage_modifier();
 };
 #endif

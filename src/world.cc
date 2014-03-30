@@ -29,7 +29,7 @@ void World::init()
   _builder.buildLevel(*firstLevel, _player);
   SDL_Log("Done.");
   _levels.push_back(firstLevel);
-  _player.weapon(ItemFactory::Build(ItemType::WEAPON, ItemSubtype::WEAPON_KRIS_RUSTED));
+  _player.weapon(ItemFactory::Build(ItemType::WEAPON, ItemSubtype::WEAPON_KRIS_RUSTED, 1));
 }
 
 void World::updateGraphics()
