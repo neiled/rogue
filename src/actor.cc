@@ -279,10 +279,15 @@ float Actor::hit_chance(Actor& other)
   return static_cast<int>(floatChance * 100.0);
 }
 
-void Actor::takeDamage(int amount)
+void Actor::takeDamage(int amount, Actor* other)
 {
   if(is_player())
-    Messages::AddBad("You take " + std::to_string(amount) + " damage");
+  {
+    auto message = "You take " + std::to_string(amount) + " damage";
+    if(other)
+      message = message + " from the " + other->name();
+    Messages::AddBad(message);
+  }
   _attributes[Attribute::HEALTH] -= amount;
   if(_attributes[Attribute::HEALTH] <= 0)
   {
