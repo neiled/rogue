@@ -2,6 +2,7 @@
 #define GAME_TYPES_H 
 
 #include <map>
+#include <vector>
 
 class DirectionalSprite;
 class Sprite;
@@ -48,7 +49,8 @@ enum class MessageType {Normal, Good, Bad};
 
 typedef std::map<MonsterType, DirectionalSprite*> monster_sprites_t;
 typedef std::map<ItemType, std::map<ItemSubtype, Sprite*>> item_sprites_t;
-typedef std::map<TileType, Sprite*> level_sprites_t;
+typedef std::map<TileType, std::vector<Sprite*>> level_sprites_t;
+
 enum class GameState {
   MENU_START,
   MENU_CHEST,

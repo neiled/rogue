@@ -3,10 +3,10 @@
 
 #include <SDL2/SDL.h>
 #include "game_types.h"
+#include "level.h"
 
 class Graphics;
 class Renderer;
-class Level;
 class Tile;
 
 class RenderLevel
@@ -18,5 +18,10 @@ class RenderLevel
 
   private:
     Graphics* _graphics;
+    std::map<Level*, std::array<std::array<Sprite*, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT>> _tile_sprites;
+
+
+    Sprite* pick_sprite(level_sprites_t sprites, TileType);
+    void draw_tile(Level*, level_sprites_t, TileType, int, int, int, int, int);
 };
 #endif

@@ -41,11 +41,21 @@ void RenderLevel::render(Renderer& renderer, SDL_Rect camera, level_sprites_t ti
         if(alpha < 128) alpha = 128;
       }
 
-      tiles[tileType]->draw(x*Renderer::TILE_SIZE,y*Renderer::TILE_SIZE, camera.x, camera.y, alpha);
+      draw_tile(&level, tiles, tileType, x, y, camera.x, camera.y, alpha);
+
       if(lit == Level::LightType::Lit)
         render_items(items, *currentTile, camera, alpha);
     }
   }
+}
+
+void RenderLevel::draw_tile(Level* level, level_sprites_t sprites, TileType type, int x, int y,
+    int camerax, int cameray, int alpha)
+{
+  if(!_tile_sprites[level][y][x])
+    _tile_sprites[level][y][x] = pick_sprite(sprites, type);
+
+  _tile_sprites[level][y][x]->draw(x*Renderer::TILE_SIZE,y*Renderer::TILE_SIZE, camerax, cameray, alpha);
 }
 
 void RenderLevel::render_items(item_sprites_t items, Tile& tile, SDL_Rect camera, int alpha)
@@ -55,4 +65,10 @@ void RenderLevel::render_items(item_sprites_t items, Tile& tile, SDL_Rect camera
     items[item->item_type()][item->item_subtype()]->draw(tile.x()*Renderer::TILE_SIZE, tile.y()*Renderer::TILE_SIZE, camera.x, camera.y, alpha);
   }
 
+}
+
+Sprite* RenderLevel::pick_sprite(level_sprites_t sprites, TileType type)
+{
+  auto random = Random::Between(0, static_cast<int>(sprites[type].size()-1));
+  return sprites[type].at(random);
 }

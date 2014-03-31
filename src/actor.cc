@@ -247,13 +247,11 @@ Chest* Actor::chest()
 
 int Actor::atk()
 {
-  //return _attributes[Attribute::ATK];
   return calc_modified(Attribute::ATK);
 }
 
 int Actor::def()
 {
-  //return _attributes[Attribute::DEF];
   return calc_modified(Attribute::DEF);
 }
 

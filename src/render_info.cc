@@ -41,11 +41,11 @@ void RenderInfo::render_look(Renderer& renderer, Game& game, Player& player, int
 
   if(look_tile->items().size() > 0)
   {
-    renderer.render_string("Items", 25, string_y, 16);
+    render_string(renderer, "Items", string_y);
     string_y += string_gap;
     for(auto item : look_tile->items())
     {
-      renderer.render_string("Name: " + item->name(), 25, string_y, 16);
+      render_string(renderer, item->name(), string_y);
       string_y += string_gap;
     }
   }
@@ -73,7 +73,7 @@ void RenderInfo::render_player_info(Renderer& renderer, Game& game, Player& play
     auto item = items[player.weapon()->item_type()][player.weapon()->item_subtype()];
     item->draw(140, 125, 0, 0, SDL_ALPHA_OPAQUE);
     auto weapon = static_cast<Weapon*>(player.weapon());
-    render_string(renderer, "Dmg: " + weapon->damage_name() , string_y);
+    render_string(renderer, "Dmg:  " + weapon->damage_name() , string_y);
   }
   renderer.draw_health_bar(25, 300, 150, 20, player.health(), player.max_health(), player.previous_health());
 
@@ -93,7 +93,7 @@ void RenderInfo::render_player_info(Renderer& renderer, Game& game, Player& play
 
 void RenderInfo::render_string(Renderer& renderer, std::string message, int y)
 {
-  renderer.render_string(message, 25, y, 16);
+  renderer.render_string(message, 10, y, 16);
 }
 
 void RenderInfo::render_actor_info(Renderer& renderer, Game& game, Actor* actor, int start_y)
@@ -105,21 +105,21 @@ void RenderInfo::render_actor_info(Renderer& renderer, Game& game, Actor* actor,
   int string_y = start_y;
   int string_gap = 25;
   
-  renderer.render_string("Name: " + actor->name(), 25, string_y, 16);
+  render_string(renderer, "Name: " + actor->name(), string_y);
   string_y += string_gap;  
   
   renderer.draw_health_bar(25, string_y, 150, 20, actor->health(), actor->max_health(), actor->previous_health());
   string_y += string_gap;
-  renderer.render_string("Dmg: " +
+  render_string(renderer, "Dmg: " +
         std::to_string(actor->min_damage(*game.player())) +
         "-" +
-        std::to_string(actor->max_damage(*game.player())), 25, string_y, 16);
+        std::to_string(actor->max_damage(*game.player())), string_y);
   string_y += string_gap;
-  renderer.render_string("Lvl: " + std::to_string(actor->xp_level()), 25, string_y, 16);
+  render_string(renderer, "Lvl: " + std::to_string(actor->xp_level()), string_y);
   string_y += string_gap;
-  renderer.render_string("Atk: " + std::to_string(actor->atk()), 25, string_y, 16);
+  render_string(renderer, "Atk: " + std::to_string(actor->atk()), string_y);
   string_y += string_gap;
-  renderer.render_string("Def: " + std::to_string(actor->def()), 25, string_y, 16);
+  render_string(renderer, "Def: " + std::to_string(actor->def()), string_y);
 
 }
 

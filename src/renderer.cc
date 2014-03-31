@@ -88,15 +88,22 @@ void Renderer::loadMonsterTiles()
 
 void Renderer::loadMapTiles()
 {
-  _tiles[TileType::Floor] =  new Sprite(_graphics, "./content/dungeon_tiles_32.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
+  for (int i = 0; i < 7; ++i)
+  {
+    _tiles[TileType::Floor].push_back(new Sprite(_graphics, "./content/dungeon_tiles_32.png", i*TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
 
-  _tiles[TileType::StairsUp] = new Sprite(_graphics, "./content/dungeon_tiles_32.png", 12*TILE_SIZE, 2*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  }
 
-  _tiles[TileType::StairsDown] = new Sprite(_graphics, "./content/dungeon_tiles_32.png", 11*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  for (int i = 0; i < 4; ++i)
+  {
+    _tiles[TileType::Rock].push_back(new Sprite(_graphics, "./content/dungeon_tiles_32.png", i*TILE_SIZE, 1*TILE_SIZE, TILE_SIZE, TILE_SIZE));
+  }
 
-  _tiles[TileType::Rock] = new Sprite(_graphics, "./content/dungeon_tiles_32.png", 12*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _tiles[TileType::StairsUp].push_back(new Sprite(_graphics, "./content/dungeon_tiles_32.png", 12*TILE_SIZE, 2*TILE_SIZE, TILE_SIZE, TILE_SIZE));
 
-  _tiles[TileType::Door] = new Sprite(_graphics, "./content/dungeon_tiles_32.png", 13*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE);
+  _tiles[TileType::StairsDown].push_back(new Sprite(_graphics, "./content/dungeon_tiles_32.png", 11*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE));
+
+  _tiles[TileType::Door].push_back(new Sprite(_graphics, "./content/dungeon_tiles_32.png", 13*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE));
 }
 
 void Renderer::load_items()
@@ -286,8 +293,15 @@ void Renderer::draw_health_bar(int x, int y, int width, int height, int current_
     g = 255;
     b = 0;
   }
-  draw_bar(x, y, width, height, previous_health, max_health, 100, 0, 0);
-  draw_bar(x, y, width, height, current_health, max_health, r, g, b, false);
+  if(previous_health > current_health)
+  {
+    draw_bar(x, y, width, height, previous_health, max_health, 100, 0, 0);
+    draw_bar(x, y, width, height, current_health, max_health, r, g, b, false);
+  }
+  else
+  {
+    draw_bar(x, y, width, height, current_health, max_health, r, g, b);
+  }
 }
 
 void Renderer::render_messages(std::deque<std::vector<Message>> messages)
