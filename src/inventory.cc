@@ -39,11 +39,8 @@ void Inventory::remove(Item* item)
   _items.erase(std::remove(_items.begin(), _items.end(), item), _items.end());
 }
 
-void Inventory::use(int index, Actor& actor)
+void Inventory::use(Item* item, Actor& actor)
 {
-  if(index >= _items.size())
-    return;
-  auto item = _items.at(index);
   if(item->item_type() == ItemType::POTION)
   {
     auto potion = static_cast<Potion*>(item);
@@ -64,11 +61,8 @@ void Inventory::use(int index, Actor& actor)
   remove(item);
 }
 
-void Inventory::drop(int index, Tile& tile)
+void Inventory::drop(Item* item, Tile& tile)
 {
-  if(index >= _items.size())
-    return;
-  auto item = _items.at(index);
   remove(item);
   tile.add_item(item);
   Messages::Add("You drop the " + item->name());

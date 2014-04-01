@@ -19,7 +19,9 @@ struct Commands
                   CMD_MOVE_LEFT,
                   CMD_MOVE_UP_LEFT,
                   CMD_EXPLORE,
-                  CMD_MOVE_TO_TILE};
+                  CMD_MOVE_TO_TILE,
+                  CMD_USE,
+                  CMD_DROP};
 };
 
 struct Command
@@ -36,6 +38,8 @@ public:
   bool Process(Command command, Actor& actor);
 
 private:
+  bool use(Actor& actor, GameObject* target);
+  bool drop(Actor& actor, GameObject* target);
   
 };
 #endif
