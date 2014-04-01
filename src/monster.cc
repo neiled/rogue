@@ -73,7 +73,7 @@ void Monster::wander()
   {
     Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
     _travelPath.pop_front();
-    _commandQueue.push_front(dirCommand);
+    _commandQueue.push_front(Command{dirCommand});
   }  
 }
 void Monster::hunt(Player& player)
@@ -89,7 +89,7 @@ void Monster::hunt(Player& player)
   if(_travelPath.empty() == false)
   {
     Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
-    _commandQueue.push_front(dirCommand);
+    _commandQueue.push_front(Command{dirCommand});
   }
 }
 

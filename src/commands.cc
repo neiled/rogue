@@ -11,9 +11,9 @@ CommandProcessor::~CommandProcessor()
 {
 }
 
-bool CommandProcessor::Process(Commands::CMD command, Actor& actor)
+bool CommandProcessor::Process(Command command, Actor& actor)
 {
-  switch(command)
+  switch(command.command)
   {
     case Commands::CMD::CMD_MOVE_UP:
       actor.moveUp();

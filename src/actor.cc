@@ -13,7 +13,7 @@ Actor::Actor(std::string name, int xp_level) : Actor(name, xp_level, 5)
 {
 }
 
-Actor::Actor(std::string name, int xp_level, int inventory_size) : _xp_level(xp_level), _inventory(inventory_size), _name(name)
+Actor::Actor(std::string name, int xp_level, int inventory_size) : GameObject(name), _xp_level(xp_level), _inventory(inventory_size)
 {
   _attributes[Attribute::ATK] = xp_level+5;//Random::BetweenNormal(1,_xp_level);
   _attributes[Attribute::DEF] = xp_level+5;//Random::BetweenNormal(1,_xp_level);
@@ -128,8 +128,8 @@ bool Actor::move_to_target()
   {
     Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
     _travelPath.pop_front();
-    _commandQueue.push_front(Commands::CMD::CMD_MOVE_TO_TILE);
-    _commandQueue.push_front(dirCommand);
+    _commandQueue.push_front(Command{Commands::CMD::CMD_MOVE_TO_TILE});
+    _commandQueue.push_front(Command{dirCommand});
   }
   else
   {
@@ -342,12 +342,17 @@ Commands::CMD Actor::getCommandFromTiles(Tile& start, Tile& end)
 
 void Actor::push_command(Commands::CMD command)
 {
-  _commandQueue.push_back(command);
+  _commandQueue.push_back(Command{command});
 }
 
-Commands::CMD Actor::popCommand()
+void Actor::push_command(Commands::CMD command, GameObject* target)
 {
-  Commands::CMD currentCommand = _commandQueue.front();
+  _commandQueue.push_back(Command{command, target});
+}
+
+Command Actor::popCommand()
+{
+  Command currentCommand = _commandQueue.front();
   _commandQueue.pop_front();
   return currentCommand;
 }
@@ -434,11 +439,6 @@ Item* Actor::weapon()
 void Actor::weapon(Item* weapon)
 {
   _weapon = weapon;
-}
-
-std::string Actor::name()
-{
-  return _name;
 }
 
 Actor* Actor::target_actor()

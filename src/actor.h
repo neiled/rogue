@@ -8,6 +8,7 @@
 #include <cstdint>
 #include "commands.h"
 #include "inventory.h"
+#include "game_object.h"
 
 class Tile;
 class Level;
@@ -15,7 +16,7 @@ class AttributeModifiers;
 class Weapon;
 class Chest;
 
-class Actor
+class Actor : public GameObject
 {
   public:
     Actor(std::string name, int xp_level);
@@ -53,7 +54,8 @@ class Actor
     
 
     void push_command(Commands::CMD command);
-    Commands::CMD popCommand();
+    void push_command(Commands::CMD command, GameObject* target);
+    Command popCommand();
     bool hasCommands() const;
     void clearCommands();
 
@@ -86,7 +88,6 @@ class Actor
     Item* weapon();
     void weapon(Item* weapon);
     
-    std::string name();
     
     Actor* target_actor();
     void target_actor(Actor* actor);
@@ -96,7 +97,7 @@ class Actor
     Tile* _targetTile = nullptr;
     //int _health;
 
-    std::deque<Commands::CMD> _commandQueue;
+    std::deque<Command> _commandQueue;
     std::deque<Tile*> _travelPath;
     Commands::CMD getCommandFromTiles(Tile& start, Tile& end);
 
@@ -127,8 +128,6 @@ class Actor
     int _previous_health;
 
     Item* _weapon = nullptr;
-    
-    std::string _name;
     
     Actor* _target_actor = nullptr;
 

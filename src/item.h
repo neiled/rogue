@@ -5,8 +5,9 @@
 #include <string>
 #include "attribute_modifiers.h"
 #include "game_types.h"
+#include "game_object.h"
 
-class Item
+class Item : public GameObject
 {
 public:
   
@@ -17,10 +18,7 @@ public:
   
   ItemType item_type();
   ItemSubtype item_subtype();
-  
-  virtual std::string name();
 
-  //virtual int calc_damage(Actor&);
   virtual int max_damage() {return 1;};
   virtual int min_damage() {return 1;};
   virtual bool interesting();
@@ -33,7 +31,6 @@ protected:
   ItemType _item_type;
   ItemSubtype _item_subtype;
   std::vector<AttributeModifiers> _modifiers;
-  std::string _name;
 
 };
 #endif

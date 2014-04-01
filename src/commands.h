@@ -1,8 +1,10 @@
 #ifndef COMMANDS_H
 #define COMMANDS_H 
 
+
 class Actor;
 class World;
+class GameObject;
 
 struct Commands
 {
@@ -20,12 +22,18 @@ struct Commands
                   CMD_MOVE_TO_TILE};
 };
 
+struct Command
+{
+  Commands::CMD command;
+  GameObject* target;
+};
+
 class CommandProcessor
 {
 public:
   CommandProcessor ();
   virtual ~CommandProcessor ();
-  bool Process(Commands::CMD command, Actor& actor);
+  bool Process(Command command, Actor& actor);
 
 private:
   

@@ -182,8 +182,8 @@ bool Player::explore()
   }
   auto dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
   _travelPath.pop_front();
-  _commandQueue.push_front(Commands::CMD::CMD_EXPLORE);
-  _commandQueue.push_front(dirCommand);
+  _commandQueue.push_front(Command{Commands::CMD::CMD_EXPLORE});
+  _commandQueue.push_front(Command{dirCommand});
   return false; //don't spend a turn on actual explore command, just on movement
 }
 
