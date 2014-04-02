@@ -85,7 +85,7 @@ bool CommandDecoderInventory::drop_chosen_item(SDL_Keycode key, Game& game)
 void CommandDecoderInventory::use_item(Player& player, int index)
 {
   //player.inventory()->use(index, player);
-  player.push_command(Commands::CMD::CMD_USE, player.inventory()->items()[index]);
+  player.push_command(Commands::CMD::CMD_USE, player.inventory()->items()[index], 200);
 }
 void CommandDecoderInventory::drop_item(Player& player, int index)
 {

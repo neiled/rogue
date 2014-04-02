@@ -28,6 +28,11 @@ struct Command
 {
   Commands::CMD command;
   GameObject* target;
+  int cost;
+
+  Command(Commands::CMD cmd, GameObject* tgt, int c) : command(cmd), target(tgt), cost(c) {}
+  Command(Commands::CMD cmd, GameObject* tgt) : Command(cmd, tgt, 100) {}
+  Command(Commands::CMD cmd) : Command(cmd, nullptr) {}
 };
 
 class CommandProcessor
@@ -40,6 +45,7 @@ public:
 private:
   bool use(Actor& actor, GameObject* target);
   bool drop(Actor& actor, GameObject* target);
+  bool attempt_process(Command command, Actor& actor);
   
 };
 #endif

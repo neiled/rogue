@@ -13,7 +13,7 @@ Actor::Actor(std::string name, int xp_level) : Actor(name, xp_level, 5)
 {
 }
 
-Actor::Actor(std::string name, int xp_level, int inventory_size) : GameObject(name), _xp_level(xp_level), _inventory(inventory_size)
+Actor::Actor(std::string name, int xp_level, int inventory_size) : GameObject(name), _xp_level(xp_level), _inventory(inventory_size), _action_points(0)
 {
   _attributes[Attribute::ATK] = xp_level+5;//Random::BetweenNormal(1,_xp_level);
   _attributes[Attribute::DEF] = xp_level+5;//Random::BetweenNormal(1,_xp_level);
@@ -40,6 +40,7 @@ void Actor::pickup_items()
 void Actor::start_turn()
 {
   _previous_health = health();
+  _action_points += 100;
 }
 
 void Actor::end_turn()
@@ -340,6 +341,7 @@ Commands::CMD Actor::getCommandFromTiles(Tile& start, Tile& end)
   return Commands::CMD::NOP;
 }
 
+//TODO: Should be called add_command
 void Actor::push_command(Commands::CMD command)
 {
   _commandQueue.push_back(Command{command});
@@ -350,6 +352,11 @@ void Actor::push_command(Commands::CMD command, GameObject* target)
   _commandQueue.push_back(Command{command, target});
 }
 
+void Actor::push_command(Commands::CMD command, GameObject* target, int cost)
+{
+  _commandQueue.push_back(Command{command, target, cost});
+}
+
 Command Actor::popCommand()
 {
   Command currentCommand = _commandQueue.front();
@@ -357,11 +364,34 @@ Command Actor::popCommand()
   return currentCommand;
 }
 
+Command Actor::next_command()
+{
+  return _commandQueue.front();
+}
+
 bool Actor::hasCommands() const
 {
 
   return _commandQueue.empty() == false;
 }
+
+bool Actor::can_afford_next_command()
+{
+  if(_commandQueue.empty())
+    return false;
+  return _commandQueue.front().cost <= _action_points;
+}
+
+int Actor::action_points()
+{
+  return _action_points;
+}
+
+void Actor::use_action_points(int amount)
+{
+  _action_points -= amount;
+}
+
 
 
 int Actor::health()

@@ -1,4 +1,5 @@
 #include "commands.h"
+#include <SDL2/SDL.h>
 #include "world.h"
 #include "actor.h"
 #include "player.h"
@@ -13,6 +14,15 @@ CommandProcessor::~CommandProcessor()
 }
 
 bool CommandProcessor::Process(Command command, Actor& actor)
+{
+  bool result = attempt_process(command, actor);
+  if(result)
+    actor.use_action_points(command.cost);
+
+  return result;
+}
+
+bool CommandProcessor::attempt_process(Command command, Actor& actor)
 {
   switch(command.command)
   {
@@ -37,12 +47,14 @@ bool CommandProcessor::Process(Command command, Actor& actor)
       return use(actor, command.target);
     case Commands::CMD::CMD_DROP:
       return drop(actor, command.target);
+    case Commands::CMD::NOP:
+      return true;
     default:
+      SDL_Log("Missing a command type!");
       break;
   }
 
   return true;
-
 }
 
 bool CommandProcessor::use(Actor& actor, GameObject* target)

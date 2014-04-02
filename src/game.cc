@@ -48,7 +48,6 @@ void Game::reset()
 
 void Game::eventLoop()
 {
-  SDL_Event event;
   CommandProcessor cProc;
 
   end_turn();
@@ -56,38 +55,44 @@ void Game::eventLoop()
   draw(_graphics, _renderer);
 
 
+  Player* player = _world.player();
   bool running = true;
   while (running == true)
   {
-    Player* player = _world.player();
-    //const int start_time_ms = SDL_GetTicks();
-    SDL_WaitEvent(&event);
-
-    decode_event(event, _graphics, _renderer);
-
+    SDL_Log("Start of players turn");
     if(_state == GameState::GAME && player->dead())
       _state = GameState::DEAD;
-    else
+
+    player->start_turn();
+
+    do
     {
-      while(player->hasCommands())
+      if(player->hasCommands() == false)
       {
-        player->start_turn();
-        if(cProc.Process(player->popCommand(), *player))
+        SDL_Log("%d points left, Waiting for a valid event.", player->action_points());
+        SDL_Event event;
+        do
         {
-          player->end_turn();
-          end_turn();
-        }
-        else
-          draw(_graphics, _renderer);
+          SDL_WaitEvent(&event);
+        }while(!decode_event(event, _graphics, _renderer));
+        SDL_Log("Got valid event.");
+        draw(_graphics, _renderer);
       }
-    }
+      else
+      {
+        SDL_Log("Processing existing command.");
+      }
 
-
-    //int current_time = SDL_GetTicks();
-    //updateGraphics(&renderer);
-    //last_update_time = current_time;
-
-    //delay(start_time_ms);
+      while(!player->dead() && player->can_afford_next_command())
+      {
+        SDL_Log("Processing command...");
+        cProc.Process(player->popCommand(), *player);
+        draw(_graphics, _renderer);
+        SDL_Log("%d points left.", player->action_points());
+      }
+    } while(player_can_continue(*player, _state));
+    player->end_turn();
+    end_turn();
 
     if(_state == GameState::STARTING)
     {
@@ -98,6 +103,22 @@ void Game::eventLoop()
 
   }
 
+}
+
+bool Game::player_can_continue(Player& player, GameState state)
+{
+  if(player.dead())
+    return false;
+  if(_state == GameState::STOP)
+    return false;
+  if(_state == GameState::STARTING)
+    return false;
+  if(player.action_points() <= 0)
+    return false;
+  if(player.hasCommands())
+    return false;
+
+  return true;
 }
 
 
@@ -114,7 +135,7 @@ int Game::turn()
   return _turn;
 }
 
-void Game::decode_event(SDL_Event& event, Graphics& graphics, Renderer& renderer)
+bool Game::decode_event(SDL_Event& event, Graphics& graphics, Renderer& renderer)
 {
   switch(event.type)
   {
@@ -126,7 +147,7 @@ void Game::decode_event(SDL_Event& event, Graphics& graphics, Renderer& renderer
         player()->add_seen_items();
         draw(graphics, renderer);
       }
-      break;
+      return decoded;
     }
     case SDL_MOUSEBUTTONDOWN:
     {
@@ -135,10 +156,10 @@ void Game::decode_event(SDL_Event& event, Graphics& graphics, Renderer& renderer
       {
         draw(graphics, renderer);
       }
-      break;
+      return decoded;
     }
     default:
-      break;
+      return false;
   }
 }
 

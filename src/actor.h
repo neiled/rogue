@@ -55,8 +55,13 @@ class Actor : public GameObject
 
     void push_command(Commands::CMD command);
     void push_command(Commands::CMD command, GameObject* target);
+    void push_command(Commands::CMD command, GameObject* target, int cost);
     Command popCommand();
+    Command next_command();
     bool hasCommands() const;
+    bool can_afford_next_command();
+    int action_points();
+    void use_action_points(int amount);
     void clearCommands();
 
     void takeDamage(int amount, Actor* other);
@@ -130,6 +135,8 @@ class Actor : public GameObject
     Item* _weapon = nullptr;
     
     Actor* _target_actor = nullptr;
+
+    int _action_points;
 
 
 

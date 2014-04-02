@@ -42,7 +42,8 @@ class Game {
     void end_turn();
 
     void delay(int start_time_ms);
-    void decode_event(SDL_Event&, Graphics&, Renderer&);
+    bool decode_event(SDL_Event&, Graphics&, Renderer&);
+    bool player_can_continue(Player& player, GameState state);
 
     int _turn;
 
