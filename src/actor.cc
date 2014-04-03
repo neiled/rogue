@@ -40,6 +40,8 @@ void Actor::pickup_items()
 void Actor::start_turn()
 {
   _previous_health = health();
+  if(_action_points < 0)
+    _action_points = 0;
   _action_points += 100;
 }
 
