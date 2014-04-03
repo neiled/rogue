@@ -62,6 +62,7 @@ void CommandDecoderChest::take_all(Player& player)
 
     use_item(player, 0);
   }
+  Messages::Push();
 }
 
 void CommandDecoderChest::use_item(Player& player, int index)
