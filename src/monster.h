@@ -15,13 +15,12 @@ class Monster : public Actor
 {
   public:
 
-    Monster(std::string name, Tile& startTile, MonsterType type, MonsterState state, int xp_level);
+    Monster(std::string name, Tile& startTile, MonsterType type, MonsterState state, int xp_level, float speed);
     virtual ~Monster();
     void explore();
     
     //virtual void update() override;
-    virtual void start_turn() override;
-    virtual void end_turn() override;
+    void think();
 
     MonsterType monster_type();
 

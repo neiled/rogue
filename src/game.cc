@@ -59,7 +59,6 @@ void Game::eventLoop()
   bool running = true;
   while (running == true)
   {
-    SDL_Log("Start of players turn");
     if(_state == GameState::GAME && player->dead())
       _state = GameState::DEAD;
 
@@ -69,26 +68,20 @@ void Game::eventLoop()
     {
       if(player->hasCommands() == false)
       {
-        SDL_Log("%d points left, Waiting for a valid event.", player->action_points());
+        //SDL_Log("%d points left, Waiting for a valid event.", player->action_points());
         SDL_Event event;
         do
         {
           SDL_WaitEvent(&event);
         }while(!decode_event(event, _graphics, _renderer));
-        SDL_Log("Got valid event.");
         draw(_graphics, _renderer);
-      }
-      else
-      {
-        SDL_Log("Processing existing command.");
       }
 
       while(!player->dead() && player->can_afford_next_command())
       {
-        SDL_Log("Processing command...");
         cProc.Process(player->popCommand(), *player);
         draw(_graphics, _renderer);
-        SDL_Log("%d points left.", player->action_points());
+        //SDL_Log("%d points left.", player->action_points());
       }
     } while(player_can_continue(*player, _state));
     player->end_turn();
@@ -126,9 +119,40 @@ void Game::end_turn()
 {
   ++_turn;
   _world.update();
+  update_monsters();
   Messages::Push();
   draw(_graphics, _renderer);
 }
+
+void Game::update_monsters()
+{
+  //SDL_Log("Staring monsters turn...");
+  CommandProcessor cProc;
+  for(auto m : level()->monsters())
+  {
+    //SDL_Log("New Monster starts turn");
+    m->start_turn();
+    do
+    {
+      //SDL_Log("Started turn");
+      if(m->hasCommands() == false)
+      {
+        //SDL_Log("Thinking");
+        m->think();
+      }
+      while(!m->dead() && m->can_afford_next_command())
+      {
+        //SDL_Log("Peforming monster commands.");
+        cProc.Process(m->popCommand(), *m);
+        //draw(_graphics, _renderer);
+      }
+    }while(m->action_points() > 0 && m->hasCommands() == false);
+
+    //SDL_Log("Ending turn of monster");
+    m->end_turn();      
+  }
+}
+
 
 int Game::turn()
 {
@@ -186,7 +210,7 @@ Player* Game::player()
 
 Level* Game::level()
 {
-  return &_world.getCurrentLevel();
+  return _world.current_level();
 }
 
 void Game::delay(int start_time_ms)

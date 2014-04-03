@@ -40,11 +40,11 @@ Monster* MonsterFactory::get_monster(MonsterType type, Tile& tile, int xp_level)
   switch(type)
   {
     case MonsterType::Orc:
-      return new Monster(name, tile, type, MonsterState::Awake, xp_level);
+      return new Monster(name, tile, type, MonsterState::Awake, xp_level, 0.5);
     case MonsterType::Devil:
-      return new Monster(name, tile, type, MonsterState::Wandering, xp_level);
+      return new Monster(name, tile, type, MonsterState::Wandering, xp_level, 1);
     case MonsterType::Skeleton:
-      return new Monster(name, tile, type, MonsterState::Awake, xp_level);
+      return new Monster(name, tile, type, MonsterState::Awake, xp_level, 2);
     default:
       SDL_Log("Need to add this new monster type to MonsterFactory::get_monster");
       break;

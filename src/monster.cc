@@ -8,8 +8,8 @@
 #include "item_factory.h"
 #include "game_types.h"
 
-Monster::Monster(std::string name, Tile& startTile, MonsterType type, MonsterState state, int xp_level)
-  : Actor(name, xp_level), _monster_type(type), _monsterState(state)
+Monster::Monster(std::string name, Tile& startTile, MonsterType type, MonsterState state, int xp_level, float speed)
+  : Actor(name, xp_level, 5, speed), _monster_type(type), _monsterState(state)
 {
   this->direction = static_cast<Actor::Direction>(Random::Between(0,3));
   set_tile(startTile);
@@ -25,9 +25,9 @@ Monster::~Monster()
 {
 }
 
-void Monster::start_turn()
+
+void Monster::think()
 {
-  Actor::start_turn();
   if(dead())
     return;
   Player* player = level().player();
@@ -38,17 +38,14 @@ void Monster::start_turn()
   
   if(_monsterState == MonsterState::Hunting)
     hunt(*player);
-  if(_monsterState == MonsterState::Wandering)
+  else if(_monsterState == MonsterState::Wandering)
   {
     wander();
   }
-  
+  else
+    push_command(Commands::CMD::NOP);
 }
 
-void Monster::end_turn()
-{
-  Actor::end_turn();
-}
 
 void Monster::look_for_player()
 {
@@ -71,10 +68,12 @@ void Monster::wander()
   }
   if(_travelPath.empty() == false)
   {
-    Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
+    auto dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
     _travelPath.pop_front();
-    _commandQueue.push_front(Command{dirCommand}); //TODO: Should use monster speed here
-  }  
+    _commandQueue.push_front(dirCommand);
+  }
+  else
+    push_command(Commands::CMD::NOP);
 }
 void Monster::hunt(Player& player)
 {
@@ -88,9 +87,11 @@ void Monster::hunt(Player& player)
   _travelPath = searcher.plotPath(*_currentTile, *player.tile(), 200);
   if(_travelPath.empty() == false)
   {
-    Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
-    _commandQueue.push_front(Command{dirCommand}); //TODO: Should use monster speed here
+    auto dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
+    _commandQueue.push_front(dirCommand);
   }
+  else
+    push_command(Commands::CMD::NOP);
 }
 
 

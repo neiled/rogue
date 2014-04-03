@@ -15,7 +15,7 @@ public:
   void init();
   void update();
   void updateGraphics();
-  Level& getCurrentLevel();
+  Level* current_level();
   Player* player();
 
 

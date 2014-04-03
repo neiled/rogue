@@ -36,8 +36,7 @@ class Game {
     Renderer _renderer;
     void reset();
     void eventLoop();
-    //void update(Renderer& renderer);
-    //void updateGraphics(Renderer* renderer,  int elapsed_time_ms);
+    void update_monsters();
     void draw(Graphics& graphics, Renderer& renderer);
     void end_turn();
 

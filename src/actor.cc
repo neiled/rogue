@@ -9,11 +9,11 @@
 #include "item.h"
 #include "chest.h"
 
-Actor::Actor(std::string name, int xp_level) : Actor(name, xp_level, 5)
+Actor::Actor(std::string name, int xp_level) : Actor(name, xp_level, 5, 1)
 {
 }
 
-Actor::Actor(std::string name, int xp_level, int inventory_size) : GameObject(name), _xp_level(xp_level), _inventory(inventory_size), _action_points(0)
+Actor::Actor(std::string name, int xp_level, int inventory_size, float speed) : GameObject(name), _xp_level(xp_level), _inventory(inventory_size), _action_points(0), _speed(speed)
 {
   _attributes[Attribute::ATK] = xp_level+5;//Random::BetweenNormal(1,_xp_level);
   _attributes[Attribute::DEF] = xp_level+5;//Random::BetweenNormal(1,_xp_level);
@@ -127,10 +127,10 @@ bool Actor::move_to_target()
 
   if(_travelPath.empty() == false)
   {
-    Commands::CMD dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
+    auto dirCommand = getCommandFromTiles(*_currentTile, *_travelPath.front());
     _travelPath.pop_front();
     _commandQueue.push_front(Command{Commands::CMD::CMD_MOVE_TO_TILE});
-    _commandQueue.push_front(Command{dirCommand});
+    _commandQueue.push_front(dirCommand);
   }
   else
   {
@@ -227,6 +227,8 @@ void Actor::meleeAttack(Actor* other)
   {
     Messages::Add("The " + name() + " missed");
   }
+
+  _action_points -= 100; //TODO: should use some form of attack speed here?
 
 
   return;
@@ -325,20 +327,24 @@ void Actor::clearCommands()
   _commandQueue.clear();
 }
 
-Commands::CMD Actor::getCommandFromTiles(Tile& start, Tile& end)
+Command Actor::getCommandFromTiles(Tile& start, Tile& end)
 {
   int xDiff = end.x() - start.x();
   int yDiff = end.y() - start.y();
+  Commands::CMD dir;
 
   if(xDiff == -1)
-    return Commands::CMD::CMD_MOVE_LEFT;
-  if(xDiff == 1)
-    return Commands::CMD::CMD_MOVE_RIGHT;
-  if(yDiff == -1)
-    return Commands::CMD::CMD_MOVE_UP;
-  if(yDiff == 1)
-    return Commands::CMD::CMD_MOVE_DOWN;
-  return Commands::CMD::NOP;
+    dir = Commands::CMD::CMD_MOVE_LEFT;
+  else if(xDiff == 1)
+    dir = Commands::CMD::CMD_MOVE_RIGHT;
+  else if(yDiff == -1)
+    dir = Commands::CMD::CMD_MOVE_UP;
+  else if(yDiff == 1)
+    dir = Commands::CMD::CMD_MOVE_DOWN;
+  else
+    dir = Commands::CMD::NOP;
+
+  return Command(dir, nullptr, 100/_speed);
 }
 
 //TODO: Should be called add_command

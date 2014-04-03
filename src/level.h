@@ -42,6 +42,7 @@ class Level
 
     void look_tile(Tile* look_tile);
     Tile* look_tile();
+    std::vector<Monster*> monsters();
 
     const static int LEVEL_WIDTH = 100;
     const static int LEVEL_HEIGHT = 100;

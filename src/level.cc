@@ -28,24 +28,35 @@ int Level::height()
   return LEVEL_HEIGHT;
 }
 
+std::vector<Monster*> Level::monsters()
+{
+  return _monsters;
+}
+
 void Level::update(Player& player)
 {
   updateLightMap(player);
   _monsters.erase( std::remove_if(_monsters.begin(), _monsters.end(), [](const Monster* m) {return m->dead();}), _monsters.end() );
-  update_monsters(player);
+  //update_monsters(player);
 }
 
-void Level::update_monsters(Player& player)
-{
-  CommandProcessor cProc;
-  for(auto m : _monsters)
-  {
-    m->start_turn();
-    if(m->hasCommands())
-      cProc.Process(m->popCommand(), *m);
-    m->end_turn();      
-  }
-}
+//void Level::update_monsters(Player& player)
+//{
+  //CommandProcessor cProc;
+  //for(auto m : _monsters)
+  //{
+    //m->start_turn();
+    //do
+    //{
+      //if(m->hasCommands() == false)
+        //m->think();
+      //while(!m->dead() && m->can_afford_next_command())
+        //cProc.Process(m->popCommand(), *m);
+    //}while(m->action_points() > 0 && m->hasCommands() == false);
+
+    //m->end_turn();      
+  //}
+//}
 
 Player* Level::player()
 {

@@ -47,9 +47,9 @@ Player* World::player()
   return &_player;
 }
 
-Level& World::getCurrentLevel()
+Level* World::current_level()
 {
-  return _player.level();
+  return &_player.level();
 }
 
 void World::checkMoveLevel()

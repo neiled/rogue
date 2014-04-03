@@ -20,7 +20,7 @@ class Actor : public GameObject
 {
   public:
     Actor(std::string name, int xp_level);
-    Actor(std::string name, int xp_level, int inventory_size);
+    Actor(std::string name, int xp_level, int inventory_size, float speed);
     virtual ~Actor();
 
     enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
@@ -104,7 +104,7 @@ class Actor : public GameObject
 
     std::deque<Command> _commandQueue;
     std::deque<Tile*> _travelPath;
-    Commands::CMD getCommandFromTiles(Tile& start, Tile& end);
+    Command getCommandFromTiles(Tile& start, Tile& end);
 
     std::vector<AttributeModifiers> _modifiers;
 
@@ -137,6 +137,8 @@ class Actor : public GameObject
     Actor* _target_actor = nullptr;
 
     int _action_points;
+
+    float _speed;
 
 
 
