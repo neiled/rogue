@@ -28,6 +28,7 @@ void RenderInventory::render_player_inventory(Renderer& renderer, item_sprites_t
   renderer.render_string("To drop an item press d then the number", x, 750, 32);
   renderer.render_string("of the item to drop.", x, 782, 32);
 }
+
 void RenderInventory::render_player_wands(Renderer& renderer, item_sprites_t items, Inventory& inventory)
 {
   SDL_Rect vp_inv;
@@ -38,18 +39,11 @@ void RenderInventory::render_player_wands(Renderer& renderer, item_sprites_t ite
 
   int x = vp_inv.x+40;
 
-  auto wands = std::vector<Item*>();
-
-  for(auto current : inventory.items())
-  {
-    if(current->item_type() == ItemType::WAND)
-      wands.push_back(current);
-  }
+  auto wands = inventory.items_of_type(ItemType::WAND);
 
   render(renderer, items, wands, vp_inv);
-  renderer.render_string("Inventory:", x, vp_inv.y + 50, 32);
-  renderer.render_string("To drop an item press d then the number", x, 750, 32);
-  renderer.render_string("of the item to drop.", x, 782, 32);
+  renderer.render_string("Wands:", x, vp_inv.y + 50, 32);
+  renderer.render_string("To zap a wand, press the number.", x, 750, 32);
 }
 void RenderInventory::render_chest_inventory(Renderer& renderer, item_sprites_t items, Inventory& inventory)
 {

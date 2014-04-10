@@ -2,6 +2,7 @@
 #define INVENTORY_H 
 
 #include <vector>
+#include "game_types.h"
 
 
 class Item;
@@ -24,6 +25,7 @@ public:
   int max_items();
   void use(Item* item, Actor& actor);
   void drop(Item* item, Tile& tile);
+  std::vector<Item*> items_of_type(ItemType type);
 
 private:
   std::vector<Item*> _items;

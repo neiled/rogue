@@ -28,6 +28,17 @@ std::vector<Item*> Inventory::items()
 {
   return _items;
 }
+std::vector<Item*> Inventory::items_of_type(ItemType type)
+{
+  auto result = std::vector<Item*>();
+  for(auto current : _items)
+  {
+    if(current->item_type() == type)
+      result.push_back(current);
+  }
+
+  return result;
+}
 
 void Inventory::clear()
 {
@@ -57,6 +68,15 @@ void Inventory::use(Item* item, Actor& actor)
   {
     auto scroll = static_cast<Scroll*>(item);
     scroll->cast(actor, nullptr);
+  }
+  else if(item->item_type() == ItemType::WAND)
+  {
+    //TODO: Something?
+  }
+  else
+  {
+    SDL_Log("Inventory doesn't know how to use that type of item!");
+    return;
   }
   remove(item);
 }
