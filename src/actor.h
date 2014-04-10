@@ -100,7 +100,6 @@ class Actor : public GameObject
   protected:
     Tile* _currentTile = nullptr;
     Tile* _targetTile = nullptr;
-    //int _health;
 
     std::deque<Command> _commandQueue;
     std::deque<Tile*> _travelPath;
@@ -133,6 +132,7 @@ class Actor : public GameObject
     int _previous_health;
 
     Item* _weapon = nullptr;
+    Item* _ranged_weapon = nullptr;
     
     Actor* _target_actor = nullptr;
 
