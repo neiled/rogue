@@ -14,6 +14,7 @@ class Tile;
 class Level;
 class AttributeModifiers;
 class Weapon;
+class RangedWeapon;
 class Chest;
 
 class Actor : public GameObject
@@ -92,6 +93,8 @@ class Actor : public GameObject
 
     Item* weapon();
     void weapon(Item* weapon);
+    RangedWeapon* ranged_weapon();
+    void ranged_weapon(RangedWeapon* weapon);
     
     
     Actor* target_actor();
@@ -132,7 +135,7 @@ class Actor : public GameObject
     int _previous_health;
 
     Item* _weapon = nullptr;
-    Item* _ranged_weapon = nullptr;
+    RangedWeapon* _ranged_weapon = nullptr;
     
     Actor* _target_actor = nullptr;
 
