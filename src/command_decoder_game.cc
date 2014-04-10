@@ -21,6 +21,8 @@ bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
     player.clearCommands();
   else if(key == SDLK_i)
     game.state(GameState::MENU_INVENTORY);
+  else if(key == SDLK_w)
+    game.state(GameState::MENU_WAND);
   else if(key == SDLK_SLASH)
   {
     game.level()->look_tile(game.player()->tile());

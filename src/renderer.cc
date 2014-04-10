@@ -45,7 +45,7 @@ void Renderer::render(Game& game)
   render_info(game, *game.player());
   render_messages(Messages::AllMessages());
   render_state(game.state(), *game.player());
-  
+
 }
 
 
@@ -136,18 +136,18 @@ void Renderer::load_corpses()
 void Renderer::load_potions()
 {
   _items[ItemType::POTION] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_LARGE] = new Sprite(_graphics, "content/potion.png", 0, 0, TILE_SIZE, TILE_SIZE); 
-  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH] = new Sprite(_graphics, "content/potion.png", 0, 0, TILE_SIZE, TILE_SIZE); 
-  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_SMALL] = new Sprite(_graphics, "content/potion.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE); 
+  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_LARGE] = new Sprite(_graphics, "content/potion.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH] = new Sprite(_graphics, "content/potion.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_SMALL] = new Sprite(_graphics, "content/potion.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
 }
 
 void Renderer::load_weapons()
 {
   _items[ItemType::WEAPON] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_LOW] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
-  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
-  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_RUSTED] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
-  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_GOOD] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_LOW] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_RUSTED] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_GOOD] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE);
 }
 
 void Renderer::load_wands()
@@ -175,7 +175,7 @@ void Renderer::updateCamera(Player& player)
   _cameraRect.x = player.tile()->x() * TILE_SIZE  - (_cameraRect.w/2);
   _cameraRect.y = player.tile()->y() * TILE_SIZE - (_cameraRect.h/2);
 
-  
+
   if(_cameraRect.x < 0) _cameraRect.x = 0;
   if(_cameraRect.y < 0) _cameraRect.y = 0;
   if(_cameraRect.x >= Level::LEVEL_WIDTH*TILE_SIZE   - _cameraRect.w) _cameraRect.x = Level::LEVEL_WIDTH* TILE_SIZE  - _cameraRect.w;
@@ -256,7 +256,7 @@ void Renderer::draw_bar(int x, int y, int width, int height, int current, int ma
   health.y = y;
   health.w = width;
   health.h = height;
-    
+
   if(background)
   {
     SDL_SetRenderDrawColor(_graphics->Renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
@@ -267,7 +267,7 @@ void Renderer::draw_bar(int x, int y, int width, int height, int current, int ma
   health.y++;
   health.h-=2;
   health.w = (width-2) * (static_cast<float>(current) / max);
-  
+
   SDL_SetRenderDrawColor(_graphics->Renderer, r, g, b, SDL_ALPHA_OPAQUE);
   SDL_RenderFillRect(_graphics->Renderer, &health);
   SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
@@ -382,6 +382,9 @@ void Renderer::render_state(GameState state, Player& player)
     case GameState::MENU_INVENTORY:
       render_inventory(*player.inventory());
       break;
+    case GameState::MENU_WAND:
+      render_wand(*player.inventory());
+      break;
     case GameState::MENU_CHEST:
       render_chest(*player.chest()->inventory());
       break;
@@ -411,7 +414,7 @@ void Renderer::render_look(Player& player)
   if(look.y > _cameraRect.y + _cameraRect.h-TILE_SIZE)
     return;
 
-    
+
   SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
   SDL_RenderDrawRect(_graphics->Renderer, &look);
   SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
@@ -420,6 +423,11 @@ void Renderer::render_look(Player& player)
 void Renderer::render_inventory(Inventory& inventory)
 {
   _render_inv.render_player_inventory(*this, _items, inventory);
+}
+
+void Renderer::render_wand(Inventory& inventory)
+{
+  _render_inv.render_player_wands(*this, _items, inventory);
 }
 
 void Renderer::render_chest(Inventory& inventory)

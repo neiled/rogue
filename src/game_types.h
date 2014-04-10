@@ -1,5 +1,5 @@
 #ifndef GAME_TYPES_H
-#define GAME_TYPES_H 
+#define GAME_TYPES_H
 
 #include <map>
 #include <vector>
@@ -60,11 +60,12 @@ enum class GameState {
   MENU_START,
   MENU_CHEST,
   MENU_INVENTORY,
-  GAME, 
+  GAME,
   DEAD,
   STARTING,
   STOP,
-  LOOK
+  LOOK,
+  MENU_WAND
 };
 
 #endif
