@@ -8,6 +8,7 @@
 
 class Potion;
 class Weapon;
+class Wand;
 class Scroll;
 class Item;
 
@@ -24,6 +25,7 @@ public:
 private:
   static void init_potions();
   static void init_weapons();
+  static void init_wands();
   static void init_corpses();
   static void init_scrolls();
   static void init_other();
@@ -41,6 +43,7 @@ private:
 
   static Potion* get_potion(ItemSubtype subtype, int level);
   static Weapon* get_weapon(ItemSubtype subtype, int level);
+  static Wand* get_wand(ItemSubtype subtype, int level);
   static Scroll* get_scroll(ItemSubtype subtype, int level);
 
   static std::vector<AttributeModifiers> generate_magic_modifiers(int level);

@@ -20,6 +20,8 @@ void Scroll::cast(Actor& owner, Actor* target)
     case ItemSubtype::SCROLL_REVEAL:
       reveal(owner);
       break;
+    default:
+      SDL_Log("You need to add this type of scroll...");
   }
 }
 

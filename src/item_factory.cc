@@ -2,6 +2,7 @@
 #include "item.h"
 #include "potion.h"
 #include "weapon.h"
+#include "wand.h"
 #include "scroll.h"
 #include "chest.h"
 #include "random.h"
@@ -41,6 +42,7 @@ void ItemFactory::Init()
 {
   ItemFactory::init_potions();
   ItemFactory::init_weapons();
+  ItemFactory::init_wands();
   ItemFactory::init_corpses();
   ItemFactory::init_scrolls();
   ItemFactory::init_other();
@@ -97,11 +99,18 @@ void ItemFactory::init_weapons()
     5000);
   ItemFactory::add_item(
     new Weapon("Kris", ItemSubtype::WEAPON_KRIS, 3, 6, {}),
-    1000);    
+    1000);
   ItemFactory::add_item(
     new Weapon("Good Quality Kris", ItemSubtype::WEAPON_KRIS_GOOD, 5, 10, {}),
-    250);    
+    250);
 
+}
+
+void ItemFactory::init_wands()
+{
+  ItemFactory::add_item(
+      new Wand("Wand of flame", ItemSubtype::WAND_FLAME, {}, 10),
+      5000);
 }
 
 void ItemFactory::init_scrolls()
@@ -151,6 +160,14 @@ Scroll* ItemFactory::get_scroll(ItemSubtype subtype, int level)
   return newScroll;
 }
 
+Wand* ItemFactory::get_wand(ItemSubtype subtype, int level)
+{
+  auto current = ItemFactory::_prototypes[ItemType::WAND][subtype];
+  auto wand = static_cast<Wand*>(current);
+  auto newWand = new Wand(*wand);
+  return newWand;
+}
+
 Item* ItemFactory::get_item(ItemType item_type, ItemSubtype item_subtype, int level)
 {
   switch(item_type)
@@ -159,6 +176,8 @@ Item* ItemFactory::get_item(ItemType item_type, ItemSubtype item_subtype, int le
       return ItemFactory::get_potion(item_subtype, level);
     case ItemType::WEAPON:
       return ItemFactory::get_weapon(item_subtype, level);
+    case ItemType::WAND:
+      return ItemFactory::get_wand(item_subtype, level);
     case ItemType::SCROLL:
       return ItemFactory::get_scroll(item_subtype, level);
     case ItemType::CORPSE:
@@ -177,7 +196,12 @@ ItemType ItemFactory::calc_item_type(MonsterType monster_type, int xp_level)
   if(random < 50)
     return ItemType::POTION;
   else if(random < 90)
-    return ItemType::WEAPON;
+  {
+    random = Random::Between(0,100);
+    if(random < 75)
+      return ItemType::WEAPON;
+    return ItemType::WAND;
+  }
   else
     return ItemType::SCROLL;
 }

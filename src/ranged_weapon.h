@@ -6,6 +6,7 @@
 class RangedWeapon : public Weapon
 {
 public:
+  RangedWeapon (std::string name, ItemType type, ItemSubtype subtype, int min_damage, int max_damage, std::vector<AttributeModifiers> modifiers, int range);
   RangedWeapon (std::string name, ItemSubtype subtype, int min_damage, int max_damage, std::vector<AttributeModifiers> modifiers, int range);
   RangedWeapon(RangedWeapon& other);
   virtual ~RangedWeapon ();

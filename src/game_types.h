@@ -18,6 +18,8 @@ enum class MonsterState {Asleep, Awake, Hunting, Wandering};
 enum class ItemType {
   CORPSE=0,
   WEAPON,
+  RANGED,
+  WAND,
   POTION,
   SCROLL,
   CHEST
@@ -40,7 +42,10 @@ enum class ItemSubtype {
   SCROLL_BLINK,
   SCROLL_REVEAL,
   //CHEST
-  CHEST
+  CHEST,
+  //RANGED
+  //WAND
+  WAND_FLAME
 };
 
 enum struct TileType {Floor = 0, Rock, StairsDown, StairsUp, Door};

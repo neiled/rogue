@@ -111,6 +111,7 @@ void Renderer::load_items()
   load_corpses();
   load_potions();
   load_weapons();
+  load_wands();
   load_scrolls();
   load_scenery();
 }
@@ -147,6 +148,12 @@ void Renderer::load_weapons()
   _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
   _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_RUSTED] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
   _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_GOOD] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE); 
+}
+
+void Renderer::load_wands()
+{
+  _items[ItemType::WAND] = std::map<ItemSubtype, Sprite*>();
+  _items[ItemType::WAND][ItemSubtype::WAND_FLAME] = new Sprite(_graphics, "content/wand.png", 0, 0, TILE_SIZE, TILE_SIZE);
 }
 
 void Renderer::load_scrolls()
