@@ -65,7 +65,8 @@ enum class GameState {
   STARTING,
   STOP,
   LOOK,
-  MENU_WAND
+  MENU_WAND,
+  RANGED_TARGET
 };
 
 #endif
