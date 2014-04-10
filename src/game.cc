@@ -29,7 +29,7 @@ void Game::start()
   _world.init();
   _decoders[GameState::GAME] = new CommandDecoderGame();
   _decoders[GameState::MENU_INVENTORY] = new CommandDecoderInventory();
-  _decoders[GameState::MENU_WAND] = new CommandDecoderInventory();
+  _decoders[GameState::MENU_WAND] = new CommandDecoderWand();
   _decoders[GameState::MENU_CHEST] = new CommandDecoderChest();
   _decoders[GameState::DEAD] = new CommandDecoderDead();
   _decoders[GameState::LOOK] = new CommandDecoderLook();
