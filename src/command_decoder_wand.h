@@ -17,6 +17,7 @@ public:
 private:
   std::vector<Item*> get_items(Player& player, GameState state);
   Item* get_item(std::vector<Item*> items, SDL_Keycode key);
+  bool use_chosen_item(SDL_Keycode key, Game& game);
 
 };
 #endif
