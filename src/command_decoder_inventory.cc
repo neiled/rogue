@@ -12,22 +12,15 @@ bool CommandDecoderInventory::Decode(SDL_Keycode key, Game& game)
     game.state(GameState::GAME);
   else if(key == SDLK_i)
   {
-    if(game.state() == GameState::MENU_INVENTORY)
-      game.state(GameState::GAME);
-    else
-      game.state(GameState::MENU_INVENTORY);
+    game.state(GameState::GAME);
   }
   else if(key == SDLK_w)
   {
-    if(game.state() == GameState::MENU_WAND)
-      game.state(GameState::GAME);
-    else
-      game.state(GameState::MENU_WAND);
+    game.state(GameState::MENU_WAND);
   }
   else if(key == SDLK_d)
   {
-    if(game.state() == GameState::MENU_INVENTORY)
-      _drop_mode = !_drop_mode;
+    _drop_mode = !_drop_mode;
     return false;
   }
   else if(_drop_mode)
@@ -54,12 +47,7 @@ bool CommandDecoderInventory::use_chosen_item(SDL_Keycode key, Game& game)
 
 std::vector<Item*> CommandDecoderInventory::get_items(Player& player, GameState state)
 {
-  if(state == GameState::MENU_INVENTORY)
-    return player.inventory()->items();
-  else if(state == GameState::MENU_WAND)
-    return player.inventory()->items_of_type(ItemType::WAND);
-  else
-    return std::vector<Item*>();
+  return player.inventory()->items();
 }
 
 bool CommandDecoderInventory::drop_chosen_item(SDL_Keycode key, Game& game)
