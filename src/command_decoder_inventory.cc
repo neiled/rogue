@@ -62,18 +62,6 @@ std::vector<Item*> CommandDecoderInventory::get_items(Player& player, GameState 
     return std::vector<Item*>();
 }
 
-Item* CommandDecoderInventory::get_item(std::vector<Item*> items, SDL_Keycode key)
-{
-  int index = get_index(key);
-  if(index < 0)
-    return nullptr;
-
-  if(index > items.size())
-    return nullptr;
-
-  return items.at(index);
-}
-
 bool CommandDecoderInventory::drop_chosen_item(SDL_Keycode key, Game& game)
 {
   auto items = get_items(*game.player(), game.state());
@@ -88,43 +76,6 @@ bool CommandDecoderInventory::drop_chosen_item(SDL_Keycode key, Game& game)
   game.state(GameState::GAME);
   return true;
 }
-
-int CommandDecoderInventory::get_index(SDL_Keycode key)
-{
-  int index = -1;
-  if(key == SDLK_0)
-    index = 0;
-  else if(key == SDLK_1)
-    index = 1;
-  else if(key == SDLK_2)
-    index = 2;
-  else if(key == SDLK_3)
-    index = 3;
-  else if(key == SDLK_4)
-    index = 4;
-  else if(key == SDLK_5)
-    index = 5;
-  else if(key == SDLK_6)
-    index = 6;
-  else if(key == SDLK_7)
-    index = 7;
-  else if(key == SDLK_8)
-    index = 8;
-  else if(key == SDLK_9)
-    index = 9;
-
-  return index;
-}
-
-//void CommandDecoderInventory::use_item(Player& player, int index)
-//{
-  //player.push_command(Commands::CMD::CMD_USE, player.inventory()->items()[index], 200);
-//}
-//void CommandDecoderInventory::drop_item(Player& player, int index)
-//{
-  //player.push_command(Commands::CMD::CMD_DROP, player.inventory()->items()[index]);
-  //_drop_mode = false;
-//}
 
 bool CommandDecoderInventory::Decode(Uint8 button, Uint8 clicks, Sint32 x, Sint32 y, Game& game)
 {
