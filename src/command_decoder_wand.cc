@@ -32,9 +32,9 @@ bool CommandDecoderWand::use_chosen_item(SDL_Keycode key, Game& game)
   if(!item)
     return false;
 
-  game.player()->push_command(Commands::CMD::CMD_USE, item, 200);
+  game.player()->ranged_weapon(static_cast<Wand*>(item));
 
-  game.state(GameState::GAME);
+  game.state(GameState::RANGED_TARGET);
   return true;
 }
 
