@@ -4,6 +4,9 @@
 #include "command_decoder.h"
 #include <SDL2/SDL.h>
 
+class Game;
+class Player;
+
 class CommandDecoderLook : public CommandDecoder
 {
 public:

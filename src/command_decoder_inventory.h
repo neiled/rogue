@@ -3,9 +3,11 @@
 
 #include "command_decoder.h"
 #include <SDL2/SDL.h>
+#include "game_types.h"
 
 
 class Item;
+class Player;
 
 class CommandDecoderInventory : public CommandDecoder
 {

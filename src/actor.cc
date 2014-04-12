@@ -479,6 +479,16 @@ void Actor::weapon(Item* weapon)
   _weapon = weapon;
 }
 
+RangedWeapon* Actor::ranged_weapon()
+{
+  return _ranged_weapon;
+}
+
+void Actor::ranged_weapon(RangedWeapon* weapon)
+{
+  _ranged_weapon = weapon;
+}
+
 Actor* Actor::target_actor()
 {
   return _target_actor;

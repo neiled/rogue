@@ -1,8 +1,12 @@
 #include "command_decoder_wand.h"
 #include "game_types.h"
 #include <SDL2/SDL.h>
+#include "player.h"
+#include "game.h"
+#include "wand.h"
+#include "item.h"
 
-CommandDecoderWand::CommandDecoderWand() : _drop_mode(false)
+CommandDecoderWand::CommandDecoderWand()
 {
 }
 

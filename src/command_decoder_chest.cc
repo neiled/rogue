@@ -3,6 +3,8 @@
 #include "tile.h"
 #include "game_types.h"
 #include "messages.h"
+#include "game.h"
+#include "player.h"
 
 CommandDecoderChest::CommandDecoderChest()
 {

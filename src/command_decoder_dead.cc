@@ -1,5 +1,6 @@
 #include "command_decoder_dead.h"
 #include "game_types.h"
+#include "game.h"
 
 
 bool CommandDecoderDead::Decode(SDL_Keycode key, Game& game)

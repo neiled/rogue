@@ -3,6 +3,7 @@
 #include "tile.h"
 #include "messages.h"
 #include "level.h"
+#include "game.h"
 
 bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
 {

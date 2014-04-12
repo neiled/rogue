@@ -1,5 +1,7 @@
 #include "command_decoder_look.h"
 #include "level.h"
+#include "player.h"
+#include "game.h"
 
 CommandDecoderLook::CommandDecoderLook()
 {

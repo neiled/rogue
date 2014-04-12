@@ -9,6 +9,7 @@
 #include "command_decoder_dead.h"
 #include "command_decoder_chest.h"
 #include "command_decoder_look.h"
+#include "command_decoder_wand.h"
 
 
 Game::Game() : _graphics(), _renderer(&_graphics)

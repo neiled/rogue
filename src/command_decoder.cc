@@ -1,8 +1,7 @@
 #include "command_decoder.h"
-
-#include "command_decoder_inventory.h"
 #include "game_types.h"
 #include <SDL2/SDL.h>
+#include "item.h"
 
 
 Item* CommandDecoder::get_item(std::vector<Item*> items, SDL_Keycode key)

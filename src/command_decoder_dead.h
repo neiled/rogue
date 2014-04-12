@@ -3,6 +3,8 @@
 
 #include "command_decoder.h"
 
+class Game;
+
 class CommandDecoderDead : public CommandDecoder
 {
 public:

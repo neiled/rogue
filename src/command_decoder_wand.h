@@ -3,9 +3,12 @@
 
 #include "command_decoder.h"
 #include <SDL2/SDL.h>
+#include <vector>
+#include "game_types.h"
 
 
 class Item;
+class Player;
 
 class CommandDecoderWand : public CommandDecoder
 {
@@ -16,7 +19,6 @@ public:
 
 private:
   std::vector<Item*> get_items(Player& player, GameState state);
-  Item* get_item(std::vector<Item*> items, SDL_Keycode key);
   bool use_chosen_item(SDL_Keycode key, Game& game);
 
 };
