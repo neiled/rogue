@@ -20,7 +20,7 @@ public:
   virtual std::string name() override;
   std::string damage_name();
   
-private:
+protected:
   int _max_damage;
   int _min_damage;
   int damage_modifier();

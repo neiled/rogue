@@ -12,6 +12,8 @@ public:
   virtual void fire(Actor& owner, Tile& tile) override;
 
 private:
+  int max_damage(ItemSubtype);
+  int min_damage(ItemSubtype);
   void flame(Actor& owner, Tile& tile);
   int _charges;
 };

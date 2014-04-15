@@ -30,6 +30,7 @@ void World::init()
   SDL_Log("Done.");
   _levels.push_back(firstLevel);
   _player.weapon(ItemFactory::Build(ItemType::WEAPON, ItemSubtype::WEAPON_KRIS_RUSTED, 1));
+  _player.inventory()->add( ItemFactory::Build(ItemType::WAND, ItemSubtype::WAND_FLAME, 1));
 }
 
 void World::updateGraphics()
