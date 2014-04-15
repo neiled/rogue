@@ -34,6 +34,7 @@ void Game::start()
   _decoders[GameState::MENU_CHEST] = new CommandDecoderChest();
   _decoders[GameState::DEAD] = new CommandDecoderDead();
   _decoders[GameState::LOOK] = new CommandDecoderLook();
+  _decoders[GameState::RANGED_TARGET] = new CommandDecoderLook();
   _state = GameState::GAME;
   eventLoop();
 }

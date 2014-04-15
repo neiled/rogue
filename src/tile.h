@@ -16,7 +16,7 @@ class Tile
     Tile (TileType tileType, Level& level, int x, int y);
     virtual ~Tile ();
     void setTileType(TileType tileType);
-    double distanceTo(const Tile& otherTile);
+    double distance_to(const Tile& otherTile);
     void removeActor();
     void setActor(Actor& actor);
     void add_item(Item* item);

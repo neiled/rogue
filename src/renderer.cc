@@ -13,7 +13,7 @@
 #include "render_monsters.h"
 #include "chest.h"
 
-Renderer::Renderer(Graphics* graphics) : _graphics(graphics), _render_inv(graphics), _render_level(graphics), _render_info(graphics)
+Renderer::Renderer(Graphics* graphics) : _graphics(graphics), _render_inv(graphics), _render_level(graphics), _render_info(graphics), _render_ranged(graphics), _render_look(graphics)
 {
 
 }
@@ -36,6 +36,12 @@ void Renderer::init()
 
   _render_inv.init();
   _render_info.init();
+  _render_ranged.init();
+}
+
+SDL_Rect Renderer::camera_rect()
+{
+  return _cameraRect;
 }
 
 void Renderer::render(Game& game)
@@ -391,6 +397,8 @@ void Renderer::render_state(GameState state, Player& player)
     case GameState::LOOK:
       render_look(player);
       break;
+    case GameState::RANGED_TARGET:
+      render_ranged(player);
     default:
       break;
   }
@@ -399,26 +407,28 @@ void Renderer::render_state(GameState state, Player& player)
 
 void Renderer::render_look(Player& player)
 {
-  if(!player.level().look_tile())
-    return;
+  _render_look.render(*this, player);
+  //if(!player.level().look_tile())
+    //return;
 
-  auto point = tile_to_screen(player.level().look_tile()->x(), player.level().look_tile()->y());
-  SDL_Rect look;
-  look.x = point.x;
-  look.y = point.y;
-  look.w = TILE_SIZE;
-  look.h = TILE_SIZE;
+  //auto point = tile_to_screen(player.level().look_tile()->x(), player.level().look_tile()->y());
+  //SDL_Rect look;
+  //look.x = point.x;
+  //look.y = point.y;
+  //look.w = TILE_SIZE;
+  //look.h = TILE_SIZE;
 
-  if(look.x > _cameraRect.x + _cameraRect.w-TILE_SIZE)
-    return;
-  if(look.y > _cameraRect.y + _cameraRect.h-TILE_SIZE)
-    return;
+  //if(look.x > _cameraRect.x + _cameraRect.w-TILE_SIZE)
+    //return;
+  //if(look.y > _cameraRect.y + _cameraRect.h-TILE_SIZE)
+    //return;
 
 
-  SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-  SDL_RenderDrawRect(_graphics->Renderer, &look);
-  SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+  //SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+  //SDL_RenderDrawRect(_graphics->Renderer, &look);
+  //SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
+
 
 void Renderer::render_inventory(Inventory& inventory)
 {
@@ -433,6 +443,11 @@ void Renderer::render_wand(Inventory& inventory)
 void Renderer::render_chest(Inventory& inventory)
 {
   _render_inv.render_chest_inventory(*this, _items, inventory);
+}
+
+void Renderer::render_ranged(Player& player)
+{
+  _render_ranged.render(*this, player);
 }
 
 SDL_Texture* Renderer::render_message(std::string message, int height, SDL_Color color)

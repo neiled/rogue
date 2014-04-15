@@ -9,8 +9,10 @@ public:
   Wand (std::string name, ItemSubtype subtype, std::vector<AttributeModifiers> modifiers, int range);
   Wand(Wand& other);
   virtual ~Wand ();
+  virtual void fire(Actor& owner, Tile& tile) override;
 
 private:
-  /* data */
+  void flame(Actor& owner, Tile& tile);
+  int _charges;
 };
 #endif

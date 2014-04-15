@@ -21,7 +21,7 @@ public:
   void addNeighbour(Room* room);
   std::vector<Room*> getNeighbours();
 
-  double distanceTo(Room* otherRoom);
+  double distance_to(Room* otherRoom);
   bool containsTile(Tile* tile);
   Tile* getRandomTile(bool avoidWalls = false);
 

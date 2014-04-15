@@ -84,7 +84,7 @@ bool Tile::is_lit() const
   return _level.light_map(_x, _y) == Level::LightType::Lit;
 }
 
-double Tile::distanceTo(const Tile& otherTile)
+double Tile::distance_to(const Tile& otherTile)
 {
   return sqrt((otherTile.x() - _x)*(otherTile.x() - _x) + (otherTile.y() - _y) * (otherTile.y() - _y));
 }

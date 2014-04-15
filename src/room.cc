@@ -103,7 +103,7 @@ bool Room::dead_end()
 }
 
 
-double Room::distanceTo(Room* otherRoom)
+double Room::distance_to(Room* otherRoom)
 {
   return sqrt((otherRoom->x() - _x)*(otherRoom->x() - _x) + (otherRoom->y() - _y) * (otherRoom->y() - _y));
 }

@@ -176,7 +176,7 @@ Room* LevelBuilder::positionStairs(std::vector<Room*> rooms)
   {
     for(Room* otherRoom : rooms)
     {
-      int currentDistance = room->distanceTo(otherRoom);
+      int currentDistance = room->distance_to(otherRoom);
       if(currentDistance > maxDistance)
       {
         startRoom = room;
@@ -236,13 +236,13 @@ void LevelBuilder::connect_rooms(std::vector<Room*> rooms)
           if(!closestRoom)
           {
             closestRoom = roomToTest;
-            minDistance = connectedRoom->distanceTo(roomToTest);
+            minDistance = connectedRoom->distance_to(roomToTest);
             startRoom = connectedRoom;
           }
-          else if(roomToTest->distanceTo(connectedRoom) < minDistance)
+          else if(roomToTest->distance_to(connectedRoom) < minDistance)
           {
             closestRoom = roomToTest;
-            minDistance = roomToTest->distanceTo(connectedRoom);
+            minDistance = roomToTest->distance_to(connectedRoom);
             startRoom = connectedRoom;
           }
           

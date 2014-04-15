@@ -2,6 +2,7 @@
 #include "level.h"
 #include "player.h"
 #include "game.h"
+#include "ranged_weapon.h"
 
 CommandDecoderLook::CommandDecoderLook()
 {
@@ -25,6 +26,19 @@ bool CommandDecoderLook::Decode(SDL_Keycode key, Game& game)
     move_tile(*game.player(), -1,0);
   else if(key == SDLK_RIGHT || key == SDLK_KP_6)
     move_tile(*game.player(), 1,0);
+  else if(key == SDLK_RETURN)
+  {
+    if(game.state() == GameState::LOOK)
+      game.state(GameState::GAME);
+    else if(game.state() == GameState::RANGED_TARGET)
+    {
+      if(game.player()->ranged_weapon())
+      {
+        game.player()->ranged_weapon()->fire(*game.player(), *game.player()->level().look_tile());
+      }
+      game.state(GameState::GAME);
+    }
+  }
   else return false;
 
   return true;

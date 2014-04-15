@@ -10,8 +10,9 @@ public:
   RangedWeapon (std::string name, ItemSubtype subtype, int min_damage, int max_damage, std::vector<AttributeModifiers> modifiers, int range);
   RangedWeapon(RangedWeapon& other);
   virtual ~RangedWeapon ();
+  virtual void fire(Actor& owner, Tile& tile);
 
-private:
+protected:
   int _range;
 };
 #endif

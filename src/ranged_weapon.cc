@@ -19,4 +19,6 @@ RangedWeapon::~RangedWeapon()
 {
 }
 
-
+void RangedWeapon::fire(Actor& owner, Tile& target)
+{
+}

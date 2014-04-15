@@ -14,6 +14,8 @@
 #include "render_inventory.h"
 #include "render_level.h"
 #include "render_info.h"
+#include "render_ranged.h"
+#include "render_look.h"
 #include "game_types.h"
 
 using std::vector;
@@ -55,6 +57,7 @@ class Renderer {
     void draw_xp_bar(int x, int y, int width, int height, int current, int max);
 
     SDL_Point tile_to_screen(int x, int y);
+    SDL_Rect camera_rect();
   private:
     //array<Sprite*,5> _mapTiles;
     monster_sprites_t _monsters;
@@ -66,6 +69,8 @@ class Renderer {
     RenderInventory _render_inv;
     RenderInfo _render_info;
     RenderLevel _render_level;
+    RenderRanged _render_ranged;
+    RenderLook _render_look;
 
     SDL_Rect _vp_main;
     SDL_Rect _vp_msg;
@@ -80,6 +85,7 @@ class Renderer {
     void render_level(Level& level);
     void render_monsters(Level& level);
     void render_items(Tile& tile, int alpha);
+    void render_ranged(Player& player);
     SDL_Texture* render_message(std::string message, int height, SDL_Color color = SDL_Color{255,255,255});
 
     
@@ -106,6 +112,7 @@ class Renderer {
     void render_wand(Inventory& inventory);
     void render_chest(Inventory& inventory);
     void render_look(Player&);
+    void render_aim(Player& player);
 
     SDL_Color calc_color(MessageType type);
 
