@@ -4,6 +4,7 @@
 class Graphics;
 class Renderer;
 class Player;
+class Tile;
 
 class RenderRanged
 {
@@ -16,5 +17,6 @@ public:
 
 private:
   Graphics* _graphics;
+  void draw_line(Renderer&, Tile&, Tile&);
 };
 #endif

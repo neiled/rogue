@@ -34,8 +34,25 @@ void RenderRanged::render(Renderer& renderer, Player& player)
   if(look.y > camera_rect.y + camera_rect.h-Renderer::TILE_SIZE)
     return;
 
+  draw_line(renderer, *player.tile(), *player.level().look_tile());
+
 
   SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
   SDL_RenderDrawRect(_graphics->Renderer, &look);
   SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+}
+
+void RenderRanged::draw_line(Renderer& renderer, Tile& start, Tile& end)
+{
+  auto start_point = renderer.tile_to_screen(start.x(), start.y());
+  start_point.x += Renderer::TILE_SIZE/2.0f;
+  start_point.y += Renderer::TILE_SIZE/2.0f;
+  auto end_point = renderer.tile_to_screen(end.x(), end.y());
+  end_point.x += Renderer::TILE_SIZE/2.0f;
+  end_point.y += Renderer::TILE_SIZE/2.0f;
+
+  SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+  SDL_RenderDrawLine(_graphics->Renderer, start_point.x, start_point.y, end_point.x, end_point.y);
+  SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+
 }
