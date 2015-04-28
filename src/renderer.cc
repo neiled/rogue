@@ -67,17 +67,17 @@ void Renderer::init_viewports()
   _vp_main.w = screen_w-info_w;
   _vp_main.h = screen_h-msg_h;
   _vp_main.x = 0;
-  _vp_main.y = msg_h;
+  _vp_main.y = 0;//msg_h;
 
-  _vp_info.w = screen_w - _vp_main.w;
+  _vp_info.w = info_w;
   _vp_info.h = screen_h;
-  _vp_info.x = screen_w - _vp_info.w;//_vp_main.x + _vp_main.w;
+  _vp_info.x = screen_w - info_w;//_vp_main.x + _vp_main.w;
   _vp_info.y = 0;//screen_h;
 
   _vp_msg.h = msg_h;
-  _vp_msg.w = screen_w - _vp_info.w;
+  _vp_msg.w = screen_w - info_w;
   _vp_msg.x = 0;
-  _vp_msg.y = 0;//screen_h - _vp_main.h;
+  _vp_msg.y = screen_h - msg_h;
 
   _cameraRect.w= _vp_main.w;
   _cameraRect.h= _vp_main.h;
