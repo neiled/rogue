@@ -23,7 +23,7 @@ Player::~Player()
 }
 
 
-void Player::die() 
+void Player::die()
 {
   Messages::Add("You died, do you want to try again? Y/N");
   //TODO: Message generation should be somewhere else...
@@ -48,7 +48,7 @@ void Player::pickup_items()
 {
   if(_auto_pickup == false)
     return;
-  
+
   for(auto item : _currentTile->items())
   {
     if(_inventory.full() == false)

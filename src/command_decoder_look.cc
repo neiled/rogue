@@ -18,13 +18,13 @@ bool CommandDecoderLook::Decode(SDL_Keycode key, Game& game)
     game.state(GameState::GAME);
   else if(key == SDLK_SLASH)
     game.state(GameState::GAME);
-  else if(key == SDLK_UP || key == SDLK_KP_8)
+  else if(key == SDLK_UP || key == SDLK_KP_8 || key == SDLK_k)
     move_tile(*game.player(), 0,-1);
-  else if(key == SDLK_DOWN || key == SDLK_KP_2)
+  else if(key == SDLK_DOWN || key == SDLK_KP_2 || key == SDLK_j)
     move_tile(*game.player(), 0,1);
-  else if(key == SDLK_LEFT || key == SDLK_KP_4)
+  else if(key == SDLK_LEFT || key == SDLK_KP_4 || key == SDLK_h)
     move_tile(*game.player(), -1,0);
-  else if(key == SDLK_RIGHT || key == SDLK_KP_6)
+  else if(key == SDLK_RIGHT || key == SDLK_KP_6 || key == SDLK_l)
     move_tile(*game.player(), 1,0);
   else if(key == SDLK_RETURN)
   {
@@ -34,7 +34,7 @@ bool CommandDecoderLook::Decode(SDL_Keycode key, Game& game)
     {
       if(game.player()->ranged_weapon())
       {
-        game.player()->ranged_weapon()->fire(*game.player(), *game.player()->level().look_tile());
+        game.player()->rangedAttack(game.player()->level().look_tile());
       }
       game.state(GameState::GAME);
     }
@@ -42,7 +42,7 @@ bool CommandDecoderLook::Decode(SDL_Keycode key, Game& game)
   else return false;
 
   return true;
-  
+
 }
 
 bool CommandDecoderLook::Decode(Uint8 button, Uint8 clicks, Sint32 x, Sint32 y, Game& game)

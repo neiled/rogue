@@ -26,16 +26,16 @@ class Actor : public GameObject
 
     enum class Direction {EAST=0, WEST=1, NORTH=2, SOUTH=3};
     enum class Attribute {ATK=0, DEF, HEALTH, CON, DMG};
-    
+
     Direction direction;
-    
+
     Level& level();
     virtual void set_tile(Tile& currentTile);
     Tile* tile() const;
 
     Inventory* inventory();
     Chest* chest();
-    
+
     int x();
     int y();
     void moveLeft();
@@ -44,7 +44,7 @@ class Actor : public GameObject
     void moveDown();
     void move_to(Tile* tile);
     bool move_to_target();
-    
+
     virtual void start_turn();
     virtual void end_turn();
 
@@ -52,7 +52,7 @@ class Actor : public GameObject
     bool can_see_actor(Actor& actor);
     virtual bool can_see_something_interesting(bool quiet = true);
     virtual bool can_see_monster(bool quiet = true);
-    
+
 
     void push_command(Commands::CMD command);
     void push_command(Commands::CMD command, GameObject* target);
@@ -71,21 +71,21 @@ class Actor : public GameObject
     virtual int min_damage(Actor& other) = 0;
 
     bool dead() const;
-    
-    
+
+
     virtual int max_health() = 0;
     int health();
     int previous_health();
-    
+
 
     void drop_items();
 
     void add_modifier(AttributeModifiers modifier);
-    
+
     int xp_level();
 
     virtual bool is_player() = 0;
-    
+
     int atk();
     int def();
     int dmg();
@@ -95,11 +95,13 @@ class Actor : public GameObject
     void weapon(Item* weapon);
     RangedWeapon* ranged_weapon();
     void ranged_weapon(RangedWeapon* weapon);
-    
-    
+
+
     Actor* target_actor();
     void target_actor(Actor* actor);
     
+    void rangedAttack(Tile* tile);
+
   protected:
     Tile* _currentTile = nullptr;
     Tile* _targetTile = nullptr;
@@ -113,7 +115,7 @@ class Actor : public GameObject
     std::map<Actor::Attribute, int> _attributes;
 
     Inventory _inventory;
-    
+
     bool attemptMove(int newX, int newY);
     Tile* checkCanMove(int newX, int newY);
     void meleeAttack(Actor* other);
@@ -131,12 +133,12 @@ class Actor : public GameObject
     virtual void pickup_items();
 
     int _xp_level;
-    
+
     int _previous_health;
 
     Item* _weapon = nullptr;
     RangedWeapon* _ranged_weapon = nullptr;
-    
+
     Actor* _target_actor = nullptr;
 
     int _action_points;

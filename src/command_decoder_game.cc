@@ -8,13 +8,13 @@
 bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
 {
   auto &player = *game.player();
-  if(key == SDLK_UP || key == SDLK_KP_8)
+  if(key == SDLK_UP || key == SDLK_KP_8 || key == SDLK_k)
     player.push_command(Commands::CMD::CMD_MOVE_UP);
-  else if(key == SDLK_DOWN || key == SDLK_KP_2)
+  else if(key == SDLK_DOWN || key == SDLK_KP_2 || key == SDLK_j)
     player.push_command(Commands::CMD::CMD_MOVE_DOWN);
-  else if(key == SDLK_LEFT || key == SDLK_KP_4)
+  else if(key == SDLK_LEFT || key == SDLK_KP_4 || key == SDLK_h)
     player.push_command(Commands::CMD::CMD_MOVE_LEFT);
-  else if(key == SDLK_RIGHT || key == SDLK_KP_6)
+  else if(key == SDLK_RIGHT || key == SDLK_KP_6 || key == SDLK_l)
     player.push_command(Commands::CMD::CMD_MOVE_RIGHT);
   else if(key == SDLK_o)
     player.push_command(Commands::CMD::CMD_EXPLORE);
@@ -54,9 +54,16 @@ bool CommandDecoderGame::Decode(Uint8 button, Uint8 clicks, Sint32 x, Sint32 y, 
   if(tile)
   {
     if(player.can_see_monster() == false)
+    {
       player.move_to(tile);
+      return true;
+    }
     else
       Messages::Push("It's too dangerous right now.");
+  }
+  else
+  {
+    SDL_Log("No Tile Clicked");
   }
   return false;
 }

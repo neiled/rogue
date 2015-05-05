@@ -152,7 +152,7 @@ void Game::update_monsters()
     }while(m->action_points() > 0 && m->hasCommands() == false);
 
     //SDL_Log("Ending turn of monster");
-    m->end_turn();      
+    m->end_turn();
   }
 }
 
@@ -222,7 +222,7 @@ void Game::delay(int start_time_ms)
   int timeToDelay = 1000 / 30 - elapsed_time_ms;
   timeToDelay = timeToDelay < 0 ? 0 : timeToDelay;
 
-  SDL_Delay(timeToDelay);  
+  SDL_Delay(timeToDelay);
 }
 
 void Game::draw(Graphics& graphics, Renderer& renderer)
@@ -232,4 +232,3 @@ void Game::draw(Graphics& graphics, Renderer& renderer)
   renderer.render(*this);
   graphics.render();
 }
-   

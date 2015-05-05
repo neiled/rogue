@@ -8,6 +8,7 @@
 #include <SDL2/SDL.h>
 #include "item.h"
 #include "chest.h"
+#include "wand.h"
 
 Actor::Actor(std::string name, int xp_level) : Actor(name, xp_level, 5, 1)
 {
@@ -49,7 +50,7 @@ void Actor::end_turn()
 {
   if(_attributes[Attribute::HEALTH] > _attributes[Attribute::CON])
     _attributes[Attribute::HEALTH] = _attributes[Attribute::CON];
-  
+
 }
 
 Tile* Actor::tile() const
@@ -144,7 +145,7 @@ bool Actor::move_to_target()
 
   return false;//Don't spend a turn setting up, turns spent on actual movement
 
-  
+
 }
 
 int Actor::x()
@@ -173,7 +174,7 @@ bool Actor::attemptMove(int xModifier, int yModifier)
 
   int newX = currentX + xModifier;
   int newY = currentY + yModifier;
-  
+
   auto newTile = checkCanMove(newX, newY);
   if(!newTile)
     return false;
@@ -203,7 +204,7 @@ void Actor::meleeAttack(Actor* other)
 {
   if(!other || other->dead())
     return;
-    
+
   _target_actor = other;
 
   float toHit = hit_chance(*other);
@@ -234,6 +235,14 @@ void Actor::meleeAttack(Actor* other)
 
 
   return;
+}
+
+void Actor::rangedAttack(Tile* tile)
+{
+  ranged_weapon()->fire(*this, *tile);
+
+  _action_points -= 100;
+
 }
 
 Chest* Actor::chest()
@@ -270,7 +279,7 @@ int Actor::calc_damage(Actor& other)
 {
   int max_damage = this->max_damage(other);
   int min_damage = this->min_damage(other);
-  
+
   auto base_damage = Random::BetweenNormal(min_damage, max_damage);
   auto total_damage = base_damage;
   total_damage += dmg();
