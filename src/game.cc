@@ -69,20 +69,23 @@ void Game::eventLoop()
 
     do
     {
-      if(player->hasCommands() == false)
+      while(player->hasCommands() == false)
       {
         //SDL_Log("%d points left, Waiting for a valid event.", player->action_points());
         SDL_Event event;
-        do
+        // do
+        // {
+        if(SDL_PollEvent(&event))
         {
-          SDL_WaitEvent(&event);
-        }while(!decode_event(event, _graphics, _renderer));
+          decode_event(event, _graphics, _renderer);
+        }
+        // }while(!);
         draw(_graphics, _renderer);
       }
 
       while(!player->dead() && player->can_afford_next_command())
       {
-        cProc.Process(player->popCommand(), *player);
+        cProc.Process(player->popCommand(), *player, *this);
         draw(_graphics, _renderer);
         //SDL_Log("%d points left.", player->action_points());
       }
@@ -146,7 +149,7 @@ void Game::update_monsters()
       while(!m->dead() && m->can_afford_next_command())
       {
         //SDL_Log("Peforming monster commands.");
-        cProc.Process(m->popCommand(), *m);
+        cProc.Process(m->popCommand(), *m, *this);
         //draw(_graphics, _renderer);
       }
     }while(m->action_points() > 0 && m->hasCommands() == false);
@@ -164,24 +167,27 @@ int Game::turn()
 
 bool Game::decode_event(SDL_Event& event, Graphics& graphics, Renderer& renderer)
 {
+  auto decoder = _decoders[_state];
+  if(!decoder)
+    return false;
   switch(event.type)
   {
     case SDL_KEYDOWN:
     {
-      auto decoded = _decoders[_state]->Decode(event.key.keysym.sym, *this);
+      auto decoded = decoder->Decode(event.key.keysym.sym, *this);
       if(decoded)
       {
         player()->add_seen_items();
-        draw(graphics, renderer);
+        // draw(graphics, renderer);
       }
       return decoded;
     }
     case SDL_MOUSEBUTTONDOWN:
     {
-      auto decoded = _decoders[_state]->Decode(event.button.button, 1, event.button.x, event.button.y, *this);
+      auto decoded = decoder->Decode(event.button.button, 1, event.button.x, event.button.y, *this);
       if(decoded)
       {
-        draw(graphics, renderer);
+        // draw(graphics, renderer);
       }
       return decoded;
     }

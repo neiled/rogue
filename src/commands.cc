@@ -4,6 +4,7 @@
 #include "actor.h"
 #include "player.h"
 #include "potion.h"
+#include "game.h"
 
 CommandProcessor::CommandProcessor()
 {
@@ -13,16 +14,16 @@ CommandProcessor::~CommandProcessor()
 {
 }
 
-bool CommandProcessor::Process(Command command, Actor& actor)
+bool CommandProcessor::Process(Command command, Actor& actor, Game& game)
 {
-  bool result = attempt_process(command, actor);
+  bool result = attempt_process(command, actor, game);
   if(result)
     actor.use_action_points(command.cost);
 
   return result;
 }
 
-bool CommandProcessor::attempt_process(Command command, Actor& actor)
+bool CommandProcessor::attempt_process(Command command, Actor& actor, Game& game)
 {
   switch(command.command)
   {
@@ -48,7 +49,22 @@ bool CommandProcessor::attempt_process(Command command, Actor& actor)
     case Commands::CMD::CMD_DROP:
       return drop(actor, command.target);
     case Commands::CMD::NOP:
-      return true;
+      break;
+    case Commands::CMD::CMD_STATE_STOP:
+      game.state(GameState::STOP);
+      break;
+    case Commands::CMD::CMD_STATE_LOOK:
+      game.state(GameState::LOOK);
+      break;
+    case Commands::CMD::CMD_STATE_WAND:
+      game.state(GameState::MENU_WAND);
+      break;
+    case Commands::CMD::CMD_STATE_INV:
+      game.state(GameState::MENU_INVENTORY);
+      break;
+    case Commands::CMD::CMD_STATE_CHEST:
+      game.state(GameState::MENU_CHEST);
+      break;
     default:
       SDL_Log("Missing a command type!");
       break;

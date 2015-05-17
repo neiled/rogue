@@ -369,6 +369,11 @@ void Actor::push_command(Commands::CMD command, GameObject* target)
   _commandQueue.push_back(Command{command, target});
 }
 
+void Actor::push_command(Commands::CMD command, int cost)
+{
+  _commandQueue.push_back(Command{command, nullptr, cost});
+}
+
 void Actor::push_command(Commands::CMD command, GameObject* target, int cost)
 {
   _commandQueue.push_back(Command{command, target, cost});

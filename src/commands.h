@@ -1,10 +1,11 @@
 #ifndef COMMANDS_H
-#define COMMANDS_H 
+#define COMMANDS_H
 
 
 class Actor;
 class World;
 class GameObject;
+class Game;
 
 struct Commands
 {
@@ -21,7 +22,14 @@ struct Commands
                   CMD_EXPLORE,
                   CMD_MOVE_TO_TILE,
                   CMD_USE,
-                  CMD_DROP};
+                  CMD_DROP,
+                  CMD_STATE_STOP,
+                  CMD_STATE_INV,
+                  CMD_STATE_WAND,
+                  CMD_STATE_LOOK,
+                  CMD_STATE_CHEST,
+                  };
+
 };
 
 struct Command
@@ -40,12 +48,13 @@ class CommandProcessor
 public:
   CommandProcessor ();
   virtual ~CommandProcessor ();
-  bool Process(Command command, Actor& actor);
+  bool Process(Command command, Actor& actor, Game& game);
 
 private:
   bool use(Actor& actor, GameObject* target);
   bool drop(Actor& actor, GameObject* target);
-  bool attempt_process(Command command, Actor& actor);
-  
+  bool attempt_process(Command command, Actor& actor, Game& game);
+
+
 };
 #endif

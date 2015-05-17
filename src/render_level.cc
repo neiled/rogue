@@ -12,6 +12,7 @@ RenderLevel::RenderLevel(Graphics* graphics) : _graphics(graphics)
 
 void RenderLevel::render(Renderer& renderer, SDL_Rect camera, level_sprites_t tiles, item_sprites_t items, Level& level)
 {
+  level.updateGraphics();
   for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
   {
     for (int x = 0; x < Level::LEVEL_WIDTH; ++x)

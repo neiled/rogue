@@ -33,10 +33,10 @@ class Level
     std::vector<Tile*> visible_tiles();
     int width();
     int height();
-    
+
     Player* player();
     void set_player(Player* player);
-    
+
     int depth();
     void reveal();
 
@@ -51,14 +51,20 @@ class Level
     const static int LEVEL_ITEM_COUNT = 25;
     const static int LEVEL_CHEST_COUNT = 5;
 
+    const static int WIND_VARIABILITY = 5;
+    const static int FLAME_AGILITY = 2;
+    const static int WIND_CALMNESS_CONSTANT = 2;
+    const static int WIND_BASELINE = 30;
+
   private:
-    int _depth; 
+    int _depth;
 
     void updateLightMap(Player& player);
     void resetLightMap();
     void update_monsters(Player& player);
     Tile* getRandomTile();
-    
+    float getNewLightIntensity();
+
     std::array<std::array<Tile*, LEVEL_WIDTH>, LEVEL_HEIGHT > _map;
     std::array<std::array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_map;
     std::array<std::array<float, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_intensity;
@@ -66,7 +72,10 @@ class Level
     std::vector<Monster*> _monsters;
     Player* _player = nullptr;
     Tile* _look_tile = nullptr;
-  
+
+    int wind, flame, flameprime = 0;
+
+
 };
 
 typedef std::array<std::array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT> lightMap_t;
@@ -77,25 +86,25 @@ struct random_selector
   //On most platforms, you probably want to use std::random_device("/dev/urandom")()
   random_selector(RandomGenerator g = RandomGenerator(std::random_device()()))
     : gen(g) {}
- 
+
   template <typename Iter>
   Iter select(Iter start, Iter end) {
     std::uniform_int_distribution<> dis(0, std::distance(start, end) - 1);
     std::advance(start, dis(gen));
     return start;
   }
- 
+
   //convenience function
   template <typename Iter>
   Iter operator()(Iter start, Iter end) {
     return select(start, end);
   }
- 
+
   template <typename Container>
   auto operator()(const Container& c) -> decltype(*begin(c))& {
     return *select(begin(c), end(c));
   }
- 
+
 private:
   RandomGenerator gen;
 };

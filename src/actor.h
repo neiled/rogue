@@ -57,6 +57,7 @@ class Actor : public GameObject
     void push_command(Commands::CMD command);
     void push_command(Commands::CMD command, GameObject* target);
     void push_command(Commands::CMD command, GameObject* target, int cost);
+    void push_command(Commands::CMD command, int cost);
     Command popCommand();
     Command next_command();
     bool hasCommands() const;
@@ -99,7 +100,7 @@ class Actor : public GameObject
 
     Actor* target_actor();
     void target_actor(Actor* actor);
-    
+
     void rangedAttack(Tile* tile);
 
   protected:

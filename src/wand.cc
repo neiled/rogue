@@ -83,6 +83,6 @@ void Wand::flame(Actor& owner, Tile& tile)
   int damage = Random::BetweenNormal(_min_damage, _max_damage);
 
   other->takeDamage(damage, &owner);
-  Messages::PushGood("You damage the " + other->name() + " for " + std::to_string(damage) + " damage with your wand");
   _charges--;
+  Messages::PushGood("You damage the " + other->name() + " for " + std::to_string(damage) + " damage with your wand. You have " + std::to_string(_charges ) + " charges remaining.");
 }

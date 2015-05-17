@@ -18,29 +18,27 @@ bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
     player.push_command(Commands::CMD::CMD_MOVE_RIGHT);
   else if(key == SDLK_o)
     player.push_command(Commands::CMD::CMD_EXPLORE);
-  else if(key == SDLK_p)
-    player.clearCommands();
   else if(key == SDLK_i)
-    game.state(GameState::MENU_INVENTORY);
+    player.push_command(Commands::CMD::CMD_STATE_INV, 0);
   else if(key == SDLK_w)
   {
     game.level()->look_tile(game.player()->tile());
-    game.state(GameState::MENU_WAND);
+    player.push_command(Commands::CMD::CMD_STATE_WAND, 0);
   }
   else if(key == SDLK_SLASH)
   {
     game.level()->look_tile(game.player()->tile());
-    game.state(GameState::LOOK);
+    player.push_command(Commands::CMD::CMD_STATE_LOOK, 0);
   }
   else if(key == SDLK_PERIOD)
   {
     if(game.player()->chest())
-      game.state(GameState::MENU_CHEST);
+      player.push_command(Commands::CMD::CMD_STATE_CHEST, 0);
   }
   else if(key == SDLK_KP_5)
     player.push_command(Commands::CMD::NOP);
   else if(key == SDLK_ESCAPE)
-    game.state(GameState::STOP);
+    player.push_command(Commands::CMD::CMD_STATE_STOP);
   else return false;
 
   return true;

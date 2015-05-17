@@ -35,28 +35,9 @@ std::vector<Monster*> Level::monsters()
 
 void Level::update(Player& player)
 {
-  updateLightMap(player);
   _monsters.erase( std::remove_if(_monsters.begin(), _monsters.end(), [](const Monster* m) {return m->dead();}), _monsters.end() );
-  //update_monsters(player);
 }
 
-//void Level::update_monsters(Player& player)
-//{
-  //CommandProcessor cProc;
-  //for(auto m : _monsters)
-  //{
-    //m->start_turn();
-    //do
-    //{
-      //if(m->hasCommands() == false)
-        //m->think();
-      //while(!m->dead() && m->can_afford_next_command())
-        //cProc.Process(m->popCommand(), *m);
-    //}while(m->action_points() > 0 && m->hasCommands() == false);
-
-    //m->end_turn();      
-  //}
-//}
 
 Player* Level::player()
 {
@@ -71,9 +52,11 @@ void Level::set_player(Player* player)
 void Level::updateLightMap(Player& player)
 {
   ShadowCasting caster;
-  std::vector<std::vector<float>> newLightMap = caster.calculateFOV(_map, player.x(), player.y(), 10.0f);
+  auto light_intensity = getNewLightIntensity();
+  // SDL_Log("Flameprime %d", light_intensity);
+  std::vector<std::vector<float>> newLightMap = caster.calculateFOV(_map, player.x(), player.y(), 10.0f*light_intensity);
 
-   
+
   resetLightMap();
 
   for (int y = 0; y < newLightMap.size(); ++y)
@@ -89,6 +72,11 @@ void Level::updateLightMap(Player& player)
     }
   }
 
+}
+
+void Level::updateGraphics()
+{
+  updateLightMap(*_player);
 }
 
 void Level::resetLightMap()
@@ -125,6 +113,63 @@ Level::LightType Level::light_map(int x, int y)
 float Level::light_intensity(int x, int y)
 {
   return _light_intensity[y][x];
+}
+
+float Level::getNewLightIntensity()
+{
+  // for (i = 0; i < 255; i++) {
+  //     if (i < flameprime) {
+  //         GPIO = 255;
+  //     } else {
+  //         GPIO = 0;
+  //     }
+  // }
+
+
+
+  //We simulate a gust of wind by setting the wind var to a random value
+  if (Random::Between(0, 255) < Level::WIND_VARIABILITY) {
+      //Make a gust of wind less likely with two random teata because 255 is not enough resolution
+      if(Random::Between(0, 255) > 220)
+      {
+           wind = Random::Between(0, 255);
+      }
+  }
+
+  //The wind constantly settles towards its baseline value
+  if (wind>Level::WIND_BASELINE) {
+      wind--;
+  }
+
+  //The flame constantly gets brighter till the wind knocks it down
+  if (flame<255) {
+      flame++;
+  }
+
+  //Depending on the wind strength and the calmnes modifer we calcuate the odds
+  //of the wind knocking down the flame by setting it to random values
+  if (Random::Between(0, 255) < (wind>>Level::WIND_CALMNESS_CONSTANT)) {
+      flame = Random::Between(0, 255);
+  }
+
+  //Real flames ook like they have inertia so we use this constant-aproach-rate filter
+  //To lowpass the flame height
+  if (flame > flameprime) {
+      if (flameprime < (255 - Level::FLAME_AGILITY)) {
+          flameprime += Level::FLAME_AGILITY;
+      }
+  } else {
+      if (flameprime > (Level::FLAME_AGILITY)) {
+          flameprime -= Level::FLAME_AGILITY;
+      }
+  }
+  //How do we prevent jittering when the two are equal?
+  //We don't. It adds to the realism.
+
+  if(flameprime <= 0)
+    return 0;
+  return 255/(float)flameprime;
+
 }
 
 int Level::depth()
