@@ -11,11 +11,11 @@ twitter:  [@neiled](http://twitter.com/neiled)
 * ~~FOV/Lighting~~
 * ~~Multiple Levels~~
 * ~~Exploring~~
-* NPCs - *In Progress*
+* ~~NPCs~~
 * Theme
-* Combat
-* Health
-* Items/Weapons
+* ~~Combat~~
+* ~~Health~~
+* ~~Items/Weapons~~
 * Magic
 
 
@@ -37,3 +37,7 @@ Scoring should be done for particularly difficult things:
 ### Other
 * Some form of seeing your past deaths? Corpses of previous plays or something...
 * Keep a diary of events, player can read through previous plays.
+* Saving game
+* Being able to go back to the surface
+* Replaying game (Maybe two game modes, hero and adventure, hero = permadeath).
+* Tourches on walls
