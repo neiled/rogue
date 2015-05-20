@@ -8,6 +8,7 @@
 #include "random.h"
 #include "messages.h"
 #include "tile.h"
+#include <algorithm>
 
 Inventory::Inventory(int max_items) : _max_items(max_items)
 {

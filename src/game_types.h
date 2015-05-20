@@ -48,7 +48,7 @@ enum class ItemSubtype {
   WAND_FLAME
 };
 
-enum struct TileType {Floor = 0, Rock, StairsDown, StairsUp, Door};
+enum struct TileType {Floor = 0, Rock, StairsDown, StairsUp, Door, Floor_Grass};
 
 enum class MessageType {Normal, Good, Bad};
 

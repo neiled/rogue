@@ -4,6 +4,7 @@
 #include "actor.h"
 #include "item.h"
 #include "level.h"
+#include <algorithm>
 
 Tile::Tile(TileType tileType, Level& level, int x, int y) :_level(level)
 {

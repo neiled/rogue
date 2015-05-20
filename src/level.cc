@@ -3,15 +3,22 @@
 #include "monster.h"
 #include <SDL2/SDL.h>
 #include "shadowcasting.h"
+#include <algorithm>
 
-Level::Level(int depth)
+Level::Level(int depth, int width, int height) : Level(depth, width, height, TileType::Rock)
 {
+}
+
+Level::Level(int depth, int width, int height, TileType defaultType)
+{
+  _width = width;
+  _height = height;
   _depth = depth;
-  for (int y = 0; y < LEVEL_HEIGHT; ++y)
+  for (int y = 0; y < height; ++y)
   {
-    for (int x = 0; x < LEVEL_WIDTH; ++x)
+    for (int x = 0; x < width; ++x)
     {
-      auto t = new Tile(TileType::Rock, *this, x, y);
+      auto t = new Tile(defaultType, *this, x, y);
       _map[y][x] = t;
       _light_map[y][x] = Level::LightType::Unseen;
     }
@@ -20,12 +27,12 @@ Level::Level(int depth)
 
 int Level::width()
 {
-  return LEVEL_WIDTH;
+  return _width;
 }
 
 int Level::height()
 {
-  return LEVEL_HEIGHT;
+  return _height;
 }
 
 std::vector<Monster*> Level::monsters()
@@ -81,9 +88,9 @@ void Level::updateGraphics()
 
 void Level::resetLightMap()
 {
-  for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
+  for (int y = 0; y < _height; ++y)
   {
-    for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
+    for (int x = 0; x < _width; ++x)
     {
       if(_light_map[y][x] == Level::LightType::Lit)
         _light_map[y][x] = Level::LightType::Unlit;
@@ -93,9 +100,9 @@ void Level::resetLightMap()
 
 void Level::reveal()
 {
-  for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
+  for (int y = 0; y < _height; ++y)
   {
-    for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
+    for (int x = 0; x < _width; ++x)
     {
       if(_map[y][x]->tile_type() == TileType::Rock)
         continue;
@@ -179,9 +186,9 @@ int Level::depth()
 
 Tile* Level::tile_of_type(TileType typeToLookFor)
 {
-  for (int y = 0; y < Level::LEVEL_HEIGHT; ++y)
+  for (int y = 0; y < _height; ++y)
   {
-    for (int x = 0; x < Level::LEVEL_WIDTH; ++x)
+    for (int x = 0; x < _width; ++x)
     {
       if(_map[y][x]->tile_type() == typeToLookFor)
         return _map[y][x];
@@ -218,10 +225,10 @@ Tile* Level::get_near_random(Tile& start, int radius)
   if(min_y < 0) min_y = 0;
 
   int max_x = start.x() + radius;
-  if(max_x >= Level::LEVEL_WIDTH) max_x = Level::LEVEL_WIDTH-1;
+  if(max_x >= _width) max_x = _width-1;
 
   int max_y = start.y() + radius;
-  if(max_y >= Level::LEVEL_HEIGHT) max_y = Level::LEVEL_HEIGHT-1;
+  if(max_y >= _height) max_y = _height-1;
 
   int x = Random::Between(min_x, max_x);
   int y = Random::Between(min_y, max_y);
@@ -238,11 +245,11 @@ void Level::setType(int x, int y, TileType tileType)
 
 Tile* Level::tile(int x, int y)
 {
-  if(x >= Level::LEVEL_WIDTH)
+  if(x >= _width)
     return nullptr;
   if(x < 0)
     return nullptr;
-  if(y >= Level::LEVEL_HEIGHT)
+  if(y >= _height)
     return nullptr;
   if(y < 0)
     return nullptr;
@@ -261,8 +268,8 @@ void Level::addMonster(Monster* monster)
 
 Tile* Level::getRandomTile()
 {
-  int x = Random::Between(0, Level::LEVEL_WIDTH-1);
-  int y = Random::Between(0, Level::LEVEL_HEIGHT-1);
+  int x = Random::Between(0, _width-1);
+  int y = Random::Between(0, _height-1);
 
   Tile* foundTile = tile(x,y);
 
@@ -273,9 +280,9 @@ std::vector<Tile*> Level::visible_tiles()
 {
   std::vector<Tile*> results;
 
-  for (int y = 0; y < LEVEL_HEIGHT; ++y)
+  for (int y = 0; y < _height; ++y)
   {
-    for (int x = 0; x < LEVEL_WIDTH; ++x)
+    for (int x = 0; x < _width; ++x)
     {
       if(_light_map[y][x] == Level::LightType::Lit)
         results.push_back(tile(x,y));
@@ -292,9 +299,9 @@ Level::~Level()
     delete monster;
   }
 
-  for (int y = 0; y < LEVEL_HEIGHT; ++y)
+  for (int y = 0; y < _height; ++y)
   {
-    for (int x = 0; x < LEVEL_WIDTH; ++x)
+    for (int x = 0; x < _width; ++x)
     {
       delete _map[y][x];
     }

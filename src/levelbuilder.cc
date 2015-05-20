@@ -8,6 +8,7 @@
 #include "monster_factory.h"
 #include "item_factory.h"
 #include "chest.h"
+#include <algorithm>
 
 
 LevelBuilder::LevelBuilder()
@@ -107,9 +108,9 @@ void LevelBuilder::generateMonsters(Level& level)
 
 void LevelBuilder::addDoors(Level& level)
 {
-  for(int y = 0; y < Level::LEVEL_HEIGHT-1; y++)
+  for(int y = 0; y < level.height()-1; y++)
   {
-    for (int x = 0; x < Level::LEVEL_WIDTH-1; ++x)
+    for (int x = 0; x < level.width()-1; ++x)
     {
       if(doorFits(x, y, level))
           level.tile(x, y)->setTileType(TileType::Door);
@@ -358,8 +359,8 @@ Room* LevelBuilder::generateRoom(Level& level, int maxWidth, int maxHeight)
 {
   int width = Random::Between(3,maxWidth);
   int height = Random::Between(3, maxHeight);
-  int x = Random::Between(1, Level::LEVEL_WIDTH);
-  int y = Random::Between(1, Level::LEVEL_HEIGHT);
+  int x = Random::Between(1, level.width());
+  int y = Random::Between(1, level.height());
 
   return new Room(level, x, y, width, height);
 
@@ -371,9 +372,9 @@ bool LevelBuilder::roomFits(Room* room, Level& level)
   {
     for (int x = room->x()-1; x <= room->x()+room->getWidth(); ++x)
     {
-      if(x >= Level::LEVEL_WIDTH-1)
+      if(x >= level.width()-1)
         return false;
-      if(y >= Level::LEVEL_HEIGHT-1)
+      if(y >= level.height()-1)
         return false;
 
       if(level.tile(x, y)->tile_type() == TileType::Floor)

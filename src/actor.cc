@@ -323,9 +323,9 @@ Tile* Actor::checkCanMove(int newX, int newY)
     return nullptr;
   if(newY < 0)
     return nullptr;
-  if(newX >= Level::LEVEL_WIDTH)
+  if(newX >= level().width())
     return nullptr;
-  if(newY >= Level::LEVEL_HEIGHT)
+  if(newY >= level().height())
     return nullptr;
   auto newTile = level().tile(newX, newY);
   if(newTile->tile_type() == TileType::Rock)

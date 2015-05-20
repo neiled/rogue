@@ -23,7 +23,7 @@ World::~World()
 void World::init()
 {
   SDL_Log("Creating first level");
-  Level* firstLevel = new Level(1);
+  Level* firstLevel = new Level(1, 100, 100);
   firstLevel->set_player(&_player);
   SDL_Log("Building first level");
   _builder.buildLevel(*firstLevel, _player);
@@ -87,7 +87,7 @@ Level* World::getLevel(int depth)
 {
     if(_levels.size() < depth )
     {
-      auto newLevel = new Level(depth);
+      auto newLevel = new Level(depth, 100, 100);
       _builder.buildLevel(*newLevel, _player);
       _levels.push_back(newLevel);
     }

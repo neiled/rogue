@@ -13,7 +13,8 @@ class Monster;
 class Level
 {
   public:
-    Level (int depth);
+    Level (int depth, int width, int height);
+    Level(int depth, int width, int height, TileType defaultType);
     virtual ~Level ();
 
     enum class LightType {Unseen, Unlit, Lit, Revealed};
@@ -44,8 +45,8 @@ class Level
     Tile* look_tile();
     std::vector<Monster*> monsters();
 
-    const static int LEVEL_WIDTH = 100;
-    const static int LEVEL_HEIGHT = 100;
+    // const static int LEVEL_WIDTH = 100;
+    // const static int LEVEL_HEIGHT = 100;
     const static int LEVEL_ROOM_COUNT = 150;
     const static int LEVEL_MONSTER_COUNT = 75;
     const static int LEVEL_ITEM_COUNT = 25;
@@ -58,6 +59,8 @@ class Level
 
   private:
     int _depth;
+    int _width;
+    int _height;
 
     void updateLightMap(Player& player);
     void resetLightMap();
@@ -65,9 +68,9 @@ class Level
     Tile* getRandomTile();
     float getNewLightIntensity();
 
-    std::array<std::array<Tile*, LEVEL_WIDTH>, LEVEL_HEIGHT > _map;
-    std::array<std::array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_map;
-    std::array<std::array<float, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT > _light_intensity;
+    std::vector<std::vector<Tile*> > _map;
+    std::vector<std::vector<Level::LightType> > _light_map;
+    std::vector<std::vector<float> > _light_intensity;
 
     std::vector<Monster*> _monsters;
     Player* _player = nullptr;
@@ -78,7 +81,7 @@ class Level
 
 };
 
-typedef std::array<std::array<Level::LightType, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT> lightMap_t;
+typedef std::vector<std::vector<Level::LightType>> lightMap_t;
 
 template <typename RandomGenerator = std::default_random_engine>
 struct random_selector

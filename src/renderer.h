@@ -9,8 +9,8 @@
 #include <string>
 #include <map>
 #include <SDL2/SDL.h>
-#include <SDL2_Image/SDL_Image.h>
-#include <SDL2_ttf/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include "render_inventory.h"
 #include "render_level.h"
 #include "render_info.h"

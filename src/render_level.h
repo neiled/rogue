@@ -18,7 +18,7 @@ class RenderLevel
 
   private:
     Graphics* _graphics;
-    std::map<Level*, std::array<std::array<Sprite*, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT>> _tile_sprites;
+    std::map<Level*, std::vector<std::vector<Sprite*> > > _tile_sprites;
 
 
     Sprite* pick_sprite(level_sprites_t sprites, TileType);

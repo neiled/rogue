@@ -4,6 +4,7 @@
 #include "actor.h"
 #include <SDL2/SDL.h>
 #include "messages.h"
+#include <algorithm>
 
 
 AStar::AStar()

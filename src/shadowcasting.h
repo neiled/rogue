@@ -7,7 +7,7 @@
 
 class Tile;
 
-typedef std::array<std::array<Tile*, Level::LEVEL_WIDTH>, Level::LEVEL_HEIGHT> resistance_map_t;
+typedef std::vector<std::vector<Tile*>> resistance_map_t;
 class ShadowCasting
 {
 public:
