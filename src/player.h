@@ -14,7 +14,7 @@ class Player : public Actor
     virtual void start_turn() override;
     virtual void end_turn() override;
     virtual int max_health() override;
-  
+
     int32_t xp();
     int32_t max_xp();
     int32_t min_xp();
@@ -27,14 +27,14 @@ class Player : public Actor
     virtual void set_tile(Tile& newTile) override;
     void add_seen_items();
     bool can_see_something_interesting(bool quiet = true) override;
-    bool can_see_monster(bool quiet = true);
+    bool can_see_monster(bool quiet = true) override;
     bool can_see_unknown_item(bool quiet = true);
     bool can_see_interesting_tile(bool quiet = true);
     bool can_see_tile(Tile& tile);
 
   protected:
     virtual void pickup_items() override;
-    
+
   private:
     virtual void die() override;
     virtual bool is_player() override { return true;}
@@ -49,7 +49,7 @@ class Player : public Actor
 
     std::vector<Item*> _interesting_items_seen;
     std::vector<Tile*> _interesting_tiles_seen;
-    
+
     bool _auto_pickup;
 
 

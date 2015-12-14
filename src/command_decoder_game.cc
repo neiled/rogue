@@ -35,7 +35,7 @@ bool CommandDecoderGame::Decode(SDL_Keycode key, Game& game)
     if(game.player()->chest())
       player.push_command(Commands::CMD::CMD_STATE_CHEST, 0);
   }
-  else if(key == SDLK_KP_5)
+  else if(key == SDLK_KP_5 || key == SDLK_SPACE)
     player.push_command(Commands::CMD::NOP);
   else if(key == SDLK_ESCAPE)
     player.push_command(Commands::CMD::CMD_STATE_STOP);
