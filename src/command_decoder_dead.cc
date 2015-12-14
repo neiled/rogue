@@ -5,10 +5,15 @@
 
 bool CommandDecoderDead::Decode(SDL_Keycode key, Game& game)
 {
-  if(key == SDLK_y)
+  auto &player = *game.player();
+  if(key == SDLK_y) {
     game.state(GameState::STARTING);
-  else if(key == SDLK_n)
+    player.push_command(Commands::CMD::NOP);
+  }
+  else if(key == SDLK_n) {
     game.state(GameState::STOP);
+    player.push_command(Commands::CMD::NOP);
+  }
   else
     return false;
 

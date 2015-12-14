@@ -83,11 +83,11 @@ void Game::eventLoop()
         draw(_graphics, _renderer);
       }
 
-      while(!player->dead() && player->can_afford_next_command())
+      while(player->can_afford_next_command())
       {
         cProc.Process(player->popCommand(), *player, *this);
         draw(_graphics, _renderer);
-        //SDL_Log("%d points left.", player->action_points());
+        SDL_Log("%d points left.", player->action_points());
       }
     } while(player_can_continue(*player, _state));
     player->end_turn();
@@ -167,6 +167,8 @@ int Game::turn()
 
 bool Game::decode_event(SDL_Event& event, Graphics& graphics, Renderer& renderer)
 {
+  // SDL_Log("Decoding commands in state %s", _state);
+
   auto decoder = _decoders[_state];
   if(!decoder)
     return false;
