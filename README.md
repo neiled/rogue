@@ -11,11 +11,11 @@ twitter:  [@neiled](http://twitter.com/neiled)
 * ~~FOV/Lighting~~
 * ~~Multiple Levels~~
 * ~~Exploring~~
-* NPCs - *In Progress*
+* ~~NPCs~~
 * Theme
-* Combat
-* Health
-* Items/Weapons
+* ~~Combat~~
+* ~~Health~~
+* ~~Items/Weapons~~
 * Magic
 
 
@@ -37,3 +37,18 @@ Scoring should be done for particularly difficult things:
 ### Other
 * Some form of seeing your past deaths? Corpses of previous plays or something...
 * Keep a diary of events, player can read through previous plays.
+* Saving game
+* Being able to go back to the surface
+* Replaying game (Maybe two game modes, hero and adventure, hero = permadeath).
+* Tourches on walls
+* Start in town at beginning of the game
+* Has shops selling things, will buy players things they found
+* Has entrace to the dungeon
+* Town scrolls will take player instantly back to town, but one way
+* Levels do not refresh, they are perm
+* Some artefacts can have origin set to a certain spot in the game so don't always have to teleport back to town, or can teleport back to that spot once returning to town.
+* Player death returns to town?
+* Tourches take up a hand spot if carried lit
+* Find corpses or other adventurers
+* Skills with cooldown periods (i.e. charge in a straight line until hit something, does damage, takes 100 turns to cooldown).
+* 
