@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 #include "game.h"
 
-CommandDecoderInventory::CommandDecoderInventory() : _drop_mode(false)
+CommandDecoderInventory::CommandDecoderInventory()
 {
 }
 
@@ -11,7 +11,7 @@ bool CommandDecoderInventory::Decode(SDL_Keycode key, Game& game)
 {
   if(key == SDLK_ESCAPE || key == SDLK_i) {
     game.state(GameState::GAME);
-    _drop_mode = false;
+    game.player()->inventory()->drop_mode(false);
   }
   else if(key == SDLK_w)
   {
@@ -19,12 +19,12 @@ bool CommandDecoderInventory::Decode(SDL_Keycode key, Game& game)
   }
   else if(key == SDLK_d)
   {
-    _drop_mode = !_drop_mode;
+    game.player()->inventory()->drop_mode(!game.player()->inventory()->drop_mode());
     return false;
   }
-  else if(_drop_mode)
+  else if(game.player()->inventory()->drop_mode())
     return drop_chosen_item(key, game);
-  else if(_drop_mode == false)
+  else
     return use_chosen_item(key, game);
 
   return true;
@@ -40,7 +40,6 @@ bool CommandDecoderInventory::use_chosen_item(SDL_Keycode key, Game& game)
 
   game.player()->push_command(Commands::CMD::CMD_USE, item, 200);
 
-//  game.state(GameState::GAME);
   return true;
 }
 
@@ -59,8 +58,6 @@ bool CommandDecoderInventory::drop_chosen_item(SDL_Keycode key, Game& game)
 
   game.player()->push_command(Commands::CMD::CMD_DROP, item, 200);
 
-//  _drop_mode = false;
-//  game.state(GameState::GAME);
   return true;
 }
 
@@ -68,3 +65,4 @@ bool CommandDecoderInventory::Decode(Uint8 button, Uint8 clicks, Sint32 x, Sint3
 {
   return false;
 }
+

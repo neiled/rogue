@@ -21,7 +21,6 @@ protected:
   //void drop_item(Player& player, int item);
 
 private:
-  bool _drop_mode;
   std::vector<Item*> get_items(Player& player, GameState state);
 
   bool use_chosen_item(SDL_Keycode, Game&);

@@ -58,7 +58,7 @@ void CommandDecoderChest::take_all(Player& player, Game& game)
   {
     if(player.inventory()->full())
     {
-      Messages::Push("You cannot carry any more items.");
+      Messages::PushBad("You cannot carry any more items.");
       return;
     }
 
@@ -71,7 +71,7 @@ void CommandDecoderChest::use_item(Player& player, int index, Game& game)
 {
   if(player.inventory()->full())
   {
-    Messages::Push("You cannot carry any more items.");
+    Messages::PushBad("You cannot carry any more items.");
     return;
   }
 

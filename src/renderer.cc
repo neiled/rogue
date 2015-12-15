@@ -408,31 +408,12 @@ void Renderer::render_state(GameState state, Player& player)
 void Renderer::render_look(Player& player)
 {
   _render_look.render(*this, player);
-  //if(!player.level().look_tile())
-    //return;
-
-  //auto point = tile_to_screen(player.level().look_tile()->x(), player.level().look_tile()->y());
-  //SDL_Rect look;
-  //look.x = point.x;
-  //look.y = point.y;
-  //look.w = TILE_SIZE;
-  //look.h = TILE_SIZE;
-
-  //if(look.x > _cameraRect.x + _cameraRect.w-TILE_SIZE)
-    //return;
-  //if(look.y > _cameraRect.y + _cameraRect.h-TILE_SIZE)
-    //return;
-
-
-  //SDL_SetRenderDrawColor(_graphics->Renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-  //SDL_RenderDrawRect(_graphics->Renderer, &look);
-  //SDL_SetRenderDrawColor(_graphics->Renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 }
 
 
 void Renderer::render_inventory(Inventory& inventory)
 {
-  _render_inv.render_player_inventory(*this, _items, inventory);
+  _render_inv.render_player_inventory(*this,_items, inventory);
 }
 
 void Renderer::render_wand(Inventory& inventory)

@@ -13,7 +13,7 @@ void RenderInventory::init()
 {
   _panel = _graphics->loadTexture("./content/blue_panel.png");
 }
-void RenderInventory::render_player_inventory(Renderer& renderer, item_sprites_t items, Inventory& inventory)
+void RenderInventory::render_player_inventory(Renderer renderer, item_sprites_t items, Inventory &inventory)
 {
   SDL_Rect vp_inv;
   vp_inv.x = 250;
@@ -25,8 +25,16 @@ void RenderInventory::render_player_inventory(Renderer& renderer, item_sprites_t
 
   render(renderer, items, inventory.items(), vp_inv);
   renderer.render_string("Inventory:", x, vp_inv.y + 50, 32);
-  renderer.render_string("To drop an item press d then the number", x, 750, 32);
-  renderer.render_string("of the item to drop.", x, 782, 32);
+  if(inventory.drop_mode()) {
+      renderer.render_string("Drop Mode!", x + 200, vp_inv.y + 50, 32);
+      renderer.render_string("To drop an item press d then the number of", x, 750, 32);
+      renderer.render_string("the item. To cancel dropping press 'd'", x, 782, 32);
+  }
+  else
+  {
+      renderer.render_string("To enter drop mode press 'd'.", x, 750, 32);
+      renderer.render_string("To use an item press its number.", x, 782, 32);
+  }
 }
 
 void RenderInventory::render_player_wands(Renderer& renderer, item_sprites_t items, Inventory& inventory)

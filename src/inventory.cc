@@ -11,6 +11,7 @@
 
 Inventory::Inventory(int max_items) : _max_items(max_items)
 {
+  _drop_mode = false;
 }
 
 Inventory::~Inventory()
@@ -115,4 +116,15 @@ int Inventory::count()
 int Inventory::max_items()
 {
   return _max_items;
+}
+
+bool Inventory::drop_mode()
+{
+  return _drop_mode;
+}
+
+void Inventory::drop_mode(bool on)
+{
+  _drop_mode = on;
+
 }

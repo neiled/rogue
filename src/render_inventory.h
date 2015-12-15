@@ -15,15 +15,15 @@ class Item;
 class RenderInventory
 {
 public:
-  RenderInventory(Graphics* graphics);
-  void render(Renderer& renderer, item_sprites_t items, std::vector<Item*> Inventory, SDL_Rect vp);
-  void render_player_inventory(Renderer& renderer, item_sprites_t items, Inventory& Inventory);
-  void render_chest_inventory(Renderer& renderer, item_sprites_t items, Inventory& Inventory);
-  void render_player_wands(Renderer& renderer, item_sprites_t items, Inventory& inventory);
-  void init();
+    RenderInventory(Graphics* graphics);
+    void render(Renderer& renderer, item_sprites_t items, std::vector<Item*> Inventory, SDL_Rect vp);
+    void render_player_inventory(Renderer renderer, item_sprites_t items, Inventory &inventory);
+    void render_chest_inventory(Renderer& renderer, item_sprites_t items, Inventory& Inventory);
+    void render_player_wands(Renderer& renderer, item_sprites_t items, Inventory& inventory);
+    void init();
 private:
-  Graphics* _graphics;
-  SDL_Texture* _panel;
+    Graphics* _graphics;
+    SDL_Texture* _panel;
 
 };
 #endif

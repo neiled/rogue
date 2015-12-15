@@ -108,7 +108,6 @@ class Renderer {
     
     void render_messages(std::deque<std::vector<Message>> messages);
     void render_state(GameState state, Player& player);
-    void render_inventory(Inventory& inventory);
     void render_wand(Inventory& inventory);
     void render_chest(Inventory& inventory);
     void render_look(Player&);
@@ -117,5 +116,8 @@ class Renderer {
     SDL_Color calc_color(MessageType type);
 
 
+    void render_inventory(Inventory &inventory, bool drop_mode);
+
+    void render_inventory(Inventory &inventory);
 };
 #endif
