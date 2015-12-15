@@ -23,9 +23,11 @@ private:
   std::map<Tile*, Tile*> parentList;
   std::map<Tile*, int> gCost;
 
-  std::vector<Tile*> surroundingValidTiles(Tile& startingPoint, bool avoid_monsters);
+  std::vector<Tile *> surroundingValidTiles(Tile& startingPoint, bool avoid_monsters, Tile& pTile);
   Tile* findLowestScore(Tile& start, Tile* end);
   Tile* search(Tile& currentSquare, Tile* end, bool avoid_monsters);
   float score(Tile& start, Tile& end);
+
+    std::vector<Tile *> surroundingValidTiles(Tile &start, bool avoid_monsters, Tile *end);
 };
 #endif

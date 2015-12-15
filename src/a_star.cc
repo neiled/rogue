@@ -93,7 +93,7 @@ Tile* AStar::search(Tile& start, Tile* end, bool avoid_monsters)
   open_list.erase(remove(open_list.begin(), open_list.end(), currentTile), open_list.end());
   closed_list.push_back(currentTile);  
 
-  std::vector<Tile*> otherTiles = surroundingValidTiles(*currentTile, avoid_monsters);
+  std::vector<Tile*> otherTiles = surroundingValidTiles(*currentTile, avoid_monsters, end);
   for(auto t : otherTiles)
   {
     //if not on the open list
@@ -144,7 +144,7 @@ float AStar::score(Tile& start, Tile& end)
   return abs(start.x() - end.x()) + abs(start.y() - end.y());
 }
 
-std::vector<Tile*> AStar::surroundingValidTiles(Tile& start, bool avoid_monsters)
+std::vector<Tile *> AStar::surroundingValidTiles(Tile& start, bool avoid_monsters, Tile* end)
 {
   std::vector<Tile*> result;
   int startX = start.x();
@@ -162,9 +162,9 @@ std::vector<Tile*> AStar::surroundingValidTiles(Tile& start, bool avoid_monsters
         continue;
       if(neighbour->tile_type() == TileType::Rock)
         continue;
-      if(neighbour->tile_type() == TileType::StairsDown)
+      if(neighbour->tile_type() == TileType::StairsDown && (end != nullptr && end->tile_type() != TileType::StairsDown))
         continue;
-      if(neighbour->tile_type() == TileType::StairsUp)
+      if(neighbour->tile_type() == TileType::StairsUp && (end != nullptr && end->tile_type() != TileType::StairsUp))
         continue;
       if(find(closed_list.begin(), closed_list.end(), neighbour) != closed_list.end())
         continue;
