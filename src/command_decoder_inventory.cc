@@ -40,7 +40,7 @@ bool CommandDecoderInventory::use_chosen_item(SDL_Keycode key, Game& game)
 
   game.player()->push_command(Commands::CMD::CMD_USE, item, 200);
 
-  game.state(GameState::GAME);
+//  game.state(GameState::GAME);
   return true;
 }
 
