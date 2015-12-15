@@ -9,11 +9,9 @@ CommandDecoderInventory::CommandDecoderInventory() : _drop_mode(false)
 
 bool CommandDecoderInventory::Decode(SDL_Keycode key, Game& game)
 {
-  if(key == SDLK_ESCAPE)
+  if(key == SDLK_ESCAPE || key == SDLK_i) {
     game.state(GameState::GAME);
-  else if(key == SDLK_i)
-  {
-    game.state(GameState::GAME);
+    _drop_mode = false;
   }
   else if(key == SDLK_w)
   {
@@ -61,8 +59,8 @@ bool CommandDecoderInventory::drop_chosen_item(SDL_Keycode key, Game& game)
 
   game.player()->push_command(Commands::CMD::CMD_DROP, item, 200);
 
-  _drop_mode = false;
-  game.state(GameState::GAME);
+//  _drop_mode = false;
+//  game.state(GameState::GAME);
   return true;
 }
 
