@@ -30,3 +30,7 @@ ompiled Object files
 ehthumbs.db
 Thumbs.db
 gen/rogue
+
+.idea
+
+CMakeLists.txt

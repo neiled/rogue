@@ -71,15 +71,11 @@ void Game::eventLoop()
     {
       while(player->hasCommands() == false)
       {
-        //SDL_Log("%d points left, Waiting for a valid event.", player->action_points());
         SDL_Event event;
-        // do
-        // {
         if(SDL_PollEvent(&event))
         {
           decode_event(event, _graphics, _renderer);
         }
-        // }while(!);
         draw(_graphics, _renderer);
       }
 
@@ -87,7 +83,6 @@ void Game::eventLoop()
       {
         cProc.Process(player->popCommand(), *player, *this);
         draw(_graphics, _renderer);
-        SDL_Log("%d points left.", player->action_points());
       }
     } while(player_can_continue(*player, _state));
     player->end_turn();
