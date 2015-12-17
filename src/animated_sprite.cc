@@ -1,8 +1,8 @@
 #include "animated_sprite.h"
 #include "renderer.h"
 
-AnimatedSprite::AnimatedSprite(Graphics* graphics, const std::string& file_path,
-      int source_x, int source_y, int width, int height, int fps, int num_frames) : Sprite(graphics, file_path, source_x, source_y, width, height), _frame_time(1000/fps), _num_frames(num_frames)
+AnimatedSprite::AnimatedSprite(Graphics* graphics, SDL_Texture* texture,
+      int source_x, int source_y, int width, int height, int fps, int num_frames) : Sprite(graphics, texture, source_x, source_y, width, height), _frame_time(1000/fps), _num_frames(num_frames)
 {
   _current_frame = 0;
   _elapsed_time = 0;

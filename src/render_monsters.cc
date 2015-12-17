@@ -17,7 +17,7 @@ void RenderMonsters::Render(Renderer& renderer, monster_sprites_t monster_sprite
     if(lit != Level::LightType::Lit)
       continue;
     auto sprite = monster_sprites[m->monster_type()];
-    sprite->update(m->direction);
+//    sprite->update(m->direction);
     renderer.draw_sprite(sprite, *currentTile);
     renderer.draw_health(*m);
     //TODO: If monster == player.target_monster() render a border

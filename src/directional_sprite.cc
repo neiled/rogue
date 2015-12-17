@@ -1,7 +1,8 @@
 #include "directional_sprite.h"
 #include "renderer.h"
 
-DirectionalSprite::DirectionalSprite(Graphics* graphics, const std::string& file_path, int source_x, int source_y, int width, int height) : Sprite(graphics, file_path, source_x, source_y, width, height)
+DirectionalSprite::DirectionalSprite(Graphics* graphics, SDL_Texture* texture, int source_x, int source_y,
+                                     int width, int height) : Sprite(graphics, texture, source_x, source_y, width, height)
 {
 }
 

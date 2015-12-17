@@ -8,7 +8,10 @@ class DirectionalSprite : public Sprite
 {
 public:
   DirectionalSprite (Graphics* graphics, const std::string& file_path, int source_x, int source_y, int width, int height);
-  virtual ~DirectionalSprite ();
+
+    DirectionalSprite(Graphics *graphics, SDL_Texture *texture, int source_x, int source_y, int width, int height);
+
+    virtual ~DirectionalSprite ();
   void update(Actor::Direction direction);
 
 private:

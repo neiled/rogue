@@ -1,9 +1,9 @@
 #include "sprite.h"
 
-Sprite::Sprite(Graphics* graphics, const std::string& file_path, int source_x, int source_y, int width, int height)
+Sprite::Sprite(Graphics* graphics, SDL_Texture* texture, int source_x, int source_y, int width, int height)
 {
   _graphics = graphics;
-  _texture = _graphics->loadTexture(file_path);
+  _texture = texture;//_graphics->loadTexture(file_path);on
   _source_rect.x = source_x;
   _source_rect.y = source_y;
   _source_rect.w = width;

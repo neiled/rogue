@@ -17,6 +17,7 @@
 #include "render_ranged.h"
 #include "render_look.h"
 #include "game_types.h"
+#include "FontSprite.h"
 
 using std::vector;
 using std::array;
@@ -63,7 +64,7 @@ class Renderer {
     monster_sprites_t _monsters;
     item_sprites_t _items;
     level_sprites_t _tiles;
-    DirectionalSprite* _player = nullptr;
+    FontSprite* _player = nullptr;
     Graphics* _graphics = nullptr;
 
     RenderInventory _render_inv;

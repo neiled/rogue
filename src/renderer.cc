@@ -12,6 +12,7 @@
 #include "messages.h"
 #include "render_monsters.h"
 #include "chest.h"
+#include "FontSprite.h"
 
 Renderer::Renderer(Graphics* graphics) : _graphics(graphics), _render_inv(graphics), _render_level(graphics), _render_info(graphics), _render_ranged(graphics), _render_look(graphics)
 {
@@ -29,8 +30,9 @@ void Renderer::init()
   loadMonsterTiles();
   load_items();
 
-  _player = new DirectionalSprite(_graphics, "./content/player.png", 0, 0, TILE_SIZE, TILE_SIZE);
+//  _player = new DirectionalSprite(_graphics, "./content/player.png", 0, 0, TILE_SIZE, TILE_SIZE);
 
+  _player = new FontSprite(_graphics, "@", TILE_SIZE, SDL_Color{255,255,255});
 
   init_viewports();
 
@@ -87,29 +89,29 @@ void Renderer::init_viewports()
 
 void Renderer::loadMonsterTiles()
 {
-  _monsters[MonsterType::Orc] = new DirectionalSprite(_graphics, "./content/monsters/monster_orc.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _monsters[MonsterType::Devil] = new DirectionalSprite(_graphics, "./content/monsters/monster_devil.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _monsters[MonsterType::Skeleton] = new DirectionalSprite(_graphics, "./content/monsters/monster_skeleton.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _monsters[MonsterType::Orc] = new FontSprite(_graphics, "o", TILE_SIZE, SDL_Color{255,255,255});
+  _monsters[MonsterType::Devil] = new FontSprite(_graphics, "d", TILE_SIZE, SDL_Color{255,255,255});
+  _monsters[MonsterType::Skeleton] = new FontSprite(_graphics, "s", TILE_SIZE, SDL_Color{255,255,255});
 }
 
 void Renderer::loadMapTiles()
 {
-  for (int i = 0; i < 7; ++i)
-  {
-    _tiles[TileType::Floor].push_back(new Sprite(_graphics, "./content/dungeon_tiles_32.png", i*TILE_SIZE, 0, TILE_SIZE, TILE_SIZE));
+    _tiles[TileType::Floor].push_back(new FontSprite(_graphics, ".", TILE_SIZE, SDL_Color{30,25,25}));
+    _tiles[TileType::Floor].push_back(new FontSprite(_graphics, "`", TILE_SIZE, SDL_Color{25,30,25}));
+    _tiles[TileType::Floor].push_back(new FontSprite(_graphics, "'", TILE_SIZE, SDL_Color{25,30,25}));
+    _tiles[TileType::Floor].push_back(new FontSprite(_graphics, ",", TILE_SIZE, SDL_Color{25,25,30}));
 
-  }
 
   for (int i = 0; i < 4; ++i)
   {
-    _tiles[TileType::Rock].push_back(new Sprite(_graphics, "./content/dungeon_tiles_32.png", i*TILE_SIZE, 1*TILE_SIZE, TILE_SIZE, TILE_SIZE));
+    _tiles[TileType::Rock].push_back(new FontSprite(_graphics, "#", TILE_SIZE, SDL_Color{255,255,255}));
   }
 
-  _tiles[TileType::StairsUp].push_back(new Sprite(_graphics, "./content/dungeon_tiles_32.png", 12*TILE_SIZE, 2*TILE_SIZE, TILE_SIZE, TILE_SIZE));
+  _tiles[TileType::StairsUp].push_back(new FontSprite(_graphics, ">", TILE_SIZE, SDL_Color{255,255,255}));
 
-  _tiles[TileType::StairsDown].push_back(new Sprite(_graphics, "./content/dungeon_tiles_32.png", 11*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE));
+  _tiles[TileType::StairsDown].push_back(new FontSprite(_graphics, "<", TILE_SIZE, SDL_Color{255,255,255}));
 
-  _tiles[TileType::Door].push_back(new Sprite(_graphics, "./content/dungeon_tiles_32.png", 13*TILE_SIZE, 5*TILE_SIZE, TILE_SIZE, TILE_SIZE));
+  _tiles[TileType::Door].push_back(new FontSprite(_graphics, "[", TILE_SIZE, SDL_Color{255,255,255}));
 }
 
 void Renderer::load_items()
@@ -125,16 +127,16 @@ void Renderer::load_items()
 void Renderer::load_scenery()
 {
   _items[ItemType::CHEST] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::CHEST][ItemSubtype::CHEST] = new Sprite(_graphics, "./content/chest.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::CHEST][ItemSubtype::CHEST] = new FontSprite(_graphics, "%", TILE_SIZE, SDL_Color{255,255,255});
 
 }
 
 void Renderer::load_corpses()
 {
   _items[ItemType::CORPSE] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::CORPSE][ItemSubtype::CORPSE_ORC] = new Sprite(_graphics, "./content/corpse.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _items[ItemType::CORPSE][ItemSubtype::CORPSE_DEVIL] = new Sprite(_graphics, "./content/corpse.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
-  _items[ItemType::CORPSE][ItemSubtype::CORPSE_SKELETON] = new Sprite(_graphics, "./content/corpse.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::CORPSE][ItemSubtype::CORPSE_ORC] = new FontSprite(_graphics, "x", TILE_SIZE, SDL_Color{255,255,255});
+  _items[ItemType::CORPSE][ItemSubtype::CORPSE_DEVIL] = new FontSprite(_graphics, "x", TILE_SIZE, SDL_Color{255,255,255});
+  _items[ItemType::CORPSE][ItemSubtype::CORPSE_SKELETON] = new FontSprite(_graphics, "x", TILE_SIZE, SDL_Color{255,255,255});
 
 
 }
@@ -142,31 +144,31 @@ void Renderer::load_corpses()
 void Renderer::load_potions()
 {
   _items[ItemType::POTION] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_LARGE] = new Sprite(_graphics, "content/potion.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH] = new Sprite(_graphics, "content/potion.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_SMALL] = new Sprite(_graphics, "content/potion.png", TILE_SIZE, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_LARGE] = new FontSprite(_graphics, "|", TILE_SIZE, SDL_Color{255,0,0});
+  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH] = new FontSprite(_graphics, "|", TILE_SIZE, SDL_Color{255,0,0});
+  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_SMALL] = new FontSprite(_graphics, "|", TILE_SIZE, SDL_Color{255,0,0});
 }
 
 void Renderer::load_weapons()
 {
   _items[ItemType::WEAPON] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_LOW] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_RUSTED] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_GOOD] = new Sprite(_graphics, "content/weapon.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_LOW] = new FontSprite(_graphics, "\\", TILE_SIZE, SDL_Color{255,255,255});
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS] = new FontSprite(_graphics, "\\", TILE_SIZE, SDL_Color{255,255,255});
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_RUSTED] = new FontSprite(_graphics, "\\", TILE_SIZE, SDL_Color{255,255,255});
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_GOOD] = new FontSprite(_graphics, "\\", TILE_SIZE, SDL_Color{255,255,255});
 }
 
 void Renderer::load_wands()
 {
   _items[ItemType::WAND] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::WAND][ItemSubtype::WAND_FLAME] = new Sprite(_graphics, "content/wand.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::WAND][ItemSubtype::WAND_FLAME] = new FontSprite(_graphics, "!", TILE_SIZE, SDL_Color{255,255,255});
 }
 
 void Renderer::load_scrolls()
 {
   _items[ItemType::SCROLL] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::SCROLL][ItemSubtype::SCROLL_BLINK] = new Sprite(_graphics, "content/scroll.png", 0, 0, TILE_SIZE, TILE_SIZE);
-  _items[ItemType::SCROLL][ItemSubtype::SCROLL_REVEAL] = new Sprite(_graphics, "content/scroll.png", 0, 0, TILE_SIZE, TILE_SIZE);
+  _items[ItemType::SCROLL][ItemSubtype::SCROLL_BLINK] = new FontSprite(_graphics, ")", TILE_SIZE, SDL_Color{255,255,255});
+  _items[ItemType::SCROLL][ItemSubtype::SCROLL_REVEAL] = new FontSprite(_graphics, ")", TILE_SIZE, SDL_Color{255,255,255});
 }
 
 
@@ -233,7 +235,7 @@ Tile* Renderer::get_tile_from_coord(Level& level, int x, int y)
 void Renderer::render(Player& player)
 {
   auto currentTile = player.tile();
-  _player->update(player.direction);
+//  _player->update(player.direction);
   draw_sprite(_player, *currentTile);
 }
 
@@ -433,7 +435,8 @@ void Renderer::render_ranged(Player& player)
 
 SDL_Texture* Renderer::render_message(std::string message, int height, SDL_Color color)
 {
-  return _graphics->renderText(message, "./content/secrcode.ttf", color, height);
+  return _graphics->renderText(message,
+                               "./content/secrcode.ttf", color, height, false);
 }
 
 void Renderer::draw_sprite(Sprite* sprite, Tile& tile)

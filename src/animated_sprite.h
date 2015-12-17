@@ -8,7 +8,11 @@ class AnimatedSprite : public Sprite
 public:
   AnimatedSprite(Graphics* graphics, const std::string& file_path,
       int source_x, int source_y, int width, int height, int fps, int num_frames);
-  virtual ~AnimatedSprite ();
+
+    AnimatedSprite(Graphics *graphics, SDL_Texture *texture, int source_x, int source_y, int width, int height, int fps,
+                       int num_frames);
+
+    virtual ~AnimatedSprite ();
   void update(int elapsed_time_in_ms);
 
 private:

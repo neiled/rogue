@@ -19,7 +19,7 @@ class Graphics
     SDL_Renderer* Renderer;
 
     SDL_Texture* loadTexture( std::string path );
-    SDL_Texture* renderText(std::string message, std::string fontFile, SDL_Color color, int fontSize);
+    SDL_Texture *renderText(std::string message, std::string fontFile, SDL_Color color, int fontSize, bool solid);
     void render();
     void clearScreen();
     int getScreenWidth();
@@ -29,12 +29,21 @@ class Graphics
     static const int RES_W = 1600;
     static const int RES_H = 900;
 
-  private:
+    TTF_Font *getFont(const std::string &fontFile, int fontSize);
+
+    void renderTexture(SDL_Texture *tex, int x, int y, int w, int h);
+
+    void renderTexture(SDL_Texture *tex, int x, int y);
+
+private:
     SDL_Window* _window;
 
     void initTTF();
 
     std::map<std::string, TTF_Font*> _fonts;
+
+    TTF_Font *getFont(const std::string &fontFile, int fontSize) const;
+
 };
 
 #endif

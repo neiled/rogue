@@ -18,6 +18,24 @@ void Graphics::init()
   SDL_SetRenderDrawColor( Renderer, 0x00, 0x00, 0x00, 0x00 );
 }
 
+
+void Graphics::renderTexture(SDL_Texture *tex, int x, int y, int w, int h){
+  //Setup the destination rectangle to be at the position we want
+  SDL_Rect dst;
+  dst.x = x;
+  dst.y = y;
+  dst.w = w;
+  dst.h = h;
+  SDL_RenderCopy(Renderer, tex, NULL, &dst);
+}
+
+
+void Graphics::renderTexture(SDL_Texture *tex,int x, int y){
+  int w, h;
+  SDL_QueryTexture(tex, NULL, NULL, &w, &h);
+  renderTexture(tex, x, y, w, h);
+}
+
 void Graphics::initTTF()
 {
   if (TTF_Init() == -1)
@@ -79,23 +97,28 @@ SDL_Texture* Graphics::loadTexture( std::string path )
   return newTexture;
 }
 
-SDL_Texture* Graphics::renderText(std::string message, std::string fontFile, 
-                        SDL_Color color, int fontSize)
+SDL_Texture * Graphics::renderText(std::string message, std::string fontFile, SDL_Color color, int fontSize, bool solid)
 {
-  auto key = fontFile + std::to_string(fontSize);
-  if(_fonts.find(key) == _fonts.end())
-    _fonts[key]= TTF_OpenFont(fontFile.c_str(), fontSize);
-  //Open the font
-  auto font = _fonts[key];
+  TTF_Font *font = getFont(fontFile, fontSize);
   if (font == nullptr)
       throw std::runtime_error("Failed to load font: " + fontFile + TTF_GetError());
 
   //Render the message to an SDL_Surface, as that's what TTF_RenderText_X returns
-  SDL_Surface *surf = TTF_RenderText_Blended(font, message.c_str(), color);
+  SDL_Surface *surf = solid ? TTF_RenderText_Solid(font, message.c_str(), color) : TTF_RenderText_Blended(font, message.c_str(), color);
   SDL_Texture *texture = SDL_CreateTextureFromSurface(Renderer, surf);
   //Clean up unneeded stuff
   SDL_FreeSurface(surf);
   //TTF_CloseFont(font);
 
   return texture;
+}
+
+TTF_Font *Graphics::getFont(const std::string &fontFile, int fontSize)
+{
+  auto key = fontFile + std::__1::to_string(fontSize);
+  if(_fonts.find(key) == _fonts.end())
+    _fonts[key]= TTF_OpenFont(fontFile.c_str(), fontSize);
+  //Open the font
+  auto font = _fonts[key];
+  return font;
 }

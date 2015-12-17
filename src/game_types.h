@@ -3,6 +3,7 @@
 
 #include <map>
 #include <vector>
+#include "FontSprite.h"
 
 class DirectionalSprite;
 class Sprite;
@@ -52,7 +53,7 @@ enum struct TileType {Floor = 0, Rock, StairsDown, StairsUp, Door};
 
 enum class MessageType {Normal, Good, Bad};
 
-typedef std::map<MonsterType, DirectionalSprite*> monster_sprites_t;
+typedef std::map<MonsterType, FontSprite*> monster_sprites_t;
 typedef std::map<ItemType, std::map<ItemSubtype, Sprite*>> item_sprites_t;
 typedef std::map<TileType, std::vector<Sprite*>> level_sprites_t;
 
