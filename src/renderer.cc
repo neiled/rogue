@@ -89,8 +89,8 @@ void Renderer::init_viewports()
 
 void Renderer::loadMonsterTiles()
 {
-  _monsters[MonsterType::Orc] = new FontSprite(_graphics, "o", TILE_SIZE, SDL_Color{255,255,255});
-  _monsters[MonsterType::Devil] = new FontSprite(_graphics, "d", TILE_SIZE, SDL_Color{255,255,255});
+  _monsters[MonsterType::Orc] = new FontSprite(_graphics, "ʘ", TILE_SIZE, SDL_Color{255,255,255});
+  _monsters[MonsterType::Devil] = new FontSprite(_graphics, new Uint16[] { L'\u9B54', '\0' }, TILE_SIZE, SDL_Color{ 255, 0, 0 });
   _monsters[MonsterType::Skeleton] = new FontSprite(_graphics, "s", TILE_SIZE, SDL_Color{255,255,255});
 }
 
@@ -98,20 +98,20 @@ void Renderer::loadMapTiles()
 {
     _tiles[TileType::Floor].push_back(new FontSprite(_graphics, ".", TILE_SIZE, SDL_Color{30,25,25}));
     _tiles[TileType::Floor].push_back(new FontSprite(_graphics, "`", TILE_SIZE, SDL_Color{25,30,25}));
-    _tiles[TileType::Floor].push_back(new FontSprite(_graphics, "'", TILE_SIZE, SDL_Color{25,30,25}));
-    _tiles[TileType::Floor].push_back(new FontSprite(_graphics, ",", TILE_SIZE, SDL_Color{25,25,30}));
 
 
-  for (int i = 0; i < 4; ++i)
-  {
-    _tiles[TileType::Rock].push_back(new FontSprite(_graphics, "#", TILE_SIZE, SDL_Color{255,255,255}));
-  }
+
+  /*for (int i = 0; i < 4; ++i)
+  {*/
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 255, 255, 255 }));
+  /*}*/
 
   _tiles[TileType::StairsUp].push_back(new FontSprite(_graphics, ">", TILE_SIZE, SDL_Color{255,255,255}));
 
   _tiles[TileType::StairsDown].push_back(new FontSprite(_graphics, "<", TILE_SIZE, SDL_Color{255,255,255}));
 
-  _tiles[TileType::Door].push_back(new FontSprite(_graphics, "[", TILE_SIZE, SDL_Color{255,255,255}));
+  
+  _tiles[TileType::Door].push_back(new FontSprite(_graphics, new Uint16[] { L'\u1985', '\0' }, TILE_SIZE, SDL_Color{ 255, 255, 255 }));
 }
 
 void Renderer::load_items()
