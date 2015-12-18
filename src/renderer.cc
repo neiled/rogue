@@ -87,23 +87,31 @@ void Renderer::init_viewports()
   _cameraRect.y = 0;
 }
 
+
 void Renderer::loadMonsterTiles()
 {
-  _monsters[MonsterType::Orc] = new FontSprite(_graphics, "ʘ", TILE_SIZE, SDL_Color{255,255,255});
-  _monsters[MonsterType::Devil] = new FontSprite(_graphics, new Uint16[] { L'\u9B54', '\0' }, TILE_SIZE, SDL_Color{ 255, 0, 0 });
-  _monsters[MonsterType::Skeleton] = new FontSprite(_graphics, "s", TILE_SIZE, SDL_Color{255,255,255});
+	_monsters[MonsterType::Orc] = new FontSprite(_graphics, new Uint16[] { L'\u162E', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 204 });
+	_monsters[MonsterType::Devil] = new FontSprite(_graphics, new Uint16[] { L'\u263F', '\0' }, TILE_SIZE, SDL_Color{ 255, 0, 0 });
+	_monsters[MonsterType::Skeleton] = new FontSprite(_graphics, new Uint16[] { L'\u2640', '\0' }, TILE_SIZE, SDL_Color{ 255, 255, 255 });
 }
 
 void Renderer::loadMapTiles()
 {
-    _tiles[TileType::Floor].push_back(new FontSprite(_graphics, ".", TILE_SIZE, SDL_Color{30,25,25}));
-    _tiles[TileType::Floor].push_back(new FontSprite(_graphics, "`", TILE_SIZE, SDL_Color{25,30,25}));
+	_tiles[TileType::Floor].push_back(new FontSprite(_graphics, new Uint16[] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 30, 25, 25 }));
+	_tiles[TileType::Floor].push_back(new FontSprite(_graphics, new Uint16[] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 25, 30, 25 }));
 
 
 
   /*for (int i = 0; i < 4; ++i)
   {*/
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 255, 255, 255 }));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[] { L'\u2801', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 204}));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[] { L'\u2802', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 153}));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[] { L'\u2803', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 153}));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[] { L'\u2804', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 102}));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[] { L'\u2805', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 204 }));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[] { L'\u2806', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 153 }));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[] { L'\u2807', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 153 }));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[] { L'\u2808', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 102 }));
   /*}*/
 
   _tiles[TileType::StairsUp].push_back(new FontSprite(_graphics, ">", TILE_SIZE, SDL_Color{255,255,255}));
@@ -111,7 +119,7 @@ void Renderer::loadMapTiles()
   _tiles[TileType::StairsDown].push_back(new FontSprite(_graphics, "<", TILE_SIZE, SDL_Color{255,255,255}));
 
   
-  _tiles[TileType::Door].push_back(new FontSprite(_graphics, new Uint16[] { L'\u1985', '\0' }, TILE_SIZE, SDL_Color{ 255, 255, 255 }));
+  _tiles[TileType::Door].push_back(new FontSprite(_graphics, new Uint16[] { L'\u2229', '\0' }, TILE_SIZE, SDL_Color{ 153, 0, 51 }));
 }
 
 void Renderer::load_items()
@@ -127,16 +135,16 @@ void Renderer::load_items()
 void Renderer::load_scenery()
 {
   _items[ItemType::CHEST] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::CHEST][ItemSubtype::CHEST] = new FontSprite(_graphics, "%", TILE_SIZE, SDL_Color{255,255,255});
+  _items[ItemType::CHEST][ItemSubtype::CHEST] = new FontSprite(_graphics, new Uint16[] { L'\u2610', '\0' }, TILE_SIZE, SDL_Color{ 255, 255, 255 });
 
 }
 
 void Renderer::load_corpses()
 {
   _items[ItemType::CORPSE] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::CORPSE][ItemSubtype::CORPSE_ORC] = new FontSprite(_graphics, "x", TILE_SIZE, SDL_Color{255,255,255});
-  _items[ItemType::CORPSE][ItemSubtype::CORPSE_DEVIL] = new FontSprite(_graphics, "x", TILE_SIZE, SDL_Color{255,255,255});
-  _items[ItemType::CORPSE][ItemSubtype::CORPSE_SKELETON] = new FontSprite(_graphics, "x", TILE_SIZE, SDL_Color{255,255,255});
+  _items[ItemType::CORPSE][ItemSubtype::CORPSE_ORC] = new FontSprite(_graphics, new Uint16[] { L'\u2620', '\0' }, TILE_SIZE, SDL_Color{ 145, 159, 163});
+  _items[ItemType::CORPSE][ItemSubtype::CORPSE_DEVIL] = new FontSprite(_graphics, new Uint16[] { L'\u2620', '\0' }, TILE_SIZE, SDL_Color{ 145, 159, 163 });
+  _items[ItemType::CORPSE][ItemSubtype::CORPSE_SKELETON] = new FontSprite(_graphics, new Uint16[] { L'\u2620', '\0' }, TILE_SIZE, SDL_Color{ 145, 159, 163 });
 
 
 }
@@ -144,24 +152,24 @@ void Renderer::load_corpses()
 void Renderer::load_potions()
 {
   _items[ItemType::POTION] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_LARGE] = new FontSprite(_graphics, "|", TILE_SIZE, SDL_Color{255,0,0});
-  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH] = new FontSprite(_graphics, "|", TILE_SIZE, SDL_Color{255,0,0});
-  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_SMALL] = new FontSprite(_graphics, "|", TILE_SIZE, SDL_Color{255,0,0});
+  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_LARGE] = new FontSprite(_graphics, new Uint16[] { L'\u2C21', '\0' }, TILE_SIZE, SDL_Color{ 255, 0, 0 });
+  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH] = new FontSprite(_graphics, new Uint16[] { L'\u2C21', '\0' }, TILE_SIZE, SDL_Color{ 255, 0, 0 });
+  _items[ItemType::POTION][ItemSubtype::POTION_HEALTH_SMALL] = new FontSprite(_graphics, new Uint16[] { L'\u2C21', '\0' }, TILE_SIZE, SDL_Color{ 255, 0, 0 });
 }
 
 void Renderer::load_weapons()
 {
   _items[ItemType::WEAPON] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_LOW] = new FontSprite(_graphics, "\\", TILE_SIZE, SDL_Color{255,255,255});
-  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS] = new FontSprite(_graphics, "\\", TILE_SIZE, SDL_Color{255,255,255});
-  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_RUSTED] = new FontSprite(_graphics, "\\", TILE_SIZE, SDL_Color{255,255,255});
-  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_GOOD] = new FontSprite(_graphics, "\\", TILE_SIZE, SDL_Color{255,255,255});
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_LOW] = new FontSprite(_graphics, new Uint16[] { L'\u2E14', '\0' }, TILE_SIZE, SDL_Color{ 255, 255, 255 });
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS] = new FontSprite(_graphics, new Uint16[] { L'\u2E14', '\0' }, TILE_SIZE, SDL_Color{ 255, 255, 255 });
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_RUSTED] = new FontSprite(_graphics, new Uint16[] { L'\u2E14', '\0' }, TILE_SIZE, SDL_Color{ 255, 255, 255 });
+  _items[ItemType::WEAPON][ItemSubtype::WEAPON_KRIS_GOOD] = new FontSprite(_graphics, new Uint16[] { L'\u2E14', '\0' }, TILE_SIZE, SDL_Color{ 255, 255, 255 });
 }
 
 void Renderer::load_wands()
 {
   _items[ItemType::WAND] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::WAND][ItemSubtype::WAND_FLAME] = new FontSprite(_graphics, "!", TILE_SIZE, SDL_Color{255,255,255});
+  _items[ItemType::WAND][ItemSubtype::WAND_FLAME] = new FontSprite(_graphics, new Uint16[] { L'\u2912', '\0' }, TILE_SIZE, SDL_Color{ 245, 239, 56 });
 }
 
 void Renderer::load_scrolls()
