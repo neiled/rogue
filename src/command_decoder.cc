@@ -10,7 +10,7 @@ Item* CommandDecoder::get_item(std::vector<Item*> items, SDL_Keycode key)
   if(index < 0)
     return nullptr;
 
-  if(index > items.size())
+  if(index >= items.size())
     return nullptr;
 
   return items.at(index);

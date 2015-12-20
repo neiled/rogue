@@ -104,14 +104,14 @@ void Renderer::loadMapTiles()
 
   /*for (int i = 0; i < 4; ++i)
   {*/
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u3801', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 204}));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u3802', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 153}));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u3803', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 153}));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u3804', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 102}));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u3805', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 204 }));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u3806', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 153 }));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u3807', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 153 }));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u3808', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 102 }));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 204}));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 153}));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 153}));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 102}));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 204 }));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 153 }));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 153 }));
+	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 102 }));
   /*}*/
 
   _tiles[TileType::StairsUp].push_back(new FontSprite(_graphics, ">", TILE_SIZE, SDL_Color{255,255,255}));
@@ -135,7 +135,7 @@ void Renderer::load_items()
 void Renderer::load_scenery()
 {
   _items[ItemType::CHEST] = std::map<ItemSubtype, Sprite*>();
-  _items[ItemType::CHEST][ItemSubtype::CHEST] = new FontSprite(_graphics, new Uint16[2] { L'\u2610', '\0' }, TILE_SIZE, SDL_Color{ 255, 255, 255 });
+  _items[ItemType::CHEST][ItemSubtype::CHEST] = new FontSprite(_graphics, new Uint16[2] { L'\u2B13', '\0' }, TILE_SIZE, SDL_Color{ 130, 88, 9 });
 
 }
 
