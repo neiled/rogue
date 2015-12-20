@@ -35,8 +35,6 @@ SDL_Texture *FontSprite::generate_texture(Graphics* graphics, std::string messag
 
 SDL_Texture *FontSprite::generate_texture(Graphics* graphics, SDL_Surface* surf, int size)
 {
-	SDL_SetRenderDrawColor(graphics->Renderer, 0x00, 0x00, 0x00, 0x00);
-
 	SDL_Texture *texture = SDL_CreateTextureFromSurface(graphics->Renderer, surf);
     SDL_Texture *t = SDL_CreateTexture(graphics->Renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, size, size);
 
@@ -48,6 +46,8 @@ SDL_Texture *FontSprite::generate_texture(Graphics* graphics, SDL_Surface* surf,
     auto current_target = SDL_GetRenderTarget(graphics->Renderer);
 
     SDL_SetRenderTarget(graphics->Renderer, t);
+	SDL_SetRenderDrawColor(graphics->Renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
+	SDL_RenderClear(graphics->Renderer);
 	SDL_RenderFillRect(graphics->Renderer, NULL);
     graphics->renderTexture(texture, x, y);
 

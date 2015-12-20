@@ -97,8 +97,13 @@ void Renderer::loadMonsterTiles()
 
 void Renderer::loadMapTiles()
 {
-	_tiles[TileType::Floor].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 30, 25, 25 }));
-	_tiles[TileType::Floor].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 25, 30, 25 }));
+	_tiles[TileType::Floor].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u0701', '\0' }, TILE_SIZE, SDL_Color{ 30, 25, 25 }));
+	_tiles[TileType::Floor].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u0702', '\0' }, TILE_SIZE, SDL_Color{ 25, 30, 25 }));
+    _tiles[TileType::Floor].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u0703', '\0' }, TILE_SIZE, SDL_Color{ 25, 30, 25 }));
+    _tiles[TileType::Floor].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u0704', '\0' }, TILE_SIZE, SDL_Color{ 25, 30, 25 }));
+    _tiles[TileType::Floor].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u0705', '\0' }, TILE_SIZE, SDL_Color{ 25, 30, 25 }));
+    _tiles[TileType::Floor].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u0706', '\0' }, TILE_SIZE, SDL_Color{ 25, 30, 25 }));
+    _tiles[TileType::Floor].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u0707', '\0' }, TILE_SIZE, SDL_Color{ 25, 30, 25 }));
 
 
 
