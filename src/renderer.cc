@@ -1,20 +1,13 @@
 #include "renderer.h"
-#include "tile.h"
-#include "sprite.h"
-#include "directional_sprite.h"
-#include "graphics.h"
 #include "player.h"
-#include "level.h"
 #include "monster.h"
 #include "world.h"
-#include "item.h"
 #include "game.h"
 #include "messages.h"
 #include "render_monsters.h"
 #include "chest.h"
-#include "FontSprite.h"
 
-Renderer::Renderer(Graphics* graphics) : _graphics(graphics), _render_inv(graphics), _render_level(graphics), _render_info(graphics), _render_ranged(graphics), _render_look(graphics)
+Renderer::Renderer(Graphics* graphics) : _graphics(graphics), _render_inv(graphics), _render_level(graphics), _render_info(graphics), _render_ranged(graphics), _render_look(graphics), _render_main_menu(graphics)
 {
 
 }
@@ -26,19 +19,20 @@ Renderer::~Renderer()
 
 void Renderer::init()
 {
-  loadMapTiles();
-  loadMonsterTiles();
-  load_items();
+    loadMapTiles();
+    loadMonsterTiles();
+    load_items();
 
 //  _player = new DirectionalSprite(_graphics, "./content/player.png", 0, 0, TILE_SIZE, TILE_SIZE);
 
-  _player = new FontSprite(_graphics, "@", TILE_SIZE, SDL_Color{255,255,255});
+    _player = new FontSprite(_graphics, "@", TILE_SIZE, SDL_Color{255, 255, 255});
 
-  init_viewports();
+    init_viewports();
 
-  _render_inv.init();
-  _render_info.init();
-  _render_ranged.init();
+    _render_inv.init();
+    _render_info.init();
+    _render_ranged.init();
+    _render_main_menu.init();
 }
 
 SDL_Rect Renderer::camera_rect()
@@ -48,11 +42,13 @@ SDL_Rect Renderer::camera_rect()
 
 void Renderer::render(Game& game)
 {
-  render(*game.level());
-  render(*game.player());
-  render_info(game, *game.player());
-  render_messages(Messages::AllMessages());
-  render_state(game.state(), *game.player());
+    if (game.state() != GameState::MENU_MAIN && game.state() != GameState::STARTING) {
+        render(*game.level());
+        render(*game.player());
+    }
+    render_info(game, *game.player());
+    render_messages(Messages::AllMessages());
+    render_state(game.state(), *game.player());
 
 }
 
@@ -107,24 +103,19 @@ void Renderer::loadMapTiles()
 
 
 
-  /*for (int i = 0; i < 4; ++i)
-  {*/
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 204}));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 153}));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 153}));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 102}));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 204 }));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 153 }));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 153, 153 }));
-	  _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 0, 102, 102 }));
-  /*}*/
+    _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 104, 104, 104}));
+    _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 112, 112, 112}));
+    _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 120, 120, 120}));
+    _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 96, 96, 96}));
+    _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 88, 88, 88 }));
+    _tiles[TileType::Rock].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u26C6', '\0' }, TILE_SIZE, SDL_Color{ 72, 72, 72 }));
 
-  _tiles[TileType::StairsUp].push_back(new FontSprite(_graphics, ">", TILE_SIZE, SDL_Color{255,255,255}));
+    _tiles[TileType::StairsUp].push_back(new FontSprite(_graphics, ">", TILE_SIZE, SDL_Color{255,255,255}));
 
-  _tiles[TileType::StairsDown].push_back(new FontSprite(_graphics, "<", TILE_SIZE, SDL_Color{255,255,255}));
+    _tiles[TileType::StairsDown].push_back(new FontSprite(_graphics, "<", TILE_SIZE, SDL_Color{255,255,255}));
 
-  
-  _tiles[TileType::Door].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u2229', '\0' }, TILE_SIZE, SDL_Color{ 153, 0, 51 }));
+
+    _tiles[TileType::Door].push_back(new FontSprite(_graphics, new Uint16[2] { L'\u1320', '\0' }, TILE_SIZE, SDL_Color{ 153, 0, 51 }));
 }
 
 void Renderer::load_items()
@@ -287,7 +278,7 @@ void Renderer::draw_bar(int x, int y, int width, int height, int current, int ma
   health.x++;
   health.y++;
   health.h-=2;
-  health.w = (width-2) * (static_cast<float>(current) / max);
+  health.w = (int) ((width - 2) * (static_cast<float>(current) / max));
 
   SDL_SetRenderDrawColor(_graphics->Renderer, r, g, b, SDL_ALPHA_OPAQUE);
   SDL_RenderFillRect(_graphics->Renderer, &health);
@@ -340,7 +331,7 @@ void Renderer::render_messages(std::deque<std::vector<Message>> messages)
 
   int message_h = 16;
   int max_messages = _vp_msg.h / message_h;
-  int start_message = messages.size()-max_messages;
+  int start_message = (int) (messages.size() - max_messages);
   if(start_message < 0)
     start_message = 0;
 
@@ -397,27 +388,35 @@ void Renderer::render_string(std::string message, int x, int y, int h)
 
 void Renderer::render_state(GameState state, Player& player)
 {
-  SDL_RenderSetViewport(_graphics->Renderer, NULL);
-  switch(state)
-  {
-    case GameState::MENU_INVENTORY:
-      render_inventory(*player.inventory());
-      break;
-    case GameState::MENU_WAND:
-      render_wand(*player.inventory());
-      break;
-    case GameState::MENU_CHEST:
-      render_chest(*player.chest()->inventory());
-      break;
-    case GameState::LOOK:
-      render_look(player);
-      break;
-    case GameState::RANGED_TARGET:
-      render_ranged(player);
-    default:
-      break;
-  }
+    SDL_RenderSetViewport(_graphics->Renderer, NULL);
+    switch (state) {
+        case GameState::MENU_INVENTORY:
+            render_inventory(*player.inventory());
+            break;
+        case GameState::MENU_MAIN:
+            render_main_menu();
+            break;
+        case GameState::MENU_WAND:
+            render_wand(*player.inventory());
+            break;
+        case GameState::MENU_CHEST:
+            render_chest(*player.chest()->inventory());
+            break;
+        case GameState::LOOK:
+            render_look(player);
+            break;
+        case GameState::RANGED_TARGET:
+            render_ranged(player);
+        default:
+            break;
+    }
 
+}
+
+
+void Renderer::render_main_menu()
+{
+    _render_main_menu.render_menu(*this);
 }
 
 void Renderer::render_look(Player& player)

@@ -10,6 +10,7 @@
 #include "command_decoder_chest.h"
 #include "command_decoder_look.h"
 #include "command_decoder_wand.h"
+#include "CommandDecoderMainMenu.h"
 
 
 Game::Game() : _graphics(), _renderer(&_graphics)
@@ -29,17 +30,18 @@ void Game::start()
   ItemFactory::Init();
   _world.init();
   _decoders[GameState::GAME] = new CommandDecoderGame();
+  _decoders[GameState::MENU_MAIN] = new CommandDecoderMainMenu();
   _decoders[GameState::MENU_INVENTORY] = new CommandDecoderInventory();
   _decoders[GameState::MENU_WAND] = new CommandDecoderWand();
   _decoders[GameState::MENU_CHEST] = new CommandDecoderChest();
   _decoders[GameState::DEAD] = new CommandDecoderDead();
   _decoders[GameState::LOOK] = new CommandDecoderLook();
   _decoders[GameState::RANGED_TARGET] = new CommandDecoderLook();
-  _state = GameState::GAME;
+  _state = GameState::MENU_MAIN;
   eventLoop();
 }
 
-void Game::reset()
+void Game::start_game()
 {
   _turn = 0;
   _world = World();
@@ -60,7 +62,7 @@ void Game::eventLoop()
 
   Player* player = _world.player();
   bool running = true;
-  while (running == true)
+  while (running)
   {
     if(_state == GameState::GAME && player->dead())
       _state = GameState::DEAD;
@@ -90,7 +92,7 @@ void Game::eventLoop()
 
     if(_state == GameState::STARTING)
     {
-      reset();
+      start_game();
     }
     if(_state == GameState::STOP)
       running = false;

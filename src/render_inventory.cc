@@ -11,7 +11,21 @@ RenderInventory::RenderInventory(Graphics* graphics) : _graphics(graphics)
 
 void RenderInventory::init()
 {
-  _panel = _graphics->loadTexture("./content/blue_panel.png");
+    SDL_Texture *t = SDL_CreateTexture(_graphics->Renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, 800, 800);
+
+
+    auto current_target = SDL_GetRenderTarget(_graphics->Renderer);
+
+    SDL_SetRenderTarget(_graphics->Renderer, t);
+    SDL_SetRenderDrawColor(_graphics->Renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
+    SDL_RenderClear(_graphics->Renderer);
+    SDL_RenderFillRect(_graphics->Renderer, NULL);
+    SDL_SetRenderDrawColor(_graphics->Renderer, 0xFF, 0xFF, 0xFF, SDL_ALPHA_OPAQUE);
+    SDL_RenderDrawRect(_graphics->Renderer, NULL);
+
+    SDL_SetRenderTarget(_graphics->Renderer, current_target);
+
+    _panel = t;
 }
 void RenderInventory::render_player_inventory(Renderer renderer, item_sprites_t items, Inventory &inventory)
 {
@@ -24,9 +38,9 @@ void RenderInventory::render_player_inventory(Renderer renderer, item_sprites_t 
   int x = vp_inv.x+40;
 
   render(renderer, items, inventory.items(), vp_inv);
-  renderer.render_string("Inventory:", x, vp_inv.y + 50, 32);
+  renderer.render_string("Inventory:", x, vp_inv.y + 25, 32);
   if(inventory.drop_mode()) {
-      renderer.render_string("Drop Mode!", x + 200, vp_inv.y + 50, 32);
+      renderer.render_string("Drop Mode!", x + 200, vp_inv.y + 25, 32);
       renderer.render_string("To drop an item press d then the number of", x, 750, 32);
       renderer.render_string("the item. To cancel dropping press 'd'", x, 782, 32);
   }

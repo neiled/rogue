@@ -34,7 +34,7 @@ class Game {
   private:
     Graphics _graphics;
     Renderer _renderer;
-    void reset();
+    void start_game();
     void eventLoop();
     void update_monsters();
     void draw(Graphics& graphics, Renderer& renderer);

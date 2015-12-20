@@ -18,6 +18,7 @@
 #include "render_look.h"
 #include "game_types.h"
 #include "FontSprite.h"
+#include "RenderMainMenu.h"
 
 using std::vector;
 using std::array;
@@ -72,6 +73,7 @@ class Renderer {
     RenderLevel _render_level;
     RenderRanged _render_ranged;
     RenderLook _render_look;
+    RenderMainMenu _render_main_menu;
 
     SDL_Rect _vp_main;
     SDL_Rect _vp_msg;
@@ -120,5 +122,6 @@ class Renderer {
     void render_inventory(Inventory &inventory, bool drop_mode);
 
     void render_inventory(Inventory &inventory);
+    void render_main_menu();
 };
 #endif
