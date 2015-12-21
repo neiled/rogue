@@ -20,13 +20,26 @@ World::~World()
 
 }
 
+int World::width() const
+{
+  return WORLD_WIDTH;
+}
+
+int World::height() const
+{
+  return WORLD_HEIGHT;
+}
+
 void World::init()
 {
+    SDL_Log("Creating world...");
+    _map = _world_builder.build_world(*this);
+
   SDL_Log("Creating first level");
   Level* firstLevel = new Level(1);
   firstLevel->set_player(&_player);
   SDL_Log("Building first level");
-  _builder.buildLevel(*firstLevel, _player);
+  _levelBuilder.buildLevel(*firstLevel, _player);
   SDL_Log("Done.");
   _levels.push_back(firstLevel);
   _player.weapon(ItemFactory::Build(ItemType::WEAPON, ItemSubtype::WEAPON_KRIS_RUSTED, 1));
@@ -88,9 +101,30 @@ Level* World::getLevel(int depth)
     if(_levels.size() < depth )
     {
       auto newLevel = new Level(depth);
-      _builder.buildLevel(*newLevel, _player);
+      _levelBuilder.buildLevel(*newLevel, _player);
       _levels.push_back(newLevel);
     }
 
     return _levels[depth-1];
+}
+
+TileType World::tile_type(int x, int y)
+{
+  double height =  _map[y][x];
+  return TileType::Rock;
+}
+
+double World::tile_height(int x, int y)
+{
+    return _map[y][x];
+}
+
+double World::tile_min_height()
+{
+    return _world_builder.min_height();
+}
+
+double World::tile_max_height()
+{
+    return _world_builder.max_height();
 }

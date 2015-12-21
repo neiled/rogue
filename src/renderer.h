@@ -19,6 +19,7 @@
 #include "game_types.h"
 #include "FontSprite.h"
 #include "RenderMainMenu.h"
+#include "RenderWorldMap.h"
 
 using std::vector;
 using std::array;
@@ -60,7 +61,10 @@ class Renderer {
 
     SDL_Point tile_to_screen(int x, int y);
     SDL_Rect camera_rect();
-  private:
+
+    void updateCamera(int x, int y);
+
+private:
     //array<Sprite*,5> _mapTiles;
     monster_sprites_t _monsters;
     item_sprites_t _items;
@@ -74,6 +78,7 @@ class Renderer {
     RenderRanged _render_ranged;
     RenderLook _render_look;
     RenderMainMenu _render_main_menu;
+    RenderWorldMap _render_world_map;
 
     SDL_Rect _vp_main;
     SDL_Rect _vp_msg;
@@ -110,7 +115,6 @@ class Renderer {
     void render_info(Game& game, Player& player);
     
     void render_messages(std::deque<std::vector<Message>> messages);
-    void render_state(GameState state, Player& player);
     void render_wand(Inventory& inventory);
     void render_chest(Inventory& inventory);
     void render_look(Player&);
@@ -123,5 +127,12 @@ class Renderer {
 
     void render_inventory(Inventory &inventory);
     void render_main_menu();
+
+    void render_world_map();
+
+    void render_world_map(World &world);
+
+    void render_state(GameState state, Player &player, World &world);
+
 };
 #endif

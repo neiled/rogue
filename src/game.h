@@ -27,6 +27,7 @@ class Game {
     GameState state();
     Player* player();
     Level* level();
+    World* world();
     int turn();
 
     Tile* get_tile_from_click(int x, int y);

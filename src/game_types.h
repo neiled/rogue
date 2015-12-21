@@ -57,17 +57,19 @@ typedef std::map<MonsterType, FontSprite*> monster_sprites_t;
 typedef std::map<ItemType, std::map<ItemSubtype, Sprite*>> item_sprites_t;
 typedef std::map<TileType, std::vector<Sprite*>> level_sprites_t;
 
-enum class GameState {
-  MENU_MAIN,
-  MENU_CHEST,
-  MENU_INVENTORY,
-  GAME,
-  DEAD,
-  STARTING,
-  STOP,
-  LOOK,
-  MENU_WAND,
-  RANGED_TARGET
+enum class GameState
+{
+    MENU_MAIN,
+    MENU_CHEST,
+    MENU_INVENTORY,
+    GAME,
+    DEAD,
+    STARTING,
+    STOP,
+    LOOK,
+    MENU_WAND,
+    WORLD_MAP,
+    RANGED_TARGET
 };
 
 #endif

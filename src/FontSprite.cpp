@@ -7,7 +7,7 @@
 
 SDL_Texture *FontSprite::generate_texture(Graphics* graphics, Uint16 *message, SDL_Color color, int size)
 {
-	TTF_Font *font = graphics->getFont("./content/unifont-8.0.01.ttf", 32);
+	TTF_Font *font = graphics->getFont("./content/unifont-8.0.01.ttf", size);
 	if (font == nullptr)
 	{
 		auto error = TTF_GetError();
@@ -21,7 +21,7 @@ SDL_Texture *FontSprite::generate_texture(Graphics* graphics, Uint16 *message, S
 
 SDL_Texture *FontSprite::generate_texture(Graphics* graphics, std::string message, SDL_Color color, int size)
 {
-	TTF_Font *font = graphics->getFont("./content/unifont-8.0.01.ttf", 32);
+	TTF_Font *font = graphics->getFont("./content/unifont-8.0.01.ttf", size);
 	if (font == nullptr)
 	{
 		auto error = TTF_GetError();

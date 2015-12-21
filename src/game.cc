@@ -11,6 +11,7 @@
 #include "command_decoder_look.h"
 #include "command_decoder_wand.h"
 #include "CommandDecoderMainMenu.h"
+#include "CommandDecoderWorldMap.h"
 
 
 Game::Game() : _graphics(), _renderer(&_graphics)
@@ -29,6 +30,7 @@ void Game::start()
   //_renderer = Renderer(&_graphics);
   ItemFactory::Init();
   _world.init();
+  _decoders[GameState::WORLD_MAP] = new CommandDecoderWorldMap();
   _decoders[GameState::GAME] = new CommandDecoderGame();
   _decoders[GameState::MENU_MAIN] = new CommandDecoderMainMenu();
   _decoders[GameState::MENU_INVENTORY] = new CommandDecoderInventory();
@@ -233,7 +235,14 @@ void Game::delay(int start_time_ms)
 void Game::draw(Graphics& graphics, Renderer& renderer)
 {
   renderer.update(&_world);
+    if(_state == GameState::WORLD_MAP)
+        renderer.updateCamera(0,0);
   graphics.clearScreen();
   renderer.render(*this);
   graphics.render();
+}
+
+World* Game::world()
+{
+  return &_world;
 }

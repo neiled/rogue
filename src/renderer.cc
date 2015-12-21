@@ -7,7 +7,7 @@
 #include "render_monsters.h"
 #include "chest.h"
 
-Renderer::Renderer(Graphics* graphics) : _graphics(graphics), _render_inv(graphics), _render_level(graphics), _render_info(graphics), _render_ranged(graphics), _render_look(graphics), _render_main_menu(graphics)
+Renderer::Renderer(Graphics* graphics) : _graphics(graphics), _render_inv(graphics), _render_level(graphics), _render_info(graphics), _render_ranged(graphics), _render_look(graphics), _render_main_menu(graphics), _render_world_map(graphics)
 {
 
 }
@@ -33,6 +33,7 @@ void Renderer::init()
     _render_info.init();
     _render_ranged.init();
     _render_main_menu.init();
+    _render_world_map.init();
 }
 
 SDL_Rect Renderer::camera_rect()
@@ -42,13 +43,13 @@ SDL_Rect Renderer::camera_rect()
 
 void Renderer::render(Game& game)
 {
-    if (game.state() != GameState::MENU_MAIN && game.state() != GameState::STARTING) {
+    if (game.state() != GameState::MENU_MAIN && game.state() != GameState::STARTING && game.state() != GameState::WORLD_MAP) {
         render(*game.level());
         render(*game.player());
     }
     render_info(game, *game.player());
     render_messages(Messages::AllMessages());
-    render_state(game.state(), *game.player());
+    render_state(game.state(), *game.player(), *game.world());
 
 }
 
@@ -184,14 +185,27 @@ void Renderer::update(World* world)
 
 void Renderer::updateCamera(Player& player)
 {
-  _cameraRect.x = player.tile()->x() * TILE_SIZE  - (_cameraRect.w/2);
-  _cameraRect.y = player.tile()->y() * TILE_SIZE - (_cameraRect.h/2);
+    int x = player.tile()->x() * TILE_SIZE - (_cameraRect.w / 2);
+    int y = player.tile()->y() * TILE_SIZE - (_cameraRect.h / 2);
+
+    updateCamera(x, y);
+
+}
+
+void Renderer::updateCamera(int x, int y)
+{
+    _cameraRect.x = x;
+    _cameraRect.y = y;
 
 
-  if(_cameraRect.x < 0) _cameraRect.x = 0;
-  if(_cameraRect.y < 0) _cameraRect.y = 0;
-  if(_cameraRect.x >= Level::LEVEL_WIDTH*TILE_SIZE   - _cameraRect.w) _cameraRect.x = Level::LEVEL_WIDTH* TILE_SIZE  - _cameraRect.w;
-  if(_cameraRect.y >= Level::LEVEL_HEIGHT*TILE_SIZE - _cameraRect.h) _cameraRect.y = Level::LEVEL_HEIGHT*TILE_SIZE - _cameraRect.h;
+    if (_cameraRect.x < 0) _cameraRect.x = 0;
+    if (_cameraRect.y < 0) _cameraRect.y = 0;
+    if (_cameraRect.x >= Level::LEVEL_WIDTH * TILE_SIZE - _cameraRect.w) _cameraRect.x =
+                                                                                 Level::LEVEL_WIDTH * TILE_SIZE -
+                                                                                 _cameraRect.w;
+    if (_cameraRect.y >= Level::LEVEL_HEIGHT * TILE_SIZE - _cameraRect.h) _cameraRect.y =
+                                                                                  Level::LEVEL_HEIGHT * TILE_SIZE -
+                                                                                  _cameraRect.h;
 }
 
 
@@ -386,7 +400,7 @@ void Renderer::render_string(std::string message, int x, int y, int h)
     SDL_DestroyTexture(messageT);
 }
 
-void Renderer::render_state(GameState state, Player& player)
+void Renderer::render_state(GameState state, Player& player, World& world)
 {
     SDL_RenderSetViewport(_graphics->Renderer, NULL);
     switch (state) {
@@ -407,12 +421,22 @@ void Renderer::render_state(GameState state, Player& player)
             break;
         case GameState::RANGED_TARGET:
             render_ranged(player);
+            break;
+        case GameState::WORLD_MAP:
+            render_world_map(world);
+            break;
         default:
             break;
     }
 
 }
 
+
+void Renderer::render_world_map(World& world)
+{
+    _render_world_map.render_map(*this, _tiles, _cameraRect, world);
+
+}
 
 void Renderer::render_main_menu()
 {
