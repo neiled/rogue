@@ -31,11 +31,16 @@ public:
   void createDefaultHeatMapGradient()
   {
     color.clear();
-    color.push_back(ColorPoint(0, 0, 1,   0.0f));      // Blue.
-    color.push_back(ColorPoint(0, 1, 1,   0.25f));     // Cyan.
-    color.push_back(ColorPoint(0, 1, 0,   0.5f));      // Green.
-    color.push_back(ColorPoint(1, 1, 0,   0.75f));     // Yellow.
-    color.push_back(ColorPoint(1, 0, 0,   1.0f));      // Red.
+    color.push_back(ColorPoint(0, 0, 128,   -1.0f));      // deeps.
+    color.push_back(ColorPoint(0, 0, 255,   -0.25f));     // shallow.
+    color.push_back(ColorPoint(0, 128, 255,   0.0f));      // shore
+    color.push_back(ColorPoint(240, 240, 64,   0.0625f));     // sand.
+    color.push_back(ColorPoint(32, 160, 0,   0.1250f));     // grass.
+    color.push_back(ColorPoint(224, 224, 0,   0.375f));     // dirt.
+    color.push_back(ColorPoint(128, 128, 128,   0.75f));     // rock.
+    color.push_back(ColorPoint(255, 255, 255,   1.00f));     // snow.
+    
+    
   }
  
   //-- Inputs a (value) between 0 and 1 and outputs the (red), (green) and (blue)
@@ -51,7 +56,7 @@ public:
       if(value < currC.val)
       {
         ColorPoint &prevC  = color[ max(0,i-1) ];
-        float valueDiff    = (prevC.val - currC.val);
+        float valueDiff    = abs(prevC.val - currC.val);
         float fractBetween = (valueDiff==0) ? 0 : (value - currC.val) / valueDiff;
         red   = (prevC.r - currC.r)*fractBetween + currC.r;
         green = (prevC.g - currC.g)*fractBetween + currC.g;
