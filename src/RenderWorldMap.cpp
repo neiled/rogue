@@ -63,14 +63,22 @@ void RenderWorldMap::init()
 
 SDL_Color RenderWorldMap::get_color(double min, double max, double height)
 {
-    double new_height = ((height-min)/(max-min));
+    double new_height = 2*((height-min)/(max-min))-1;
 
-    if(new_height < 0.3)
-        return SDL_Color{(Uint8) (0 ), (Uint8) (25 * new_height/0.3 ), (Uint8) (255 * new_height/0.3)};
-    else if(new_height < 0.6)
-        return SDL_Color{(Uint8) (0 ), (Uint8) (255 * new_height/0.6), (Uint8) (21 * new_height/0.6 )};
-
-    return SDL_Color{(Uint8) (255 * new_height), (Uint8) (255 * new_height), (Uint8) (255 * new_height)};
+    if(new_height < -0.25)
+        return SDL_Color{0,0,128}; //deeps
+    else if(new_height < 0)
+        return SDL_Color{0,0,255}; //shallow
+    else if(new_height < 0.0625)
+        return SDL_Color{240,240,64}; //shore
+    else if(new_height < 0.1250)
+        return SDL_Color{32,160,0}; //sand      
+    else if(new_height < 0.3750)
+        return SDL_Color{224,224,0}; //grass
+    else if(new_height < 0.7500)
+        return SDL_Color{128,128,128}; //dirt
+    else if(new_height <= 1)
+        return SDL_Color{255,255,255}; //rock 
 
 
 //    if(new_height < 0.2)
