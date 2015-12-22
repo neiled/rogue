@@ -32,6 +32,9 @@ class Game {
 
     Tile* get_tile_from_click(int x, int y);
 
+    void updateCamera(int x, int y);
+    void moveCamera(int xAmount, int yAmount);
+
   private:
     Graphics _graphics;
     Renderer _renderer;

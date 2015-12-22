@@ -36,8 +36,8 @@ public:
 
     Player *player();
 
-    const static int WORLD_WIDTH = 200;
-    const static int WORLD_HEIGHT = 200;
+    const static int WORLD_WIDTH = 100;
+    const static int WORLD_HEIGHT = 100;
 
 
 private:

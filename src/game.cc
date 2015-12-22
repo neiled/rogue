@@ -24,23 +24,23 @@ Game::~Game() {
 
 void Game::start()
 {
-  SDL_Init(SDL_INIT_EVERYTHING);
-  _graphics.init();
-  _renderer.init();
-  //_renderer = Renderer(&_graphics);
-  ItemFactory::Init();
-  _world.init();
-  _decoders[GameState::WORLD_MAP] = new CommandDecoderWorldMap();
-  _decoders[GameState::GAME] = new CommandDecoderGame();
-  _decoders[GameState::MENU_MAIN] = new CommandDecoderMainMenu();
-  _decoders[GameState::MENU_INVENTORY] = new CommandDecoderInventory();
-  _decoders[GameState::MENU_WAND] = new CommandDecoderWand();
-  _decoders[GameState::MENU_CHEST] = new CommandDecoderChest();
-  _decoders[GameState::DEAD] = new CommandDecoderDead();
-  _decoders[GameState::LOOK] = new CommandDecoderLook();
-  _decoders[GameState::RANGED_TARGET] = new CommandDecoderLook();
-  _state = GameState::MENU_MAIN;
-  eventLoop();
+    SDL_Init(SDL_INIT_EVERYTHING);
+    _graphics.init();
+    _world.init();
+    _renderer.init(_world);
+    //_renderer = Renderer(&_graphics);
+    ItemFactory::Init();
+    _decoders[GameState::WORLD_MAP] = new CommandDecoderWorldMap();
+    _decoders[GameState::GAME] = new CommandDecoderGame();
+    _decoders[GameState::MENU_MAIN] = new CommandDecoderMainMenu();
+    _decoders[GameState::MENU_INVENTORY] = new CommandDecoderInventory();
+    _decoders[GameState::MENU_WAND] = new CommandDecoderWand();
+    _decoders[GameState::MENU_CHEST] = new CommandDecoderChest();
+    _decoders[GameState::DEAD] = new CommandDecoderDead();
+    _decoders[GameState::LOOK] = new CommandDecoderLook();
+    _decoders[GameState::RANGED_TARGET] = new CommandDecoderLook();
+    _state = GameState::MENU_MAIN;
+    eventLoop();
 }
 
 void Game::start_game()
@@ -64,6 +64,10 @@ void Game::eventLoop()
 
   Player* player = _world.player();
   bool running = true;
+
+
+  _renderer.updateCamera(0,0);
+
   while (running)
   {
     if(_state == GameState::GAME && player->dead())
@@ -122,11 +126,13 @@ bool Game::player_can_continue(Player& player, GameState state)
 
 void Game::end_turn()
 {
-  ++_turn;
-  _world.update();
-  update_monsters();
-  Messages::Push();
-  draw(_graphics, _renderer);
+    if (state() == GameState::WORLD_MAP || state() == GameState::MENU_MAIN || state() == GameState::STOP)
+        return;
+    ++_turn;
+    _world.update();
+    update_monsters();
+    Messages::Push();
+    draw(_graphics, _renderer);
 }
 
 void Game::update_monsters()
@@ -235,8 +241,6 @@ void Game::delay(int start_time_ms)
 void Game::draw(Graphics& graphics, Renderer& renderer)
 {
   renderer.update(&_world);
-    if(_state == GameState::WORLD_MAP)
-        renderer.updateCamera(0,0);
   graphics.clearScreen();
   renderer.render(*this);
   graphics.render();
@@ -245,4 +249,15 @@ void Game::draw(Graphics& graphics, Renderer& renderer)
 World* Game::world()
 {
   return &_world;
+}
+
+void Game::updateCamera(int x, int y)
+{
+    _renderer.updateCamera(x, y);
+
+}
+
+void Game::moveCamera(int xAmount, int yAmount)
+{
+    _renderer.updateCamera(_renderer.camera_rect().x+xAmount, _renderer.camera_rect().y+yAmount);
 }

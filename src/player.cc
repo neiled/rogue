@@ -194,30 +194,26 @@ void Player::set_tile(Tile& tile)
 
 void Player::add_seen_items()
 {
-  auto visible_tiles = _currentTile->level().visible_tiles();
-  for(auto tile : visible_tiles)
-  {
-    if(tile->interesting())
-    {
-      if(find(_interesting_tiles_seen.begin(), _interesting_tiles_seen.end(), tile)
-          == _interesting_tiles_seen.end())
-      {
-        _interesting_tiles_seen.push_back(tile);
-      }
-    }
-    for(auto item : tile->items())
-    {
-      if(item->interesting())
-      {
-        if(find(_interesting_items_seen.begin(), _interesting_items_seen.end(), item)
-            == _interesting_items_seen.end())
-        {
-          _interesting_items_seen.push_back(item);
-        }
-      }
-    }
-  }
+    if (!_currentTile)
+        return;
 
+    auto visible_tiles = _currentTile->level().visible_tiles();
+    for (auto tile : visible_tiles) {
+        if (tile->interesting()) {
+            if (find(_interesting_tiles_seen.begin(), _interesting_tiles_seen.end(), tile)
+                == _interesting_tiles_seen.end()) {
+                _interesting_tiles_seen.push_back(tile);
+            }
+        }
+        for (auto item : tile->items()) {
+            if (item->interesting()) {
+                if (find(_interesting_items_seen.begin(), _interesting_items_seen.end(), item)
+                    == _interesting_items_seen.end()) {
+                    _interesting_items_seen.push_back(item);
+                }
+            }
+        }
+    }
 
 
 }

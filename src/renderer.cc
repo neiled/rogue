@@ -17,7 +17,7 @@ Renderer::~Renderer()
 
 }
 
-void Renderer::init()
+void Renderer::init(World& world)
 {
     loadMapTiles();
     loadMonsterTiles();
@@ -33,7 +33,7 @@ void Renderer::init()
     _render_info.init();
     _render_ranged.init();
     _render_main_menu.init();
-    _render_world_map.init();
+    _render_world_map.init(world);
 }
 
 SDL_Rect Renderer::camera_rect()
@@ -43,7 +43,7 @@ SDL_Rect Renderer::camera_rect()
 
 void Renderer::render(Game& game)
 {
-    if (game.state() != GameState::MENU_MAIN && game.state() != GameState::STARTING && game.state() != GameState::WORLD_MAP) {
+    if (game.state() != GameState::MENU_MAIN && game.state() != GameState::STARTING && game.state() != GameState::WORLD_MAP && game.state() != GameState::STOP) {
         render(*game.level());
         render(*game.player());
     }
@@ -179,8 +179,6 @@ void Renderer::load_scrolls()
 
 void Renderer::update(World* world)
 {
-  auto &player = *world->player();
-  updateCamera(player);
 }
 
 void Renderer::updateCamera(Player& player)
@@ -212,10 +210,12 @@ void Renderer::updateCamera(int x, int y)
 
 void Renderer::render(Level& level)
 {
-  SDL_RenderSetViewport(_graphics->Renderer, &_vp_main);
-  render_level(level);
-  render_monsters(level);
-  SDL_RenderSetViewport(_graphics->Renderer, NULL);
+    auto player = level.player();
+    updateCamera(*player);
+    SDL_RenderSetViewport(_graphics->Renderer, &_vp_main);
+    render_level(level);
+    render_monsters(level);
+    SDL_RenderSetViewport(_graphics->Renderer, NULL);
 }
 
 void Renderer::render_monsters(Level& level)
@@ -435,7 +435,6 @@ void Renderer::render_state(GameState state, Player& player, World& world)
 void Renderer::render_world_map(World& world)
 {
     _render_world_map.render_map(*this, _tiles, _cameraRect, world);
-
 }
 
 void Renderer::render_main_menu()

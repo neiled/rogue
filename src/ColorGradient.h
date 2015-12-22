@@ -1,3 +1,9 @@
+#include <stdlib.h>
+#include <vector>
+#include <cmath>
+
+#pragma once
+
 class ColorGradient
 {
 private:
@@ -8,7 +14,7 @@ private:
     ColorPoint(float red, float green, float blue, float value)
       : r(red), g(green), b(blue), val(value) {}
   };
-  vector<ColorPoint> color;      // An array of color points in ascending value.
+  std::vector<ColorPoint> color;      // An array of color points in ascending value.
  
 public:
   //-- Default constructor:
@@ -55,8 +61,8 @@ public:
       ColorPoint &currC = color[i];
       if(value < currC.val)
       {
-        ColorPoint &prevC  = color[ max(0,i-1) ];
-        float valueDiff    = abs(prevC.val - currC.val);
+        ColorPoint &prevC  = color[ std::max(0,i-1) ];
+        float valueDiff    = prevC.val - currC.val;
         float fractBetween = (valueDiff==0) ? 0 : (value - currC.val) / valueDiff;
         red   = (prevC.r - currC.r)*fractBetween + currC.r;
         green = (prevC.g - currC.g)*fractBetween + currC.g;

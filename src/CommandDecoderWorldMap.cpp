@@ -15,8 +15,33 @@ bool CommandDecoderWorldMap::Decode(SDL_Keycode key, Game& game)
 //        game.state(GameState::STARTING);
         player.push_command(Commands::CMD::NOP);
     }
-    else if(key == SDLK_ESCAPE)
-        player.push_command(Commands::CMD::CMD_STATE_STOP);
+    else if(key == SDLK_ESCAPE) {
+        player.push_command(Commands::CMD::NOP);
+        game.state(GameState::STOP);
+    }
+    else if(key == SDLK_UP || key == SDLK_KP_8 || key == SDLK_k)
+    {
+        player.push_command(Commands::CMD::NOP);
+        game.moveCamera(0, -MOVE_AMOUNT);
+    }
+    else if(key == SDLK_DOWN || key == SDLK_KP_2 || key == SDLK_j)
+    {
+        game.moveCamera(0, MOVE_AMOUNT);
+        player.push_command(Commands::CMD::NOP);
+
+    }
+    else if(key == SDLK_LEFT || key == SDLK_KP_4 || key == SDLK_h)
+    {
+        game.moveCamera(-MOVE_AMOUNT, 0);
+        player.push_command(Commands::CMD::NOP);
+
+    }
+    else if(key == SDLK_RIGHT || key == SDLK_KP_6 || key == SDLK_l)
+    {
+        game.moveCamera(MOVE_AMOUNT, 0);
+        player.push_command(Commands::CMD::NOP);
+
+    }
     else
         return false;
 

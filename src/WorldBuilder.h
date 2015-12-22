@@ -14,7 +14,7 @@ class WorldBuilder
 {
 
 public:
-    std::array<std::array<double, 200>, 200> build_world(World &world);
+    std::array<std::array<double, 100>, 100> build_world(World &world);
 
     double max_height()
     {

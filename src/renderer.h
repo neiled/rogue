@@ -43,8 +43,7 @@ class Renderer {
     Renderer(Graphics* graphics);
     ~Renderer();
 
-    void init();
-  
+
     void render(Game& game);
     void update(World* world);
 
@@ -63,6 +62,7 @@ class Renderer {
     SDL_Rect camera_rect();
 
     void updateCamera(int x, int y);
+    void init(World &world);
 
 private:
     //array<Sprite*,5> _mapTiles;

@@ -86,8 +86,11 @@ void RenderInfo::render_player_info(Renderer& renderer, Game& game, Player& play
   render_string(renderer, "Atk:  " + std::to_string(player.atk()), string_y);
   string_y += string_gap;
   render_string(renderer, "Def:  " + std::to_string(player.def()), string_y);
-  string_y += string_gap;
-  render_string(renderer, "Dpth: " + std::to_string(player.level().depth()), string_y);
+  if(player.tile())
+  {
+    string_y += string_gap;
+    render_string(renderer, "Dpth: " + std::to_string(player.level().depth()), string_y);
+  }
   string_y += string_gap;
   render_string(renderer, "Turn: " + std::to_string(game.turn()), string_y);  
 }
