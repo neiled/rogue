@@ -21,9 +21,12 @@ void RenderWorldMap::init()
 void RenderWorldMap::generateTexture(World &world)
 {
     SDL_Log("Generating Texture for World");
-    int tile_size = Renderer::TILE_SIZE / 4;
+    int tile_size = Renderer::TILE_SIZE / 2;
     int t_height = world.height() * tile_size;
     int t_width = world.width() * tile_size;
+    SDL_Log("Tile Size: %d", tile_size);
+    SDL_Log("Total Width: %d", t_width);
+
 
     auto t = SDL_CreateTexture(_graphics->Renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_TARGET, t_width, t_height);
     _heatMapGradient.createDefaultHeatMapGradient();
@@ -67,14 +70,14 @@ void RenderWorldMap::generateTexture(World &world)
     SDL_Log("Done.");
 }
 
-void RenderWorldMap::render_map(Renderer &renderer,level_sprites_t tiles, SDL_Rect camera, World* world)
+void RenderWorldMap::render_map(Renderer &renderer,double zoom, SDL_Rect camera, World* world)
 {
     if (_seed != world->seed())
     {
         generateTexture(*world);
         _seed = world->seed();
     }
-    full_map->draw(0 + camera.x, 0 + camera.y, camera.x, camera.y, camera.w, camera.h, 255);
+    full_map->draw(0 + camera.x, 0 + camera.y, camera.x, camera.y, camera.w, camera.h, 255, zoom);
 
 }
 
@@ -92,11 +95,13 @@ Uint16* RenderWorldMap::get_symbol(double min, double max, float height)
 
     if(height < 0)
         return new Uint16[2] { L'\u079D', '\0' }; //water
+    else if(height < 0.0625)
+        return new Uint16[2] { L'\u0F02', '\0' }; //shore
     else if(height < 0.125)
-        return new Uint16[2] { L'\u0F02', '\0' }; //sand
+        return new Uint16[2] { L'\u0634', '\0' }; //sand
     else if(height < 0.75)
-        return new Uint16[2] { L'\u1368', '\0' }; //grass/dirt
+        return new Uint16[2] { L'\u0729', '\0' }; //grass/dirt
     else
-        return new Uint16[2] { L'\u26C6', '\0' };
+        return new Uint16[2] { L'\u071F', '\0' };
 
 }

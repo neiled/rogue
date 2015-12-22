@@ -64,6 +64,8 @@ class Renderer {
     void updateCamera(int x, int y);
     void init(World &world);
 
+    void update_zoom(int amount);
+
 private:
     //array<Sprite*,5> _mapTiles;
     monster_sprites_t _monsters;
@@ -83,6 +85,9 @@ private:
     SDL_Rect _vp_main;
     SDL_Rect _vp_msg;
     SDL_Rect _vp_info;
+
+
+    double _zoom;
 
     void updateCamera(Player& player);
     void loadMapTiles();
@@ -128,11 +133,10 @@ private:
     void render_inventory(Inventory &inventory);
     void render_main_menu();
 
-    void render_world_map();
 
-    void render_world_map(World &world);
+    void render_world_map(World &world, double zoom);
 
-    void render_state(GameState state, Player &player, World &world);
+    void render_state(GameState state, Player &player, World &world, double zoom);
 
 };
 #endif

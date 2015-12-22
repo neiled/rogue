@@ -79,12 +79,14 @@ void Game::eventLoop()
     {
       while(player->hasCommands() == false)
       {
+        int start_time = SDL_GetTicks();
         SDL_Event event;
         if(SDL_PollEvent(&event))
         {
           decode_event(event, _graphics, _renderer);
         }
         draw(_graphics, _renderer);
+        delay(start_time);
       }
 
       while(player->can_afford_next_command())
@@ -232,7 +234,7 @@ Level* Game::level()
 void Game::delay(int start_time_ms)
 {
   const int elapsed_time_ms = SDL_GetTicks() - start_time_ms;
-  int timeToDelay = 1000 / 30 - elapsed_time_ms;
+  int timeToDelay = 1000 / 60 - elapsed_time_ms;
   timeToDelay = timeToDelay < 0 ? 0 : timeToDelay;
 
   SDL_Delay(timeToDelay);
@@ -251,13 +253,25 @@ World* Game::world()
   return &_world;
 }
 
-void Game::updateCamera(int x, int y)
-{
-    _renderer.updateCamera(x, y);
-
-}
+//void Game::updateCamera(int x, int y)
+//{
+//    _renderer.updateCamera(x, y);
+//
+//}
 
 void Game::moveCamera(int xAmount, int yAmount)
 {
     _renderer.updateCamera(_renderer.camera_rect().x+xAmount, _renderer.camera_rect().y+yAmount);
+}
+
+void Game::increaseZoom(int amount)
+{
+  _renderer.update_zoom(amount);
+
+}
+
+void Game::decreaseZoom(int amount)
+{
+  _renderer.update_zoom(-amount);
+
 }

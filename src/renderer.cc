@@ -7,7 +7,7 @@
 #include "render_monsters.h"
 #include "chest.h"
 
-Renderer::Renderer(Graphics* graphics) : _graphics(graphics), _render_inv(graphics), _render_level(graphics), _render_info(graphics), _render_ranged(graphics), _render_look(graphics), _render_main_menu(graphics), _render_world_map(graphics)
+Renderer::Renderer(Graphics* graphics) : _graphics(graphics), _render_inv(graphics), _render_level(graphics), _render_info(graphics), _render_ranged(graphics), _render_look(graphics), _render_main_menu(graphics), _render_world_map(graphics), _zoom(1)
 {
 
 }
@@ -49,8 +49,16 @@ void Renderer::render(Game& game)
     }
     render_info(game, *game.player());
     render_messages(Messages::AllMessages());
-    render_state(game.state(), *game.player(), *game.world());
+    render_state(game.state(), *game.player(), *game.world(), _zoom);
 
+}
+
+void Renderer::update_zoom(int amount)
+{
+    if(amount > 0)
+        _zoom *= 2;
+    if(amount < 0)
+        _zoom /= 2;
 }
 
 
@@ -198,12 +206,14 @@ void Renderer::updateCamera(int x, int y)
 
     if (_cameraRect.x < 0) _cameraRect.x = 0;
     if (_cameraRect.y < 0) _cameraRect.y = 0;
-    if (_cameraRect.x >= Level::LEVEL_WIDTH * TILE_SIZE - _cameraRect.w) _cameraRect.x =
-                                                                                 Level::LEVEL_WIDTH * TILE_SIZE -
-                                                                                 _cameraRect.w;
-    if (_cameraRect.y >= Level::LEVEL_HEIGHT * TILE_SIZE - _cameraRect.h) _cameraRect.y =
-                                                                                  Level::LEVEL_HEIGHT * TILE_SIZE -
-                                                                                  _cameraRect.h;
+//    if(_cameraRect.x > max_x)
+//        _cameraRect.x = max_x;
+//    if(_cameraRect.y > max_y)
+//        _cameraRect.y = max_y;
+//    if (_cameraRect.x >= Level::LEVEL_WIDTH * TILE_SIZE - _cameraRect.w)
+//        _cameraRect.x = Level::LEVEL_WIDTH * TILE_SIZE - _cameraRect.w;
+//    if (_cameraRect.y >= Level::LEVEL_HEIGHT * TILE_SIZE - _cameraRect.h)
+//        _cameraRect.y = Level::LEVEL_HEIGHT * TILE_SIZE - _cameraRect.h;
 }
 
 
@@ -400,7 +410,7 @@ void Renderer::render_string(std::string message, int x, int y, int h)
     SDL_DestroyTexture(messageT);
 }
 
-void Renderer::render_state(GameState state, Player& player, World& world)
+void Renderer::render_state(GameState state, Player& player, World& world, double zoom)
 {
     SDL_RenderSetViewport(_graphics->Renderer, NULL);
     switch (state) {
@@ -423,7 +433,7 @@ void Renderer::render_state(GameState state, Player& player, World& world)
             render_ranged(player);
             break;
         case GameState::WORLD_MAP:
-            render_world_map(world);
+            render_world_map(world, zoom);
             break;
         default:
             break;
@@ -432,9 +442,9 @@ void Renderer::render_state(GameState state, Player& player, World& world)
 }
 
 
-void Renderer::render_world_map(World& world)
+void Renderer::render_world_map(World& world, double zoom)
 {
-    _render_world_map.render_map(*this, _tiles, _cameraRect, &world);
+    _render_world_map.render_map(*this, zoom, _cameraRect, &world);
 }
 
 void Renderer::render_main_menu()

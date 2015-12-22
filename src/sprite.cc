@@ -19,8 +19,14 @@ void Sprite::draw(int x, int y, int offsetX, int offsetY, int alpha)
 {
     draw(x, y, offsetX, offsetY,_source_rect.w, _source_rect.h, alpha);
 }
-
 void Sprite::draw(int x, int y, int offsetX, int offsetY, int width, int height, int alpha)
+{
+    draw(x, y, offsetX, offsetY, width, height, alpha, 1.0);
+
+}
+
+
+void Sprite::draw(int x, int y, int offsetX, int offsetY, int width, int height, int alpha, double zoom)
 {
     SDL_Rect destination;
     destination.x = x - offsetX;
@@ -31,8 +37,8 @@ void Sprite::draw(int x, int y, int offsetX, int offsetY, int width, int height,
     SDL_Rect source;
     source.x = _source_rect.x + offsetX;
     source.y = _source_rect.y + offsetY;
-    source.w = width;
-    source.h = height;
+    source.w = (int) (width / zoom);
+    source.h = (int) (height / zoom);
 
     SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
     SDL_SetTextureAlphaMod(_texture, alpha);

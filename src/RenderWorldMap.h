@@ -19,7 +19,7 @@ public:
     RenderWorldMap(Graphics* graphics);
     void init();
 
-    void render_map(Renderer &renderer, level_sprites_t tiles, SDL_Rect camera, World *world);
+    void render_map(Renderer &renderer, double zoom, SDL_Rect camera, World *world);
 
 private:
     Graphics* _graphics;

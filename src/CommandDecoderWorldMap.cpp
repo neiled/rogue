@@ -42,6 +42,14 @@ bool CommandDecoderWorldMap::Decode(SDL_Keycode key, Game& game)
         player.push_command(Commands::CMD::NOP);
 
     }
+        else if(key == SDLK_PLUS || key == SDLK_KP_PLUS || key == SDLK_EQUALS)
+    {
+        game.increaseZoom(1);
+    }
+        else if(key == SDLK_MINUS)
+    {
+        game.decreaseZoom(1);
+    }
     else
         return false;
 

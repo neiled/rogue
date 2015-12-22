@@ -34,6 +34,8 @@ class Game {
 
     void updateCamera(int x, int y);
     void moveCamera(int xAmount, int yAmount);
+    void increaseZoom(int amount);
+    void decreaseZoom(int amount);
 
   private:
     Graphics _graphics;
