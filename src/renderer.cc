@@ -33,7 +33,7 @@ void Renderer::init(World& world)
     _render_info.init();
     _render_ranged.init();
     _render_main_menu.init();
-    _render_world_map.init(world);
+    _render_world_map.init();
 }
 
 SDL_Rect Renderer::camera_rect()
@@ -434,7 +434,7 @@ void Renderer::render_state(GameState state, Player& player, World& world)
 
 void Renderer::render_world_map(World& world)
 {
-    _render_world_map.render_map(*this, _tiles, _cameraRect, world);
+    _render_world_map.render_map(*this, _tiles, _cameraRect, &world);
 }
 
 void Renderer::render_main_menu()

@@ -49,7 +49,7 @@ void Game::start_game()
   _world = World();
   _world.init();
   Messages::Clear();
-  _state = GameState::GAME;
+  _state = GameState::MENU_MAIN;
   end_turn();
 }
 
@@ -126,7 +126,7 @@ bool Game::player_can_continue(Player& player, GameState state)
 
 void Game::end_turn()
 {
-    if (state() == GameState::WORLD_MAP || state() == GameState::MENU_MAIN || state() == GameState::STOP)
+    if (state() == GameState::WORLD_MAP || state() == GameState::MENU_MAIN || state() == GameState::STOP || state() == GameState::STARTING)
         return;
     ++_turn;
     _world.update();

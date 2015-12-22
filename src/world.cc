@@ -32,8 +32,10 @@ int World::height() const
 
 void World::init()
 {
+    _seed = Random::Between(1,10000);
     SDL_Log("Creating world...");
     _map = _world_builder.build_world(*this);
+    SDL_Log("Done.");
 
 //  SDL_Log("Creating first level");
 //  Level* firstLevel = new Level(1);
@@ -128,4 +130,9 @@ double World::tile_min_height()
 double World::tile_max_height()
 {
     return _world_builder.max_height();
+}
+
+int World::seed() const
+{
+    return _seed;
 }

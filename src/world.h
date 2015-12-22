@@ -24,6 +24,8 @@ public:
     int height() const;
     int width() const;
 
+    int seed() const;
+
 
 
 
@@ -50,5 +52,6 @@ private:
     LevelBuilder _levelBuilder;
     WorldBuilder _world_builder;
     std::array<std::array<double, WORLD_HEIGHT >, WORLD_WIDTH> _map;
+    int _seed;
 };
 #endif

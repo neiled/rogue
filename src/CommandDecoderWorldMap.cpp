@@ -12,7 +12,7 @@ bool CommandDecoderWorldMap::Decode(SDL_Keycode key, Game& game)
 {
     auto &player = *game.player();
     if(key == SDLK_1) {
-//        game.state(GameState::STARTING);
+        game.state(GameState::STARTING);
         player.push_command(Commands::CMD::NOP);
     }
     else if(key == SDLK_ESCAPE) {
