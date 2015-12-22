@@ -14,7 +14,7 @@ std::array<std::array<double, World::WORLD_HEIGHT>, World::WORLD_WIDTH> WorldBui
     double min = 1000;
     double max = -1000;
 
-    PerlinNoise* p = new PerlinNoise(1, 5, 5, 4, Random::Between(1,1000));
+    PerlinNoise* p = new PerlinNoise(0.7, 5, 5, 6, Random::Between(1,1000));
     for (int y = 0; y < world.height(); ++y)
     {
         for (int x = 0; x < world.width(); ++x)

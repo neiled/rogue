@@ -42,7 +42,7 @@ public:
     color.push_back(ColorPoint(0, 128, 255,   0.0f));      // shore
     color.push_back(ColorPoint(240, 240, 64,   0.0625f));     // sand.
     color.push_back(ColorPoint(32, 160, 0,   0.1250f));     // grass.
-    color.push_back(ColorPoint(224, 224, 0,   0.375f));     // dirt.
+    color.push_back(ColorPoint(102, 102, 84,   0.375f));     // dirt.
     color.push_back(ColorPoint(128, 128, 128,   0.75f));     // rock.
     color.push_back(ColorPoint(255, 255, 255,   1.00f));     // snow.
     

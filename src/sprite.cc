@@ -17,13 +17,24 @@ Sprite::~Sprite()
 
 void Sprite::draw(int x, int y, int offsetX, int offsetY, int alpha)
 {
-  SDL_Rect destination;
-  destination.x = x - offsetX;
-  destination.y = y - offsetY;
-  destination.w = _source_rect.w;
-  destination.h = _source_rect.h;
+    draw(x, y, offsetX, offsetY,_source_rect.w, _source_rect.h, alpha);
+}
 
-  SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
-  SDL_SetTextureAlphaMod(_texture, alpha);
-  SDL_RenderCopy(_graphics->Renderer, _texture, &_source_rect, &destination);
+void Sprite::draw(int x, int y, int offsetX, int offsetY, int width, int height, int alpha)
+{
+    SDL_Rect destination;
+    destination.x = x - offsetX;
+    destination.y = y - offsetY;
+    destination.w = width;
+    destination.h = height;
+
+    SDL_Rect source;
+    source.x = _source_rect.x + offsetX;
+    source.y = _source_rect.y + offsetY;
+    source.w = width;
+    source.h = height;
+
+    SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
+    SDL_SetTextureAlphaMod(_texture, alpha);
+    SDL_RenderCopy(_graphics->Renderer, _texture, &source, &destination);
 }

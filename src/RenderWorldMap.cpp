@@ -51,7 +51,7 @@ void RenderWorldMap::init(World& world)
 
 void RenderWorldMap::render_map(Renderer &renderer,level_sprites_t tiles, SDL_Rect camera, World& world)
 {
-    full_map->draw(0, 0, camera.x, camera.y, 255);
+    full_map->draw(0+camera.x, 0+camera.y, camera.x, camera.y, camera.w, camera.h, 255);
 
 //    _graphics->renderTexture(full_map, -camera.x, -camera.y);
 
