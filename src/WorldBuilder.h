@@ -30,6 +30,8 @@ public:
 private:
     double _min;
     double _max;
+
+    std::array<std::array<double, 500>, 500> generate_base_world(const World &world);
 };
 
 

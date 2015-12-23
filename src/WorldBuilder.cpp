@@ -9,7 +9,15 @@
 
 std::array<std::array<double, World::WORLD_HEIGHT>, World::WORLD_WIDTH> WorldBuilder::build_world(World& world)
 {
-    std::array<std::array<double, World::WORLD_HEIGHT>, World::WORLD_WIDTH > _map;
+    std::array<std::array<double, World::WORLD_HEIGHT>, World::WORLD_WIDTH> _map = generate_base_world(world);
+
+    return _map;
+
+}
+
+std::array<std::array<double, World::WORLD_HEIGHT>, World::WORLD_WIDTH> WorldBuilder::generate_base_world(const World &world)
+{
+    std::__1::array<std::__1::array<double, World::WORLD_HEIGHT>, World::WORLD_WIDTH > _map;
 
     double min = 1000;
     double max = -1000;
@@ -19,7 +27,7 @@ std::array<std::array<double, World::WORLD_HEIGHT>, World::WORLD_WIDTH> WorldBui
     {
         for (int x = 0; x < world.width(); ++x)
         {
-            auto new_height = p->GetHeight((double)x/World::WORLD_WIDTH,(double)y/World::WORLD_HEIGHT);
+            auto new_height = p->GetHeight((double)x / World::WORLD_WIDTH, (double)y / World::WORLD_HEIGHT);
             _map[y][x] = new_height;
             if(new_height < min)
                 min = new_height;
@@ -30,7 +38,5 @@ std::array<std::array<double, World::WORLD_HEIGHT>, World::WORLD_WIDTH> WorldBui
 
     _min = min;
     _max = max;
-
     return _map;
-
 }
