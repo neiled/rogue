@@ -23,10 +23,10 @@ void Game::start()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
     _graphics.init();
+    ItemFactory::Init();
     _world.init();
     _renderer.init(_world);
     //_renderer = Renderer(&_graphics);
-    ItemFactory::Init();
     _decoders[GameState::WORLD_MAP] = new CommandDecoderWorldMap();
     _decoders[GameState::GAME] = new CommandDecoderGame();
     _decoders[GameState::MENU_MAIN] = new CommandDecoderMainMenu();

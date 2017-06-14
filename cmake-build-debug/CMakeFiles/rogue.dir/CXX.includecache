@@ -867,6 +867,8 @@ world.h
 /Users/Edwards/dev/rogue/src/world.h
 level.h
 /Users/Edwards/dev/rogue/src/level.h
+item_factory.h
+/Users/Edwards/dev/rogue/src/item_factory.h
 
 /Users/Edwards/dev/rogue/src/world.h
 vector

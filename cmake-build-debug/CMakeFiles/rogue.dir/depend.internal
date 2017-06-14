@@ -1102,11 +1102,13 @@ CMakeFiles/rogue.dir/src/world.cc.o
  /Users/Edwards/dev/rogue/src/Random.inl
  /Users/Edwards/dev/rogue/src/WorldBuilder.h
  /Users/Edwards/dev/rogue/src/actor.h
+ /Users/Edwards/dev/rogue/src/attribute_modifiers.h
  /Users/Edwards/dev/rogue/src/commands.h
  /Users/Edwards/dev/rogue/src/game_object.h
  /Users/Edwards/dev/rogue/src/game_types.h
  /Users/Edwards/dev/rogue/src/graphics.h
  /Users/Edwards/dev/rogue/src/inventory.h
+ /Users/Edwards/dev/rogue/src/item_factory.h
  /Users/Edwards/dev/rogue/src/level.h
  /Users/Edwards/dev/rogue/src/levelbuilder.h
  /Users/Edwards/dev/rogue/src/player.h

@@ -1,5 +1,6 @@
 #include "world.h"
 #include "level.h"
+#include "item_factory.h"
 
 World::World()
 {
@@ -32,15 +33,15 @@ void World::init()
     _map = _world_builder.build_world(*this);
     SDL_Log("Done.");
 
-//  SDL_Log("Creating first level");
-//  Level* firstLevel = new Level(1);
-//  firstLevel->set_player(&_player);
-//  SDL_Log("Building first level");
-//  _levelBuilder.buildLevel(*firstLevel, _player);
-//  SDL_Log("Done.");
-//  _levels.push_back(firstLevel);
-//  _player.weapon(ItemFactory::Build(ItemType::WEAPON, ItemSubtype::WEAPON_KRIS_RUSTED, 1));
-//  _player.inventory()->add( ItemFactory::Build(ItemType::WAND, ItemSubtype::WAND_FLAME, 1));
+  SDL_Log("Creating first level");
+  Level* firstLevel = new Level(1);
+  firstLevel->set_player(&_player);
+  SDL_Log("Building first level");
+  _levelBuilder.buildLevel(*firstLevel, _player);
+  SDL_Log("Done.");
+  _levels.push_back(firstLevel);
+  _player.weapon(ItemFactory::Build(ItemType::WEAPON, ItemSubtype::WEAPON_KRIS_RUSTED, 1));
+  _player.inventory()->add( ItemFactory::Build(ItemType::WAND, ItemSubtype::WAND_FLAME, 1));
 }
 
 void World::updateGraphics()

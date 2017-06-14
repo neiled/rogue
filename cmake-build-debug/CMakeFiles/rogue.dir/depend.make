@@ -1101,11 +1101,13 @@ CMakeFiles/rogue.dir/src/world.cc.o: ../src/FontSprite.h
 CMakeFiles/rogue.dir/src/world.cc.o: ../src/Random.inl
 CMakeFiles/rogue.dir/src/world.cc.o: ../src/WorldBuilder.h
 CMakeFiles/rogue.dir/src/world.cc.o: ../src/actor.h
+CMakeFiles/rogue.dir/src/world.cc.o: ../src/attribute_modifiers.h
 CMakeFiles/rogue.dir/src/world.cc.o: ../src/commands.h
 CMakeFiles/rogue.dir/src/world.cc.o: ../src/game_object.h
 CMakeFiles/rogue.dir/src/world.cc.o: ../src/game_types.h
 CMakeFiles/rogue.dir/src/world.cc.o: ../src/graphics.h
 CMakeFiles/rogue.dir/src/world.cc.o: ../src/inventory.h
+CMakeFiles/rogue.dir/src/world.cc.o: ../src/item_factory.h
 CMakeFiles/rogue.dir/src/world.cc.o: ../src/level.h
 CMakeFiles/rogue.dir/src/world.cc.o: ../src/levelbuilder.h
 CMakeFiles/rogue.dir/src/world.cc.o: ../src/player.h
