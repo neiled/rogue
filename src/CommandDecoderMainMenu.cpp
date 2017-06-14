@@ -11,7 +11,7 @@ bool CommandDecoderMainMenu::Decode(SDL_Keycode key, Game& game)
 {
     auto &player = *game.player();
     if(key == SDLK_1) {
-        game.state(GameState::WORLD_MAP);
+        game.state(GameState::STARTING);
         player.push_command(Commands::CMD::NOP);
     }
 //    else if(key == SDLK_n) {

@@ -1,12 +1,10 @@
 #include <SDL2/SDL.h>
 #include "level.h"
 #include "monster.h"
-#include "tile.h"
 #include "player.h"
 #include "a_star.h"
 #include "item.h"
 #include "item_factory.h"
-#include "game_types.h"
 
 Monster::Monster(std::string name, Tile& startTile, MonsterType type, MonsterState state, int xp_level, float speed)
   : Actor(name, xp_level, 5, speed), _monster_type(type), _monsterState(state)

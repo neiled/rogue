@@ -1,6 +1,5 @@
 #include "command_decoder.h"
 #include "game_types.h"
-#include <SDL2/SDL.h>
 #include "item.h"
 
 

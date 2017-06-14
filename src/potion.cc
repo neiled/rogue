@@ -1,6 +1,5 @@
 #include "potion.h"
 #include "messages.h"
-#include <string>
 
 Potion::Potion(std::string name, ItemSubtype subtype, std::vector<AttributeModifiers> modifiers) : Item(name, ItemType::POTION, subtype, modifiers)
 {

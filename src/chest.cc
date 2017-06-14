@@ -1,5 +1,4 @@
 #include "chest.h"
-#include "inventory.h"
 
 Chest::Chest() : _inventory(10), Item("Chest", ItemType::CHEST, ItemSubtype::CHEST)
 {

@@ -1,10 +1,5 @@
 #include "world.h"
-#include "levelbuilder.h"
 #include "level.h"
-#include "player.h"
-#include "tile.h"
-#include <SDL2/SDL.h>
-#include "item_factory.h"
 
 World::World()
 {

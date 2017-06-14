@@ -1,8 +1,6 @@
 #include "monster_factory.h"
-#include "monster.h"
 #include "tile.h"
 #include "level.h"
-#include <SDL2/SDL.h>
 
 Monster* MonsterFactory::Build(Tile& tile)
 {

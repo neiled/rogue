@@ -7,7 +7,7 @@
 
 SDL_Texture *FontSprite::generate_texture(Graphics* graphics, Uint16 *message, SDL_Color color, int size)
 {
-	TTF_Font *font = graphics->getFont("./content/unifont-8.0.01.ttf", size);
+    auto font = graphics->getFont("./content/unifont-8.0.01.ttf", size);
 	if (font == nullptr)
 	{
 		auto error = TTF_GetError();
@@ -21,41 +21,23 @@ SDL_Texture *FontSprite::generate_texture(Graphics* graphics, Uint16 *message, S
 
 SDL_Texture *FontSprite::generate_texture(Graphics* graphics, std::string message, SDL_Color color, int size)
 {
-	TTF_Font *font = graphics->getFont("./content/unifont-8.0.01.ttf", size);
+    auto font = graphics->getFont("./content/unifont-8.0.01.ttf", size);
 	if (font == nullptr)
 	{
 		auto error = TTF_GetError();
 		throw std::runtime_error(std::string("Failed to load font: ") + error);
 	}
 
-	SDL_Surface *surf = get_surface(font, message, color, SDL_Color{ 0, 0, 0 });
+    auto surf = get_surface(font, message, color, SDL_Color{0, 0, 0 });
 
 	return generate_texture(graphics, surf, size);
 }
 
 SDL_Texture *FontSprite::generate_texture(Graphics* graphics, SDL_Surface* surf, int size)
 {
-    SDL_Texture *texture = SDL_CreateTextureFromSurface(graphics->Renderer, surf);
-//    SDL_Texture *t = SDL_CreateTexture(graphics->Renderer, SDL_PIXELFORMAT_RGBA8888,SDL_TEXTUREACCESS_TARGET, size, size);
-//
-//	int iW, iH;
-//    SDL_QueryTexture(texture, NULL, NULL, &iW, &iH);
-//    int x = size / 2 - iW / 2;
-//    int y = size / 2 - iH / 2;
-//
-//    auto current_target = SDL_GetRenderTarget(graphics->Renderer);
-//
-//    SDL_SetRenderTarget(graphics->Renderer, t);
-//	SDL_SetRenderDrawColor(graphics->Renderer, 0x00, 0x00, 0x00, SDL_ALPHA_OPAQUE);
-//	SDL_RenderClear(graphics->Renderer);
-//	SDL_RenderFillRect(graphics->Renderer, NULL);
-//    graphics->renderTexture(texture, x, y);
-//
-//    SDL_SetRenderTarget(graphics->Renderer, current_target);
-
+    auto texture = SDL_CreateTextureFromSurface(graphics->Renderer, surf);
     SDL_FreeSurface(surf);
 
-//    return t;
     return texture;
 }
 

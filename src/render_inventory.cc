@@ -1,8 +1,5 @@
 #include "render_inventory.h"
 #include "renderer.h"
-#include "inventory.h"
-#include "item.h"
-#include "sprite.h"
 
 RenderInventory::RenderInventory(Graphics* graphics) : _graphics(graphics)
 {

@@ -1,9 +1,5 @@
 #include "render_level.h"
-#include "level.h"
 #include "renderer.h"
-#include "tile.h"
-#include "item.h"
-#include "sprite.h"
 
 
 RenderLevel::RenderLevel(Graphics* graphics) : _graphics(graphics)

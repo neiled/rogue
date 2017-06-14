@@ -1,6 +1,4 @@
 #include "command_decoder_inventory.h"
-#include "game_types.h"
-#include <SDL2/SDL.h>
 #include "game.h"
 
 CommandDecoderInventory::CommandDecoderInventory()

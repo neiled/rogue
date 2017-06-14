@@ -6,7 +6,6 @@
 #include "scroll.h"
 #include "chest.h"
 #include "random.h"
-#include <SDL2/SDL.h>
 
 std::map<ItemType, std::map<ItemSubtype, Item*>> ItemFactory::_prototypes;
 std::map<ItemType, std::map<ItemSubtype, int>> ItemFactory::_weightings;

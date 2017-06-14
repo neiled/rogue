@@ -2,8 +2,6 @@
 #include "tile.h"
 #include "level.h"
 #include "actor.h"
-#include <SDL2/SDL.h>
-#include "messages.h"
 
 
 AStar::AStar()

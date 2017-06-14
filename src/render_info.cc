@@ -1,10 +1,6 @@
 #include "render_info.h"
 #include "renderer.h"
-#include "player.h"
-#include "item.h"
 #include "game.h"
-#include "sprite.h"
-#include "level.h"
 #include "weapon.h"
 
 

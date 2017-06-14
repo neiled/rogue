@@ -1,7 +1,6 @@
 #include "render_ranged.h"
 #include "renderer.h"
 #include "game.h"
-#include "player.h"
 
 RenderRanged::RenderRanged(Graphics* g): _graphics(g)
 {

@@ -1,8 +1,4 @@
 #include "shadowcasting.h"
-#include "tile.h"
-#include <math.h>
-#include <SDL2/SDL.h>
-#include <array>
 
 ShadowCasting::ShadowCasting()
 {

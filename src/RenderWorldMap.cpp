@@ -5,8 +5,6 @@
 #include <sstream>
 #include "RenderWorldMap.h"
 #include "renderer.h"
-#include "world.h"
-#include "ColorGradient.h"
 
 RenderWorldMap::RenderWorldMap(Graphics *graphics) : _graphics(graphics)
 {

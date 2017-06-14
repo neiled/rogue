@@ -3,7 +3,6 @@
 #include "a_star.h"
 #include "item.h"
 #include "messages.h"
-#include <deque>
 #include "item_factory.h"
 
 Player::Player() : Actor("player", 1, 10, 1), _xp(0), _auto_pickup(true)

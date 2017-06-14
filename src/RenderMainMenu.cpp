@@ -6,9 +6,6 @@
 
 #include "render_inventory.h"
 #include "renderer.h"
-#include "inventory.h"
-#include "item.h"
-#include "sprite.h"
 
 RenderMainMenu::RenderMainMenu(Graphics* graphics) : _graphics(graphics)
 {

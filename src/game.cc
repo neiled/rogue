@@ -1,7 +1,4 @@
 #include "game.h"
-#include "world.h"
-#include "actor.h"
-#include "player.h"
 #include "messages.h"
 #include "item_factory.h"
 #include "command_decoder_game.h"
@@ -39,7 +36,7 @@ void Game::start()
     _decoders[GameState::DEAD] = new CommandDecoderDead();
     _decoders[GameState::LOOK] = new CommandDecoderLook();
     _decoders[GameState::RANGED_TARGET] = new CommandDecoderLook();
-    _state = GameState::MENU_MAIN;
+    _state = GameState::GAME;
     eventLoop();
 }
 
@@ -49,7 +46,7 @@ void Game::start_game()
   _world = World();
   _world.init();
   Messages::Clear();
-  _state = GameState::MENU_MAIN;
+  _state = GameState::GAME;
   end_turn();
 }
 

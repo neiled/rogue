@@ -2,10 +2,7 @@
 #include "level.h"
 #include "a_star.h"
 #include "messages.h"
-#include <deque>
-#include "random.h"
 #include "attribute_modifiers.h"
-#include <SDL2/SDL.h>
 #include "item.h"
 #include "chest.h"
 #include "wand.h"

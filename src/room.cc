@@ -1,10 +1,8 @@
 #include <cmath>
 #include <limits>
-#include <cstddef>
 #include "room.h"
 #include "tile.h"
 #include "level.h"
-#include "random.h"
 
 Room::Room(Level& level, int x, int y, int width, int height) : _level(level)
 {

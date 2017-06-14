@@ -1,10 +1,8 @@
 #include "command_decoder_chest.h"
 #include "chest.h"
 #include "tile.h"
-#include "game_types.h"
 #include "messages.h"
 #include "game.h"
-#include "player.h"
 
 CommandDecoderChest::CommandDecoderChest()
 {

@@ -1,7 +1,5 @@
 #include "renderer.h"
-#include "player.h"
 #include "monster.h"
-#include "world.h"
 #include "game.h"
 #include "messages.h"
 #include "render_monsters.h"

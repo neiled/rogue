@@ -2,9 +2,6 @@
 #include "item.h"
 #include "potion.h"
 #include "scroll.h"
-#include "actor.h"
-#include <SDL2/SDL.h>
-#include <assert.h>
 #include "random.h"
 #include "messages.h"
 #include "tile.h"

@@ -1,5 +1,4 @@
 #include "wand.h"
-#include <SDL2/SDL.h>
 #include "tile.h"
 #include "messages.h"
 #include "random.h"

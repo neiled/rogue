@@ -1,8 +1,6 @@
 #include "commands.h"
 #include <SDL2/SDL.h>
 #include "world.h"
-#include "actor.h"
-#include "player.h"
 #include "potion.h"
 #include "game.h"
 

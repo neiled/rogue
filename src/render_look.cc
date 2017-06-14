@@ -1,7 +1,6 @@
 #include "render_look.h"
 #include "renderer.h"
 #include "game.h"
-#include "player.h"
 
 RenderLook::RenderLook(Graphics* g): _graphics(g)
 {

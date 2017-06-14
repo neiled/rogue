@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="rogue"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/Edwards/dev/rogue/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/Edwards/dev/rogue/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/Edwards/dev/rogue/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rogue">
+				<Option output="/Users/Edwards/dev/rogue/cmake-build-debug/rogue" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Edwards/dev/rogue/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/8.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 rogue"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rogue/fast">
+				<Option output="/Users/Edwards/dev/rogue/cmake-build-debug/rogue" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/Edwards/dev/rogue/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../lib/clang/8.1.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 rogue/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/Edwards/dev/rogue/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/Edwards/dev/rogue/src/ColorGradient.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/CommandDecoderMainMenu.cpp">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/CommandDecoderMainMenu.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/CommandDecoderWorldMap.cpp">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/CommandDecoderWorldMap.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/FontSprite.cpp">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/FontSprite.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/PerlinNoise.cpp">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/PerlinNoise.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/RenderMainMenu.cpp">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/RenderMainMenu.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/RenderWorldMap.cpp">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/RenderWorldMap.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/WorldBuilder.cpp">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/WorldBuilder.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/a_star.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/a_star.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/actor.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/actor.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/animated_sprite.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/animated_sprite.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/attribute_modifiers.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/attribute_modifiers.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/chest.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/chest.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder_chest.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder_chest.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder_dead.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder_dead.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder_game.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder_game.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder_inventory.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder_inventory.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder_look.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder_look.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder_wand.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/command_decoder_wand.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/commands.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/commands.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/directional_sprite.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/directional_sprite.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/game.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/game.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/game_object.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/game_object.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/game_types.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/graphics.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/graphics.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/inventory.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/inventory.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/item.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/item.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/item_factory.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/item_factory.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/level.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/level.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/levelbuilder.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/levelbuilder.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/main.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/messages.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/messages.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/monster.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/monster.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/monster_factory.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/monster_factory.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/player.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/player.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/potion.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/potion.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/random.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/random.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/ranged_weapon.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/ranged_weapon.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/render_info.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/render_info.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/render_inventory.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/render_inventory.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/render_level.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/render_level.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/render_look.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/render_look.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/render_monsters.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/render_monsters.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/render_ranged.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/render_ranged.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/renderer.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/renderer.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/room.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/room.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/scroll.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/scroll.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/shadowcasting.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/shadowcasting.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/sprite.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/sprite.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/tile.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/tile.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/wand.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/wand.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/weapon.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/weapon.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/world.cc">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/src/world.h">
+			<Option target="rogue"/>
+		</Unit>
+		<Unit filename="/Users/Edwards/dev/rogue/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

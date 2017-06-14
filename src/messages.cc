@@ -1,5 +1,4 @@
 #include "messages.h"
-#include <SDL2/SDL.h>
 
 std::deque<std::vector<Message>> Messages::_messages;
 std::vector<Message> Messages::_current_messages;

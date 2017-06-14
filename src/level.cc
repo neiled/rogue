@@ -1,7 +1,6 @@
 #include "level.h"
 #include "player.h"
 #include "monster.h"
-#include <SDL2/SDL.h>
 #include "shadowcasting.h"
 
 Level::Level(int depth)

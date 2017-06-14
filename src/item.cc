@@ -1,5 +1,4 @@
 #include "item.h"
-#include <SDL2/SDL.h>
 
 
 Item::Item(std::string name, ItemType itemType, ItemSubtype subtype, std::vector<AttributeModifiers> modifiers ) : GameObject(name)
