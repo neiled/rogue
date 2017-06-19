@@ -345,9 +345,57 @@ CMakeFiles/rogue.dir/src/command_decoder_wand.cc.o.provides: CMakeFiles/rogue.di
 CMakeFiles/rogue.dir/src/command_decoder_wand.cc.o.provides.build: CMakeFiles/rogue.dir/src/command_decoder_wand.cc.o
 
 
+CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o: CMakeFiles/rogue.dir/flags.make
+CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o: ../src/CommandDecoderMainMenu.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o -c /Users/Edwards/dev/rogue/src/CommandDecoderMainMenu.cc
+
+CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/CommandDecoderMainMenu.cc > CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.i
+
+CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/CommandDecoderMainMenu.cc -o CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.s
+
+CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o.requires:
+
+.PHONY : CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o.requires
+
+CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o.provides: CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o.requires
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o.provides.build
+.PHONY : CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o.provides
+
+CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o.provides.build: CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o
+
+
+CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o: CMakeFiles/rogue.dir/flags.make
+CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o: ../src/CommandDecoderWorldMap.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o -c /Users/Edwards/dev/rogue/src/CommandDecoderWorldMap.cc
+
+CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/CommandDecoderWorldMap.cc > CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.i
+
+CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/CommandDecoderWorldMap.cc -o CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.s
+
+CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o.requires:
+
+.PHONY : CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o.requires
+
+CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o.provides: CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o.requires
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o.provides.build
+.PHONY : CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o.provides
+
+CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o.provides.build: CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o
+
+
 CMakeFiles/rogue.dir/src/commands.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/commands.cc.o: ../src/commands.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/rogue.dir/src/commands.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/rogue.dir/src/commands.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/commands.cc.o -c /Users/Edwards/dev/rogue/src/commands.cc
 
 CMakeFiles/rogue.dir/src/commands.cc.i: cmake_force
@@ -371,7 +419,7 @@ CMakeFiles/rogue.dir/src/commands.cc.o.provides.build: CMakeFiles/rogue.dir/src/
 
 CMakeFiles/rogue.dir/src/directional_sprite.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/directional_sprite.cc.o: ../src/directional_sprite.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/rogue.dir/src/directional_sprite.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/rogue.dir/src/directional_sprite.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/directional_sprite.cc.o -c /Users/Edwards/dev/rogue/src/directional_sprite.cc
 
 CMakeFiles/rogue.dir/src/directional_sprite.cc.i: cmake_force
@@ -393,9 +441,33 @@ CMakeFiles/rogue.dir/src/directional_sprite.cc.o.provides: CMakeFiles/rogue.dir/
 CMakeFiles/rogue.dir/src/directional_sprite.cc.o.provides.build: CMakeFiles/rogue.dir/src/directional_sprite.cc.o
 
 
+CMakeFiles/rogue.dir/src/FontSprite.cc.o: CMakeFiles/rogue.dir/flags.make
+CMakeFiles/rogue.dir/src/FontSprite.cc.o: ../src/FontSprite.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/rogue.dir/src/FontSprite.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/FontSprite.cc.o -c /Users/Edwards/dev/rogue/src/FontSprite.cc
+
+CMakeFiles/rogue.dir/src/FontSprite.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/FontSprite.cc.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/FontSprite.cc > CMakeFiles/rogue.dir/src/FontSprite.cc.i
+
+CMakeFiles/rogue.dir/src/FontSprite.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/FontSprite.cc.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/FontSprite.cc -o CMakeFiles/rogue.dir/src/FontSprite.cc.s
+
+CMakeFiles/rogue.dir/src/FontSprite.cc.o.requires:
+
+.PHONY : CMakeFiles/rogue.dir/src/FontSprite.cc.o.requires
+
+CMakeFiles/rogue.dir/src/FontSprite.cc.o.provides: CMakeFiles/rogue.dir/src/FontSprite.cc.o.requires
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/FontSprite.cc.o.provides.build
+.PHONY : CMakeFiles/rogue.dir/src/FontSprite.cc.o.provides
+
+CMakeFiles/rogue.dir/src/FontSprite.cc.o.provides.build: CMakeFiles/rogue.dir/src/FontSprite.cc.o
+
+
 CMakeFiles/rogue.dir/src/game.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/game.cc.o: ../src/game.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/rogue.dir/src/game.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/rogue.dir/src/game.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/game.cc.o -c /Users/Edwards/dev/rogue/src/game.cc
 
 CMakeFiles/rogue.dir/src/game.cc.i: cmake_force
@@ -419,7 +491,7 @@ CMakeFiles/rogue.dir/src/game.cc.o.provides.build: CMakeFiles/rogue.dir/src/game
 
 CMakeFiles/rogue.dir/src/game_object.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/game_object.cc.o: ../src/game_object.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/rogue.dir/src/game_object.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/rogue.dir/src/game_object.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/game_object.cc.o -c /Users/Edwards/dev/rogue/src/game_object.cc
 
 CMakeFiles/rogue.dir/src/game_object.cc.i: cmake_force
@@ -443,7 +515,7 @@ CMakeFiles/rogue.dir/src/game_object.cc.o.provides.build: CMakeFiles/rogue.dir/s
 
 CMakeFiles/rogue.dir/src/graphics.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/graphics.cc.o: ../src/graphics.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/rogue.dir/src/graphics.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/rogue.dir/src/graphics.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/graphics.cc.o -c /Users/Edwards/dev/rogue/src/graphics.cc
 
 CMakeFiles/rogue.dir/src/graphics.cc.i: cmake_force
@@ -467,7 +539,7 @@ CMakeFiles/rogue.dir/src/graphics.cc.o.provides.build: CMakeFiles/rogue.dir/src/
 
 CMakeFiles/rogue.dir/src/inventory.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/inventory.cc.o: ../src/inventory.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/rogue.dir/src/inventory.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/rogue.dir/src/inventory.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/inventory.cc.o -c /Users/Edwards/dev/rogue/src/inventory.cc
 
 CMakeFiles/rogue.dir/src/inventory.cc.i: cmake_force
@@ -491,7 +563,7 @@ CMakeFiles/rogue.dir/src/inventory.cc.o.provides.build: CMakeFiles/rogue.dir/src
 
 CMakeFiles/rogue.dir/src/item.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/item.cc.o: ../src/item.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/rogue.dir/src/item.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/rogue.dir/src/item.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/item.cc.o -c /Users/Edwards/dev/rogue/src/item.cc
 
 CMakeFiles/rogue.dir/src/item.cc.i: cmake_force
@@ -515,7 +587,7 @@ CMakeFiles/rogue.dir/src/item.cc.o.provides.build: CMakeFiles/rogue.dir/src/item
 
 CMakeFiles/rogue.dir/src/item_factory.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/item_factory.cc.o: ../src/item_factory.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/rogue.dir/src/item_factory.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/rogue.dir/src/item_factory.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/item_factory.cc.o -c /Users/Edwards/dev/rogue/src/item_factory.cc
 
 CMakeFiles/rogue.dir/src/item_factory.cc.i: cmake_force
@@ -539,7 +611,7 @@ CMakeFiles/rogue.dir/src/item_factory.cc.o.provides.build: CMakeFiles/rogue.dir/
 
 CMakeFiles/rogue.dir/src/level.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/level.cc.o: ../src/level.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/rogue.dir/src/level.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/rogue.dir/src/level.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/level.cc.o -c /Users/Edwards/dev/rogue/src/level.cc
 
 CMakeFiles/rogue.dir/src/level.cc.i: cmake_force
@@ -563,7 +635,7 @@ CMakeFiles/rogue.dir/src/level.cc.o.provides.build: CMakeFiles/rogue.dir/src/lev
 
 CMakeFiles/rogue.dir/src/levelbuilder.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/levelbuilder.cc.o: ../src/levelbuilder.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/rogue.dir/src/levelbuilder.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/rogue.dir/src/levelbuilder.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/levelbuilder.cc.o -c /Users/Edwards/dev/rogue/src/levelbuilder.cc
 
 CMakeFiles/rogue.dir/src/levelbuilder.cc.i: cmake_force
@@ -587,7 +659,7 @@ CMakeFiles/rogue.dir/src/levelbuilder.cc.o.provides.build: CMakeFiles/rogue.dir/
 
 CMakeFiles/rogue.dir/src/main.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/main.cc.o: ../src/main.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/rogue.dir/src/main.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/rogue.dir/src/main.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/main.cc.o -c /Users/Edwards/dev/rogue/src/main.cc
 
 CMakeFiles/rogue.dir/src/main.cc.i: cmake_force
@@ -611,7 +683,7 @@ CMakeFiles/rogue.dir/src/main.cc.o.provides.build: CMakeFiles/rogue.dir/src/main
 
 CMakeFiles/rogue.dir/src/messages.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/messages.cc.o: ../src/messages.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/rogue.dir/src/messages.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/rogue.dir/src/messages.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/messages.cc.o -c /Users/Edwards/dev/rogue/src/messages.cc
 
 CMakeFiles/rogue.dir/src/messages.cc.i: cmake_force
@@ -635,7 +707,7 @@ CMakeFiles/rogue.dir/src/messages.cc.o.provides.build: CMakeFiles/rogue.dir/src/
 
 CMakeFiles/rogue.dir/src/monster.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/monster.cc.o: ../src/monster.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/rogue.dir/src/monster.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/rogue.dir/src/monster.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/monster.cc.o -c /Users/Edwards/dev/rogue/src/monster.cc
 
 CMakeFiles/rogue.dir/src/monster.cc.i: cmake_force
@@ -659,7 +731,7 @@ CMakeFiles/rogue.dir/src/monster.cc.o.provides.build: CMakeFiles/rogue.dir/src/m
 
 CMakeFiles/rogue.dir/src/monster_factory.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/monster_factory.cc.o: ../src/monster_factory.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/rogue.dir/src/monster_factory.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/rogue.dir/src/monster_factory.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/monster_factory.cc.o -c /Users/Edwards/dev/rogue/src/monster_factory.cc
 
 CMakeFiles/rogue.dir/src/monster_factory.cc.i: cmake_force
@@ -681,9 +753,33 @@ CMakeFiles/rogue.dir/src/monster_factory.cc.o.provides: CMakeFiles/rogue.dir/src
 CMakeFiles/rogue.dir/src/monster_factory.cc.o.provides.build: CMakeFiles/rogue.dir/src/monster_factory.cc.o
 
 
+CMakeFiles/rogue.dir/src/PerlinNoise.cc.o: CMakeFiles/rogue.dir/flags.make
+CMakeFiles/rogue.dir/src/PerlinNoise.cc.o: ../src/PerlinNoise.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/rogue.dir/src/PerlinNoise.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/PerlinNoise.cc.o -c /Users/Edwards/dev/rogue/src/PerlinNoise.cc
+
+CMakeFiles/rogue.dir/src/PerlinNoise.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/PerlinNoise.cc.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/PerlinNoise.cc > CMakeFiles/rogue.dir/src/PerlinNoise.cc.i
+
+CMakeFiles/rogue.dir/src/PerlinNoise.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/PerlinNoise.cc.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/PerlinNoise.cc -o CMakeFiles/rogue.dir/src/PerlinNoise.cc.s
+
+CMakeFiles/rogue.dir/src/PerlinNoise.cc.o.requires:
+
+.PHONY : CMakeFiles/rogue.dir/src/PerlinNoise.cc.o.requires
+
+CMakeFiles/rogue.dir/src/PerlinNoise.cc.o.provides: CMakeFiles/rogue.dir/src/PerlinNoise.cc.o.requires
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/PerlinNoise.cc.o.provides.build
+.PHONY : CMakeFiles/rogue.dir/src/PerlinNoise.cc.o.provides
+
+CMakeFiles/rogue.dir/src/PerlinNoise.cc.o.provides.build: CMakeFiles/rogue.dir/src/PerlinNoise.cc.o
+
+
 CMakeFiles/rogue.dir/src/player.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/player.cc.o: ../src/player.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/rogue.dir/src/player.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/rogue.dir/src/player.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/player.cc.o -c /Users/Edwards/dev/rogue/src/player.cc
 
 CMakeFiles/rogue.dir/src/player.cc.i: cmake_force
@@ -707,7 +803,7 @@ CMakeFiles/rogue.dir/src/player.cc.o.provides.build: CMakeFiles/rogue.dir/src/pl
 
 CMakeFiles/rogue.dir/src/potion.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/potion.cc.o: ../src/potion.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/rogue.dir/src/potion.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/rogue.dir/src/potion.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/potion.cc.o -c /Users/Edwards/dev/rogue/src/potion.cc
 
 CMakeFiles/rogue.dir/src/potion.cc.i: cmake_force
@@ -731,7 +827,7 @@ CMakeFiles/rogue.dir/src/potion.cc.o.provides.build: CMakeFiles/rogue.dir/src/po
 
 CMakeFiles/rogue.dir/src/random.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/random.cc.o: ../src/random.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/rogue.dir/src/random.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/rogue.dir/src/random.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/random.cc.o -c /Users/Edwards/dev/rogue/src/random.cc
 
 CMakeFiles/rogue.dir/src/random.cc.i: cmake_force
@@ -755,7 +851,7 @@ CMakeFiles/rogue.dir/src/random.cc.o.provides.build: CMakeFiles/rogue.dir/src/ra
 
 CMakeFiles/rogue.dir/src/ranged_weapon.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/ranged_weapon.cc.o: ../src/ranged_weapon.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/rogue.dir/src/ranged_weapon.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/rogue.dir/src/ranged_weapon.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/ranged_weapon.cc.o -c /Users/Edwards/dev/rogue/src/ranged_weapon.cc
 
 CMakeFiles/rogue.dir/src/ranged_weapon.cc.i: cmake_force
@@ -779,7 +875,7 @@ CMakeFiles/rogue.dir/src/ranged_weapon.cc.o.provides.build: CMakeFiles/rogue.dir
 
 CMakeFiles/rogue.dir/src/render_info.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/render_info.cc.o: ../src/render_info.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/rogue.dir/src/render_info.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/rogue.dir/src/render_info.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/render_info.cc.o -c /Users/Edwards/dev/rogue/src/render_info.cc
 
 CMakeFiles/rogue.dir/src/render_info.cc.i: cmake_force
@@ -803,7 +899,7 @@ CMakeFiles/rogue.dir/src/render_info.cc.o.provides.build: CMakeFiles/rogue.dir/s
 
 CMakeFiles/rogue.dir/src/render_inventory.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/render_inventory.cc.o: ../src/render_inventory.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/rogue.dir/src/render_inventory.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/rogue.dir/src/render_inventory.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/render_inventory.cc.o -c /Users/Edwards/dev/rogue/src/render_inventory.cc
 
 CMakeFiles/rogue.dir/src/render_inventory.cc.i: cmake_force
@@ -827,7 +923,7 @@ CMakeFiles/rogue.dir/src/render_inventory.cc.o.provides.build: CMakeFiles/rogue.
 
 CMakeFiles/rogue.dir/src/render_level.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/render_level.cc.o: ../src/render_level.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/rogue.dir/src/render_level.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/rogue.dir/src/render_level.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/render_level.cc.o -c /Users/Edwards/dev/rogue/src/render_level.cc
 
 CMakeFiles/rogue.dir/src/render_level.cc.i: cmake_force
@@ -851,7 +947,7 @@ CMakeFiles/rogue.dir/src/render_level.cc.o.provides.build: CMakeFiles/rogue.dir/
 
 CMakeFiles/rogue.dir/src/render_look.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/render_look.cc.o: ../src/render_look.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/rogue.dir/src/render_look.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/rogue.dir/src/render_look.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/render_look.cc.o -c /Users/Edwards/dev/rogue/src/render_look.cc
 
 CMakeFiles/rogue.dir/src/render_look.cc.i: cmake_force
@@ -875,7 +971,7 @@ CMakeFiles/rogue.dir/src/render_look.cc.o.provides.build: CMakeFiles/rogue.dir/s
 
 CMakeFiles/rogue.dir/src/render_monsters.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/render_monsters.cc.o: ../src/render_monsters.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/rogue.dir/src/render_monsters.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/rogue.dir/src/render_monsters.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/render_monsters.cc.o -c /Users/Edwards/dev/rogue/src/render_monsters.cc
 
 CMakeFiles/rogue.dir/src/render_monsters.cc.i: cmake_force
@@ -899,7 +995,7 @@ CMakeFiles/rogue.dir/src/render_monsters.cc.o.provides.build: CMakeFiles/rogue.d
 
 CMakeFiles/rogue.dir/src/render_ranged.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/render_ranged.cc.o: ../src/render_ranged.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/rogue.dir/src/render_ranged.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/rogue.dir/src/render_ranged.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/render_ranged.cc.o -c /Users/Edwards/dev/rogue/src/render_ranged.cc
 
 CMakeFiles/rogue.dir/src/render_ranged.cc.i: cmake_force
@@ -923,7 +1019,7 @@ CMakeFiles/rogue.dir/src/render_ranged.cc.o.provides.build: CMakeFiles/rogue.dir
 
 CMakeFiles/rogue.dir/src/renderer.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/renderer.cc.o: ../src/renderer.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/rogue.dir/src/renderer.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/rogue.dir/src/renderer.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/renderer.cc.o -c /Users/Edwards/dev/rogue/src/renderer.cc
 
 CMakeFiles/rogue.dir/src/renderer.cc.i: cmake_force
@@ -945,9 +1041,57 @@ CMakeFiles/rogue.dir/src/renderer.cc.o.provides: CMakeFiles/rogue.dir/src/render
 CMakeFiles/rogue.dir/src/renderer.cc.o.provides.build: CMakeFiles/rogue.dir/src/renderer.cc.o
 
 
+CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o: CMakeFiles/rogue.dir/flags.make
+CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o: ../src/RenderMainMenu.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o -c /Users/Edwards/dev/rogue/src/RenderMainMenu.cc
+
+CMakeFiles/rogue.dir/src/RenderMainMenu.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/RenderMainMenu.cc.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/RenderMainMenu.cc > CMakeFiles/rogue.dir/src/RenderMainMenu.cc.i
+
+CMakeFiles/rogue.dir/src/RenderMainMenu.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/RenderMainMenu.cc.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/RenderMainMenu.cc -o CMakeFiles/rogue.dir/src/RenderMainMenu.cc.s
+
+CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o.requires:
+
+.PHONY : CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o.requires
+
+CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o.provides: CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o.requires
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o.provides.build
+.PHONY : CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o.provides
+
+CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o.provides.build: CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o
+
+
+CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o: CMakeFiles/rogue.dir/flags.make
+CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o: ../src/RenderWorldMap.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o -c /Users/Edwards/dev/rogue/src/RenderWorldMap.cc
+
+CMakeFiles/rogue.dir/src/RenderWorldMap.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/RenderWorldMap.cc.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/RenderWorldMap.cc > CMakeFiles/rogue.dir/src/RenderWorldMap.cc.i
+
+CMakeFiles/rogue.dir/src/RenderWorldMap.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/RenderWorldMap.cc.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/RenderWorldMap.cc -o CMakeFiles/rogue.dir/src/RenderWorldMap.cc.s
+
+CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o.requires:
+
+.PHONY : CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o.requires
+
+CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o.provides: CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o.requires
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o.provides.build
+.PHONY : CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o.provides
+
+CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o.provides.build: CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o
+
+
 CMakeFiles/rogue.dir/src/room.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/room.cc.o: ../src/room.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/rogue.dir/src/room.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object CMakeFiles/rogue.dir/src/room.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/room.cc.o -c /Users/Edwards/dev/rogue/src/room.cc
 
 CMakeFiles/rogue.dir/src/room.cc.i: cmake_force
@@ -971,7 +1115,7 @@ CMakeFiles/rogue.dir/src/room.cc.o.provides.build: CMakeFiles/rogue.dir/src/room
 
 CMakeFiles/rogue.dir/src/scroll.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/scroll.cc.o: ../src/scroll.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/rogue.dir/src/scroll.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object CMakeFiles/rogue.dir/src/scroll.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/scroll.cc.o -c /Users/Edwards/dev/rogue/src/scroll.cc
 
 CMakeFiles/rogue.dir/src/scroll.cc.i: cmake_force
@@ -995,7 +1139,7 @@ CMakeFiles/rogue.dir/src/scroll.cc.o.provides.build: CMakeFiles/rogue.dir/src/sc
 
 CMakeFiles/rogue.dir/src/shadowcasting.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/shadowcasting.cc.o: ../src/shadowcasting.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/rogue.dir/src/shadowcasting.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object CMakeFiles/rogue.dir/src/shadowcasting.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/shadowcasting.cc.o -c /Users/Edwards/dev/rogue/src/shadowcasting.cc
 
 CMakeFiles/rogue.dir/src/shadowcasting.cc.i: cmake_force
@@ -1019,7 +1163,7 @@ CMakeFiles/rogue.dir/src/shadowcasting.cc.o.provides.build: CMakeFiles/rogue.dir
 
 CMakeFiles/rogue.dir/src/sprite.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/sprite.cc.o: ../src/sprite.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/rogue.dir/src/sprite.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object CMakeFiles/rogue.dir/src/sprite.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/sprite.cc.o -c /Users/Edwards/dev/rogue/src/sprite.cc
 
 CMakeFiles/rogue.dir/src/sprite.cc.i: cmake_force
@@ -1043,7 +1187,7 @@ CMakeFiles/rogue.dir/src/sprite.cc.o.provides.build: CMakeFiles/rogue.dir/src/sp
 
 CMakeFiles/rogue.dir/src/tile.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/tile.cc.o: ../src/tile.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/rogue.dir/src/tile.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/rogue.dir/src/tile.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/tile.cc.o -c /Users/Edwards/dev/rogue/src/tile.cc
 
 CMakeFiles/rogue.dir/src/tile.cc.i: cmake_force
@@ -1067,7 +1211,7 @@ CMakeFiles/rogue.dir/src/tile.cc.o.provides.build: CMakeFiles/rogue.dir/src/tile
 
 CMakeFiles/rogue.dir/src/wand.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/wand.cc.o: ../src/wand.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object CMakeFiles/rogue.dir/src/wand.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/rogue.dir/src/wand.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/wand.cc.o -c /Users/Edwards/dev/rogue/src/wand.cc
 
 CMakeFiles/rogue.dir/src/wand.cc.i: cmake_force
@@ -1091,7 +1235,7 @@ CMakeFiles/rogue.dir/src/wand.cc.o.provides.build: CMakeFiles/rogue.dir/src/wand
 
 CMakeFiles/rogue.dir/src/weapon.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/weapon.cc.o: ../src/weapon.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object CMakeFiles/rogue.dir/src/weapon.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/rogue.dir/src/weapon.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/weapon.cc.o -c /Users/Edwards/dev/rogue/src/weapon.cc
 
 CMakeFiles/rogue.dir/src/weapon.cc.i: cmake_force
@@ -1115,7 +1259,7 @@ CMakeFiles/rogue.dir/src/weapon.cc.o.provides.build: CMakeFiles/rogue.dir/src/we
 
 CMakeFiles/rogue.dir/src/world.cc.o: CMakeFiles/rogue.dir/flags.make
 CMakeFiles/rogue.dir/src/world.cc.o: ../src/world.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object CMakeFiles/rogue.dir/src/world.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object CMakeFiles/rogue.dir/src/world.cc.o"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/world.cc.o -c /Users/Edwards/dev/rogue/src/world.cc
 
 CMakeFiles/rogue.dir/src/world.cc.i: cmake_force
@@ -1137,172 +1281,28 @@ CMakeFiles/rogue.dir/src/world.cc.o.provides: CMakeFiles/rogue.dir/src/world.cc.
 CMakeFiles/rogue.dir/src/world.cc.o.provides.build: CMakeFiles/rogue.dir/src/world.cc.o
 
 
-CMakeFiles/rogue.dir/src/FontSprite.cpp.o: CMakeFiles/rogue.dir/flags.make
-CMakeFiles/rogue.dir/src/FontSprite.cpp.o: ../src/FontSprite.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object CMakeFiles/rogue.dir/src/FontSprite.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/FontSprite.cpp.o -c /Users/Edwards/dev/rogue/src/FontSprite.cpp
+CMakeFiles/rogue.dir/src/WorldBuilder.cc.o: CMakeFiles/rogue.dir/flags.make
+CMakeFiles/rogue.dir/src/WorldBuilder.cc.o: ../src/WorldBuilder.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object CMakeFiles/rogue.dir/src/WorldBuilder.cc.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/WorldBuilder.cc.o -c /Users/Edwards/dev/rogue/src/WorldBuilder.cc
 
-CMakeFiles/rogue.dir/src/FontSprite.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/FontSprite.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/FontSprite.cpp > CMakeFiles/rogue.dir/src/FontSprite.cpp.i
+CMakeFiles/rogue.dir/src/WorldBuilder.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/WorldBuilder.cc.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/WorldBuilder.cc > CMakeFiles/rogue.dir/src/WorldBuilder.cc.i
 
-CMakeFiles/rogue.dir/src/FontSprite.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/FontSprite.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/FontSprite.cpp -o CMakeFiles/rogue.dir/src/FontSprite.cpp.s
+CMakeFiles/rogue.dir/src/WorldBuilder.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/WorldBuilder.cc.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/WorldBuilder.cc -o CMakeFiles/rogue.dir/src/WorldBuilder.cc.s
 
-CMakeFiles/rogue.dir/src/FontSprite.cpp.o.requires:
+CMakeFiles/rogue.dir/src/WorldBuilder.cc.o.requires:
 
-.PHONY : CMakeFiles/rogue.dir/src/FontSprite.cpp.o.requires
+.PHONY : CMakeFiles/rogue.dir/src/WorldBuilder.cc.o.requires
 
-CMakeFiles/rogue.dir/src/FontSprite.cpp.o.provides: CMakeFiles/rogue.dir/src/FontSprite.cpp.o.requires
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/FontSprite.cpp.o.provides.build
-.PHONY : CMakeFiles/rogue.dir/src/FontSprite.cpp.o.provides
+CMakeFiles/rogue.dir/src/WorldBuilder.cc.o.provides: CMakeFiles/rogue.dir/src/WorldBuilder.cc.o.requires
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/WorldBuilder.cc.o.provides.build
+.PHONY : CMakeFiles/rogue.dir/src/WorldBuilder.cc.o.provides
 
-CMakeFiles/rogue.dir/src/FontSprite.cpp.o.provides.build: CMakeFiles/rogue.dir/src/FontSprite.cpp.o
-
-
-CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o: CMakeFiles/rogue.dir/flags.make
-CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o: ../src/PerlinNoise.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o -c /Users/Edwards/dev/rogue/src/PerlinNoise.cpp
-
-CMakeFiles/rogue.dir/src/PerlinNoise.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/PerlinNoise.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/PerlinNoise.cpp > CMakeFiles/rogue.dir/src/PerlinNoise.cpp.i
-
-CMakeFiles/rogue.dir/src/PerlinNoise.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/PerlinNoise.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/PerlinNoise.cpp -o CMakeFiles/rogue.dir/src/PerlinNoise.cpp.s
-
-CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o.requires:
-
-.PHONY : CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o.requires
-
-CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o.provides: CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o.requires
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o.provides.build
-.PHONY : CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o.provides
-
-CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o.provides.build: CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o
-
-
-CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o: CMakeFiles/rogue.dir/flags.make
-CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o: ../src/CommandDecoderMainMenu.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o -c /Users/Edwards/dev/rogue/src/CommandDecoderMainMenu.cpp
-
-CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/CommandDecoderMainMenu.cpp > CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.i
-
-CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/CommandDecoderMainMenu.cpp -o CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.s
-
-CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o.requires:
-
-.PHONY : CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o.requires
-
-CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o.provides: CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o.requires
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o.provides.build
-.PHONY : CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o.provides
-
-CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o.provides.build: CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o
-
-
-CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o: CMakeFiles/rogue.dir/flags.make
-CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o: ../src/RenderMainMenu.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o -c /Users/Edwards/dev/rogue/src/RenderMainMenu.cpp
-
-CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/RenderMainMenu.cpp > CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.i
-
-CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/RenderMainMenu.cpp -o CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.s
-
-CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o.requires:
-
-.PHONY : CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o.requires
-
-CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o.provides: CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o.requires
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o.provides.build
-.PHONY : CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o.provides
-
-CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o.provides.build: CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o
-
-
-CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o: CMakeFiles/rogue.dir/flags.make
-CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o: ../src/WorldBuilder.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o -c /Users/Edwards/dev/rogue/src/WorldBuilder.cpp
-
-CMakeFiles/rogue.dir/src/WorldBuilder.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/WorldBuilder.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/WorldBuilder.cpp > CMakeFiles/rogue.dir/src/WorldBuilder.cpp.i
-
-CMakeFiles/rogue.dir/src/WorldBuilder.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/WorldBuilder.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/WorldBuilder.cpp -o CMakeFiles/rogue.dir/src/WorldBuilder.cpp.s
-
-CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o.requires:
-
-.PHONY : CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o.requires
-
-CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o.provides: CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o.requires
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o.provides.build
-.PHONY : CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o.provides
-
-CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o.provides.build: CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o
-
-
-CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o: CMakeFiles/rogue.dir/flags.make
-CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o: ../src/CommandDecoderWorldMap.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o -c /Users/Edwards/dev/rogue/src/CommandDecoderWorldMap.cpp
-
-CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/CommandDecoderWorldMap.cpp > CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.i
-
-CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/CommandDecoderWorldMap.cpp -o CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.s
-
-CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o.requires:
-
-.PHONY : CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o.requires
-
-CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o.provides: CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o.requires
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o.provides.build
-.PHONY : CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o.provides
-
-CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o.provides.build: CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o
-
-
-CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o: CMakeFiles/rogue.dir/flags.make
-CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o: ../src/RenderWorldMap.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o -c /Users/Edwards/dev/rogue/src/RenderWorldMap.cpp
-
-CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/Edwards/dev/rogue/src/RenderWorldMap.cpp > CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.i
-
-CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/Edwards/dev/rogue/src/RenderWorldMap.cpp -o CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.s
-
-CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o.requires:
-
-.PHONY : CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o.requires
-
-CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o.provides: CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o.requires
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o.provides.build
-.PHONY : CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o.provides
-
-CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o.provides.build: CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o
+CMakeFiles/rogue.dir/src/WorldBuilder.cc.o.provides.build: CMakeFiles/rogue.dir/src/WorldBuilder.cc.o
 
 
 # Object files for target rogue
@@ -1319,8 +1319,11 @@ rogue_OBJECTS = \
 "CMakeFiles/rogue.dir/src/command_decoder_inventory.cc.o" \
 "CMakeFiles/rogue.dir/src/command_decoder_look.cc.o" \
 "CMakeFiles/rogue.dir/src/command_decoder_wand.cc.o" \
+"CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o" \
+"CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o" \
 "CMakeFiles/rogue.dir/src/commands.cc.o" \
 "CMakeFiles/rogue.dir/src/directional_sprite.cc.o" \
+"CMakeFiles/rogue.dir/src/FontSprite.cc.o" \
 "CMakeFiles/rogue.dir/src/game.cc.o" \
 "CMakeFiles/rogue.dir/src/game_object.cc.o" \
 "CMakeFiles/rogue.dir/src/graphics.cc.o" \
@@ -1333,6 +1336,7 @@ rogue_OBJECTS = \
 "CMakeFiles/rogue.dir/src/messages.cc.o" \
 "CMakeFiles/rogue.dir/src/monster.cc.o" \
 "CMakeFiles/rogue.dir/src/monster_factory.cc.o" \
+"CMakeFiles/rogue.dir/src/PerlinNoise.cc.o" \
 "CMakeFiles/rogue.dir/src/player.cc.o" \
 "CMakeFiles/rogue.dir/src/potion.cc.o" \
 "CMakeFiles/rogue.dir/src/random.cc.o" \
@@ -1344,6 +1348,8 @@ rogue_OBJECTS = \
 "CMakeFiles/rogue.dir/src/render_monsters.cc.o" \
 "CMakeFiles/rogue.dir/src/render_ranged.cc.o" \
 "CMakeFiles/rogue.dir/src/renderer.cc.o" \
+"CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o" \
+"CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o" \
 "CMakeFiles/rogue.dir/src/room.cc.o" \
 "CMakeFiles/rogue.dir/src/scroll.cc.o" \
 "CMakeFiles/rogue.dir/src/shadowcasting.cc.o" \
@@ -1352,13 +1358,7 @@ rogue_OBJECTS = \
 "CMakeFiles/rogue.dir/src/wand.cc.o" \
 "CMakeFiles/rogue.dir/src/weapon.cc.o" \
 "CMakeFiles/rogue.dir/src/world.cc.o" \
-"CMakeFiles/rogue.dir/src/FontSprite.cpp.o" \
-"CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o" \
-"CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o" \
-"CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o" \
-"CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o" \
-"CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o" \
-"CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o"
+"CMakeFiles/rogue.dir/src/WorldBuilder.cc.o"
 
 # External object files for target rogue
 rogue_EXTERNAL_OBJECTS =
@@ -1375,8 +1375,11 @@ rogue: CMakeFiles/rogue.dir/src/command_decoder_game.cc.o
 rogue: CMakeFiles/rogue.dir/src/command_decoder_inventory.cc.o
 rogue: CMakeFiles/rogue.dir/src/command_decoder_look.cc.o
 rogue: CMakeFiles/rogue.dir/src/command_decoder_wand.cc.o
+rogue: CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o
+rogue: CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o
 rogue: CMakeFiles/rogue.dir/src/commands.cc.o
 rogue: CMakeFiles/rogue.dir/src/directional_sprite.cc.o
+rogue: CMakeFiles/rogue.dir/src/FontSprite.cc.o
 rogue: CMakeFiles/rogue.dir/src/game.cc.o
 rogue: CMakeFiles/rogue.dir/src/game_object.cc.o
 rogue: CMakeFiles/rogue.dir/src/graphics.cc.o
@@ -1389,6 +1392,7 @@ rogue: CMakeFiles/rogue.dir/src/main.cc.o
 rogue: CMakeFiles/rogue.dir/src/messages.cc.o
 rogue: CMakeFiles/rogue.dir/src/monster.cc.o
 rogue: CMakeFiles/rogue.dir/src/monster_factory.cc.o
+rogue: CMakeFiles/rogue.dir/src/PerlinNoise.cc.o
 rogue: CMakeFiles/rogue.dir/src/player.cc.o
 rogue: CMakeFiles/rogue.dir/src/potion.cc.o
 rogue: CMakeFiles/rogue.dir/src/random.cc.o
@@ -1400,6 +1404,8 @@ rogue: CMakeFiles/rogue.dir/src/render_look.cc.o
 rogue: CMakeFiles/rogue.dir/src/render_monsters.cc.o
 rogue: CMakeFiles/rogue.dir/src/render_ranged.cc.o
 rogue: CMakeFiles/rogue.dir/src/renderer.cc.o
+rogue: CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o
+rogue: CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o
 rogue: CMakeFiles/rogue.dir/src/room.cc.o
 rogue: CMakeFiles/rogue.dir/src/scroll.cc.o
 rogue: CMakeFiles/rogue.dir/src/shadowcasting.cc.o
@@ -1408,13 +1414,7 @@ rogue: CMakeFiles/rogue.dir/src/tile.cc.o
 rogue: CMakeFiles/rogue.dir/src/wand.cc.o
 rogue: CMakeFiles/rogue.dir/src/weapon.cc.o
 rogue: CMakeFiles/rogue.dir/src/world.cc.o
-rogue: CMakeFiles/rogue.dir/src/FontSprite.cpp.o
-rogue: CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o
-rogue: CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o
-rogue: CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o
-rogue: CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o
-rogue: CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o
-rogue: CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o
+rogue: CMakeFiles/rogue.dir/src/WorldBuilder.cc.o
 rogue: CMakeFiles/rogue.dir/build.make
 rogue: CMakeFiles/rogue.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Linking CXX executable rogue"
@@ -1437,8 +1437,11 @@ CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/command_decoder_game.cc.
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/command_decoder_inventory.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/command_decoder_look.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/command_decoder_wand.cc.o.requires
+CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o.requires
+CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/commands.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/directional_sprite.cc.o.requires
+CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/FontSprite.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/game.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/game_object.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/graphics.cc.o.requires
@@ -1451,6 +1454,7 @@ CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/main.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/messages.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/monster.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/monster_factory.cc.o.requires
+CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/PerlinNoise.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/player.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/potion.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/random.cc.o.requires
@@ -1462,6 +1466,8 @@ CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/render_look.cc.o.require
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/render_monsters.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/render_ranged.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/renderer.cc.o.requires
+CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o.requires
+CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/room.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/scroll.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/shadowcasting.cc.o.requires
@@ -1470,13 +1476,7 @@ CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/tile.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/wand.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/weapon.cc.o.requires
 CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/world.cc.o.requires
-CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/FontSprite.cpp.o.requires
-CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o.requires
-CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o.requires
-CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o.requires
-CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o.requires
-CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o.requires
-CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o.requires
+CMakeFiles/rogue.dir/requires: CMakeFiles/rogue.dir/src/WorldBuilder.cc.o.requires
 
 .PHONY : CMakeFiles/rogue.dir/requires
 

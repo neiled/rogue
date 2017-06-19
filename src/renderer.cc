@@ -189,8 +189,11 @@ void Renderer::update(World* world)
 
 void Renderer::updateCamera(Player& player)
 {
-    int x = player.tile()->x() * TILE_SIZE - (_cameraRect.w / 2);
-    int y = player.tile()->y() * TILE_SIZE - (_cameraRect.h / 2);
+    auto x = player.tile()->x() * TILE_SIZE - (_cameraRect.w / 2.0);
+    auto y = player.tile()->y() * TILE_SIZE - (_cameraRect.h / 2.0);
+
+//    SDL_Log("x: %d, y: %d", player.tile()->x(), player.tile()->y());
+//    SDL_Log("updating camera %f, %f", x, y);
 
     updateCamera(x, y);
 
@@ -198,12 +201,22 @@ void Renderer::updateCamera(Player& player)
 
 void Renderer::updateCamera(int x, int y)
 {
+//    SDL_Log("camera w/h - %d, %d", _cameraRect.w, _cameraRect.h);
+//    SDL_Log("setting cx: %d, cy: %d", x, y);
     _cameraRect.x = x;
     _cameraRect.y = y;
+//    SDL_Log("first cx: %d, cy: %d", _cameraRect.x, _cameraRect.y);
 
 
     if (_cameraRect.x < 0) _cameraRect.x = 0;
     if (_cameraRect.y < 0) _cameraRect.y = 0;
+
+    if (_cameraRect.x >= Level::LEVEL_WIDTH * TILE_SIZE - _cameraRect.w) _cameraRect.x =
+                                                                                 Level::LEVEL_WIDTH * TILE_SIZE -
+                                                                                 _cameraRect.w;
+    if (_cameraRect.y >= Level::LEVEL_HEIGHT * TILE_SIZE - _cameraRect.h) _cameraRect.y =
+                                                                                  Level::LEVEL_HEIGHT * TILE_SIZE -
+                                                                                  _cameraRect.h;
 //    if(_cameraRect.x > max_x)
 //        _cameraRect.x = max_x;
 //    if(_cameraRect.y > max_y)
@@ -212,6 +225,8 @@ void Renderer::updateCamera(int x, int y)
 //        _cameraRect.x = Level::LEVEL_WIDTH * TILE_SIZE - _cameraRect.w;
 //    if (_cameraRect.y >= Level::LEVEL_HEIGHT * TILE_SIZE - _cameraRect.h)
 //        _cameraRect.y = Level::LEVEL_HEIGHT * TILE_SIZE - _cameraRect.h;
+
+//    SDL_Log("cx: %d, cy: %d", _cameraRect.x, _cameraRect.y);
 }
 
 
@@ -479,7 +494,7 @@ void Renderer::render_ranged(Player& player)
 SDL_Texture* Renderer::render_message(std::string message, int height, SDL_Color color)
 {
   return _graphics->renderText(message,
-                               "./content/secrcode.ttf", color, height, false);
+                               "../content/secrcode.ttf", color, height, false);
 }
 
 void Renderer::draw_sprite(Sprite* sprite, Tile& tile)

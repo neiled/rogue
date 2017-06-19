@@ -35,8 +35,8 @@ void Sprite::draw(int x, int y, int offsetX, int offsetY, int width, int height,
     destination.h = height;
 
     SDL_Rect source;
-    source.x = _source_rect.x + offsetX;
-    source.y = _source_rect.y + offsetY;
+    source.x = _source_rect.x;// + offsetX;
+    source.y = _source_rect.y;// + offsetY;
     source.w = (int) (width / zoom);
     source.h = (int) (height / zoom);
 

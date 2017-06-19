@@ -11,7 +11,7 @@ RenderInfo::RenderInfo(Graphics* g): _graphics(g)
 
 void RenderInfo::init()
 {
-  SDL_Texture* texture = _graphics->loadTexture("./content/outline.png");
+  SDL_Texture* texture = _graphics->loadTexture("../content/outline.png");
   _info_char = new Sprite(_graphics, texture, 0, 0, 150, 271);
 }
 

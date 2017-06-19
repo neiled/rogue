@@ -4,13 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/Edwards/dev/rogue/src/CommandDecoderMainMenu.cpp" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o"
-  "/Users/Edwards/dev/rogue/src/CommandDecoderWorldMap.cpp" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o"
-  "/Users/Edwards/dev/rogue/src/FontSprite.cpp" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/FontSprite.cpp.o"
-  "/Users/Edwards/dev/rogue/src/PerlinNoise.cpp" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o"
-  "/Users/Edwards/dev/rogue/src/RenderMainMenu.cpp" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o"
-  "/Users/Edwards/dev/rogue/src/RenderWorldMap.cpp" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o"
-  "/Users/Edwards/dev/rogue/src/WorldBuilder.cpp" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o"
+  "/Users/Edwards/dev/rogue/src/CommandDecoderMainMenu.cc" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o"
+  "/Users/Edwards/dev/rogue/src/CommandDecoderWorldMap.cc" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o"
+  "/Users/Edwards/dev/rogue/src/FontSprite.cc" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/FontSprite.cc.o"
+  "/Users/Edwards/dev/rogue/src/PerlinNoise.cc" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/PerlinNoise.cc.o"
+  "/Users/Edwards/dev/rogue/src/RenderMainMenu.cc" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o"
+  "/Users/Edwards/dev/rogue/src/RenderWorldMap.cc" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o"
+  "/Users/Edwards/dev/rogue/src/WorldBuilder.cc" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/WorldBuilder.cc.o"
   "/Users/Edwards/dev/rogue/src/a_star.cc" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/a_star.cc.o"
   "/Users/Edwards/dev/rogue/src/actor.cc" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/actor.cc.o"
   "/Users/Edwards/dev/rogue/src/animated_sprite.cc" "/Users/Edwards/dev/rogue/cmake-build-debug/CMakeFiles/rogue.dir/src/animated_sprite.cc.o"
@@ -61,6 +61,9 @@ set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "/Library/Frameworks/SDL2.framework/Headers"
+  "/Library/Frameworks/SDL2_image.framework/Headers"
+  "/Library/Frameworks/SDL2_ttf.framework/Headers"
   )
 
 # Targets to which this target links.

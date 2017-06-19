@@ -14,7 +14,7 @@ vector
 cmath
 -
 
-/Users/Edwards/dev/rogue/src/CommandDecoderMainMenu.cpp
+/Users/Edwards/dev/rogue/src/CommandDecoderMainMenu.cc
 CommandDecoderMainMenu.h
 /Users/Edwards/dev/rogue/src/CommandDecoderMainMenu.h
 game_types.h
@@ -28,7 +28,7 @@ game.h
 command_decoder.h
 /Users/Edwards/dev/rogue/src/command_decoder.h
 
-/Users/Edwards/dev/rogue/src/CommandDecoderWorldMap.cpp
+/Users/Edwards/dev/rogue/src/CommandDecoderWorldMap.cc
 CommandDecoderWorldMap.h
 /Users/Edwards/dev/rogue/src/CommandDecoderWorldMap.h
 game_types.h
@@ -42,7 +42,7 @@ game.h
 command_decoder.h
 /Users/Edwards/dev/rogue/src/command_decoder.h
 
-/Users/Edwards/dev/rogue/src/FontSprite.cpp
+/Users/Edwards/dev/rogue/src/FontSprite.cc
 vector
 -
 FontSprite.h
@@ -52,7 +52,7 @@ FontSprite.h
 sprite.h
 /Users/Edwards/dev/rogue/src/sprite.h
 
-/Users/Edwards/dev/rogue/src/PerlinNoise.cpp
+/Users/Edwards/dev/rogue/src/PerlinNoise.cc
 PerlinNoise.h
 /Users/Edwards/dev/rogue/src/PerlinNoise.h
 
@@ -60,7 +60,7 @@ PerlinNoise.h
 
 /Users/Edwards/dev/rogue/src/Random.inl
 
-/Users/Edwards/dev/rogue/src/RenderMainMenu.cpp
+/Users/Edwards/dev/rogue/src/RenderMainMenu.cc
 RenderMainMenu.h
 /Users/Edwards/dev/rogue/src/RenderMainMenu.h
 render_inventory.h
@@ -72,7 +72,7 @@ renderer.h
 graphics.h
 /Users/Edwards/dev/rogue/src/graphics.h
 
-/Users/Edwards/dev/rogue/src/RenderWorldMap.cpp
+/Users/Edwards/dev/rogue/src/RenderWorldMap.cc
 sstream
 -
 RenderWorldMap.h
@@ -90,7 +90,7 @@ world.h
 ColorGradient.h
 /Users/Edwards/dev/rogue/src/ColorGradient.h
 
-/Users/Edwards/dev/rogue/src/WorldBuilder.cpp
+/Users/Edwards/dev/rogue/src/WorldBuilder.cc
 WorldBuilder.h
 /Users/Edwards/dev/rogue/src/WorldBuilder.h
 PerlinNoise.h

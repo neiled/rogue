@@ -123,194 +123,194 @@ rogue/fast:
 	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/build
 .PHONY : rogue/fast
 
-src/CommandDecoderMainMenu.o: src/CommandDecoderMainMenu.cpp.o
+src/CommandDecoderMainMenu.o: src/CommandDecoderMainMenu.cc.o
 
 .PHONY : src/CommandDecoderMainMenu.o
 
 # target to build an object file
-src/CommandDecoderMainMenu.cpp.o:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.o
-.PHONY : src/CommandDecoderMainMenu.cpp.o
+src/CommandDecoderMainMenu.cc.o:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.o
+.PHONY : src/CommandDecoderMainMenu.cc.o
 
-src/CommandDecoderMainMenu.i: src/CommandDecoderMainMenu.cpp.i
+src/CommandDecoderMainMenu.i: src/CommandDecoderMainMenu.cc.i
 
 .PHONY : src/CommandDecoderMainMenu.i
 
 # target to preprocess a source file
-src/CommandDecoderMainMenu.cpp.i:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.i
-.PHONY : src/CommandDecoderMainMenu.cpp.i
+src/CommandDecoderMainMenu.cc.i:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.i
+.PHONY : src/CommandDecoderMainMenu.cc.i
 
-src/CommandDecoderMainMenu.s: src/CommandDecoderMainMenu.cpp.s
+src/CommandDecoderMainMenu.s: src/CommandDecoderMainMenu.cc.s
 
 .PHONY : src/CommandDecoderMainMenu.s
 
 # target to generate assembly for a file
-src/CommandDecoderMainMenu.cpp.s:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cpp.s
-.PHONY : src/CommandDecoderMainMenu.cpp.s
+src/CommandDecoderMainMenu.cc.s:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderMainMenu.cc.s
+.PHONY : src/CommandDecoderMainMenu.cc.s
 
-src/CommandDecoderWorldMap.o: src/CommandDecoderWorldMap.cpp.o
+src/CommandDecoderWorldMap.o: src/CommandDecoderWorldMap.cc.o
 
 .PHONY : src/CommandDecoderWorldMap.o
 
 # target to build an object file
-src/CommandDecoderWorldMap.cpp.o:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.o
-.PHONY : src/CommandDecoderWorldMap.cpp.o
+src/CommandDecoderWorldMap.cc.o:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o
+.PHONY : src/CommandDecoderWorldMap.cc.o
 
-src/CommandDecoderWorldMap.i: src/CommandDecoderWorldMap.cpp.i
+src/CommandDecoderWorldMap.i: src/CommandDecoderWorldMap.cc.i
 
 .PHONY : src/CommandDecoderWorldMap.i
 
 # target to preprocess a source file
-src/CommandDecoderWorldMap.cpp.i:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.i
-.PHONY : src/CommandDecoderWorldMap.cpp.i
+src/CommandDecoderWorldMap.cc.i:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.i
+.PHONY : src/CommandDecoderWorldMap.cc.i
 
-src/CommandDecoderWorldMap.s: src/CommandDecoderWorldMap.cpp.s
+src/CommandDecoderWorldMap.s: src/CommandDecoderWorldMap.cc.s
 
 .PHONY : src/CommandDecoderWorldMap.s
 
 # target to generate assembly for a file
-src/CommandDecoderWorldMap.cpp.s:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cpp.s
-.PHONY : src/CommandDecoderWorldMap.cpp.s
+src/CommandDecoderWorldMap.cc.s:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.s
+.PHONY : src/CommandDecoderWorldMap.cc.s
 
-src/FontSprite.o: src/FontSprite.cpp.o
+src/FontSprite.o: src/FontSprite.cc.o
 
 .PHONY : src/FontSprite.o
 
 # target to build an object file
-src/FontSprite.cpp.o:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/FontSprite.cpp.o
-.PHONY : src/FontSprite.cpp.o
+src/FontSprite.cc.o:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/FontSprite.cc.o
+.PHONY : src/FontSprite.cc.o
 
-src/FontSprite.i: src/FontSprite.cpp.i
+src/FontSprite.i: src/FontSprite.cc.i
 
 .PHONY : src/FontSprite.i
 
 # target to preprocess a source file
-src/FontSprite.cpp.i:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/FontSprite.cpp.i
-.PHONY : src/FontSprite.cpp.i
+src/FontSprite.cc.i:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/FontSprite.cc.i
+.PHONY : src/FontSprite.cc.i
 
-src/FontSprite.s: src/FontSprite.cpp.s
+src/FontSprite.s: src/FontSprite.cc.s
 
 .PHONY : src/FontSprite.s
 
 # target to generate assembly for a file
-src/FontSprite.cpp.s:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/FontSprite.cpp.s
-.PHONY : src/FontSprite.cpp.s
+src/FontSprite.cc.s:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/FontSprite.cc.s
+.PHONY : src/FontSprite.cc.s
 
-src/PerlinNoise.o: src/PerlinNoise.cpp.o
+src/PerlinNoise.o: src/PerlinNoise.cc.o
 
 .PHONY : src/PerlinNoise.o
 
 # target to build an object file
-src/PerlinNoise.cpp.o:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/PerlinNoise.cpp.o
-.PHONY : src/PerlinNoise.cpp.o
+src/PerlinNoise.cc.o:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/PerlinNoise.cc.o
+.PHONY : src/PerlinNoise.cc.o
 
-src/PerlinNoise.i: src/PerlinNoise.cpp.i
+src/PerlinNoise.i: src/PerlinNoise.cc.i
 
 .PHONY : src/PerlinNoise.i
 
 # target to preprocess a source file
-src/PerlinNoise.cpp.i:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/PerlinNoise.cpp.i
-.PHONY : src/PerlinNoise.cpp.i
+src/PerlinNoise.cc.i:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/PerlinNoise.cc.i
+.PHONY : src/PerlinNoise.cc.i
 
-src/PerlinNoise.s: src/PerlinNoise.cpp.s
+src/PerlinNoise.s: src/PerlinNoise.cc.s
 
 .PHONY : src/PerlinNoise.s
 
 # target to generate assembly for a file
-src/PerlinNoise.cpp.s:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/PerlinNoise.cpp.s
-.PHONY : src/PerlinNoise.cpp.s
+src/PerlinNoise.cc.s:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/PerlinNoise.cc.s
+.PHONY : src/PerlinNoise.cc.s
 
-src/RenderMainMenu.o: src/RenderMainMenu.cpp.o
+src/RenderMainMenu.o: src/RenderMainMenu.cc.o
 
 .PHONY : src/RenderMainMenu.o
 
 # target to build an object file
-src/RenderMainMenu.cpp.o:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.o
-.PHONY : src/RenderMainMenu.cpp.o
+src/RenderMainMenu.cc.o:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderMainMenu.cc.o
+.PHONY : src/RenderMainMenu.cc.o
 
-src/RenderMainMenu.i: src/RenderMainMenu.cpp.i
+src/RenderMainMenu.i: src/RenderMainMenu.cc.i
 
 .PHONY : src/RenderMainMenu.i
 
 # target to preprocess a source file
-src/RenderMainMenu.cpp.i:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.i
-.PHONY : src/RenderMainMenu.cpp.i
+src/RenderMainMenu.cc.i:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderMainMenu.cc.i
+.PHONY : src/RenderMainMenu.cc.i
 
-src/RenderMainMenu.s: src/RenderMainMenu.cpp.s
+src/RenderMainMenu.s: src/RenderMainMenu.cc.s
 
 .PHONY : src/RenderMainMenu.s
 
 # target to generate assembly for a file
-src/RenderMainMenu.cpp.s:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderMainMenu.cpp.s
-.PHONY : src/RenderMainMenu.cpp.s
+src/RenderMainMenu.cc.s:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderMainMenu.cc.s
+.PHONY : src/RenderMainMenu.cc.s
 
-src/RenderWorldMap.o: src/RenderWorldMap.cpp.o
+src/RenderWorldMap.o: src/RenderWorldMap.cc.o
 
 .PHONY : src/RenderWorldMap.o
 
 # target to build an object file
-src/RenderWorldMap.cpp.o:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.o
-.PHONY : src/RenderWorldMap.cpp.o
+src/RenderWorldMap.cc.o:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderWorldMap.cc.o
+.PHONY : src/RenderWorldMap.cc.o
 
-src/RenderWorldMap.i: src/RenderWorldMap.cpp.i
+src/RenderWorldMap.i: src/RenderWorldMap.cc.i
 
 .PHONY : src/RenderWorldMap.i
 
 # target to preprocess a source file
-src/RenderWorldMap.cpp.i:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.i
-.PHONY : src/RenderWorldMap.cpp.i
+src/RenderWorldMap.cc.i:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderWorldMap.cc.i
+.PHONY : src/RenderWorldMap.cc.i
 
-src/RenderWorldMap.s: src/RenderWorldMap.cpp.s
+src/RenderWorldMap.s: src/RenderWorldMap.cc.s
 
 .PHONY : src/RenderWorldMap.s
 
 # target to generate assembly for a file
-src/RenderWorldMap.cpp.s:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderWorldMap.cpp.s
-.PHONY : src/RenderWorldMap.cpp.s
+src/RenderWorldMap.cc.s:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/RenderWorldMap.cc.s
+.PHONY : src/RenderWorldMap.cc.s
 
-src/WorldBuilder.o: src/WorldBuilder.cpp.o
+src/WorldBuilder.o: src/WorldBuilder.cc.o
 
 .PHONY : src/WorldBuilder.o
 
 # target to build an object file
-src/WorldBuilder.cpp.o:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/WorldBuilder.cpp.o
-.PHONY : src/WorldBuilder.cpp.o
+src/WorldBuilder.cc.o:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/WorldBuilder.cc.o
+.PHONY : src/WorldBuilder.cc.o
 
-src/WorldBuilder.i: src/WorldBuilder.cpp.i
+src/WorldBuilder.i: src/WorldBuilder.cc.i
 
 .PHONY : src/WorldBuilder.i
 
 # target to preprocess a source file
-src/WorldBuilder.cpp.i:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/WorldBuilder.cpp.i
-.PHONY : src/WorldBuilder.cpp.i
+src/WorldBuilder.cc.i:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/WorldBuilder.cc.i
+.PHONY : src/WorldBuilder.cc.i
 
-src/WorldBuilder.s: src/WorldBuilder.cpp.s
+src/WorldBuilder.s: src/WorldBuilder.cc.s
 
 .PHONY : src/WorldBuilder.s
 
 # target to generate assembly for a file
-src/WorldBuilder.cpp.s:
-	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/WorldBuilder.cpp.s
-.PHONY : src/WorldBuilder.cpp.s
+src/WorldBuilder.cc.s:
+	$(MAKE) -f CMakeFiles/rogue.dir/build.make CMakeFiles/rogue.dir/src/WorldBuilder.cc.s
+.PHONY : src/WorldBuilder.cc.s
 
 src/a_star.o: src/a_star.cc.o
 
