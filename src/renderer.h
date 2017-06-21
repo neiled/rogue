@@ -48,6 +48,7 @@ class Renderer {
     void update(World* world);
 
     const static int TILE_SIZE = 32;
+    const static int FONT_SIZE = 24;
 
     void draw_sprite(Sprite* sprite, Tile& tile);
     void draw_health(Actor& actor);

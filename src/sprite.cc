@@ -1,4 +1,5 @@
 #include "sprite.h"
+#include "renderer.h"
 
 Sprite::Sprite(Graphics* graphics, SDL_Texture* texture, int source_x, int source_y, int width, int height)
 {

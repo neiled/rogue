@@ -68,10 +68,34 @@ CMakeFiles/rogue.dir/src/CommandDecoderWorldMap.cc.o
  /Users/Edwards/dev/rogue/src/tile.h
  /Users/Edwards/dev/rogue/src/world.h
 CMakeFiles/rogue.dir/src/FontSprite.cc.o
+ /Users/Edwards/dev/rogue/src/ColorGradient.h
  /Users/Edwards/dev/rogue/src/FontSprite.cc
  /Users/Edwards/dev/rogue/src/FontSprite.h
+ /Users/Edwards/dev/rogue/src/Random.inl
+ /Users/Edwards/dev/rogue/src/RenderMainMenu.h
+ /Users/Edwards/dev/rogue/src/RenderWorldMap.h
+ /Users/Edwards/dev/rogue/src/WorldBuilder.h
+ /Users/Edwards/dev/rogue/src/actor.h
+ /Users/Edwards/dev/rogue/src/attribute_modifiers.h
+ /Users/Edwards/dev/rogue/src/commands.h
+ /Users/Edwards/dev/rogue/src/game_object.h
+ /Users/Edwards/dev/rogue/src/game_types.h
  /Users/Edwards/dev/rogue/src/graphics.h
+ /Users/Edwards/dev/rogue/src/inventory.h
+ /Users/Edwards/dev/rogue/src/item.h
+ /Users/Edwards/dev/rogue/src/level.h
+ /Users/Edwards/dev/rogue/src/levelbuilder.h
+ /Users/Edwards/dev/rogue/src/player.h
+ /Users/Edwards/dev/rogue/src/random.h
+ /Users/Edwards/dev/rogue/src/render_info.h
+ /Users/Edwards/dev/rogue/src/render_inventory.h
+ /Users/Edwards/dev/rogue/src/render_level.h
+ /Users/Edwards/dev/rogue/src/render_look.h
+ /Users/Edwards/dev/rogue/src/render_ranged.h
+ /Users/Edwards/dev/rogue/src/renderer.h
  /Users/Edwards/dev/rogue/src/sprite.h
+ /Users/Edwards/dev/rogue/src/tile.h
+ /Users/Edwards/dev/rogue/src/world.h
 CMakeFiles/rogue.dir/src/PerlinNoise.cc.o
  /Users/Edwards/dev/rogue/src/PerlinNoise.cc
  /Users/Edwards/dev/rogue/src/PerlinNoise.h
@@ -1046,9 +1070,34 @@ CMakeFiles/rogue.dir/src/shadowcasting.cc.o
  /Users/Edwards/dev/rogue/src/sprite.h
  /Users/Edwards/dev/rogue/src/tile.h
 CMakeFiles/rogue.dir/src/sprite.cc.o
+ /Users/Edwards/dev/rogue/src/ColorGradient.h
+ /Users/Edwards/dev/rogue/src/FontSprite.h
+ /Users/Edwards/dev/rogue/src/Random.inl
+ /Users/Edwards/dev/rogue/src/RenderMainMenu.h
+ /Users/Edwards/dev/rogue/src/RenderWorldMap.h
+ /Users/Edwards/dev/rogue/src/WorldBuilder.h
+ /Users/Edwards/dev/rogue/src/actor.h
+ /Users/Edwards/dev/rogue/src/attribute_modifiers.h
+ /Users/Edwards/dev/rogue/src/commands.h
+ /Users/Edwards/dev/rogue/src/game_object.h
+ /Users/Edwards/dev/rogue/src/game_types.h
  /Users/Edwards/dev/rogue/src/graphics.h
+ /Users/Edwards/dev/rogue/src/inventory.h
+ /Users/Edwards/dev/rogue/src/item.h
+ /Users/Edwards/dev/rogue/src/level.h
+ /Users/Edwards/dev/rogue/src/levelbuilder.h
+ /Users/Edwards/dev/rogue/src/player.h
+ /Users/Edwards/dev/rogue/src/random.h
+ /Users/Edwards/dev/rogue/src/render_info.h
+ /Users/Edwards/dev/rogue/src/render_inventory.h
+ /Users/Edwards/dev/rogue/src/render_level.h
+ /Users/Edwards/dev/rogue/src/render_look.h
+ /Users/Edwards/dev/rogue/src/render_ranged.h
+ /Users/Edwards/dev/rogue/src/renderer.h
  /Users/Edwards/dev/rogue/src/sprite.cc
  /Users/Edwards/dev/rogue/src/sprite.h
+ /Users/Edwards/dev/rogue/src/tile.h
+ /Users/Edwards/dev/rogue/src/world.h
 CMakeFiles/rogue.dir/src/tile.cc.o
  /Users/Edwards/dev/rogue/src/FontSprite.h
  /Users/Edwards/dev/rogue/src/Random.inl

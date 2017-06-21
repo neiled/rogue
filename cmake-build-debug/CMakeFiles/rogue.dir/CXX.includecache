@@ -47,6 +47,8 @@ vector
 -
 FontSprite.h
 /Users/Edwards/dev/rogue/src/FontSprite.h
+renderer.h
+/Users/Edwards/dev/rogue/src/renderer.h
 
 /Users/Edwards/dev/rogue/src/FontSprite.h
 sprite.h
@@ -811,6 +813,8 @@ level.h
 /Users/Edwards/dev/rogue/src/sprite.cc
 sprite.h
 /Users/Edwards/dev/rogue/src/sprite.h
+renderer.h
+/Users/Edwards/dev/rogue/src/renderer.h
 
 /Users/Edwards/dev/rogue/src/sprite.h
 graphics.h

@@ -10,7 +10,7 @@ public:
 
     virtual ~Sprite();
 
-    void draw(int x, int y, int offsetX, int offsetY, int alpha = 255);
+    virtual void draw(int x, int y, int offsetX, int offsetY, int alpha = 255);
 
     void draw(int x, int y, int offsetX, int offsetY, int width, int height, int alpha);
 

@@ -15,6 +15,7 @@ void Graphics::init()
   _window = SDL_CreateWindow("YARL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Graphics::RES_W, Graphics::RES_H, SDL_WINDOW_OPENGL);
   Renderer = SDL_CreateRenderer(_window, -1, SDL_RENDERER_ACCELERATED);
   SDL_SetRenderDrawColor( Renderer, 0x00, 0x00, 0x00, 0x00 );
+  SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" );
 }
 
 
