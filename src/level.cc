@@ -53,7 +53,7 @@ void Level::updateLightMap(Player& player)
   ShadowCasting caster;
   auto light_intensity = getNewLightIntensity();
   // SDL_Log("Flameprime %d", light_intensity);
-  std::vector<std::vector<float>> newLightMap = caster.calculateFOV(_map, player.x(), player.y(), 10.0f*light_intensity);
+  std::vector<std::vector<float>> newLightMap = caster.calculateFOV(_map, player.x(), player.y(), 5.0f*light_intensity);
 
 
   resetLightMap();
@@ -116,15 +116,6 @@ float Level::light_intensity(int x, int y)
 
 float Level::getNewLightIntensity()
 {
-  // for (i = 0; i < 255; i++) {
-  //     if (i < flameprime) {
-  //         GPIO = 255;
-  //     } else {
-  //         GPIO = 0;
-  //     }
-  // }
-
-
 
   //We simulate a gust of wind by setting the wind var to a random value
   if (Random::Between(0, 255) < Level::WIND_VARIABILITY) {

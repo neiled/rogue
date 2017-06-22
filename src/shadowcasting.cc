@@ -31,7 +31,7 @@ std::vector<std::vector<float>>  ShadowCasting::calculateFOV(resistance_map_t re
     }
  
     _lightMap[starty][startx] = force;
-    //for (Direction d : Direction.DIAGONALS) {
+
     for (int i = -1; i < 2; i+=2)
     {
       for (int j = -1; j < 2; j+=2)
@@ -74,7 +74,7 @@ void ShadowCasting::castLight(int row, float start, float end, int startx, int s
 
             //check if it's within the lightable area and light if needed
             if (radius(deltaX, deltaY) <= _radius) {
-                float bright = (float) (1 - (_decay * radius(deltaX, deltaY) / _force));
+                float bright = 1 - (_decay * radius(deltaX, deltaY) / _force);
 
                 _lightMap[currentY][currentX] = bright;
             }

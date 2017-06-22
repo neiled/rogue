@@ -28,11 +28,11 @@ void RenderLevel::render(Renderer& renderer, SDL_Rect camera, level_sprites_t ti
       int alpha = 255;
 
       if (lit == Level::LightType::Unlit)
-        alpha = 100;
+        alpha = 50;
       else {
         auto intensity = level.light_intensity(x, y);
         alpha = static_cast<int>(255.0f * intensity);
-        if (alpha < 128) alpha = 128;
+//        if (alpha < 64) alpha = 64;
       }
 
       draw_tile(&level, tiles, tileType, x, y, camera.x, camera.y, alpha);
