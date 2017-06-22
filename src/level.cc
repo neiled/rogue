@@ -52,7 +52,7 @@ void Level::updateLightMap(Player& player)
 {
   ShadowCasting caster;
   auto light_intensity = getNewLightIntensity();
-  // SDL_Log("Flameprime %d", light_intensity);
+
   std::vector<std::vector<float>> newLightMap = caster.calculateFOV(_map, player.x(), player.y(), 5.0f*light_intensity);
 
 
@@ -156,9 +156,11 @@ float Level::getNewLightIntensity()
   //How do we prevent jittering when the two are equal?
   //We don't. It adds to the realism.
 
-  if(flameprime <= 0)
-    return 0;
-  return 255/(float)flameprime;
+    if(flameprime <= 0)
+      return 0;
+    auto result =  255/(float)flameprime;
+//    SDL_Log("%f", result);
+    return result;
 
 }
 
